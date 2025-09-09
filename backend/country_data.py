@@ -1,6 +1,6 @@
 <file>
       <absolute_file_name>/app/backend/country_data.py</absolute_file_name>
-      <content># Données économiques réelles par pays (Sources: PNUD, Banque Mondiale, BAD, FMI, sites gouvernementaux)
+# Données économiques réelles par pays (Sources: PNUD, Banque Mondiale, BAD, FMI, sites gouvernementaux)
 # Dernière mise à jour: Septembre 2024
 
 REAL_COUNTRY_DATA = {
