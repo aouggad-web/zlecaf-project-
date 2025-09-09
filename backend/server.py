@@ -340,45 +340,46 @@ async def get_countries():
 
 @api_router.get("/country-profile/{country_code}")
 async def get_country_profile(country_code: str) -> CountryEconomicProfile:
-    """Récupérer le profil économique complet d'un pays"""
+    """Récupérer le profil économique complet d'un pays avec données réelles"""
     
     # Trouver le pays
     country = next((c for c in AFRICAN_COUNTRIES if c['code'] == country_code.upper()), None)
     if not country:
         raise HTTPException(status_code=404, detail="Pays non trouvé dans la ZLECAf")
     
-    # Récupérer les données de la Banque Mondiale
-    wb_data = await wb_client.get_country_data([country['wb_code']])
-    country_wb_data = wb_data.get(country['wb_code'], {})
+    # Récupérer les données réelles du pays
+    real_data = get_country_data(country_code.upper())
     
-    # Construire le profil
+    # Construire le profil avec données réelles
     profile = CountryEconomicProfile(
         country_code=country['code'],
         country_name=country['name'],
-        population=country['population'],
+        population=real_data.get('population_2024', country['population']),
         region=country['region']
     )
     
-    # Ajouter les données économiques de la Banque Mondiale
-    if 'NY.GDP.MKTP.CD' in country_wb_data:
-        profile.gdp_usd = country_wb_data['NY.GDP.MKTP.CD']['value']
+    # Ajouter les données économiques réelles
+    profile.gdp_usd = real_data.get('gdp_usd_2024')
+    profile.gdp_per_capita = real_data.get('gdp_per_capita_2024')
+    profile.inflation_rate = None  # À obtenir via API si nécessaire
     
-    if 'NY.GDP.PCAP.CD' in country_wb_data:
-        profile.gdp_per_capita = country_wb_data['NY.GDP.PCAP.CD']['value']
-    
-    if 'FP.CPI.TOTL.ZG' in country_wb_data:
-        profile.inflation_rate = country_wb_data['FP.CPI.TOTL.ZG']['value']
-    
-    # Ajouter des projections simulées (en production, utiliser des APIs de projections réelles)
+    # Ajouter les projections réelles et secteurs spécifiques
     profile.projections = {
-        "gdp_growth_forecast_2024": "4.2%",
-        "population_growth_rate": "2.8%",
-        "trade_growth_potential": "15.5%",
-        "zlecaf_benefit_potential": "High",
-        "key_sectors": ["Agriculture", "Mining", "Manufacturing", "Services"],
-        "investment_climate_score": "B+",
-        "infrastructure_index": 6.7,
-        "business_environment_rank": 45
+        "gdp_growth_forecast_2024": real_data.get('growth_forecast_2024', '3.0%'),
+        "gdp_growth_projection_2025": real_data.get('growth_projection_2025', '3.2%'),
+        "gdp_growth_projection_2026": real_data.get('growth_projection_2026', '3.5%'),
+        "development_index": real_data.get('development_index', 0.500),
+        "africa_rank": real_data.get('africa_rank', 25),
+        "key_sectors": [f"{sector['name']} ({sector['pib_share']}% PIB): {sector['description']}" 
+                       for sector in real_data.get('key_sectors', [])],
+        "zlecaf_potential_level": real_data.get('zlecaf_potential', {}).get('level', 'Modéré'),
+        "zlecaf_potential_description": real_data.get('zlecaf_potential', {}).get('description', ''),
+        "zlecaf_opportunities": real_data.get('zlecaf_potential', {}).get('key_opportunities', []),
+        "main_exports": real_data.get('main_exports', []),
+        "main_imports": real_data.get('main_imports', []),
+        "investment_climate_score": "B+",  # À personnaliser par pays
+        "infrastructure_index": 6.7,      # À personnaliser par pays
+        "business_environment_rank": real_data.get('africa_rank', 25)
     }
     
     return profile
