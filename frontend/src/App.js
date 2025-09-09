@@ -841,15 +841,15 @@ function ZLECAfCalculator() {
                           <div className="space-y-2">
                             <div className="flex justify-between">
                               <span>Croissance prévue 2024:</span>
-                              <Badge variant="secondary">{countryProfile.growth_forecast_2024}</Badge>
+                              <Badge variant="secondary">{countryProfile.projections?.gdp_growth_forecast_2024 || 'N/A'}</Badge>
                             </div>
                             <div className="flex justify-between">
                               <span>Projection 2025:</span>
-                              <Badge variant="outline">{countryProfile.growth_projection_2025}</Badge>
+                              <Badge variant="outline">{countryProfile.projections?.gdp_growth_projection_2025 || 'N/A'}</Badge>
                             </div>
                             <div className="flex justify-between">
                               <span>Projection 2026:</span>
-                              <Badge variant="default">{countryProfile.growth_projection_2026}</Badge>
+                              <Badge variant="default">{countryProfile.projections?.gdp_growth_projection_2026 || 'N/A'}</Badge>
                             </div>
                           </div>
                         </div>
