@@ -478,7 +478,7 @@ async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
     normal_rate = normal_rates.get(sector_code, 0.15)
     zlecaf_rate = zlecaf_rates.get(sector_code, 0.03)
     
-    # Calculs
+    # Calculs en USD
     normal_amount = request.value * normal_rate
     zlecaf_amount = request.value * zlecaf_rate
     savings = normal_amount - zlecaf_amount
