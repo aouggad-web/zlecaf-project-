@@ -38,7 +38,7 @@ AFRICAN_COUNTRIES = [
     {"code": "BI", "name": "Burundi", "region": "Afrique de l'Est", "iso3": "BDI", "wb_code": "BDI", "population": 12000000},
     {"code": "CM", "name": "Cameroun", "region": "Afrique Centrale", "iso3": "CMR", "wb_code": "CMR", "population": 26500000},
     {"code": "CV", "name": "Cap-Vert", "region": "Afrique de l'Ouest", "iso3": "CPV", "wb_code": "CPV", "population": 560000},
-    {"code": "CF", "name": "République Centrafricaine", "region": "Afrique Centrale", "iso3": "CAF", "wb_code": "CAF", "population": 4800000},
+    {"code": "CF", "name": "République Centrafricaine", "region": "Afrique Centrale", "iso3": "CAF", "wb_code": "CAF", "population": 5400000},
     {"code": "TD", "name": "Tchad", "region": "Afrique Centrale", "iso3": "TCD", "wb_code": "TCD", "population": 16400000},
     {"code": "KM", "name": "Comores", "region": "Afrique de l'Est", "iso3": "COM", "wb_code": "COM", "population": 870000},
     {"code": "CG", "name": "République du Congo", "region": "Afrique Centrale", "iso3": "COG", "wb_code": "COG", "population": 5500000},
