@@ -877,23 +877,61 @@ function ZLECAfCalculator() {
 
                       <div>
                         <h4 className="font-semibold mb-3">Secteurs Clés</h4>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="space-y-2">
                           {countryProfile.projections?.key_sectors?.map((sector, index) => (
-                            <Badge key={index} variant="outline">
+                            <div key={index} className="text-sm p-2 bg-gray-50 rounded">
                               {sector}
-                            </Badge>
-                          ))}
+                            </div>
+                          )) || <p className="text-sm text-gray-500">Données non disponibles</p>}
                         </div>
                       </div>
 
                       <div className="bg-green-50 p-4 rounded-lg mt-4">
-                        <h4 className="font-semibold text-green-800 mb-2">Potentiel ZLECAf</h4>
-                        <p className="text-sm text-green-700">
-                          <strong>Bénéfice potentiel:</strong> {countryProfile.projections?.zlecaf_benefit_potential}
+                        <h4 className="font-semibold text-green-800 mb-2">
+                          Potentiel ZLECAf - {countryProfile.projections?.zlecaf_potential_level || 'N/A'}
+                        </h4>
+                        <p className="text-sm text-green-700 mb-3">
+                          {countryProfile.projections?.zlecaf_potential_description || 'Description non disponible'}
                         </p>
-                        <p className="text-sm text-green-700">
-                          Ce pays présente un fort potentiel de bénéfices avec la mise en œuvre complète de la ZLECAf.
-                        </p>
+                        
+                        {countryProfile.projections?.zlecaf_opportunities && (
+                          <div>
+                            <p className="text-sm font-semibold text-green-800 mb-2">Opportunités clés :</p>
+                            <ul className="text-sm text-green-700 space-y-1">
+                              {countryProfile.projections.zlecaf_opportunities.map((opp, index) => (
+                                <li key={index} className="flex items-start">
+                                  <span className="mr-2">•</span>
+                                  {opp}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Nouvelles sections avec données réelles */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div className="bg-blue-50 p-4 rounded-lg">
+                          <h4 className="font-semibold text-blue-800 mb-2">Principales Exportations</h4>
+                          <div className="flex flex-wrap gap-1">
+                            {countryProfile.projections?.main_exports?.map((exp, index) => (
+                              <Badge key={index} variant="outline" className="text-xs">
+                                {exp}
+                              </Badge>
+                            )) || <p className="text-xs text-gray-500">Non disponible</p>}
+                          </div>
+                        </div>
+                        
+                        <div className="bg-orange-50 p-4 rounded-lg">
+                          <h4 className="font-semibold text-orange-800 mb-2">Principales Importations</h4>
+                          <div className="flex flex-wrap gap-1">
+                            {countryProfile.projections?.main_imports?.map((imp, index) => (
+                              <Badge key={index} variant="outline" className="text-xs">
+                                {imp}
+                              </Badge>
+                            )) || <p className="text-xs text-gray-500">Non disponible</p>}
+                          </div>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
