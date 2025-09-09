@@ -815,14 +815,14 @@ function ZLECAfCalculator() {
                         
                         <div className="text-center">
                           <p className="text-2xl font-bold text-purple-600">
-                            {countryProfile.development_index}
+                            {countryProfile.projections?.development_index || 'N/A'}
                           </p>
                           <p className="text-sm text-gray-600">Indice de développement</p>
                         </div>
                         
                         <div className="text-center">
                           <p className="text-2xl font-bold text-orange-600">
-                            #{countryProfile.africa_rank}
+                            #{countryProfile.projections?.africa_rank || 'N/A'}
                           </p>
                           <p className="text-sm text-gray-600">Rang en Afrique</p>
                         </div>
