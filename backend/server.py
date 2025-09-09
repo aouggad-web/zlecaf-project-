@@ -13,6 +13,7 @@ import requests
 import pandas as pd
 import asyncio
 import json
+from country_data import get_country_data, REAL_COUNTRY_DATA
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
