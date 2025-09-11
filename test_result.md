@@ -101,3 +101,133 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Tester l'API ZLECAf qui calcule les tarifs commerciaux pour les pays africains avec tous les endpoints et vérifier l'intégration MongoDB"
+
+backend:
+  - task: "API Root Endpoint"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Point d'entrée API accessible avec message ZLECAf correct. Endpoint GET /api/ retourne le message attendu."
+
+  - task: "Countries List Endpoint"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Liste complète des 54 pays membres ZLECAf avec structure correcte. Tous les champs requis présents (code, name, region, iso3, wb_code, population)."
+
+  - task: "Country Profile Endpoints"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Profils économiques complets pour NG, MA, MU testés avec succès. Données économiques réelles, projections ZLECAf, et secteurs clés présents."
+
+  - task: "Rules of Origin Endpoints"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Règles d'origine ZLECAf pour codes SH 010121 et 847989 testées avec succès. Structure complète avec règles, exigences, et documentation requise."
+
+  - task: "Tariff Calculation Endpoint"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Calcul tarifaire complet fonctionnel. Test NG->MA pour HS 010121 avec valeur 100000 USD: économies de 15000 USD (75%). Logique de calcul correcte, règles d'origine incluses."
+
+  - task: "Statistics Endpoint"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Statistiques complètes ZLECAf avec 54 pays, données de population (1.35 milliards), projections 2025/2030, et sources de données officielles."
+
+  - task: "MongoDB Integration"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Intégration MongoDB fonctionnelle. Calculs tarifaires sauvegardés correctement avec ID unique. 1 calcul stocké vérifié en base."
+
+  - task: "External URL Routing"
+    implemented: true
+    working: false
+    file: "backend/server.py"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "CRITIQUE: URL externe https://emergent.city/api retourne 404. Backend fonctionne parfaitement sur localhost:8001/api mais routing externe non configuré. Problème d'infrastructure Kubernetes/ingress."
+
+frontend:
+  - task: "Frontend Testing"
+    implemented: false
+    working: "NA"
+    file: "N/A"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: false
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Frontend testing non effectué selon les instructions - focus uniquement sur backend API."
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "External URL Routing"
+  stuck_tasks:
+    - "External URL Routing"
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "testing"
+      message: "Tests backend ZLECAf complétés avec succès. 8/9 fonctionnalités opérationnelles. PROBLÈME CRITIQUE: URL externe https://emergent.city/api non accessible (404) - problème de routing infrastructure. Backend parfaitement fonctionnel sur localhost:8001/api avec tous endpoints, calculs tarifaires corrects, et intégration MongoDB. Recommande correction routing externe pour production."
