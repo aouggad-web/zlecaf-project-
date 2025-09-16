@@ -293,7 +293,7 @@ REAL_COUNTRY_DATA = {
         "name": "Nigéria",
         "gdp_usd_2024": 374.984,
         "gdp_per_capita_2024": 1645.51,
-        "population_2024": 227.883,
+        "population_2024": 227883000,  # 227.883M converted to actual number
         "development_index": 0.5,
         "africa_rank": 25,
         "growth_forecast_2024": "3.0%",
