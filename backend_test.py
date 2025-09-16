@@ -160,10 +160,10 @@ class ZLECAfAPITester:
         """Test GET /api/country-profile/{country_code} - Profils économiques avec nouvelles données"""
         # Tests spécifiques avec nouvelles données validées
         test_countries_data = {
-            'NGA': {'expected_gdp': 374.984, 'expected_pop': 227.883, 'name': 'Nigéria'},
-            'DZA': {'expected_gdp': 269.128, 'expected_pop': 46.7, 'name': 'Algérie'},
-            'ZAF': {'expected_gdp': 377.782, 'expected_pop': 63.212, 'name': 'Afrique du Sud'},
-            'EGY': {'expected_gdp': 331.59, 'expected_pop': 114.536, 'name': 'Égypte'}
+            'NG': {'expected_gdp': 374.984, 'expected_pop': 227.883, 'name': 'Nigéria'},
+            'DZ': {'expected_gdp': 269.128, 'expected_pop': 46.7, 'name': 'Algérie'},
+            'ZA': {'expected_gdp': 377.782, 'expected_pop': 63.212, 'name': 'Afrique du Sud'},
+            'EG': {'expected_gdp': 331.59, 'expected_pop': 114.536, 'name': 'Égypte'}
         }
         
         for country_code, expected_data in test_countries_data.items():
