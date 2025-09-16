@@ -382,6 +382,15 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
         "business_environment_rank": real_data.get('africa_rank', 25)
     }
     
+    # Ajouter les notations de risque
+    profile.risk_ratings = real_data.get('risk_ratings', {
+        "sp": "NR",
+        "moodys": "NR", 
+        "fitch": "NR",
+        "scope": "NR",
+        "global_risk": "Non évalué"
+    })
+    
     return profile
 
 @api_router.get("/rules-of-origin/{hs_code}")
