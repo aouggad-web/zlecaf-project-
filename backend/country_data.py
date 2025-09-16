@@ -1,9 +1,10 @@
 # Données économiques complètes des 54 pays ZLECAf mises à jour
 # Sources: PNUD, Banque Mondiale, FMI, S&P, Moody's, Fitch, Scope
+# Codes ISO3 pour compatibilité API
 # Dernière mise à jour: 2024-09-16
 
 REAL_COUNTRY_DATA = {
-    "DZA": {  # Algérie
+    "DZA": {
         "name": "Algérie",
         "gdp_usd_2024": 269.128,
         "gdp_per_capita_2024": 5763,
@@ -11,21 +12,51 @@ REAL_COUNTRY_DATA = {
         "development_index": 0.745,
         "africa_rank": 3,
         "growth_forecast_2024": "3.2%",
-        "risk_ratings": {"sp": "B+", "moodys": "B2", "fitch": "B+", "scope": "B+", "global_risk": "Élevé"},
+        "risk_ratings": {
+            "sp": "B+",
+            "moodys": "B2",
+            "fitch": "B+",
+            "scope": "B+",
+            "global_risk": "Élevé"
+        },
         "key_sectors": [
-            {"name": "Hydrocarbures", "pib_share": 35.0, "description": "Pétrole et gaz naturel"},
-            {"name": "Services", "pib_share": 40.0, "description": "Secteur tertiaire"},
-            {"name": "Industrie", "pib_share": 25.0, "description": "Secteur secondaire"}
+            {
+                "name": "Hydrocarbures",
+                "pib_share": 35.0,
+                "description": "Pétrole et gaz naturel"
+            },
+            {
+                "name": "Services",
+                "pib_share": 40.0,
+                "description": "Secteur tertiaire"
+            },
+            {
+                "name": "Industrie",
+                "pib_share": 25.0,
+                "description": "Secteur secondaire"
+            }
         ],
-        "main_exports": ["Hydrocarbures (85%)", "Produits chimiques (5%)", "Produits alimentaires (4%)"],
-        "main_imports": ["Machines et équipements (25%)", "Produits alimentaires (20%)", "Produits chimiques (15%)"],
+        "main_exports": [
+            "Hydrocarbures (85%)",
+            "Produits chimiques (5%)",
+            "Produits alimentaires (4%)"
+        ],
+        "main_imports": [
+            "Machines et équipements (25%)",
+            "Produits alimentaires (20%)",
+            "Produits chimiques (15%)"
+        ],
         "zlecaf_potential": {
-            'level': 'Élevé',
-            'description': 'Potentiel commercial fort avec ratification ZLECAf',
-            'key_opportunities': ['Commerce intra-africain', 'Intégration régionale', 'Réduction tarifaire']
+            "level": "Modéré",
+            "description": "Potentiel commercial avec ratification ZLECAf",
+            "key_opportunities": [
+                "Commerce intra-africain",
+                "Intégration régionale",
+                "Réduction tarifaire"
+            ]
         }
     },
-    "AGO": {  # Angola
+    "AGO": {
         "name": "Angola",
         "gdp_usd_2024": 124.2,
         "gdp_per_capita_2024": 3508,
@@ -33,66 +64,51 @@ REAL_COUNTRY_DATA = {
         "development_index": 0.586,
         "africa_rank": 8,
         "growth_forecast_2024": "2.8%",
-        "risk_ratings": {"sp": "B-", "moodys": "B3", "fitch": "B-", "scope": "B-", "global_risk": "Élevé"},
+        "risk_ratings": {
+            "sp": "B-",
+            "moodys": "B3",
+            "fitch": "B-",
+            "scope": "B-",
+            "global_risk": "Élevé"
+        },
         "key_sectors": [
-            {"name": "Pétrole", "pib_share": 50.0, "description": "Industrie pétrolière"},
-            {"name": "Services", "pib_share": 30.0, "description": "Secteur tertiaire"},
-            {"name": "Agriculture", "pib_share": 20.0, "description": "Secteur primaire"}
+            {
+                "name": "Pétrole",
+                "pib_share": 50.0,
+                "description": "Industrie pétrolière"
+            },
+            {
+                "name": "Services",
+                "pib_share": 30.0,
+                "description": "Secteur tertiaire"
+            },
+            {
+                "name": "Agriculture",
+                "pib_share": 20.0,
+                "description": "Secteur primaire"
+            }
         ],
-        "main_exports": ["Pétrole brut (92%)", "Diamants (4%)", "Produits pétroliers raffinés (2%)"],
-        "main_imports": ["Machines et équipements (30%)", "Véhicules (15%)", "Produits alimentaires (20%)"],
+        "main_exports": [
+            "Pétrole brut (92%)",
+            "Diamants (4%)",
+            "Produits pétroliers raffinés (2%)"
+        ],
+        "main_imports": [
+            "Machines et équipements (30%)",
+            "Véhicules (15%)",
+            "Produits alimentaires (20%)"
+        ],
         "zlecaf_potential": {
-            'level': 'Élevé',
-            'description': 'Grand potentiel avec diversification économique',
-            'key_opportunities': ['Commerce intra-africain', 'Intégration régionale', 'Réduction tarifaire']
+            "level": "Modéré",
+            "description": "Potentiel commercial avec ratification ZLECAf",
+            "key_opportunities": [
+                "Commerce intra-africain",
+                "Intégration régionale",
+                "Réduction tarifaire"
+            ]
         }
     },
-    "MAR": {  # Maroc
-        "name": "Maroc",
-        "gdp_usd_2024": 142.0,
-        "gdp_per_capita_2024": 3757,
-        "population_2024": 37800000,
-        "development_index": 0.683,
-        "africa_rank": 5,
-        "growth_forecast_2024": "3.2%",
-        "risk_ratings": {"sp": "BBB-", "moodys": "Ba1", "fitch": "BBB-", "scope": "BBB-", "global_risk": "Modéré"},
-        "key_sectors": [
-            {"name": "Services", "pib_share": 50.0, "description": "Tourisme, services financiers"},
-            {"name": "Industrie", "pib_share": 33.0, "description": "Textile, automobile, phosphates"},
-            {"name": "Agriculture", "pib_share": 17.0, "description": "Agrumes, céréales"}
-        ],
-        "main_exports": ["Phosphates (18%)", "Textiles (16%)", "Produits alimentaires (14%)"],
-        "main_imports": ["Machines et équipements (20%)", "Carburants (15%)", "Produits alimentaires (12%)"],
-        "zlecaf_potential": {
-            'level': 'Très Élevé',
-            'description': 'Leader régional avec forte intégration commerciale',
-            'key_opportunities': ['Commerce intra-africain', 'Intégration régionale', 'Réduction tarifaire']
-        }
-    },
-    "GHA": {  # Ghana
-        "name": "Ghana",
-        "gdp_usd_2024": 76.6,
-        "gdp_per_capita_2024": 2287,
-        "population_2024": 33500000,
-        "development_index": 0.632,
-        "africa_rank": 9,
-        "growth_forecast_2024": "2.8%",
-        "risk_ratings": {"sp": "CCC+", "moodys": "Caa2", "fitch": "CCC", "scope": "CCC+", "global_risk": "Très Élevé"},
-        "key_sectors": [
-            {"name": "Services", "pib_share": 47.0, "description": "Commerce, services financiers"},
-            {"name": "Agriculture", "pib_share": 25.0, "description": "Cacao, café, noix de cajou"},
-            {"name": "Mines", "pib_share": 28.0, "description": "Or, pétrole, bauxite"}
-        ],
-        "main_exports": ["Or (45%)", "Cacao (20%)", "Pétrole (15%)"],
-        "main_imports": ["Machines et équipements (20%)", "Produits pétroliers (18%)", "Véhicules (15%)"],
-        "zlecaf_potential": {
-            'level': 'Élevé',
-            'description': 'Hub commercial ouest-africain important',
-            'key_opportunities': ['Commerce intra-africain', 'Intégration régionale', 'Réduction tarifaire']
-        }  
-    },
-
-    "BJ": {
+    "BEN": {
         "name": "Bénin",
         "gdp_usd_2024": 19.4,
         "gdp_per_capita_2024": 1492,
@@ -144,7 +160,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "BW": {
+    "BWA": {
         "name": "Botswana",
         "gdp_usd_2024": 20.4,
         "gdp_per_capita_2024": 8500,
@@ -196,7 +212,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "BF": {
+    "BFA": {
         "name": "Burkina Faso",
         "gdp_usd_2024": 20.9,
         "gdp_per_capita_2024": 921,
@@ -248,7 +264,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "BI": {
+    "BDI": {
         "name": "Burundi",
         "gdp_usd_2024": 3.8,
         "gdp_per_capita_2024": 295,
@@ -300,7 +316,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "CM": {
+    "CMR": {
         "name": "Cameroun",
         "gdp_usd_2024": 47.3,
         "gdp_per_capita_2024": 1683,
@@ -352,7 +368,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "CV": {
+    "CPV": {
         "name": "Cap-Vert",
         "gdp_usd_2024": 2.1,
         "gdp_per_capita_2024": 3500,
@@ -404,7 +420,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "CF": {
+    "CAF": {
         "name": "République Centrafricaine",
         "gdp_usd_2024": 2.3,
         "gdp_per_capita_2024": 411,
@@ -456,7 +472,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "TD": {
+    "TCD": {
         "name": "Tchad",
         "gdp_usd_2024": 18.6,
         "gdp_per_capita_2024": 1051,
@@ -508,7 +524,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "KM": {
+    "COM": {
         "name": "Comores",
         "gdp_usd_2024": 1.3,
         "gdp_per_capita_2024": 1444,
@@ -560,7 +576,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "CG": {
+    "COG": {
         "name": "République du Congo",
         "gdp_usd_2024": 14.2,
         "gdp_per_capita_2024": 2448,
@@ -612,7 +628,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "CD": {
+    "COD": {
         "name": "République Démocratique du Congo",
         "gdp_usd_2024": 69.5,
         "gdp_per_capita_2024": 679,
@@ -664,7 +680,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "CI": {
+    "CIV": {
         "name": "Côte d'Ivoire",
         "gdp_usd_2024": 78.9,
         "gdp_per_capita_2024": 2730,
@@ -716,7 +732,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "DJ": {
+    "DJI": {
         "name": "Djibouti",
         "gdp_usd_2024": 3.9,
         "gdp_per_capita_2024": 3545,
@@ -768,7 +784,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "EG": {
+    "EGY": {
         "name": "Égypte",
         "gdp_usd_2024": 331.59,
         "gdp_per_capita_2024": 2895,
@@ -820,7 +836,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "GQ": {
+    "GNQ": {
         "name": "Guinée Équatoriale",
         "gdp_usd_2024": 12.1,
         "gdp_per_capita_2024": 8067,
@@ -872,7 +888,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "ER": {
+    "ERI": {
         "name": "Érythrée",
         "gdp_usd_2024": 2.6,
         "gdp_per_capita_2024": 703,
@@ -924,7 +940,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "SZ": {
+    "SWZ": {
         "name": "Eswatini",
         "gdp_usd_2024": 4.7,
         "gdp_per_capita_2024": 3917,
@@ -976,7 +992,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "ET": {
+    "ETH": {
         "name": "Éthiopie",
         "gdp_usd_2024": 156.1,
         "gdp_per_capita_2024": 1234,
@@ -1028,7 +1044,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "GA": {
+    "GAB": {
         "name": "Gabon",
         "gdp_usd_2024": 20.9,
         "gdp_per_capita_2024": 8708,
@@ -1080,7 +1096,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "GM": {
+    "GMB": {
         "name": "Gambie",
         "gdp_usd_2024": 2.1,
         "gdp_per_capita_2024": 808,
@@ -1132,7 +1148,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "GH": {
+    "GHA": {
         "name": "Ghana",
         "gdp_usd_2024": 76.6,
         "gdp_per_capita_2024": 2287,
@@ -1184,7 +1200,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "GN": {
+    "GIN": {
         "name": "Guinée",
         "gdp_usd_2024": 18.9,
         "gdp_per_capita_2024": 1331,
@@ -1236,7 +1252,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "GW": {
+    "GNB": {
         "name": "Guinée-Bissau",
         "gdp_usd_2024": 1.6,
         "gdp_per_capita_2024": 762,
@@ -1288,7 +1304,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "KE": {
+    "KEN": {
         "name": "Kenya",
         "gdp_usd_2024": 115.0,
         "gdp_per_capita_2024": 2087,
@@ -1340,7 +1356,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "LS": {
+    "LSO": {
         "name": "Lesotho",
         "gdp_usd_2024": 2.3,
         "gdp_per_capita_2024": 1000,
@@ -1392,7 +1408,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "LR": {
+    "LBR": {
         "name": "Libéria",
         "gdp_usd_2024": 4.3,
         "gdp_per_capita_2024": 796,
@@ -1444,7 +1460,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "LY": {
+    "LBY": {
         "name": "Libye",
         "gdp_usd_2024": 52.1,
         "gdp_per_capita_2024": 7443,
@@ -1496,7 +1512,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "MG": {
+    "MDG": {
         "name": "Madagascar",
         "gdp_usd_2024": 16.7,
         "gdp_per_capita_2024": 564,
@@ -1548,7 +1564,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "MW": {
+    "MWI": {
         "name": "Malawi",
         "gdp_usd_2024": 13.2,
         "gdp_per_capita_2024": 632,
@@ -1600,7 +1616,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "ML": {
+    "MLI": {
         "name": "Mali",
         "gdp_usd_2024": 19.9,
         "gdp_per_capita_2024": 881,
@@ -1652,7 +1668,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "MR": {
+    "MRT": {
         "name": "Mauritanie",
         "gdp_usd_2024": 9.1,
         "gdp_per_capita_2024": 1857,
@@ -1704,7 +1720,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "MU": {
+    "MUS": {
         "name": "Maurice",
         "gdp_usd_2024": 16.7,
         "gdp_per_capita_2024": 12846,
@@ -1756,7 +1772,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "MA": {
+    "MAR": {
         "name": "Maroc",
         "gdp_usd_2024": 142.0,
         "gdp_per_capita_2024": 3757,
@@ -1808,7 +1824,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "MZ": {
+    "MOZ": {
         "name": "Mozambique",
         "gdp_usd_2024": 18.1,
         "gdp_per_capita_2024": 534,
@@ -1860,7 +1876,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "NA": {
+    "NAM": {
         "name": "Namibie",
         "gdp_usd_2024": 12.4,
         "gdp_per_capita_2024": 4769,
@@ -1912,7 +1928,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "NE": {
+    "NER": {
         "name": "Niger",
         "gdp_usd_2024": 16.6,
         "gdp_per_capita_2024": 634,
@@ -1964,7 +1980,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "NG": {
+    "NGA": {
         "name": "Nigéria",
         "gdp_usd_2024": 374.984,
         "gdp_per_capita_2024": 1645,
@@ -2016,7 +2032,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "RW": {
+    "RWA": {
         "name": "Rwanda",
         "gdp_usd_2024": 13.3,
         "gdp_per_capita_2024": 964,
@@ -2068,7 +2084,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "ST": {
+    "STP": {
         "name": "São Tomé-et-Príncipe",
         "gdp_usd_2024": 0.5,
         "gdp_per_capita_2024": 2500,
@@ -2120,7 +2136,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "SN": {
+    "SEN": {
         "name": "Sénégal",
         "gdp_usd_2024": 29.6,
         "gdp_per_capita_2024": 1609,
@@ -2172,7 +2188,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "SC": {
+    "SYC": {
         "name": "Seychelles",
         "gdp_usd_2024": 1.7,
         "gdp_per_capita_2024": 17000,
@@ -2224,7 +2240,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "SL": {
+    "SLE": {
         "name": "Sierra Leone",
         "gdp_usd_2024": 4.1,
         "gdp_per_capita_2024": 477,
@@ -2276,7 +2292,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "SO": {
+    "SOM": {
         "name": "Somalie",
         "gdp_usd_2024": 5.4,
         "gdp_per_capita_2024": 307,
@@ -2328,7 +2344,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "ZA": {
+    "ZAF": {
         "name": "Afrique du Sud",
         "gdp_usd_2024": 377.782,
         "gdp_per_capita_2024": 5976,
@@ -2380,7 +2396,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "SS": {
+    "SSD": {
         "name": "Soudan du Sud",
         "gdp_usd_2024": 3.2,
         "gdp_per_capita_2024": 276,
@@ -2432,7 +2448,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "SD": {
+    "SDN": {
         "name": "Soudan",
         "gdp_usd_2024": 35.8,
         "gdp_per_capita_2024": 744,
@@ -2484,7 +2500,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "TZ": {
+    "TZA": {
         "name": "Tanzanie",
         "gdp_usd_2024": 75.7,
         "gdp_per_capita_2024": 1190,
@@ -2536,7 +2552,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "TG": {
+    "TGO": {
         "name": "Togo",
         "gdp_usd_2024": 8.3,
         "gdp_per_capita_2024": 965,
@@ -2588,7 +2604,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "TN": {
+    "TUN": {
         "name": "Tunisie",
         "gdp_usd_2024": 48.3,
         "gdp_per_capita_2024": 4025,
@@ -2640,7 +2656,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "UG": {
+    "UGA": {
         "name": "Ouganda",
         "gdp_usd_2024": 48.1,
         "gdp_per_capita_2024": 989,
@@ -2692,7 +2708,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "ZM": {
+    "ZMB": {
         "name": "Zambie",
         "gdp_usd_2024": 26.7,
         "gdp_per_capita_2024": 1335,
@@ -2744,7 +2760,7 @@ REAL_COUNTRY_DATA = {
             ]
         }
     },
-    "ZW": {
+    "ZWE": {
         "name": "Zimbabwe",
         "gdp_usd_2024": 31.0,
         "gdp_per_capita_2024": 1902,
