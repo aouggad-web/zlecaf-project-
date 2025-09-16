@@ -3,7 +3,7 @@
     "test": "API Root Endpoint",
     "success": true,
     "message": "Point d'entrée accessible avec message ZLECAf",
-    "timestamp": "2025-09-11T16:13:23.311005",
+    "timestamp": "2025-09-16T22:33:30.528725",
     "details": {
       "response": {
         "message": "Système Commercial ZLECAf API - Version Complète"
@@ -14,7 +14,7 @@
     "test": "Countries List",
     "success": true,
     "message": "Liste complète de 54 pays avec structure correcte",
-    "timestamp": "2025-09-11T16:13:23.355153",
+    "timestamp": "2025-09-16T22:33:30.535256",
     "details": {
       "sample_countries": [
         {
@@ -45,46 +45,46 @@
     }
   },
   {
-    "test": "Country Profile NG",
-    "success": true,
-    "message": "Profil complet avec données économiques et ZLECAf pour Nigéria",
-    "timestamp": "2025-09-11T16:13:23.398146",
+    "test": "Country Profile NGA",
+    "success": false,
+    "message": "Pays NGA non trouvé",
+    "timestamp": "2025-09-16T22:33:30.543959",
     "details": {
-      "country": "Nigéria",
-      "gdp": 244000000000.0,
-      "population": 218500000,
-      "zlecaf_level": "Très élevé"
+      "status_code": 404
     }
   },
   {
-    "test": "Country Profile MA",
-    "success": true,
-    "message": "Profil complet avec données économiques et ZLECAf pour Maroc",
-    "timestamp": "2025-09-11T16:13:23.441097",
+    "test": "Country Profile DZA",
+    "success": false,
+    "message": "Pays DZA non trouvé",
+    "timestamp": "2025-09-16T22:33:30.590725",
     "details": {
-      "country": "Maroc",
-      "gdp": 10000000000.0,
-      "population": 10000000,
-      "zlecaf_level": "Modéré"
+      "status_code": 404
     }
   },
   {
-    "test": "Country Profile MU",
-    "success": true,
-    "message": "Profil complet avec données économiques et ZLECAf pour Maurice",
-    "timestamp": "2025-09-11T16:13:23.484117",
+    "test": "Country Profile ZAF",
+    "success": false,
+    "message": "Pays ZAF non trouvé",
+    "timestamp": "2025-09-16T22:33:30.596603",
     "details": {
-      "country": "Maurice",
-      "gdp": 15800000000.0,
-      "population": 1270000,
-      "zlecaf_level": "Très élevé"
+      "status_code": 404
+    }
+  },
+  {
+    "test": "Country Profile EGY",
+    "success": false,
+    "message": "Pays EGY non trouvé",
+    "timestamp": "2025-09-16T22:33:30.643554",
+    "details": {
+      "status_code": 404
     }
   },
   {
     "test": "Rules of Origin 010121",
     "success": true,
     "message": "Règles d'origine complètes pour 010121 - Entièrement obtenus",
-    "timestamp": "2025-09-11T16:13:23.527069",
+    "timestamp": "2025-09-16T22:33:30.690411",
     "details": {
       "rule_type": "Entièrement obtenus",
       "regional_content": 100,
@@ -95,7 +95,7 @@
     "test": "Rules of Origin 847989",
     "success": true,
     "message": "Règles d'origine complètes pour 847989 - Transformation substantielle",
-    "timestamp": "2025-09-11T16:13:23.570119",
+    "timestamp": "2025-09-16T22:33:30.737527",
     "details": {
       "rule_type": "Transformation substantielle",
       "regional_content": 45,
@@ -104,25 +104,22 @@
   },
   {
     "test": "Tariff Calculation",
-    "success": true,
-    "message": "Calcul tarifaire réussi - Économies: 15000.00 USD (75.0%)",
-    "timestamp": "2025-09-11T16:13:35.914105",
+    "success": false,
+    "message": "Erreur de validation des données d'entrée",
+    "timestamp": "2025-09-16T22:33:30.784494",
     "details": {
-      "normal_tariff": "20.0%",
-      "zlecaf_tariff": "5.0%",
-      "savings_usd": 15000.0,
-      "savings_percent": 75.0,
-      "calculation_id": "ad40e91b-6b89-4a29-a64a-3d52a9697b90"
+      "status_code": 400,
+      "response": "{\"detail\":\"L'un des pays sélectionnés n'est pas membre de la ZLECAf\"}"
     }
   },
   {
     "test": "Statistics",
     "success": true,
-    "message": "Statistiques complètes - 54 pays, 1 calculs",
-    "timestamp": "2025-09-11T16:13:35.964062",
+    "message": "Statistiques complètes - 54 pays, 2 calculs",
+    "timestamp": "2025-09-16T22:33:30.803308",
     "details": {
       "countries": 54,
-      "calculations": 1,
+      "calculations": 2,
       "population": 1355398000,
       "gdp": 3400000000000,
       "tariff_reduction": "85%"
