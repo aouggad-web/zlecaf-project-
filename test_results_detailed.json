@@ -3,7 +3,7 @@
     "test": "API Root Endpoint",
     "success": true,
     "message": "Point d'entrée accessible avec message ZLECAf",
-    "timestamp": "2025-09-16T22:33:59.553310",
+    "timestamp": "2025-09-16T22:36:07.702063",
     "details": {
       "response": {
         "message": "Système Commercial ZLECAf API - Version Complète"
@@ -14,7 +14,7 @@
     "test": "Countries List",
     "success": true,
     "message": "Liste complète de 54 pays avec structure correcte",
-    "timestamp": "2025-09-16T22:33:59.566540",
+    "timestamp": "2025-09-16T22:36:07.721733",
     "details": {
       "sample_countries": [
         {
@@ -46,49 +46,57 @@
   },
   {
     "test": "Country Profile NG",
-    "success": false,
-    "message": "PIB incorrect: 10000000000.0 au lieu de 374.984",
-    "timestamp": "2025-09-16T22:33:59.615819",
+    "success": true,
+    "message": "Profil validé avec nouvelles données - Nigéria: PIB 374.984Mds, Pop 227883000M",
+    "timestamp": "2025-09-16T22:36:07.732725",
     "details": {
-      "actual_gdp": 10000000000.0,
-      "expected_gdp": 374.984
+      "country": "Nigéria",
+      "gdp": 374.984,
+      "population": 227883000,
+      "zlecaf_level": "Modéré"
     }
   },
   {
     "test": "Country Profile DZ",
-    "success": false,
-    "message": "PIB incorrect: 10000000000.0 au lieu de 269.128",
-    "timestamp": "2025-09-16T22:33:59.625737",
+    "success": true,
+    "message": "Profil validé avec nouvelles données - Algérie: PIB 269.128Mds, Pop 46700000M",
+    "timestamp": "2025-09-16T22:36:07.781731",
     "details": {
-      "actual_gdp": 10000000000.0,
-      "expected_gdp": 269.128
+      "country": "Algérie",
+      "gdp": 269.128,
+      "population": 46700000,
+      "zlecaf_level": "Modéré"
     }
   },
   {
     "test": "Country Profile ZA",
-    "success": false,
-    "message": "PIB incorrect: 10000000000.0 au lieu de 377.782",
-    "timestamp": "2025-09-16T22:33:59.674612",
+    "success": true,
+    "message": "Profil validé avec nouvelles données - Afrique du Sud: PIB 377.782Mds, Pop 63212000M",
+    "timestamp": "2025-09-16T22:36:07.793686",
     "details": {
-      "actual_gdp": 10000000000.0,
-      "expected_gdp": 377.782
+      "country": "Afrique du Sud",
+      "gdp": 377.782,
+      "population": 63212000,
+      "zlecaf_level": "Modéré"
     }
   },
   {
     "test": "Country Profile EG",
-    "success": false,
-    "message": "PIB incorrect: 10000000000.0 au lieu de 331.59",
-    "timestamp": "2025-09-16T22:33:59.724584",
+    "success": true,
+    "message": "Profil validé avec nouvelles données - Égypte: PIB 331.59Mds, Pop 114536000M",
+    "timestamp": "2025-09-16T22:36:07.843090",
     "details": {
-      "actual_gdp": 10000000000.0,
-      "expected_gdp": 331.59
+      "country": "Égypte",
+      "gdp": 331.59,
+      "population": 114536000,
+      "zlecaf_level": "Modéré"
     }
   },
   {
     "test": "Rules of Origin 010121",
     "success": true,
     "message": "Règles d'origine complètes pour 010121 - Entièrement obtenus",
-    "timestamp": "2025-09-16T22:33:59.733710",
+    "timestamp": "2025-09-16T22:36:07.851462",
     "details": {
       "rule_type": "Entièrement obtenus",
       "regional_content": 100,
@@ -99,7 +107,7 @@
     "test": "Rules of Origin 847989",
     "success": true,
     "message": "Règles d'origine complètes pour 847989 - Transformation substantielle",
-    "timestamp": "2025-09-16T22:33:59.783594",
+    "timestamp": "2025-09-16T22:36:07.899494",
     "details": {
       "rule_type": "Transformation substantielle",
       "regional_content": 45,
@@ -110,23 +118,23 @@
     "test": "Tariff Calculation",
     "success": true,
     "message": "Calcul tarifaire réussi - Économies: 15000.00 USD (75.0%)",
-    "timestamp": "2025-09-16T22:34:08.615513",
+    "timestamp": "2025-09-16T22:36:18.185040",
     "details": {
       "normal_tariff": "20.0%",
       "zlecaf_tariff": "5.0%",
       "savings_usd": 15000.0,
       "savings_percent": 75.0,
-      "calculation_id": "eed27afa-5045-4f0e-93b8-0fdf6065f551"
+      "calculation_id": "3426971a-57b5-471b-a25a-fb91a9d7efca"
     }
   },
   {
     "test": "Statistics",
     "success": true,
-    "message": "Statistiques complètes - 54 pays, 3 calculs",
-    "timestamp": "2025-09-16T22:34:08.630951",
+    "message": "Statistiques complètes - 54 pays, 4 calculs",
+    "timestamp": "2025-09-16T22:36:18.201398",
     "details": {
       "countries": 54,
-      "calculations": 3,
+      "calculations": 4,
       "population": 1355398000,
       "gdp": 3400000000000,
       "tariff_reduction": "85%"
