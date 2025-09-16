@@ -3,7 +3,7 @@
 # Dernière mise à jour: 2024-09-16
 
 REAL_COUNTRY_DATA = {
-    "DZ": {
+    "DZA": {  # Algérie
         "name": "Algérie",
         "gdp_usd_2024": 269.128,
         "gdp_per_capita_2024": 5763,
@@ -11,49 +11,85 @@ REAL_COUNTRY_DATA = {
         "development_index": 0.745,
         "africa_rank": 3,
         "growth_forecast_2024": "3.2%",
-        "risk_ratings": {
-            "sp": "B+",
-            "moodys": "B2",
-            "fitch": "B+",
-            "scope": "B+",
-            "global_risk": "Élevé"
-        },
+        "risk_ratings": {"sp": "B+", "moodys": "B2", "fitch": "B+", "scope": "B+", "global_risk": "Élevé"},
         "key_sectors": [
-            {
-                "name": "Hydrocarbures",
-                "pib_share": 35.0,
-                "description": "Pétrole et gaz naturel"
-            },
-            {
-                "name": "Services",
-                "pib_share": 40.0,
-                "description": "Secteur tertiaire"
-            },
-            {
-                "name": "Industrie",
-                "pib_share": 25.0,
-                "description": "Secteur secondaire"
-            }
+            {"name": "Hydrocarbures", "pib_share": 35.0, "description": "Pétrole et gaz naturel"},
+            {"name": "Services", "pib_share": 40.0, "description": "Secteur tertiaire"},
+            {"name": "Industrie", "pib_share": 25.0, "description": "Secteur secondaire"}
         ],
-        "main_exports": [
-            "Hydrocarbures (85%)",
-            "Produits chimiques (5%)",
-            "Produits alimentaires (4%)"
-        ],
-        "main_imports": [
-            "Machines et équipements (25%)",
-            "Produits alimentaires (20%)",
-            "Produits chimiques (15%)"
-        ],
+        "main_exports": ["Hydrocarbures (85%)", "Produits chimiques (5%)", "Produits alimentaires (4%)"],
+        "main_imports": ["Machines et équipements (25%)", "Produits alimentaires (20%)", "Produits chimiques (15%)"],
         "zlecaf_potential": {
-            "level": "Modéré",
-            "description": "Potentiel commercial avec ratification ZLECAf",
-            "key_opportunities": [
-                "Commerce intra-africain",
-                "Intégration régionale",
-                "Réduction tarifaire"
-            ]
+            'level': 'Élevé',
+            'description': 'Potentiel commercial fort avec ratification ZLECAf',
+            'key_opportunities': ['Commerce intra-africain', 'Intégration régionale', 'Réduction tarifaire']
         }
+    },
+    "AGO": {  # Angola
+        "name": "Angola",
+        "gdp_usd_2024": 124.2,
+        "gdp_per_capita_2024": 3508,
+        "population_2024": 35400000,
+        "development_index": 0.586,
+        "africa_rank": 8,
+        "growth_forecast_2024": "2.8%",
+        "risk_ratings": {"sp": "B-", "moodys": "B3", "fitch": "B-", "scope": "B-", "global_risk": "Élevé"},
+        "key_sectors": [
+            {"name": "Pétrole", "pib_share": 50.0, "description": "Industrie pétrolière"},
+            {"name": "Services", "pib_share": 30.0, "description": "Secteur tertiaire"},
+            {"name": "Agriculture", "pib_share": 20.0, "description": "Secteur primaire"}
+        ],
+        "main_exports": ["Pétrole brut (92%)", "Diamants (4%)", "Produits pétroliers raffinés (2%)"],
+        "main_imports": ["Machines et équipements (30%)", "Véhicules (15%)", "Produits alimentaires (20%)"],
+        "zlecaf_potential": {
+            'level': 'Élevé',
+            'description': 'Grand potentiel avec diversification économique',
+            'key_opportunities': ['Commerce intra-africain', 'Intégration régionale', 'Réduction tarifaire']
+        }
+    },
+    "MAR": {  # Maroc
+        "name": "Maroc",
+        "gdp_usd_2024": 142.0,
+        "gdp_per_capita_2024": 3757,
+        "population_2024": 37800000,
+        "development_index": 0.683,
+        "africa_rank": 5,
+        "growth_forecast_2024": "3.2%",
+        "risk_ratings": {"sp": "BBB-", "moodys": "Ba1", "fitch": "BBB-", "scope": "BBB-", "global_risk": "Modéré"},
+        "key_sectors": [
+            {"name": "Services", "pib_share": 50.0, "description": "Tourisme, services financiers"},
+            {"name": "Industrie", "pib_share": 33.0, "description": "Textile, automobile, phosphates"},
+            {"name": "Agriculture", "pib_share": 17.0, "description": "Agrumes, céréales"}
+        ],
+        "main_exports": ["Phosphates (18%)", "Textiles (16%)", "Produits alimentaires (14%)"],
+        "main_imports": ["Machines et équipements (20%)", "Carburants (15%)", "Produits alimentaires (12%)"],
+        "zlecaf_potential": {
+            'level': 'Très Élevé',
+            'description': 'Leader régional avec forte intégration commerciale',
+            'key_opportunities': ['Commerce intra-africain', 'Intégration régionale', 'Réduction tarifaire']
+        }
+    },
+    "GHA": {  # Ghana
+        "name": "Ghana",
+        "gdp_usd_2024": 76.6,
+        "gdp_per_capita_2024": 2287,
+        "population_2024": 33500000,
+        "development_index": 0.632,
+        "africa_rank": 9,
+        "growth_forecast_2024": "2.8%",
+        "risk_ratings": {"sp": "CCC+", "moodys": "Caa2", "fitch": "CCC", "scope": "CCC+", "global_risk": "Très Élevé"},
+        "key_sectors": [
+            {"name": "Services", "pib_share": 47.0, "description": "Commerce, services financiers"},
+            {"name": "Agriculture", "pib_share": 25.0, "description": "Cacao, café, noix de cajou"},
+            {"name": "Mines", "pib_share": 28.0, "description": "Or, pétrole, bauxite"}
+        ],
+        "main_exports": ["Or (45%)", "Cacao (20%)", "Pétrole (15%)"],
+        "main_imports": ["Machines et équipements (20%)", "Produits pétroliers (18%)", "Véhicules (15%)"],
+        "zlecaf_potential": {
+            'level': 'Élevé',
+            'description': 'Hub commercial ouest-africain important',
+            'key_opportunities': ['Commerce intra-africain', 'Intégration régionale', 'Réduction tarifaire']
+        }  
     },
     "AO": {
         "name": "Angola",
