@@ -47,7 +47,7 @@ REAL_COUNTRY_DATA = {
         "name": "Algérie",
         "gdp_usd_2024": 269.128,
         "gdp_per_capita_2024": 5762.91,
-        "population_2024": 46.7,
+        "population_2024": 46700000,  # 46.7M converted to actual number
         "development_index": 0.5,
         "africa_rank": 25,
         "growth_forecast_2024": "3.0%",
