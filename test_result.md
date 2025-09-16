@@ -148,7 +148,7 @@
     - agent: "main"
       message: "Application ZLECAf complète identifiée. Backend API fonctionne parfaitement (54 pays, calculs tarifaires, règles origine). Frontend moderne React avec Shadcn/UI. Problème: routing externe https://emergent.city/api cause erreurs CORS depuis localhost:3000. Solutions possibles: configurer proxy ou corriger ingress Kubernetes."
 
-user_problem_statement: "Tester l'API ZLECAf avec les nouvelles données validées intégrées depuis le fichier Excel fourni par l'utilisateur"
+user_problem_statement: "Tester l'application ZLECAf React qui vient d'être mise à jour avec de nouvelles données validées. L'utilisateur signale que les 'profils de pays' et 'statistiques' ne fonctionnent pas."
 
 backend:
   - task: "API ZLECAf avec nouvelles données Excel - GET /api/countries"
