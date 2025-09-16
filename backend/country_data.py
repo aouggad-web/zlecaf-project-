@@ -498,7 +498,7 @@ REAL_COUNTRY_DATA = {
         "name": "Égypte",
         "gdp_usd_2024": 331.59,
         "gdp_per_capita_2024": 2895.07,
-        "population_2024": 114.536,
+        "population_2024": 114536000,  # 114.536M converted to actual number
         "development_index": 0.5,
         "africa_rank": 25,
         "growth_forecast_2024": "3.0%",
