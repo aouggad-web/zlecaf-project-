@@ -12,7 +12,7 @@ from datetime import datetime
 from typing import Dict, Any, List
 
 # Configuration de l'API
-BASE_URL = "http://localhost:8001/api"
+BASE_URL = "https://etape-suivante.preview.emergentagent.com/api"
 TIMEOUT = 30
 
 class ZLECAfAPITester:
