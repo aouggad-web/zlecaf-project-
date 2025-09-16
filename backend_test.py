@@ -365,10 +365,11 @@ class ZLECAfAPITester:
                 )
     
     def test_tariff_calculation(self):
-        """Test POST /api/calculate-tariff - Calcul complet des tarifs"""
+        """Test POST /api/calculate-tariff - Calcul complet des tarifs avec nouvelles données"""
+        # Payload de test spécifique mentionné dans la demande
         test_payload = {
-            "origin_country": "NG",
-            "destination_country": "MA",
+            "origin_country": "NGA",
+            "destination_country": "EGY",
             "hs_code": "010121",
             "value": 100000
         }
