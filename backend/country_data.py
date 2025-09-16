@@ -91,58 +91,7 @@ REAL_COUNTRY_DATA = {
             'key_opportunities': ['Commerce intra-africain', 'Intégration régionale', 'Réduction tarifaire']
         }  
     },
-    "AO": {
-        "name": "Angola",
-        "gdp_usd_2024": 124.2,
-        "gdp_per_capita_2024": 3508,
-        "population_2024": 35400000,
-        "development_index": 0.586,
-        "africa_rank": 8,
-        "growth_forecast_2024": "2.8%",
-        "risk_ratings": {
-            "sp": "B-",
-            "moodys": "B3",
-            "fitch": "B-",
-            "scope": "B-",
-            "global_risk": "Élevé"
-        },
-        "key_sectors": [
-            {
-                "name": "Pétrole",
-                "pib_share": 50.0,
-                "description": "Industrie pétrolière"
-            },
-            {
-                "name": "Services",
-                "pib_share": 30.0,
-                "description": "Secteur tertiaire"
-            },
-            {
-                "name": "Agriculture",
-                "pib_share": 20.0,
-                "description": "Secteur primaire"
-            }
-        ],
-        "main_exports": [
-            "Pétrole brut (92%)",
-            "Diamants (4%)",
-            "Produits pétroliers raffinés (2%)"
-        ],
-        "main_imports": [
-            "Machines et équipements (30%)",
-            "Véhicules (15%)",
-            "Produits alimentaires (20%)"
-        ],
-        "zlecaf_potential": {
-            "level": "Modéré",
-            "description": "Potentiel commercial avec ratification ZLECAf",
-            "key_opportunities": [
-                "Commerce intra-africain",
-                "Intégration régionale",
-                "Réduction tarifaire"
-            ]
-        }
-    },
+
     "BJ": {
         "name": "Bénin",
         "gdp_usd_2024": 19.4,
