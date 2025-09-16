@@ -6,7 +6,7 @@ REAL_COUNTRY_DATA = {
         "name": "Afrique du Sud",
         "gdp_usd_2024": 377.782,
         "gdp_per_capita_2024": 5976.43,
-        "population_2024": 63.212,
+        "population_2024": 63212000,  # 63.212M converted to actual number
         "development_index": 0.5,
         "africa_rank": 25,
         "growth_forecast_2024": "3.0%",
