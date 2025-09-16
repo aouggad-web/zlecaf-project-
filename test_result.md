@@ -272,17 +272,53 @@ backend:
           comment: "✅ VALIDÉ: Point d'entrée API accessible avec message ZLECAf correct. Endpoint GET /api/ opérationnel."
 
 frontend:
-  - task: "Frontend Testing"
-    implemented: false
-    working: "NA"
-    file: "N/A"
+  - task: "Interface React ZLECAf avec calculs tarifaires"
+    implemented: true
+    working: true
+    file: "App.js"
     stuck_count: 0
-    priority: "low"
+    priority: "high"
     needs_retesting: false
     status_history:
-        - working: "NA"
+        - working: true
           agent: "testing"
-          comment: "Frontend testing non effectué selon les instructions - focus uniquement sur backend API."
+          comment: "✅ VALIDÉ: Calculateur fonctionnel - 54 pays ZLECAf chargés, sélection origine/destination opérationnelle, calculs tarifaires fonctionnels avec API backend."
+
+  - task: "Onglet Statistiques ZLECAf"
+    implemented: true
+    working: true
+    file: "App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Statistiques affichées correctement - $64,500 économies totales, projections 2025/2030 (15%, 52%, 35%), sources officielles présentes."
+
+  - task: "Onglet Profils Pays"
+    implemented: true
+    working: true
+    file: "App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Profils pays fonctionnels - Sélecteur 'Choisir un pays' avec 54 pays, données Algérie affichées (PIB, population, projections), API country-profile opérationnelle."
+
+  - task: "Intégration Frontend-Backend API"
+    implemented: true
+    working: true
+    file: "App.js, .env"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Intégration complète réussie - URL API externe https://etape-suivante.preview.emergentagent.com/api fonctionnelle, appels API countries/statistics/country-profile opérationnels."
 
 metadata:
   created_by: "testing_agent"
