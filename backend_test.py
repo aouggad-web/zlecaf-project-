@@ -157,10 +157,16 @@ class ZLECAfAPITester:
             )
     
     def test_country_profiles(self):
-        """Test GET /api/country-profile/{country_code} - Profils économiques"""
-        test_countries = ['NG', 'MA', 'MU']
+        """Test GET /api/country-profile/{country_code} - Profils économiques avec nouvelles données"""
+        # Tests spécifiques avec nouvelles données validées
+        test_countries_data = {
+            'NGA': {'expected_gdp': 374.984, 'expected_pop': 227.883, 'name': 'Nigéria'},
+            'DZA': {'expected_gdp': 269.128, 'expected_pop': 46.7, 'name': 'Algérie'},
+            'ZAF': {'expected_gdp': 377.782, 'expected_pop': 63.212, 'name': 'Afrique du Sud'},
+            'EGY': {'expected_gdp': 331.59, 'expected_pop': 114.536, 'name': 'Égypte'}
+        }
         
-        for country_code in test_countries:
+        for country_code, expected_data in test_countries_data.items():
             try:
                 response = self.session.get(f"{self.base_url}/country-profile/{country_code}", timeout=TIMEOUT)
                 
@@ -180,16 +186,26 @@ class ZLECAfAPITester:
                         )
                         continue
                     
-                    # Vérifier les données économiques
-                    economic_fields = ['gdp_usd', 'gdp_per_capita', 'population']
-                    has_economic_data = any(field in profile and profile[field] is not None for field in economic_fields)
+                    # Vérifier les données économiques spécifiques
+                    gdp_check = profile.get('gdp_usd') == expected_data['expected_gdp']
+                    pop_check = profile.get('population') == expected_data['expected_pop']
+                    name_check = profile.get('country_name') == expected_data['name']
                     
-                    if not has_economic_data:
+                    if not gdp_check:
                         self.log_result(
                             f"Country Profile {country_code}", 
                             False, 
-                            "Aucune donnée économique présente",
-                            {'profile': profile}
+                            f"PIB incorrect: {profile.get('gdp_usd')} au lieu de {expected_data['expected_gdp']}",
+                            {'actual_gdp': profile.get('gdp_usd'), 'expected_gdp': expected_data['expected_gdp']}
+                        )
+                        continue
+                    
+                    if not pop_check:
+                        self.log_result(
+                            f"Country Profile {country_code}", 
+                            False, 
+                            f"Population incorrecte: {profile.get('population')} au lieu de {expected_data['expected_pop']}",
+                            {'actual_pop': profile.get('population'), 'expected_pop': expected_data['expected_pop']}
                         )
                         continue
                     
@@ -220,7 +236,7 @@ class ZLECAfAPITester:
                     self.log_result(
                         f"Country Profile {country_code}", 
                         True, 
-                        f"Profil complet avec données économiques et ZLECAf pour {profile['country_name']}",
+                        f"Profil validé avec nouvelles données - {expected_data['name']}: PIB {expected_data['expected_gdp']}Mds, Pop {expected_data['expected_pop']}M",
                         {
                             'country': profile['country_name'],
                             'gdp': profile.get('gdp_usd'),
