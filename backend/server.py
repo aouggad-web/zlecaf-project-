@@ -348,7 +348,7 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
         raise HTTPException(status_code=404, detail="Pays non trouvé dans la ZLECAf")
     
     # Récupérer les données réelles du pays
-    real_data = get_country_data(country_code.upper())
+    real_data = get_country_data(country['iso3'])
     
     # Construire le profil avec données réelles
     profile = CountryEconomicProfile(
