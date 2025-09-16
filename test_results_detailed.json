@@ -3,7 +3,7 @@
     "test": "API Root Endpoint",
     "success": true,
     "message": "Point d'entrée accessible avec message ZLECAf",
-    "timestamp": "2025-09-16T22:33:30.528725",
+    "timestamp": "2025-09-16T22:33:59.553310",
     "details": {
       "response": {
         "message": "Système Commercial ZLECAf API - Version Complète"
@@ -14,7 +14,7 @@
     "test": "Countries List",
     "success": true,
     "message": "Liste complète de 54 pays avec structure correcte",
-    "timestamp": "2025-09-16T22:33:30.535256",
+    "timestamp": "2025-09-16T22:33:59.566540",
     "details": {
       "sample_countries": [
         {
@@ -45,46 +45,50 @@
     }
   },
   {
-    "test": "Country Profile NGA",
+    "test": "Country Profile NG",
     "success": false,
-    "message": "Pays NGA non trouvé",
-    "timestamp": "2025-09-16T22:33:30.543959",
+    "message": "PIB incorrect: 10000000000.0 au lieu de 374.984",
+    "timestamp": "2025-09-16T22:33:59.615819",
     "details": {
-      "status_code": 404
+      "actual_gdp": 10000000000.0,
+      "expected_gdp": 374.984
     }
   },
   {
-    "test": "Country Profile DZA",
+    "test": "Country Profile DZ",
     "success": false,
-    "message": "Pays DZA non trouvé",
-    "timestamp": "2025-09-16T22:33:30.590725",
+    "message": "PIB incorrect: 10000000000.0 au lieu de 269.128",
+    "timestamp": "2025-09-16T22:33:59.625737",
     "details": {
-      "status_code": 404
+      "actual_gdp": 10000000000.0,
+      "expected_gdp": 269.128
     }
   },
   {
-    "test": "Country Profile ZAF",
+    "test": "Country Profile ZA",
     "success": false,
-    "message": "Pays ZAF non trouvé",
-    "timestamp": "2025-09-16T22:33:30.596603",
+    "message": "PIB incorrect: 10000000000.0 au lieu de 377.782",
+    "timestamp": "2025-09-16T22:33:59.674612",
     "details": {
-      "status_code": 404
+      "actual_gdp": 10000000000.0,
+      "expected_gdp": 377.782
     }
   },
   {
-    "test": "Country Profile EGY",
+    "test": "Country Profile EG",
     "success": false,
-    "message": "Pays EGY non trouvé",
-    "timestamp": "2025-09-16T22:33:30.643554",
+    "message": "PIB incorrect: 10000000000.0 au lieu de 331.59",
+    "timestamp": "2025-09-16T22:33:59.724584",
     "details": {
-      "status_code": 404
+      "actual_gdp": 10000000000.0,
+      "expected_gdp": 331.59
     }
   },
   {
     "test": "Rules of Origin 010121",
     "success": true,
     "message": "Règles d'origine complètes pour 010121 - Entièrement obtenus",
-    "timestamp": "2025-09-16T22:33:30.690411",
+    "timestamp": "2025-09-16T22:33:59.733710",
     "details": {
       "rule_type": "Entièrement obtenus",
       "regional_content": 100,
@@ -95,7 +99,7 @@
     "test": "Rules of Origin 847989",
     "success": true,
     "message": "Règles d'origine complètes pour 847989 - Transformation substantielle",
-    "timestamp": "2025-09-16T22:33:30.737527",
+    "timestamp": "2025-09-16T22:33:59.783594",
     "details": {
       "rule_type": "Transformation substantielle",
       "regional_content": 45,
@@ -104,22 +108,25 @@
   },
   {
     "test": "Tariff Calculation",
-    "success": false,
-    "message": "Erreur de validation des données d'entrée",
-    "timestamp": "2025-09-16T22:33:30.784494",
+    "success": true,
+    "message": "Calcul tarifaire réussi - Économies: 15000.00 USD (75.0%)",
+    "timestamp": "2025-09-16T22:34:08.615513",
     "details": {
-      "status_code": 400,
-      "response": "{\"detail\":\"L'un des pays sélectionnés n'est pas membre de la ZLECAf\"}"
+      "normal_tariff": "20.0%",
+      "zlecaf_tariff": "5.0%",
+      "savings_usd": 15000.0,
+      "savings_percent": 75.0,
+      "calculation_id": "eed27afa-5045-4f0e-93b8-0fdf6065f551"
     }
   },
   {
     "test": "Statistics",
     "success": true,
-    "message": "Statistiques complètes - 54 pays, 2 calculs",
-    "timestamp": "2025-09-16T22:33:30.803308",
+    "message": "Statistiques complètes - 54 pays, 3 calculs",
+    "timestamp": "2025-09-16T22:34:08.630951",
     "details": {
       "countries": 54,
-      "calculations": 2,
+      "calculations": 3,
       "population": 1355398000,
       "gdp": 3400000000000,
       "tariff_reduction": "85%"
