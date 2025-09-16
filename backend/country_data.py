@@ -520,9 +520,16 @@ REAL_COUNTRY_DATA = {
         "gdp_usd_2024": 331.59,
         "gdp_per_capita_2024": 2895.07,
         "population_2024": 114536000,  # 114.536M converted to actual number
-        "development_index": 0.5,
-        "africa_rank": 25,
-        "growth_forecast_2024": "3.0%",
+        "development_index": 0.731,
+        "africa_rank": 4,
+        "growth_forecast_2024": "3.8%",
+        "risk_ratings": {
+            "sp": "B",
+            "moodys": "B2",
+            "fitch": "B",
+            "scope": "B",
+            "global_risk": "Élevé"
+        },
         "key_sectors": [
             {
                 "name": "Agriculture",
