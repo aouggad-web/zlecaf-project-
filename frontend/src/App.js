@@ -798,7 +798,7 @@ function ZLECAfCalculator() {
                         {countryProfile.gdp_usd && (
                           <div className="text-center">
                             <p className="text-2xl font-bold text-green-600">
-                              ${(countryProfile.gdp_usd / 1000000000).toFixed(1)}B
+                              ${countryProfile.gdp_usd.toFixed(1)}B
                             </p>
                             <p className="text-sm text-gray-600">PIB (milliards USD)</p>
                           </div>
