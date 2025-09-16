@@ -327,6 +327,7 @@ class CountryEconomicProfile(BaseModel):
     region: str
     trade_profile: Dict[str, Any] = {}
     projections: Dict[str, Any] = {}
+    risk_ratings: Dict[str, Any] = {}
 
 # Routes
 @api_router.get("/")
