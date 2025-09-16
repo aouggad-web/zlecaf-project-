@@ -368,8 +368,8 @@ class ZLECAfAPITester:
         """Test POST /api/calculate-tariff - Calcul complet des tarifs avec nouvelles données"""
         # Payload de test spécifique mentionné dans la demande
         test_payload = {
-            "origin_country": "NGA",
-            "destination_country": "EGY",
+            "origin_country": "NG",
+            "destination_country": "EG",
             "hs_code": "010121",
             "value": 100000
         }
