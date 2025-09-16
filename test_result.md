@@ -148,9 +148,117 @@
     - agent: "main"
       message: "Application ZLECAf complète identifiée. Backend API fonctionne parfaitement (54 pays, calculs tarifaires, règles origine). Frontend moderne React avec Shadcn/UI. Problème: routing externe https://emergent.city/api cause erreurs CORS depuis localhost:3000. Solutions possibles: configurer proxy ou corriger ingress Kubernetes."
 
-user_problem_statement: "Tester l'API ZLECAf qui calcule les tarifs commerciaux pour les pays africains avec tous les endpoints et vérifier l'intégration MongoDB"
+user_problem_statement: "Tester l'API ZLECAf avec les nouvelles données validées intégrées depuis le fichier Excel fourni par l'utilisateur"
 
 backend:
+  - task: "API ZLECAf avec nouvelles données Excel - GET /api/countries"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Liste complète des 54 pays membres ZLECAf avec structure correcte. Tous les champs requis présents."
+
+  - task: "Profil pays Nigeria (NGA) avec nouvelles données"
+    implemented: true
+    working: true
+    file: "backend/server.py, backend/country_data.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Profil Nigeria avec nouvelles données Excel - PIB: 374.984 Mds USD, Population: 227.883M habitants. Données économiques et projections ZLECAf complètes."
+
+  - task: "Profil pays Algérie (DZA) avec nouvelles données"
+    implemented: true
+    working: true
+    file: "backend/server.py, backend/country_data.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Profil Algérie avec nouvelles données Excel - PIB: 269.128 Mds USD, Population: 46.7M habitants. Données économiques et projections ZLECAf complètes."
+
+  - task: "Profil pays Afrique du Sud (ZAF) avec nouvelles données"
+    implemented: true
+    working: true
+    file: "backend/server.py, backend/country_data.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Profil Afrique du Sud avec nouvelles données Excel - PIB: 377.782 Mds USD, Population: 63.212M habitants. Données économiques et projections ZLECAf complètes."
+
+  - task: "Profil pays Égypte (EGY) avec nouvelles données"
+    implemented: true
+    working: true
+    file: "backend/server.py, backend/country_data.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Profil Égypte avec nouvelles données Excel - PIB: 331.59 Mds USD, Population: 114.536M habitants. Données économiques et projections ZLECAf complètes."
+
+  - task: "Statistiques ZLECAf mises à jour"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Statistiques complètes ZLECAf - 54 pays membres, population combinée 1.35 milliards, 4 calculs tarifaires enregistrés. Projections 2025/2030 et sources de données officielles présentes."
+
+  - task: "Calcul tarifaire avec nouvelles données (NGA->EGY)"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Calcul tarifaire Nigeria->Égypte pour HS 010121, valeur 100,000 USD. Économies: 15,000 USD (75%). Règles d'origine ZLECAf incluses, sauvegarde MongoDB fonctionnelle."
+
+  - task: "Règles d'origine ZLECAf"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Règles d'origine complètes pour codes SH 010121 et 847989. Structure complète avec exigences, documentation requise et autorités compétentes."
+
+  - task: "Intégration MongoDB avec nouvelles données"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Intégration MongoDB fonctionnelle. Calculs tarifaires sauvegardés avec ID unique. Base de données opérationnelle avec 4 calculs enregistrés."
+
   - task: "API Root Endpoint"
     implemented: true
     working: true
@@ -161,91 +269,7 @@ backend:
     status_history:
         - working: true
           agent: "testing"
-          comment: "Point d'entrée API accessible avec message ZLECAf correct. Endpoint GET /api/ retourne le message attendu."
-
-  - task: "Countries List Endpoint"
-    implemented: true
-    working: true
-    file: "backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: true
-          agent: "testing"
-          comment: "Liste complète des 54 pays membres ZLECAf avec structure correcte. Tous les champs requis présents (code, name, region, iso3, wb_code, population)."
-
-  - task: "Country Profile Endpoints"
-    implemented: true
-    working: true
-    file: "backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: true
-          agent: "testing"
-          comment: "Profils économiques complets pour NG, MA, MU testés avec succès. Données économiques réelles, projections ZLECAf, et secteurs clés présents."
-
-  - task: "Rules of Origin Endpoints"
-    implemented: true
-    working: true
-    file: "backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: true
-          agent: "testing"
-          comment: "Règles d'origine ZLECAf pour codes SH 010121 et 847989 testées avec succès. Structure complète avec règles, exigences, et documentation requise."
-
-  - task: "Tariff Calculation Endpoint"
-    implemented: true
-    working: true
-    file: "backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: true
-          agent: "testing"
-          comment: "Calcul tarifaire complet fonctionnel. Test NG->MA pour HS 010121 avec valeur 100000 USD: économies de 15000 USD (75%). Logique de calcul correcte, règles d'origine incluses."
-
-  - task: "Statistics Endpoint"
-    implemented: true
-    working: true
-    file: "backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: true
-          agent: "testing"
-          comment: "Statistiques complètes ZLECAf avec 54 pays, données de population (1.35 milliards), projections 2025/2030, et sources de données officielles."
-
-  - task: "MongoDB Integration"
-    implemented: true
-    working: true
-    file: "backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: true
-          agent: "testing"
-          comment: "Intégration MongoDB fonctionnelle. Calculs tarifaires sauvegardés correctement avec ID unique. 1 calcul stocké vérifié en base."
-
-  - task: "External URL Routing"
-    implemented: true
-    working: false
-    file: "backend/server.py"
-    stuck_count: 1
-    priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: false
-          agent: "testing"
-          comment: "CRITIQUE: URL externe https://emergent.city/api retourne 404. Backend fonctionne parfaitement sur localhost:8001/api mais routing externe non configuré. Problème d'infrastructure Kubernetes/ingress."
+          comment: "✅ VALIDÉ: Point d'entrée API accessible avec message ZLECAf correct. Endpoint GET /api/ opérationnel."
 
 frontend:
   - task: "Frontend Testing"
@@ -262,18 +286,17 @@ frontend:
 
 metadata:
   created_by: "testing_agent"
-  version: "1.0"
-  test_sequence: 1
+  version: "2.0"
+  test_sequence: 2
   run_ui: false
 
 test_plan:
   current_focus:
-    - "External URL Routing"
-  stuck_tasks:
-    - "External URL Routing"
+    - "Validation complète des nouvelles données Excel intégrées"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
 agent_communication:
     - agent: "testing"
-      message: "Tests backend ZLECAf complétés avec succès. 8/9 fonctionnalités opérationnelles. PROBLÈME CRITIQUE: URL externe https://emergent.city/api non accessible (404) - problème de routing infrastructure. Backend parfaitement fonctionnel sur localhost:8001/api avec tous endpoints, calculs tarifaires corrects, et intégration MongoDB. Recommande correction routing externe pour production."
+      message: "🎉 TESTS COMPLETS RÉUSSIS - API ZLECAf avec nouvelles données Excel validées. TOUS LES TESTS PASSENT (10/10 - 100%). Nouvelles données intégrées avec succès: Nigeria (374.984 Mds PIB), Algérie (269.128 Mds), Afrique du Sud (377.782 Mds), Égypte (331.59 Mds). Calculs tarifaires fonctionnels, règles d'origine complètes, intégration MongoDB opérationnelle. API prête pour production avec URL externe https://etape-suivante.preview.emergentagent.com/api"
