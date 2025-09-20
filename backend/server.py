@@ -305,9 +305,25 @@ class TariffCalculationResponse(BaseModel):
     # Tarifs ZLECAf
     zlecaf_tariff_rate: float
     zlecaf_tariff_amount: float
+    # Autres taxes et frais
+    normal_vat_rate: float = 0.0
+    normal_vat_amount: float = 0.0
+    zlecaf_vat_rate: float = 0.0
+    zlecaf_vat_amount: float = 0.0
+    normal_other_taxes: float = 0.0
+    zlecaf_other_taxes: float = 0.0
+    normal_handling_fees: float = 0.0
+    zlecaf_handling_fees: float = 0.0
+    # Totaux
+    normal_total_cost: float = 0.0
+    zlecaf_total_cost: float = 0.0
     # Économies
     savings: float
     savings_percentage: float
+    # Détail des économies par composant
+    tariff_savings: float = 0.0
+    vat_savings: float = 0.0
+    other_savings: float = 0.0
     # Règles d'origine
     rules_of_origin: Dict[str, Any]
     # Top producteurs africains
