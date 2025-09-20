@@ -413,36 +413,255 @@ function ZLECAfCalculator() {
                   </button>
                 </div>
 
-                {/* Résultats */}
+                {/* Résultats avec graphiques donuts */}
                 {result && (
-                  <div className="results-grid fade-in-up">
-                    <div className="metric-card">
-                      <div className="metric-value">
-                        {formatCurrency(result.normal_tariff_amount)}
+                  <div className="fade-in-up">
+                    {/* Graphiques Donuts */}
+                    <div className="results-grid mb-xl">
+                      <div className="metric-card">
+                        <h4 className="font-semibold mb-md text-center">Régime NPF Standard</h4>
+                        <div className="donut-container" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px', position: 'relative'}}>
+                          <svg width="180" height="180" viewBox="0 0 180 180">
+                            <circle
+                              cx="90"
+                              cy="90"
+                              r="70"
+                              fill="none"
+                              stroke="#E5E7EB"
+                              strokeWidth="20"
+                            />
+                            <circle
+                              cx="90"
+                              cy="90"
+                              r="70"
+                              fill="none"
+                              stroke="#EF4444"
+                              strokeWidth="20"
+                              strokeDasharray={`${(result.normal_tariff_amount / result.normal_total_cost) * 439.8} 439.8`}
+                              strokeDashoffset="0"
+                              transform="rotate(-90 90 90)"
+                            />
+                            <circle
+                              cx="90"
+                              cy="90"
+                              r="70"
+                              fill="none"
+                              stroke="#F59E0B"
+                              strokeWidth="20"
+                              strokeDasharray={`${(result.normal_vat_amount / result.normal_total_cost) * 439.8} 439.8`}
+                              strokeDashoffset={`-${(result.normal_tariff_amount / result.normal_total_cost) * 439.8}`}
+                              transform="rotate(-90 90 90)"
+                            />
+                            <circle
+                              cx="90"
+                              cy="90"
+                              r="70"
+                              fill="none"
+                              stroke="#6B7280"
+                              strokeWidth="20"
+                              strokeDasharray={`${((result.normal_other_taxes + result.normal_handling_fees) / result.normal_total_cost) * 439.8} 439.8`}
+                              strokeDashoffset={`-${((result.normal_tariff_amount + result.normal_vat_amount) / result.normal_total_cost) * 439.8}`}
+                              transform="rotate(-90 90 90)"
+                            />
+                            <text x="90" y="85" textAnchor="middle" className="text-lg font-bold fill-current text-gray-800">
+                              {formatCurrency(result.normal_total_cost)}
+                            </text>
+                            <text x="90" y="100" textAnchor="middle" className="text-sm fill-current text-gray-600">
+                              Total NPF
+                            </text>
+                          </svg>
+                        </div>
+                        <div className="space-y-2 mt-md">
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                            <span className="text-sm">Droits: {formatCurrency(result.normal_tariff_amount)}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
+                            <span className="text-sm">TVA: {formatCurrency(result.normal_vat_amount)}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 bg-gray-500 rounded-full"></div>
+                            <span className="text-sm">Autres: {formatCurrency(result.normal_other_taxes + result.normal_handling_fees)}</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="metric-label">{t.normalTariff}</div>
-                      <div className="metric-change">
-                        Taux: {(result.normal_tariff_rate * 100).toFixed(1)}%
+
+                      <div className="metric-card">
+                        <h4 className="font-semibold mb-md text-center">Régime ZLECAf</h4>
+                        <div className="donut-container" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px', position: 'relative'}}>
+                          <svg width="180" height="180" viewBox="0 0 180 180">
+                            <circle
+                              cx="90"
+                              cy="90"
+                              r="70"
+                              fill="none"
+                              stroke="#E5E7EB"
+                              strokeWidth="20"
+                            />
+                            <circle
+                              cx="90"
+                              cy="90"
+                              r="70"
+                              fill="none"
+                              stroke="#10B981"
+                              strokeWidth="20"
+                              strokeDasharray={`${(result.zlecaf_tariff_amount / result.zlecaf_total_cost) * 439.8} 439.8`}
+                              strokeDashoffset="0"
+                              transform="rotate(-90 90 90)"
+                            />
+                            <circle
+                              cx="90"
+                              cy="90"
+                              r="70"
+                              fill="none"
+                              stroke="#34D399"
+                              strokeWidth="20"
+                              strokeDasharray={`${(result.zlecaf_vat_amount / result.zlecaf_total_cost) * 439.8} 439.8`}
+                              strokeDashoffset={`-${(result.zlecaf_tariff_amount / result.zlecaf_total_cost) * 439.8}`}
+                              transform="rotate(-90 90 90)"
+                            />
+                            <circle
+                              cx="90"
+                              cy="90"
+                              r="70"
+                              fill="none"
+                              stroke="#9CA3AF"
+                              strokeWidth="20"
+                              strokeDasharray={`${((result.zlecaf_other_taxes + result.zlecaf_handling_fees) / result.zlecaf_total_cost) * 439.8} 439.8`}
+                              strokeDashoffset={`-${((result.zlecaf_tariff_amount + result.zlecaf_vat_amount) / result.zlecaf_total_cost) * 439.8}`}
+                              transform="rotate(-90 90 90)"
+                            />
+                            <text x="90" y="85" textAnchor="middle" className="text-lg font-bold fill-current text-green-600">
+                              {formatCurrency(result.zlecaf_total_cost)}
+                            </text>
+                            <text x="90" y="100" textAnchor="middle" className="text-sm fill-current text-gray-600">
+                              Total ZLECAf
+                            </text>
+                          </svg>
+                        </div>
+                        <div className="space-y-2 mt-md">
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 bg-green-600 rounded-full"></div>
+                            <span className="text-sm">Droits: {formatCurrency(result.zlecaf_tariff_amount)}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 bg-green-400 rounded-full"></div>
+                            <span className="text-sm">TVA: {formatCurrency(result.zlecaf_vat_amount)}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 bg-gray-400 rounded-full"></div>
+                            <span className="text-sm">Autres: {formatCurrency(result.zlecaf_other_taxes + result.zlecaf_handling_fees)}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="metric-card" style={{gridColumn: 'span 2'}}>
+                        <h4 className="font-semibold mb-md text-center">Économies Détaillées</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-lg">
+                          <div className="text-center">
+                            <div className="metric-value text-green-600">
+                              {formatCurrency(result.tariff_savings || 0)}
+                            </div>
+                            <div className="metric-label">Économie Droits</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="metric-value text-green-600">
+                              {formatCurrency(result.vat_savings || 0)}
+                            </div>
+                            <div className="metric-label">Économie TVA</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="metric-value text-green-600">
+                              {formatCurrency(result.other_savings || 0)}
+                            </div>
+                            <div className="metric-label">Autres Économies</div>
+                          </div>
+                        </div>
+                        <div className="border-t pt-lg mt-lg">
+                          <div className="text-center">
+                            <div className="text-3xl font-bold text-green-600 mb-sm">
+                              {formatCurrency(result.savings)}
+                            </div>
+                            <div className="text-lg font-semibold text-gray-700">
+                              Économie Totale ({result.savings_percentage?.toFixed(1)}%)
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="metric-card">
-                      <div className="metric-value">
-                        {formatCurrency(result.zlecaf_tariff_amount)}
-                      </div>
-                      <div className="metric-label">{t.zlecafTariff}</div>
-                      <div className="metric-change">
-                        Taux: {(result.zlecaf_tariff_rate * 100).toFixed(1)}%
-                      </div>
-                    </div>
-
-                    <div className="metric-card">
-                      <div className="metric-value text-green-600">
-                        {formatCurrency(result.savings)}
-                      </div>
-                      <div className="metric-label">{t.savings}</div>
-                      <div className="metric-change positive">
-                        -{result.savings_percentage.toFixed(1)}%
+                    {/* Tableau détaillé des coûts */}
+                    <div className="professional-card">
+                      <div className="card-content-pro">
+                        <h3 className="card-title-pro mb-lg">
+                          💰 Détail des Coûts par Composant
+                        </h3>
+                        <div className="overflow-x-auto">
+                          <table className="table-pro">
+                            <thead>
+                              <tr>
+                                <th>Composant</th>
+                                <th>Régime NPF</th>
+                                <th>Régime ZLECAf</th>
+                                <th>Économie</th>
+                                <th>% Économie</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>💼 Valeur Marchandise</td>
+                                <td>{formatCurrency(result.value)}</td>
+                                <td>{formatCurrency(result.value)}</td>
+                                <td className="text-gray-500">-</td>
+                                <td className="text-gray-500">-</td>
+                              </tr>
+                              <tr>
+                                <td>🏛️ Droits de Douane</td>
+                                <td>{formatCurrency(result.normal_tariff_amount)} ({(result.normal_tariff_rate * 100).toFixed(1)}%)</td>
+                                <td>{formatCurrency(result.zlecaf_tariff_amount)} ({(result.zlecaf_tariff_rate * 100).toFixed(1)}%)</td>
+                                <td className="text-green-600 font-semibold">{formatCurrency(result.tariff_savings || 0)}</td>
+                                <td className="text-green-600 font-semibold">
+                                  {result.normal_tariff_amount > 0 ? (((result.tariff_savings || 0) / result.normal_tariff_amount) * 100).toFixed(1) : '0'}%
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>🧾 TVA</td>
+                                <td>{formatCurrency(result.normal_vat_amount)} ({(result.normal_vat_rate * 100).toFixed(1)}%)</td>
+                                <td>{formatCurrency(result.zlecaf_vat_amount)} ({(result.zlecaf_vat_rate * 100).toFixed(1)}%)</td>
+                                <td className="text-green-600 font-semibold">{formatCurrency(result.vat_savings || 0)}</td>
+                                <td className="text-green-600 font-semibold">
+                                  {result.normal_vat_amount > 0 ? (((result.vat_savings || 0) / result.normal_vat_amount) * 100).toFixed(1) : '0'}%
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>📋 Autres Taxes</td>
+                                <td>{formatCurrency(result.normal_other_taxes)}</td>
+                                <td>{formatCurrency(result.zlecaf_other_taxes)}</td>
+                                <td className="text-green-600 font-semibold">{formatCurrency((result.normal_other_taxes || 0) - (result.zlecaf_other_taxes || 0))}</td>
+                                <td className="text-green-600 font-semibold">
+                                  {result.normal_other_taxes > 0 ? ((((result.normal_other_taxes || 0) - (result.zlecaf_other_taxes || 0)) / result.normal_other_taxes) * 100).toFixed(1) : '0'}%
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>🔧 Frais Manutention</td>
+                                <td>{formatCurrency(result.normal_handling_fees)}</td>
+                                <td>{formatCurrency(result.zlecaf_handling_fees)}</td>
+                                <td className="text-green-600 font-semibold">{formatCurrency((result.normal_handling_fees || 0) - (result.zlecaf_handling_fees || 0))}</td>
+                                <td className="text-green-600 font-semibold">
+                                  {result.normal_handling_fees > 0 ? ((((result.normal_handling_fees || 0) - (result.zlecaf_handling_fees || 0)) / result.normal_handling_fees) * 100).toFixed(1) : '0'}%
+                                </td>
+                              </tr>
+                              <tr className="bg-gray-100 font-semibold">
+                                <td>💰 TOTAL</td>
+                                <td className="text-red-600">{formatCurrency(result.normal_total_cost)}</td>
+                                <td className="text-green-600">{formatCurrency(result.zlecaf_total_cost)}</td>
+                                <td className="text-green-600 text-lg">{formatCurrency(result.savings)}</td>
+                                <td className="text-green-600 text-lg">{result.savings_percentage?.toFixed(1)}%</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>
