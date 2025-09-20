@@ -879,7 +879,7 @@ function ZLECAfCalculator() {
                             Statut Éligibilité
                           </div>
                           <p className="text-gray-700 mb-2 font-medium">
-                            {calculationMode === 'ZLECAF' ? '✅ Éligible' : '⚠️ Non testé'}
+                            {calculationMode === 'ZLECAF' ? '✅ Éligible' : '⚠️ Calculé selon les conditions ZLECAf'}
                           </p>
                           <p className="text-xs text-gray-600">
                             Basé sur le mode de calcul sélectionné
