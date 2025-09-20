@@ -39,55 +39,94 @@ function ZLECAfCalculator() {
   const [statistics, setStatistics] = useState(null);
   const [countryProfile, setCountryProfile] = useState(null);
   const [rulesOfOrigin, setRulesOfOrigin] = useState(null);
-  const [partnerImportStats, setPartnerImportStats] = useState(null);
+  const [selectedCountryCode, setSelectedCountryCode] = useState('');
+  const [selectedHsCode, setSelectedHsCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('calculator');
-  const [language, setLanguage] = useState('fr'); // fr ou en
+  const [language, setLanguage] = useState('fr');
 
   const texts = {
     fr: {
-      title: "Accord de la ZLECAf",
-      subtitle: "Levier de développement de l'AFRIQUE",
-      calculatorTab: "Calculateur",
-      statisticsTab: "Statistiques", 
+      title: "ZLECAf Digital Hub",
+      subtitle: "Plateforme Officielle d'Analyse Commerciale Africaine",
+      calculatorTab: "Calculateur Tarifaire",
+      statisticsTab: "Données & Statistiques", 
       rulesTab: "Règles d'Origine",
-      profilesTab: "Profils Pays",
-      calculatorTitle: "Calculateur ZLECAf Complet",
-      calculatorDesc: "Calculs basés sur les données officielles des organismes internationaux",
-      originCountry: "Pays d'origine",
-      partnerCountry: "Pays partenaire", 
+      profilesTab: "Profils Économiques",
+      calculatorTitle: "Calculateur Tarifaire ZLECAf",
+      calculatorDesc: "Calculs précis basés sur les données officielles des institutions internationales",
+      originCountry: "Pays Exportateur",
+      partnerCountry: "Pays Importateur", 
       hsCodeLabel: "Code SH6 (6 chiffres)",
-      valueLabel: "Valeur de la marchandise (USD)",
-      calculateBtn: "Calculer avec Données Officielles",
-      normalTariff: "Tarif NPF",
-      zlecafTariff: "Tarif ZLECAf",
-      savings: "Économie Réalisée",
-      rulesOrigin: "Règles d'Origine ZLECAf",
-      partnerImports: "Importations Partenaire",
-      projections: "Projections ZLECAf",
-      dataSources: "Sources de Données Officielles"
+      hsCodePlaceholder: "Ex: 010121, 180100, 090111",
+      valueLabel: "Valeur de la Marchandise (USD)",
+      valuePlaceholder: "Ex: 100000",
+      calculateBtn: "Calculer les Tarifs",
+      calculating: "Calcul en cours...",
+      normalTariff: "Tarif NPF Standard",
+      zlecafTariff: "Tarif ZLECAf Préférentiel",
+      savings: "Économies Réalisées",
+      rulesOrigin: "Règles d'Origine Applicables",
+      partnerImports: "Données d'Importation",
+      projections: "Projections Économiques",
+      dataSources: "Sources Officielles",
+      selectCountry: "Sélectionner un pays",
+      selectHsCode: "Entrer le code SH6",
+      searchCountry: "Rechercher un pays",
+      statisticsTitle: "Statistiques Commerciales ZLECAf",
+      statisticsDesc: "Données macroéconomiques et projections pour la Zone de Libre-Échange",
+      rulesTitle: "Règles d'Origine par Secteur",
+      rulesDesc: "Critères de qualification pour bénéficier des préférences tarifaires",
+      profilesTitle: "Profils Économiques des Pays",
+      profilesDesc: "Données économiques détaillées des 54 pays membres",
+      officialSources: "Sources Officielles:",
+      unionAfricaine: "Union Africaine",
+      banqueMondiale: "Banque Mondiale",
+      fmi: "FMI",
+      bad: "BAD",
+      unctad: "UNCTAD",
+      oec: "OEC Atlas"
     },
     en: {
-      title: "AfCFTA Agreement",
-      subtitle: "AFRICA's Development Lever",
-      calculatorTab: "Calculator",
-      statisticsTab: "Statistics",
+      title: "AfCFTA Digital Hub",
+      subtitle: "Official African Trade Analysis Platform",
+      calculatorTab: "Tariff Calculator",
+      statisticsTab: "Data & Statistics",
       rulesTab: "Rules of Origin", 
-      profilesTab: "Country Profiles",
-      calculatorTitle: "Complete AfCFTA Calculator",
-      calculatorDesc: "Calculations based on official data from international organizations",
-      originCountry: "Origin Country",
-      partnerCountry: "Partner Country",
+      profilesTab: "Economic Profiles",
+      calculatorTitle: "AfCFTA Tariff Calculator",
+      calculatorDesc: "Precise calculations based on official data from international institutions",
+      originCountry: "Exporting Country",
+      partnerCountry: "Importing Country",
       hsCodeLabel: "HS6 Code (6 digits)",
+      hsCodePlaceholder: "Ex: 010121, 180100, 090111",
       valueLabel: "Merchandise Value (USD)",
-      calculateBtn: "Calculate with Official Data",
-      normalTariff: "MFN Tariff",
-      zlecafTariff: "AfCFTA Tariff", 
+      valuePlaceholder: "Ex: 100000",
+      calculateBtn: "Calculate Tariffs",
+      calculating: "Calculating...",
+      normalTariff: "Standard MFN Tariff",
+      zlecafTariff: "AfCFTA Preferential Tariff",
       savings: "Savings Achieved",
-      rulesOrigin: "AfCFTA Rules of Origin",
-      partnerImports: "Partner Imports",
-      projections: "AfCFTA Projections",
-      dataSources: "Official Data Sources"
+      rulesOrigin: "Applicable Rules of Origin",
+      partnerImports: "Import Data",
+      projections: "Economic Projections",
+      dataSources: "Official Sources",
+      selectCountry: "Select a country",
+      selectHsCode: "Enter HS6 code",
+      searchCountry: "Search country",
+      statisticsTitle: "AfCFTA Trade Statistics",
+      statisticsDesc: "Macroeconomic data and projections for the Free Trade Area",
+      rulesTitle: "Rules of Origin by Sector",
+      rulesDesc: "Qualification criteria to benefit from tariff preferences",
+      profilesTitle: "Country Economic Profiles",
+      profilesDesc: "Detailed economic data for the 54 member countries",
+      officialSources: "Official Sources:",
+      unionAfricaine: "African Union",
+      banqueMondiale: "World Bank",
+      fmi: "IMF",
+      bad: "AfDB",
+      unctad: "UNCTAD",
+      oec: "OEC Atlas"
     }
   };
 
@@ -98,12 +137,6 @@ function ZLECAfCalculator() {
     fetchStatistics();
   }, []);
 
-  useEffect(() => {
-    if (destinationCountry && hsCode.length >= 4) {
-      fetchPartnerImportStats();
-    }
-  }, [destinationCountry, hsCode]);
-
   const fetchCountries = async () => {
     try {
       const response = await axios.get(`${API}/countries`);
@@ -113,7 +146,7 @@ function ZLECAfCalculator() {
       toast({
         title: "Erreur",
         description: "Impossible de charger la liste des pays",
-        variant: "destructive"
+        variant: "destructive",
       });
     }
   };
@@ -127,865 +160,603 @@ function ZLECAfCalculator() {
     }
   };
 
-  const fetchPartnerImportStats = async () => {
-    if (!destinationCountry || hsCode.length < 4) return;
-    
-    try {
-      // Simuler des données d'importation du pays partenaire
-      // En production, ceci appellerait l'API OEC
-      const mockImportData = {
-        country: destinationCountry,
-        hs_code: hsCode,
-        year_2022: Math.floor(Math.random() * 500000000) + 100000000, // 100M - 600M USD
-        year_2023: Math.floor(Math.random() * 500000000) + 100000000,
-        growth_rate: ((Math.random() - 0.5) * 20).toFixed(1), // -10% à +10%
-        share_of_total_imports: (Math.random() * 5).toFixed(2), // 0-5%
-        source: "OEC Atlas"
-      };
-      setPartnerImportStats(mockImportData);
-    } catch (error) {
-      console.error('Erreur lors du chargement des statistiques d\'importation:', error);
-    }
-  };
-
   const fetchCountryProfile = async (countryCode) => {
     try {
+      setLoading(true);
       const response = await axios.get(`${API}/country-profile/${countryCode}`);
-      // Les données réelles sont maintenant gérées par le backend
-      const enhancedProfile = response.data;
-      setCountryProfile(enhancedProfile);
+      setCountryProfile(response.data);
     } catch (error) {
       console.error('Erreur lors du chargement du profil pays:', error);
-    }
-  };
-
-  const fetchRulesOfOrigin = async (hsCode) => {
-    try {
-      const response = await axios.get(`${API}/rules-of-origin/${hsCode}`);
-      setRulesOfOrigin(response.data);
-    } catch (error) {
-      console.error('Erreur lors du chargement des règles d\'origine:', error);
-    }
-  };
-
-  const calculateTariff = async () => {
-    if (!originCountry || !destinationCountry || !hsCode || !value) {
       toast({
-        title: "Champs manquants",
-        description: "Veuillez remplir tous les champs",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (hsCode.length !== 6) {
-      toast({
-        title: "Code SH6 invalide",
-        description: "Le code SH6 doit contenir exactement 6 chiffres",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const response = await axios.post(`${API}/calculate-tariff`, {
-        origin_country: originCountry,
-        destination_country: destinationCountry,
-        hs_code: hsCode,
-        value: parseFloat(value)
-      });
-      
-      setResult(response.data);
-      await fetchStatistics();
-      await fetchRulesOfOrigin(hsCode);
-      await fetchPartnerImportStats();
-      
-      toast({
-        title: "Calcul réussi",
-        description: `Économie potentielle: $${formatNumber(response.data.savings)}`,
-      });
-    } catch (error) {
-      console.error('Erreur lors du calcul:', error);
-      toast({
-        title: "Erreur de calcul",
-        description: error.response?.data?.detail || "Erreur lors du calcul",
-        variant: "destructive"
+        title: "Erreur",
+        description: "Impossible de charger le profil du pays",
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
     }
   };
 
-  const getCountryName = (code) => {
-    const country = countries.find(c => c.code === code);
-    return country ? country.name : code;
+  const fetchRulesOfOrigin = async (hsCode) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${API}/rules-of-origin/${hsCode}`);
+      setRulesOfOrigin(response.data);
+    } catch (error) {
+      console.error('Erreur lors du chargement des règles d\'origine:', error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de charger les règles d'origine",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCalculate = async () => {
+    if (!originCountry || !destinationCountry || !hsCode || !value) {
+      toast({
+        title: "Champs manquants",
+        description: "Veuillez remplir tous les champs obligatoires",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (hsCode.length !== 6) {
+      toast({
+        title: "Code SH invalide",
+        description: "Le code SH doit contenir exactement 6 chiffres",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await axios.post(`${API}/calculate-tariff`, {
+        origin_country: originCountry,
+        destination_country: destinationCountry,
+        hs_code: hsCode,
+        value: parseFloat(value)
+      });
+      setResult(response.data);
+      toast({
+        title: "Calcul terminé",
+        description: "Les tarifs ont été calculés avec succès",
+      });
+    } catch (error) {
+      console.error('Erreur lors du calcul:', error);
+      toast({
+        title: "Erreur de calcul",
+        description: error.response?.data?.detail || "Une erreur est survenue",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('fr-FR', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 0
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(amount);
   };
 
-  const formatNumber = (number) => {
-    return new Intl.NumberFormat('en-US').format(number);
-  };
-
-  const getSectorName = (hsCode) => {
-    const sectorNames = {
-      '01': 'Animaux vivants / Live animals',
-      '02': 'Viandes et abats / Meat and edible meat offal',
-      '03': 'Poissons et crustacés / Fish and crustaceans',
-      '04': 'Produits laitiers / Dairy products',
-      '05': 'Autres produits d\'origine animale / Other animal products',
-      '06': 'Plantes vivantes / Live plants',
-      '07': 'Légumes / Vegetables',
-      '08': 'Fruits / Fruits',
-      '09': 'Café, thé, épices / Coffee, tea, spices',
-      '10': 'Céréales / Cereals',
-      '11': 'Produits de la minoterie / Milling products',
-      '12': 'Graines et fruits oléagineux / Oil seeds and oleaginous fruits',
-      '13': 'Gommes, résines / Lac, gums, resins',
-      '14': 'Matières à tresser / Vegetable plaiting materials',
-      '15': 'Graisses et huiles / Animal or vegetable fats and oils',
-      '16': 'Préparations de viande / Preparations of meat',
-      '17': 'Sucres et sucreries / Sugars and sugar confectionery',
-      '18': 'Cacao et ses préparations / Cocoa and cocoa preparations',
-      '19': 'Préparations de céréales / Preparations of cereals',
-      '20': 'Préparations de légumes / Preparations of vegetables',
-      '21': 'Préparations alimentaires diverses / Miscellaneous edible preparations',
-      '22': 'Boissons / Beverages',
-      '23': 'Résidus industries alimentaires / Food industry residues',
-      '24': 'Tabacs / Tobacco',
-      '25': 'Sel, soufre, terres et pierres / Salt, sulfur, stone',
-      '26': 'Minerais / Ores',
-      '27': 'Combustibles minéraux / Mineral fuels',
-      '28': 'Produits chimiques inorganiques / Inorganic chemicals',
-      '29': 'Produits chimiques organiques / Organic chemicals',
-      '30': 'Produits pharmaceutiques / Pharmaceutical products',
-      '84': 'Machines et appareils mécaniques / Machinery and mechanical appliances',
-      '85': 'Machines et appareils électriques / Electrical machinery',
-      '87': 'Véhicules automobiles / Vehicles',
-      '61': 'Vêtements en bonneterie / Knitted apparel',
-      '62': 'Vêtements, autres qu\'en bonneterie / Woven apparel',
-      '72': 'Fonte, fer et acier / Iron and steel',
-    };
-    
-    const sector = hsCode.substring(0, 2);
-    return sectorNames[sector] || `Secteur ${sector} / Sector ${sector}`;
-  };
-
-  // Données simulées pour le graphique donut de la part SH2
-  const generateSectorShareData = () => {
-    if (!partnerImportStats) return [];
-    
-    const sectorCode = hsCode.substring(0, 2);
-    const sectorShare = parseFloat(partnerImportStats.share_of_total_imports);
-    
-    return [
-      { name: `SH${sectorCode}`, value: sectorShare, color: '#10b981' },
-      { name: 'Autres secteurs', value: 100 - sectorShare, color: '#e5e7eb' }
-    ];
+  const formatNumber = (num) => {
+    return new Intl.NumberFormat('fr-FR').format(num);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b-2 border-green-600">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">🌍</span>
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">
-                  {t.title}
-                </h1>
-                <p className="text-gray-600 mt-1">
-                  {t.subtitle}
-                </p>
-              </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header Professionnel */}
+      <header className="zlecaf-header">
+        <div className="header-content">
+          <div className="header-brand">
+            <div className="brand-logo">
+              🌍
             </div>
-            
-            {/* Sélecteur de langue */}
-            <div className="flex space-x-2">
-              <Button 
-                variant={language === 'fr' ? 'default' : 'outline'}
-                size="sm"
+            <div className="brand-text">
+              <h1>{t.title}</h1>
+              <p>{t.subtitle}</p>
+            </div>
+          </div>
+          <div className="header-actions">
+            <div className="language-selector">
+              <button 
+                className={`language-btn ${language === 'fr' ? 'active' : ''}`}
                 onClick={() => setLanguage('fr')}
               >
                 🇫🇷 FR
-              </Button>
-              <Button 
-                variant={language === 'en' ? 'default' : 'outline'}
-                size="sm"
+              </button>
+              <button 
+                className={`language-btn ${language === 'en' ? 'active' : ''}`}
                 onClick={() => setLanguage('en')}
               >
                 🇬🇧 EN
-              </Button>
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto px-4 py-8">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="calculator">{t.calculatorTab}</TabsTrigger>
-            <TabsTrigger value="statistics">{t.statisticsTab}</TabsTrigger>
-            <TabsTrigger value="rules">{t.rulesTab}</TabsTrigger>
-            <TabsTrigger value="profiles">{t.profilesTab}</TabsTrigger>
-          </TabsList>
+      {/* Navigation Principale */}
+      <nav className="main-navigation">
+        <div className="nav-content">
+          <div className="nav-tabs">
+            <button
+              className={`nav-tab ${activeTab === 'calculator' ? 'active' : ''}`}
+              onClick={() => setActiveTab('calculator')}
+            >
+              <span className="nav-tab-icon">🧮</span>
+              {t.calculatorTab}
+            </button>
+            <button
+              className={`nav-tab ${activeTab === 'statistics' ? 'active' : ''}`}
+              onClick={() => setActiveTab('statistics')}
+            >
+              <span className="nav-tab-icon">📊</span>
+              {t.statisticsTab}
+            </button>
+            <button
+              className={`nav-tab ${activeTab === 'rules' ? 'active' : ''}`}
+              onClick={() => setActiveTab('rules')}
+            >
+              <span className="nav-tab-icon">📋</span>
+              {t.rulesTab}
+            </button>
+            <button
+              className={`nav-tab ${activeTab === 'profiles' ? 'active' : ''}`}
+              onClick={() => setActiveTab('profiles')}
+            >
+              <span className="nav-tab-icon">🌍</span>
+              {t.profilesTab}
+            </button>
+          </div>
+        </div>
+      </nav>
 
-          <TabsContent value="calculator">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Formulaire de calcul */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <span>📊</span>
-                    <span>{t.calculatorTitle}</span>
-                  </CardTitle>
-                  <CardDescription>
-                    {t.calculatorDesc}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="origin">{t.originCountry}</Label>
-                      <Select value={originCountry} onValueChange={setOriginCountry}>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t.originCountry} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {countries.map((country) => (
-                            <SelectItem key={country.code} value={country.code}>
-                              {countryFlags[country.code]} {country.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="destination">{t.partnerCountry}</Label>
-                      <Select value={destinationCountry} onValueChange={setDestinationCountry}>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t.partnerCountry} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {countries.map((country) => (
-                            <SelectItem key={country.code} value={country.code}>
-                              {countryFlags[country.code]} {country.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
+      {/* Conteneur Principal */}
+      <main className="main-container">
+        {/* Onglet Calculateur */}
+        {activeTab === 'calculator' && (
+          <div className="fade-in-up">
+            <div className="professional-card">
+              <div className="card-header-pro">
+                <h2 className="card-title-pro">
+                  🧮 {t.calculatorTitle}
+                </h2>
+                <p className="card-description-pro">
+                  {t.calculatorDesc}
+                </p>
+              </div>
+              <div className="card-content-pro">
+                <div className="form-grid">
+                  <div className="form-group-pro">
+                    <label className="form-label-pro">
+                      🏭 {t.originCountry}
+                    </label>
+                    <select
+                      className="form-input-pro form-select-pro"
+                      value={originCountry}
+                      onChange={(e) => setOriginCountry(e.target.value)}
+                    >
+                      <option value="">{t.selectCountry}</option>
+                      {countries.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {countryFlags[country.code]} {country.name} ({country.code})
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="hs-code">{t.hsCodeLabel}</Label>
-                    <Input
-                      id="hs-code"
+                  <div className="form-group-pro">
+                    <label className="form-label-pro">
+                      🏪 {t.partnerCountry}
+                    </label>
+                    <select
+                      className="form-input-pro form-select-pro"
+                      value={destinationCountry}
+                      onChange={(e) => setDestinationCountry(e.target.value)}
+                    >
+                      <option value="">{t.selectCountry}</option>
+                      {countries.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {countryFlags[country.code]} {country.name} ({country.code})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="form-group-pro">
+                    <label className="form-label-pro">
+                      📦 {t.hsCodeLabel}
+                    </label>
+                    <input
+                      type="text"
+                      className="form-input-pro"
+                      placeholder={t.hsCodePlaceholder}
                       value={hsCode}
                       onChange={(e) => setHsCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                      placeholder="Ex : 010121, 180100..."
                       maxLength={6}
                     />
-                    {hsCode.length >= 2 && (
-                      <p className="text-sm text-blue-600">
-                        {getSectorName(hsCode)}
-                      </p>
-                    )}
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="value">{t.valueLabel}</Label>
-                    <Input
-                      id="value"
+                  <div className="form-group-pro">
+                    <label className="form-label-pro">
+                      💰 {t.valueLabel}
+                    </label>
+                    <input
                       type="number"
+                      className="form-input-pro"
+                      placeholder={t.valuePlaceholder}
                       value={value}
                       onChange={(e) => setValue(e.target.value)}
-                      placeholder="100000"
                       min="0"
+                      step="1000"
                     />
                   </div>
+                </div>
 
-                  <Button 
-                    onClick={calculateTariff}
+                <div className="text-center mb-xl">
+                  <button
+                    className="btn-primary-pro"
+                    onClick={handleCalculate}
                     disabled={loading}
-                    className="w-full bg-gradient-to-r from-green-600 to-blue-600"
                   >
-                    {loading ? 'Calcul en cours...' : t.calculateBtn}
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Résultats complets */}
-              {result && (
-                <div className="space-y-4">
-                  <Card className="border-green-200">
-                    <CardHeader>
-                      <CardTitle className="flex items-center space-x-2 text-green-700">
-                        <span>💰</span>
-                        <span>Résultats Détaillés</span>
-                      </CardTitle>
-                      <CardDescription>
-                        {countryFlags[result.origin_country]} {getCountryName(result.origin_country)} → {countryFlags[result.destination_country]} {getCountryName(result.destination_country)}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <p className="text-sm font-medium text-gray-600">{t.normalTariff}</p>
-                          <p className="text-2xl font-bold text-red-600">
-                            {formatCurrency(result.normal_tariff_amount)}
-                          </p>
-                          <p className="text-sm text-gray-500">
-                            {(result.normal_tariff_rate * 100).toFixed(1)}% de {formatCurrency(result.value)}
-                          </p>
-                        </div>
-
-                        <div className="space-y-2">
-                          <p className="text-sm font-medium text-gray-600">{t.zlecafTariff}</p>
-                          <p className="text-2xl font-bold text-green-600">
-                            {formatCurrency(result.zlecaf_tariff_amount)}
-                          </p>
-                          <p className="text-sm text-gray-500">
-                            {(result.zlecaf_tariff_rate * 100).toFixed(1)}% de {formatCurrency(result.value)}
-                          </p>
-                        </div>
-                      </div>
-
-                      <Separator />
-
-                      <div className="text-center space-y-2">
-                        <p className="text-sm font-medium text-gray-600">{t.savings}</p>
-                        <p className="text-3xl font-bold text-blue-600">
-                          {formatCurrency(result.savings)}
-                        </p>
-                        <Badge variant="secondary" className="text-lg px-3 py-1">
-                          {result.savings_percentage.toFixed(1)}% d'économie
-                        </Badge>
-                        <Progress value={result.savings_percentage} className="w-full mt-2" />
-                      </div>
-
-                      {/* Règles d'origine */}
-                      <div className="bg-amber-50 p-4 rounded-lg">
-                        <h4 className="font-semibold text-amber-800 mb-2">{t.rulesOrigin}</h4>
-                        <p className="text-sm text-amber-700">
-                          <strong>Type:</strong> {result.rules_of_origin.rule}
-                        </p>
-                        <p className="text-sm text-amber-700">
-                          <strong>Exigence:</strong> {result.rules_of_origin.requirement}
-                        </p>
-                        <Progress 
-                          value={result.rules_of_origin.regional_content} 
-                          className="w-full mt-2"
-                        />
-                        <p className="text-xs text-amber-600 mt-1">
-                          Contenu régional minimum: {result.rules_of_origin.regional_content}%
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Top producteurs africains */}
-                  {result.top_african_producers && result.top_african_producers.length > 0 && (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center space-x-2">
-                          <span>🏆</span>
-                          <span>Top Producteurs Africains</span>
-                        </CardTitle>
-                        <CardDescription>
-                          Principaux pays exportateurs pour le code SH {result.hs_code}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-2">
-                          {result.top_african_producers.map((producer, index) => (
-                            <div key={producer.country_code} className="flex justify-between items-center">
-                              <span className="text-sm font-medium">
-                                {index + 1}. {countryFlags[producer.country_code]} {producer.country_name}
-                              </span>
-                              <Badge variant="outline">
-                                ${(producer.export_value / 1000000).toFixed(1)}M USD
-                              </Badge>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  )}
-                </div>
-              )}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="statistics">
-            {statistics && (
-              <div className="space-y-6">
-                {/* Nouvelles métriques modifiées */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {/* Statistiques d'importation du pays partenaire */}
-                  {partnerImportStats && (
-                    <Card>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg">{t.partnerImports}</CardTitle>
-                        <CardDescription>
-                          {countryFlags[destinationCountry]} {getCountryName(destinationCountry)} - SH {hsCode}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-2">
-                          <div className="flex justify-between">
-                            <span className="text-sm">2023:</span>
-                            <span className="font-bold">${(partnerImportStats.year_2023 / 1000000).toFixed(0)}M</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm">2022:</span>
-                            <span className="font-bold">${(partnerImportStats.year_2022 / 1000000).toFixed(0)}M</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm">Croissance:</span>
-                            <Badge variant={parseFloat(partnerImportStats.growth_rate) > 0 ? "default" : "destructive"}>
-                              {partnerImportStats.growth_rate}%
-                            </Badge>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  )}
-
-                  {/* Graphique donut simulé pour la part SH2 */}
-                  {partnerImportStats && (
-                    <Card>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg">Part du Secteur</CardTitle>
-                        <CardDescription>
-                          SH{hsCode.substring(0, 2)} dans les importations totales
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-center">
-                          <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-green-400 to-blue-500 mb-2">
-                            <span className="text-white font-bold text-lg">
-                              {partnerImportStats.share_of_total_imports}%
-                            </span>
-                          </div>
-                          <p className="text-sm text-gray-600">
-                            du secteur SH{hsCode.substring(0, 2)}
-                          </p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  )}
-
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-lg">Économies Totales</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-2xl font-bold text-green-600">
-                        {formatCurrency(statistics.overview.total_savings)}
-                      </p>
-                      <p className="text-sm text-gray-600">économisées via ZLECAf</p>
-                    </CardContent>
-                  </Card>
+                    {loading && <div className="loading-spinner" />}
+                    {loading ? t.calculating : t.calculateBtn}
+                  </button>
                 </div>
 
-                {/* Projections */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t.projections}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-semibold mb-3 text-blue-600">Horizon 2025</h4>
-                        <div className="space-y-2">
-                          <div className="flex justify-between">
-                            <span>Augmentation volume commercial:</span>
-                            <Badge variant="secondary">{statistics.projections['2025'].trade_volume_increase}</Badge>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Éliminations tarifaires:</span>
-                            <Badge variant="outline">{statistics.projections['2025'].tariff_eliminations}</Badge>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Nouveaux corridors commerciaux:</span>
-                            <Badge variant="default">{statistics.projections['2025'].new_trade_corridors}</Badge>
-                          </div>
-                        </div>
+                {/* Résultats */}
+                {result && (
+                  <div className="results-grid fade-in-up">
+                    <div className="metric-card">
+                      <div className="metric-value">
+                        {formatCurrency(result.normal_tariff_amount)}
                       </div>
-                      
-                      <div>
-                        <h4 className="font-semibold mb-3 text-green-600">Horizon 2030</h4>
-                        <div className="space-y-2">
-                          <div className="flex justify-between">
-                            <span>Augmentation volume commercial:</span>
-                            <Badge variant="secondary">{statistics.projections['2030'].trade_volume_increase}</Badge>
+                      <div className="metric-label">{t.normalTariff}</div>
+                      <div className="metric-change">
+                        Taux: {(result.normal_tariff_rate * 100).toFixed(1)}%
+                      </div>
+                    </div>
+
+                    <div className="metric-card">
+                      <div className="metric-value">
+                        {formatCurrency(result.zlecaf_tariff_amount)}
+                      </div>
+                      <div className="metric-label">{t.zlecafTariff}</div>
+                      <div className="metric-change">
+                        Taux: {(result.zlecaf_tariff_rate * 100).toFixed(1)}%
+                      </div>
+                    </div>
+
+                    <div className="metric-card">
+                      <div className="metric-value text-green-600">
+                        {formatCurrency(result.savings)}
+                      </div>
+                      <div className="metric-label">{t.savings}</div>
+                      <div className="metric-change positive">
+                        -{result.savings_percentage.toFixed(1)}%
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Règles d'origine */}
+                {result && result.rules_of_origin && (
+                  <div className="professional-card mt-xl">
+                    <div className="card-content-pro">
+                      <h3 className="card-title-pro mb-lg">
+                        📋 {t.rulesOrigin}
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
+                        <div>
+                          <div className="badge-pro badge-info mb-sm">
+                            Règle Applicable
                           </div>
-                          <div className="flex justify-between">
-                            <span>Augmentation PIB:</span>
-                            <Badge variant="outline">{statistics.projections['2030'].gdp_increase}</Badge>
+                          <p className="text-gray-700">{result.rules_of_origin.rule}</p>
+                        </div>
+                        <div>
+                          <div className="badge-pro badge-success mb-sm">
+                            Exigence
                           </div>
-                          <div className="flex justify-between">
-                            <span>Boost industrialisation:</span>
-                            <Badge variant="default">{statistics.projections['2030'].industrialization_boost}</Badge>
-                          </div>
+                          <p className="text-gray-700">{result.rules_of_origin.requirement}</p>
                         </div>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-
-                {/* Sources de données */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t.dataSources}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                      {statistics.data_sources.map((source, index) => (
-                        <Badge key={index} variant="outline" className="text-center">
-                          {source}
-                        </Badge>
-                      ))}
-                    </div>
-                    <p className="text-sm text-gray-500 mt-4">
-                      Dernière mise à jour: {new Date(statistics.last_updated).toLocaleDateString('fr-FR')}
-                    </p>
-                  </CardContent>
-                </Card>
+                  </div>
+                )}
               </div>
-            )}
-          </TabsContent>
+            </div>
+          </div>
+        )}
 
-          <TabsContent value="rules">
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Règles d'Origine ZLECAf</CardTitle>
-                  <CardDescription>
-                    Entrez un code SH6 pour consulter les règles d'origine spécifiques
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex space-x-2">
-                    <Input
-                      placeholder="Code SH6 (ex: 010121)"
-                      value={hsCode}
-                      onChange={(e) => setHsCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+        {/* Onglet Statistiques */}
+        {activeTab === 'statistics' && (
+          <div className="fade-in-up">
+            <div className="professional-card">
+              <div className="card-header-pro">
+                <h2 className="card-title-pro">
+                  📊 {t.statisticsTitle}
+                </h2>
+                <p className="card-description-pro">
+                  {t.statisticsDesc}
+                </p>
+              </div>
+              <div className="card-content-pro">
+                {statistics && (
+                  <>
+                    <div className="results-grid mb-xl">
+                      <div className="metric-card">
+                        <div className="metric-value">
+                          {statistics.overview?.african_countries_members || 54}
+                        </div>
+                        <div className="metric-label">Pays Membres</div>
+                      </div>
+                      <div className="metric-card">
+                        <div className="metric-value">
+                          {formatNumber(statistics.overview?.combined_population || 0)}
+                        </div>
+                        <div className="metric-label">Population Totale</div>
+                      </div>
+                      <div className="metric-card">
+                        <div className="metric-value">
+                          {formatCurrency(statistics.overview?.estimated_combined_gdp || 0)}
+                        </div>
+                        <div className="metric-label">PIB Combiné</div>
+                      </div>
+                      <div className="metric-card">
+                        <div className="metric-value">
+                          {formatCurrency(statistics.overview?.total_savings || 0)}
+                        </div>
+                        <div className="metric-label">Économies Calculées</div>
+                      </div>
+                    </div>
+
+                    {/* Projections */}
+                    {statistics.projections && (
+                      <div className="professional-card">
+                        <div className="card-content-pro">
+                          <h3 className="card-title-pro mb-lg">
+                            🚀 {t.projections}
+                          </h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
+                            <div>
+                              <h4 className="font-semibold text-lg mb-md">Projections 2025</h4>
+                              <ul className="space-y-2">
+                                <li>📈 Augmentation commerce: {statistics.projections['2025']?.trade_volume_increase}</li>
+                                <li>📋 Éliminations tarifaires: {statistics.projections['2025']?.tariff_eliminations}</li>
+                                <li>🛣️ Nouveaux corridors: {statistics.projections['2025']?.new_trade_corridors}</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-lg mb-md">Projections 2030</h4>
+                              <ul className="space-y-2">
+                                <li>📊 Augmentation commerce: {statistics.projections['2030']?.trade_volume_increase}</li>
+                                <li>💰 Augmentation PIB: {statistics.projections['2030']?.gdp_increase}</li>
+                                <li>🏭 Boost industrialisation: {statistics.projections['2030']?.industrialization_boost}</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Onglet Règles d'Origine */}
+        {activeTab === 'rules' && (
+          <div className="fade-in-up">
+            <div className="professional-card">
+              <div className="card-header-pro">
+                <h2 className="card-title-pro">
+                  📋 {t.rulesTitle}
+                </h2>
+                <p className="card-description-pro">
+                  {t.rulesDesc}
+                </p>
+              </div>
+              <div className="card-content-pro">
+                <div className="form-group-pro mb-xl">
+                  <label className="form-label-pro">
+                    🔍 Rechercher par Code SH6
+                  </label>
+                  <div className="flex gap-md">
+                    <input
+                      type="text"
+                      className="form-input-pro flex-1"
+                      placeholder={t.hsCodePlaceholder}
+                      value={selectedHsCode}
+                      onChange={(e) => setSelectedHsCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
                       maxLength={6}
                     />
-                    <Button onClick={() => fetchRulesOfOrigin(hsCode)} disabled={hsCode.length !== 6}>
-                      Consulter
-                    </Button>
+                    <button
+                      className="btn-primary-pro"
+                      onClick={() => selectedHsCode && fetchRulesOfOrigin(selectedHsCode)}
+                      disabled={loading || selectedHsCode.length !== 6}
+                    >
+                      {loading && <div className="loading-spinner" />}
+                      Rechercher
+                    </button>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
 
-              {rulesOfOrigin && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Règles pour le Code SH {rulesOfOrigin.hs_code}</CardTitle>
-                    <CardDescription>
-                      Secteur: {getSectorName(rulesOfOrigin.hs_code)}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h4 className="font-semibold mb-2">Type de Règle</h4>
-                        <Badge variant="secondary" className="text-lg px-3 py-1">
-                          {rulesOfOrigin.rules.rule}
-                        </Badge>
+                {rulesOfOrigin && (
+                  <div className="professional-card fade-in-up">
+                    <div className="card-content-pro">
+                      <div className="flex items-center gap-md mb-lg">
+                        <div className="badge-pro badge-info">
+                          Code SH: {rulesOfOrigin.hs_code}
+                        </div>
+                        <div className="badge-pro badge-success">
+                          Secteur: {rulesOfOrigin.sector_code}
+                        </div>
                       </div>
                       
-                      <div>
-                        <h4 className="font-semibold mb-2">Exigence</h4>
-                        <p className="text-sm">{rulesOfOrigin.rules.requirement}</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-lg mb-lg">
+                        <div>
+                          <h4 className="font-semibold mb-sm">Type de Règle</h4>
+                          <p className="text-gray-700">{rulesOfOrigin.rules?.rule}</p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-sm">Exigence</h4>
+                          <p className="text-gray-700">{rulesOfOrigin.rules?.requirement}</p>
+                        </div>
                       </div>
-                    </div>
 
-                    <div>
-                      <h4 className="font-semibold mb-2">Contenu Régional Minimum</h4>
-                      <Progress value={rulesOfOrigin.rules.regional_content} className="w-full" />
-                      <p className="text-sm text-gray-600 mt-1">
-                        {rulesOfOrigin.rules.regional_content}% de contenu africain requis
-                      </p>
+                      {rulesOfOrigin.explanation && (
+                        <div className="border-t pt-lg">
+                          <h4 className="font-semibold mb-sm">Documentation Requise</h4>
+                          <ul className="list-disc list-inside space-y-1 text-gray-700">
+                            {rulesOfOrigin.explanation.documentation_required?.map((doc, index) => (
+                              <li key={index}>{doc}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
-
-                    <Separator />
-
-                    <div>
-                      <h4 className="font-semibold mb-3">Documentation Requise</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {rulesOfOrigin.explanation.documentation_required.map((doc, index) => (
-                          <Badge key={index} variant="outline">
-                            {doc}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-blue-800 mb-2">Informations Administratives</h4>
-                      <div className="space-y-1 text-sm text-blue-700">
-                        <p><strong>Période de validité:</strong> {rulesOfOrigin.explanation.validity_period}</p>
-                        <p><strong>Autorité émettrice:</strong> {rulesOfOrigin.explanation.issuing_authority}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
+                  </div>
+                )}
+              </div>
             </div>
-          </TabsContent>
+          </div>
+        )}
 
-          <TabsContent value="profiles">
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Profils Économiques des Pays</CardTitle>
-                  <CardDescription>
-                    Sélectionnez un pays pour consulter son profil économique complet
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Select 
-                    value={originCountry} 
-                    onValueChange={(value) => {
-                      setOriginCountry(value);
-                      fetchCountryProfile(value);
-                    }}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Choisir un pays" />
-                    </SelectTrigger>
-                    <SelectContent>
+        {/* Onglet Profils Pays */}
+        {activeTab === 'profiles' && (
+          <div className="fade-in-up">
+            <div className="professional-card">
+              <div className="card-header-pro">
+                <h2 className="card-title-pro">
+                  🌍 {t.profilesTitle}
+                </h2>
+                <p className="card-description-pro">
+                  {t.profilesDesc}
+                </p>
+              </div>
+              <div className="card-content-pro">
+                <div className="form-group-pro mb-xl">
+                  <label className="form-label-pro">
+                    🔍 Sélectionner un Pays
+                  </label>
+                  <div className="flex gap-md">
+                    <select
+                      className="form-input-pro form-select-pro flex-1"
+                      value={selectedCountryCode}
+                      onChange={(e) => setSelectedCountryCode(e.target.value)}
+                    >
+                      <option value="">{t.selectCountry}</option>
                       {countries.map((country) => (
-                        <SelectItem key={country.code} value={country.code}>
-                          {countryFlags[country.code]} {country.name} - {country.region}
-                        </SelectItem>
+                        <option key={country.code} value={country.code}>
+                          {countryFlags[country.code]} {country.name}
+                        </option>
                       ))}
-                    </SelectContent>
-                  </Select>
-                </CardContent>
-              </Card>
-
-              {countryProfile && (
-                <div className="space-y-4">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center space-x-2">
-                        <span>{countryFlags[countryProfile.country_code]}</span>
-                        <span>{countryProfile.country_name}</span>
-                      </CardTitle>
-                      <CardDescription>
-                        {countryProfile.region} • Population: {formatNumber(countryProfile.population)} habitants
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        {countryProfile.gdp_usd && (
-                          <div className="text-center">
-                            <p className="text-2xl font-bold text-green-600">
-                              ${countryProfile.gdp_usd.toFixed(1)}B
-                            </p>
-                            <p className="text-sm text-gray-600">PIB (milliards USD)</p>
-                          </div>
-                        )}
-                        
-                        {countryProfile.gdp_per_capita && (
-                          <div className="text-center">
-                            <p className="text-2xl font-bold text-blue-600">
-                              ${formatNumber(Math.round(countryProfile.gdp_per_capita))}
-                            </p>
-                            <p className="text-sm text-gray-600">PIB par habitant</p>
-                          </div>
-                        )}
-                        
-                        <div className="text-center">
-                          <p className="text-2xl font-bold text-purple-600">
-                            {countryProfile.projections?.development_index || 'N/A'}
-                          </p>
-                          <p className="text-sm text-gray-600">Indice de développement</p>
-                        </div>
-                        
-                        <div className="text-center">
-                          <p className="text-2xl font-bold text-orange-600">
-                            #{countryProfile.projections?.africa_rank || 'N/A'}
-                          </p>
-                          <p className="text-sm text-gray-600">Rang en Afrique</p>
-                        </div>
-                        
-                        {/* Notations de risque */}
-                        <div className="col-span-full mt-4">
-                          <h4 className="font-semibold mb-3 text-gray-800">Notations de Risque Souverain</h4>
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            <div className="bg-blue-50 p-3 rounded-lg text-center">
-                              <p className="text-lg font-bold text-blue-600">
-                                {countryProfile.risk_ratings?.sp || 'NR'}
-                              </p>
-                              <p className="text-xs text-gray-600">S&P (USA)</p>
-                            </div>
-                            <div className="bg-green-50 p-3 rounded-lg text-center">
-                              <p className="text-lg font-bold text-green-600">
-                                {countryProfile.risk_ratings?.moodys || 'NR'}
-                              </p>
-                              <p className="text-xs text-gray-600">Moody's (USA)</p>
-                            </div>
-                            <div className="bg-purple-50 p-3 rounded-lg text-center">
-                              <p className="text-lg font-bold text-purple-600">
-                                {countryProfile.risk_ratings?.fitch || 'NR'}
-                              </p>
-                              <p className="text-xs text-gray-600">Fitch (FR/USA)</p>
-                            </div>
-                            <div className="bg-orange-50 p-3 rounded-lg text-center">
-                              <p className="text-lg font-bold text-orange-600">
-                                {countryProfile.risk_ratings?.scope || 'NR'}
-                              </p>
-                              <p className="text-xs text-gray-600">Scope (Europe)</p>
-                            </div>
-                          </div>
-                          
-                          {/* Risque global */}
-                          <div className="mt-3 text-center">
-                            <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                              countryProfile.risk_ratings?.global_risk === 'Très Faible' ? 'bg-green-100 text-green-800' :
-                              countryProfile.risk_ratings?.global_risk === 'Faible' ? 'bg-green-100 text-green-700' :
-                              countryProfile.risk_ratings?.global_risk === 'Modéré' ? 'bg-yellow-100 text-yellow-800' :
-                              countryProfile.risk_ratings?.global_risk === 'Élevé' ? 'bg-orange-100 text-orange-800' :
-                              countryProfile.risk_ratings?.global_risk === 'Très Élevé' ? 'bg-red-100 text-red-800' :
-                              'bg-gray-100 text-gray-600'
-                            }`}>
-                              🏛️ Risque Global: {countryProfile.risk_ratings?.global_risk || 'Non évalué'}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Perspectives et Projections</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <h4 className="font-semibold mb-3">Projections de Croissance</h4>
-                          <div className="space-y-2">
-                            <div className="flex justify-between">
-                              <span>Croissance prévue 2024:</span>
-                              <Badge variant="secondary">{countryProfile.projections?.gdp_growth_forecast_2024 || 'N/A'}</Badge>
-                            </div>
-                            <div className="flex justify-between">
-                              <span>Projection 2025:</span>
-                              <Badge variant="outline">{countryProfile.projections?.gdp_growth_projection_2025 || 'N/A'}</Badge>
-                            </div>
-                            <div className="flex justify-between">
-                              <span>Projection 2026:</span>
-                              <Badge variant="default">{countryProfile.projections?.gdp_growth_projection_2026 || 'N/A'}</Badge>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-semibold mb-3">Environnement des Affaires</h4>
-                          <div className="space-y-2">
-                            <div className="flex justify-between">
-                              <span>Climat d'investissement:</span>
-                              <Badge variant="secondary">{countryProfile.projections?.investment_climate_score}</Badge>
-                            </div>
-                            <div className="flex justify-between">
-                              <span>Indice infrastructure:</span>
-                              <Badge variant="outline">{countryProfile.projections?.infrastructure_index}/10</Badge>
-                            </div>
-                            <div className="flex justify-between">
-                              <span>Rang environnement business:</span>
-                              <Badge variant="default">#{countryProfile.projections?.business_environment_rank}</Badge>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <Separator className="my-4" />
-
-                      <div>
-                        <h4 className="font-semibold mb-3">Secteurs Clés</h4>
-                        <div className="space-y-2">
-                          {countryProfile.projections?.key_sectors?.map((sector, index) => (
-                            <div key={index} className="text-sm p-2 bg-gray-50 rounded">
-                              {sector}
-                            </div>
-                          )) || <p className="text-sm text-gray-500">Données non disponibles</p>}
-                        </div>
-                      </div>
-
-                      <div className="bg-green-50 p-4 rounded-lg mt-4">
-                        <h4 className="font-semibold text-green-800 mb-2">
-                          Potentiel ZLECAf - {countryProfile.projections?.zlecaf_potential_level || 'N/A'}
-                        </h4>
-                        <p className="text-sm text-green-700 mb-3">
-                          {countryProfile.projections?.zlecaf_potential_description || 'Description non disponible'}
-                        </p>
-                        
-                        {countryProfile.projections?.zlecaf_opportunities && (
-                          <div>
-                            <p className="text-sm font-semibold text-green-800 mb-2">Opportunités clés :</p>
-                            <ul className="text-sm text-green-700 space-y-1">
-                              {countryProfile.projections.zlecaf_opportunities.map((opp, index) => (
-                                <li key={index} className="flex items-start">
-                                  <span className="mr-2">•</span>
-                                  {opp}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Nouvelles sections avec données réelles */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                        <div className="bg-blue-50 p-4 rounded-lg">
-                          <h4 className="font-semibold text-blue-800 mb-2">Principales Exportations</h4>
-                          <div className="flex flex-wrap gap-1">
-                            {countryProfile.projections?.main_exports?.map((exp, index) => (
-                              <Badge key={index} variant="outline" className="text-xs">
-                                {exp}
-                              </Badge>
-                            )) || <p className="text-xs text-gray-500">Non disponible</p>}
-                          </div>
-                        </div>
-                        
-                        <div className="bg-orange-50 p-4 rounded-lg">
-                          <h4 className="font-semibold text-orange-800 mb-2">Principales Importations</h4>
-                          <div className="flex flex-wrap gap-1">
-                            {countryProfile.projections?.main_imports?.map((imp, index) => (
-                              <Badge key={index} variant="outline" className="text-xs">
-                                {imp}
-                              </Badge>
-                            )) || <p className="text-xs text-gray-500">Non disponible</p>}
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                    </select>
+                    <button
+                      className="btn-primary-pro"
+                      onClick={() => selectedCountryCode && fetchCountryProfile(selectedCountryCode)}
+                      disabled={loading || !selectedCountryCode}
+                    >
+                      {loading && <div className="loading-spinner" />}
+                      Charger Profil
+                    </button>
+                  </div>
                 </div>
-              )}
+
+                {countryProfile && (
+                  <div className="professional-card fade-in-up">
+                    <div className="card-content-pro">
+                      <div className="flex items-center gap-md mb-lg">
+                        <div className="text-4xl">
+                          {countryFlags[countryProfile.country_code]}
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-bold">{countryProfile.country_name}</h3>
+                          <p className="text-gray-600">{countryProfile.region}</p>
+                        </div>
+                      </div>
+
+                      <div className="results-grid mb-lg">
+                        <div className="metric-card">
+                          <div className="metric-value">
+                            {formatNumber(countryProfile.population || 0)}
+                          </div>
+                          <div className="metric-label">Population</div>
+                        </div>
+                        {countryProfile.gdp_usd && (
+                          <div className="metric-card">
+                            <div className="metric-value">
+                              {formatCurrency(countryProfile.gdp_usd)}
+                            </div>
+                            <div className="metric-label">PIB (USD)</div>
+                          </div>
+                        )}
+                        {countryProfile.gdp_per_capita && (
+                          <div className="metric-card">
+                            <div className="metric-value">
+                              {formatCurrency(countryProfile.gdp_per_capita)}
+                            </div>
+                            <div className="metric-label">PIB/Habitant</div>
+                          </div>
+                        )}
+                        {countryProfile.projections?.africa_rank && (
+                          <div className="metric-card">
+                            <div className="metric-value">
+                              #{countryProfile.projections.africa_rank}
+                            </div>
+                            <div className="metric-label">Rang Afrique</div>
+                          </div>
+                        )}
+                      </div>
+
+                      {countryProfile.projections?.key_sectors && (
+                        <div className="border-t pt-lg">
+                          <h4 className="font-semibold mb-sm">Secteurs Clés</h4>
+                          <div className="space-y-2">
+                            {countryProfile.projections.key_sectors.slice(0, 3).map((sector, index) => (
+                              <div key={index} className="badge-pro badge-info">
+                                {sector}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </TabsContent>
-        </Tabs>
-      </div>
+          </div>
+        )}
+      </main>
+
+      {/* Footer Professionnel */}
+      <footer className="zlecaf-footer">
+        <div className="footer-content">
+          <div className="footer-links">
+            <span className="footer-link">{t.officialSources}</span>
+            <span className="footer-link">{t.unionAfricaine}</span>
+            <span className="footer-link">{t.banqueMondiale}</span>
+            <span className="footer-link">{t.fmi}</span>
+            <span className="footer-link">{t.bad}</span>
+            <span className="footer-link">{t.unctad}</span>
+            <span className="footer-link">{t.oec}</span>
+          </div>
+          <div className="footer-copyright">
+            © {new Date().getFullYear()} ZLECAf Digital Hub - Plateforme Officielle d'Analyse Commerciale Africaine
+          </div>
+        </div>
+      </footer>
 
       <Toaster />
     </div>
