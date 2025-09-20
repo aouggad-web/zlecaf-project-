@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explorateur ZLECAf — Données & Tarifs (v3.1)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="chartjs-primary" src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    (function ensureChart(){
+      function markNoChart(){ document.documentElement.dataset.nochart = '1'; }
+      if (window.Chart) return; 
+      var s = document.createElement('script');
+      s.src = 'https://unpkg.com/chart.js@4.4.1/dist/chart.umd.js';
+      s.onload = function(){};
+      s.onerror = markNoChart;
+      document.head.appendChild(s);
+      setTimeout(function(){ if (!window.Chart) markNoChart(); }, 2000);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,'Noto Sans','Liberation Sans',sans-serif}
+    .container{max-width:1120px}
+    .chart-container{position:relative;height:260px}
+    .custom-select{width:100%;padding:0.625rem 0.75rem;border:1px solid #e5e7eb;border-radius:0.75rem;background-color:#fff}
+    [data-nochart] .fallback-bars .bar{height:12px;background:linear-gradient(90deg,#e5e7eb,#d1d5db);border-radius:6px}
+    [data-nochart] .fallback-pie .slice{display:flex;align-items:center;gap:.5rem}
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-6">
+    <header class="text-center mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-1">Explorateur de Données ZLECAf</h1>
+      <p class="text-gray-600">Statistiques d'importation, droits & taxes (NPF vs ZLECAf), et règles d'origine spécifiques.</p>
+      <p id="chart-status" class="text-xs text-gray-500 mt-2"></p>
+    </header>
+
+    <main>
+      <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-200">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div class="md:col-span-1">
+            <label for="country-select" class="block text-sm font-medium text-gray-700 mb-2">1. Pays importateur</label>
+            <select id="country-select" class="custom-select focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="">Sélectionner un pays</option>
+            </select>
+          </div>
+          <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label for="product-select" class="block text-sm font-medium text-gray-700 mb-2">2. Produit (HS6)</label>
+              <select id="product-select" class="custom-select" disabled>
+                <option value="">Sélectionner un produit</option>
+              </select>
+            </div>
+            <div>
+              <label for="topn-select" class="block text-sm font-medium text-gray-700 mb-2">Top produits à afficher</label>
+              <select id="topn-select" class="custom-select">
+                <option value="5">Top 5</option>
+                <option value="20" selected>Top 20</option>
+              </select>
+            </div>
+            <div class="flex items-end">
+              <button id="refresh-btn" class="w-full md:w-auto px-4 py-2 rounded-xl bg-blue-600 text-white font-medium shadow hover:bg-blue-700 transition">Rafraîchir</button>
+            </div>
+            <div class="md:col-span-3">
+              <label class="block text-sm font-medium text-gray-700 mb-1">3. Régime tarifaire à simuler</label>
+              <div id="regime-switch" class="flex flex-wrap gap-6 text-sm text-gray-800">
+                <label class="inline-flex items-center gap-2"><input type="radio" name="regime" value="NPF" checked class="accent-blue-600"> NPF (taux nationaux hors préférence)</label>
+                <label class="inline-flex items-center gap-2"><input type="radio" name="regime" value="ZLECAF" class="accent-green-600"> ZLECAf (préférence, si éligible)</label>
+              </div>
+              <p id="regime-note" class="text-xs text-gray-500 mt-1">Le bénéfice ZLECAf suppose le respect de la règle d'origine et l'inclusion du produit dans le calendrier de démantèlement.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="welcome-message" class="text-center py-12 text-gray-600">
+          <div class="text-6xl mb-4">🧭</div>
+          <h2 class="text-2xl font-semibold mb-2">Démarrons</h2>
+          <p>Choisissez un <strong>pays</strong>, un <strong>produit HS6</strong>, puis le <strong>régime</strong> pour voir les détails.</p>
+        </div>
+
+        <section id="product-details" class="hidden">
+          <div id="intro-paragraph" class="mb-6 p-5 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg">
+            <p class="text-gray-700"></p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8" id="kpis">
+            <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+              <p class="text-xs text-gray-500">Valeur la plus récente</p>
+              <p id="kpi-latest" class="text-2xl font-semibold text-gray-800">—</p>
+              <p id="kpi-latest-year" class="text-xs text-gray-500">—</p>
+            </div>
+            <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+              <p class="text-xs text-gray-500">Année précédente</p>
+              <p id="kpi-prev" class="text-2xl font-semibold text-gray-800">—</p>
+              <p id="kpi-prev-year" class="text-xs text-gray-500">—</p>
+            </div>
+            <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+              <p class="text-xs text-gray-500">Bénéfice ZLECAf (potentiel)</p>
+              <p id="kpi-benefit" class="text-2xl font-semibold text-green-700">—</p>
+              <p id="kpi-benefit-note" class="text-xs text-gray-500">vs NPF — si éligible et ROS satisfaite</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-800 mb-4">Statistiques d'Importation</h3>
+              <div class="chart-container">
+                <canvas id="import-stats-chart"></canvas>
+                <div id="import-fallback" class="hidden fallback-bars space-y-2"></div>
+              </div>
+              <div class="mt-3 text-center text-sm text-gray-500" id="import-stats-summary"></div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-800 mb-4">Droits & Taxes — <span id="duties-regime-label">NPF</span></h3>
+              <div class="chart-container">
+                <canvas id="duties-chart"></canvas>
+                <div id="duties-fallback" class="hidden fallback-pie space-y-1 text-sm text-gray-700"></div>
+              </div>
+              <div class="mt-3 text-center text-sm text-gray-500" id="duties-summary"></div>
+            </div>
+
+            <div class="mt-2 bg-gray-50 p-6 rounded-xl border border-gray-200 lg:col-span-2">
+              <h3 class="text-lg font-semibold text-gray-800 mb-4">Règle d'Origine Spécifique (ZLECAf)</h3>
+              <div id="psr-details" class="space-y-2 text-gray-700"></div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 lg:col-span-2 mt-2">
+              <div class="flex items-baseline justify-between mb-2">
+                <h3 class="text-lg font-semibold text-gray-800">Top produits importés — <span id="top-products-country"></span></h3>
+                <span id="top-products-count" class="text-xs text-gray-500"></span>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="min-w-full text-sm">
+                  <thead>
+                    <tr class="text-left text-gray-600">
+                      <th class="py-2 pr-4">#</th>
+                      <th class="py-2 pr-4">HS6</th>
+                      <th class="py-2 pr-4">Libellé</th>
+                      <th class="py-2 pr-4">Valeur (USD)</th>
+                      <th class="py-2">Part (%)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="top-products-tbody" class="divide-y divide-gray-200"></tbody>
+                </table>
+              </div>
+              <p class="text-xs text-gray-500 mt-2">Si moins d'items que Top N s'affichent, c'est que la source ne contient pas davantage de lignes pour ce pays. Ajoutez d'autres HS6 dans <code>data.trade_data[CODE]</code>.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+<footer class="text-center text-xs text-gray-400 mt-10">© zlecaf.online</footer>
+
+  </div>
+
+<script>
+const data = {
+  countries: { ZA: 'Afrique du Sud', DZ: 'Algérie', EG: 'Égypte', NG: 'Nigéria', KE: 'Kenya' },
+  products: {
+    '150910': "Huile d'olive, vierge", '220210': 'Eaux sucrées (non alco.)', '100590': 'Maïs (non semence)',
+    '100630': 'Riz blanchi', '090111': 'Café, non torréfié', '090240': 'Thé noir', '180690': 'Chocolat & préparations cacao',
+    '310210': 'Urée', '252329': 'Ciment Portland', '392330': 'Bouteilles plastique', '441113': 'MDF >9mm',
+    '940360': 'Meubles bois', '711311': 'Bijoux en argent', '760200': "Déchets d'aluminium", '730890': 'Structures acier',
+    '850440': 'Convertisseurs statiques', '854140': 'Panneaux PV', '870332': 'Voitures 1500-3000cc', '870421': 'Camions <=5t',
+    '300490': 'Médicaments dosés'
+  },
+  psr: {
+    '150910': { rule: 'CC ou CTH + VCR minimal', type: 'CC/CTH + VCR', rvc: 25 },
+    '220210': { rule: 'CTH ou VCR 60 %', type: 'CTH/VCR', rvc: 60 },
+    '100590': { rule: 'WO (totalement obtenu)', type: 'WO', rvc: null },
+    '100630': { rule: 'CTH + VCR 40 %', type: 'CTH + VCR', rvc: 40 },
+    '090111': { rule: 'WO', type: 'WO', rvc: null },
+    '090240': { rule: 'CTH ou VCR 40 %', type: 'CTH/VCR', rvc: 40 },
+    '180690': { rule: 'CTH + VCR 35 %', type: 'CTH + VCR', rvc: 35 },
+    '310210': { rule: 'CTH', type: 'CTH', rvc: null },
+    '252329': { rule: 'CTH', type: 'CTH', rvc: null },
+    '392330': { rule: 'CTH + VCR 40 %', type: 'CTH + VCR', rvc: 40 },
+    '441113': { rule: 'CTH + VCR 35 %', type: 'CTH + VCR', rvc: 35 },
+    '940360': { rule: 'CTH + VCR 35 %', type: 'CTH + VCR', rvc: 35 },
+    '711311': { rule: 'CTH + VCR 35 %', type: 'CTH + VCR', rvc: 35 },
+    '760200': { rule: 'CTH + VCR 35 %', type: 'CTH + VCR', rvc: 35 },
+    '730890': { rule: 'CTH + VCR 35 %', type: 'CTH + VCR', rvc: 35 },
+    '850440': { rule: 'CTH + VCR 40 %', type: 'CTH + VCR', rvc: 40 },
+    '854140': { rule: 'CTH + VCR 40 %', type: 'CTH + VCR', rvc: 40 },
+    '870332': { rule: 'CTH + VCR 40 %', type: 'CTH + VCR', rvc: 40 },
+    '870421': { rule: 'CTH + VCR 40 %', type: 'CTH + VCR', rvc: 40 },
+    '300490': { rule: 'CTH + VCR 40 %', type: 'CTH + VCR', rvc: 40 }
+  },
+  trade_data: {
+    ZA: {
+      '150910': { duties:{mfn:20,vat:15,excise:0,other:0}, stats:{'2022':26000000,'2023':29000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '220210': { duties:{mfn:25,vat:15,excise:2,other:0}, stats:{'2022':150000000,'2023':155000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '100590': { duties:{mfn:0,vat:15,excise:0,other:0}, stats:{'2022':1800000000,'2023':1950000000}, pref:{zlecaf_rate:0,eligible:true} },
+      '100630': { duties:{mfn:12,vat:15,excise:0,other:0}, stats:{'2022':450000000,'2023':475000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '870332': { duties:{mfn:25,vat:15,excise:10,other:0}, stats:{'2022':4500000000,'2023':4800000000}, pref:{zlecaf_rate:20,eligible:true} },
+      '392330': { duties:{mfn:20,vat:15,excise:0,other:0}, stats:{'2022':180000000,'2023':200000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '300490': { duties:{mfn:5, vat:15,excise:0,other:0}, stats:{'2022':720000000,'2023':800000000}, pref:{zlecaf_rate:2,eligible:true} },
+      '854140': { duties:{mfn:5, vat:15,excise:0,other:0}, stats:{'2022':520000000,'2023':600000000}, pref:{zlecaf_rate:2,eligible:true} },
+      '850440': { duties:{mfn:20,vat:15,excise:0,other:0}, stats:{'2022':320000000,'2023':350000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '252329': { duties:{mfn:20,vat:15,excise:0,other:0}, stats:{'2022':85000000,'2023':90000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '730890': { duties:{mfn:20,vat:15,excise:0,other:0}, stats:{'2022':110000000,'2023':120000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '760200': { duties:{mfn:10,vat:15,excise:0,other:0}, stats:{'2022':65000000,'2023':70000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '940360': { duties:{mfn:25,vat:15,excise:0,other:0}, stats:{'2022':78000000,'2023':85000000}, pref:{zlecaf_rate:15,eligible:true} },
+      '441113': { duties:{mfn:15,vat:15,excise:0,other:0}, stats:{'2022':42000000,'2023':50000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '711311': { duties:{mfn:20,vat:15,excise:0,other:0}, stats:{'2022':35000000,'2023':40000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '180690': { duties:{mfn:20,vat:15,excise:0,other:0}, stats:{'2022':80000000,'2023':90000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '090111': { duties:{mfn:10,vat:15,excise:0,other:0}, stats:{'2022':120000000,'2023':130000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '090240': { duties:{mfn:10,vat:15,excise:0,other:0}, stats:{'2022':55000000,'2023':60000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '310210': { duties:{mfn:5, vat:15,excise:0,other:0}, stats:{'2022':280000000,'2023':300000000}, pref:{zlecaf_rate:2,eligible:true} },
+      '870421': { duties:{mfn:20,vat:15,excise:0,other:0}, stats:{'2022':380000000,'2023':420000000}, pref:{zlecaf_rate:15,eligible:true} }
+    },
+    DZ: {
+      '150910': { duties:{mfn:30,vat:19,excise:0,other:2}, stats:{'2022':4000000,'2023':4500000}, pref:{zlecaf_rate:0,eligible:true,daps_applicable:false} },
+      '220210': { duties:{mfn:30,vat:19,excise:0,other:2}, stats:{'2022':95000000,'2023':110000000}, pref:{zlecaf_rate:10,eligible:true,daps_applicable:false} },
+      '100590': { duties:{mfn:5, vat:9, excise:0,other:1}, stats:{'2022':2500000000,'2023':2700000000}, pref:{zlecaf_rate:0,eligible:true} },
+      '252329': { duties:{mfn:30,vat:19,excise:0,other:2}, stats:{'2022':15000000,'2023':12000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '300490': { duties:{mfn:5, vat:9, excise:0,other:1}, stats:{'2022':1800000000,'2023':1950000000}, pref:{zlecaf_rate:2,eligible:true} },
+      '180690': { duties:{mfn:30,vat:19,excise:0,other:2}, stats:{'2022':1180000,'2023':124000}, pref:{zlecaf_rate:15,eligible:true} },
+      '441113': { duties:{mfn:15,vat:19,excise:0,other:0}, stats:{'2022':8000000,'2023':9200000}, pref:{zlecaf_rate:10,eligible:true} },
+      '940360': { duties:{mfn:30,vat:19,excise:0,other:0}, stats:{'2022':6000000,'2023':7100000}, pref:{zlecaf_rate:20,eligible:true} },
+      '711311': { duties:{mfn:60,vat:19,excise:0,other:0}, stats:{'2022':300000,'2023':350000}, pref:{zlecaf_rate:40,eligible:true} },
+      '760200': { duties:{mfn:0, vat:19,excise:0,other:0}, stats:{'2022':20000000,'2023':22000000}, pref:{zlecaf_rate:0,eligible:true} },
+      '730890': { duties:{mfn:30,vat:19,excise:0,other:0}, stats:{'2022':14000000,'2023':16500000}, pref:{zlecaf_rate:15,eligible:true} },
+      '850440': { duties:{mfn:30,vat:19,excise:0,other:0}, stats:{'2022':36000000,'2023':38000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '854140': { duties:{mfn:5, vat:9, excise:0,other:1}, stats:{'2022':42000000,'2023':56000000}, pref:{zlecaf_rate:2,eligible:true} },
+      '870332': { duties:{mfn:60,vat:19,excise:0,other:0}, stats:{'2022':900000000,'2023':1100000000}, pref:{zlecaf_rate:40,eligible:true,daps_applicable:false} },
+      '870421': { duties:{mfn:60,vat:19,excise:0,other:0}, stats:{'2022':250000000,'2023':300000000}, pref:{zlecaf_rate:40,eligible:true,daps_applicable:false} }
+    },
+    KE: {
+      '392330': { duties:{mfn:25,vat:16,excise:10,other:3.5}, stats:{'2022':450000000,'2023':480000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '180690': { duties:{mfn:35,vat:16,excise:0, other:3.5}, stats:{'2022':80000000,'2023':90000000}, pref:{zlecaf_rate:25,eligible:true} },
+      '760200': { duties:{mfn:10,vat:16,excise:0, other:3.5}, stats:{'2022':50000000,'2023':58000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '850440': { duties:{mfn:25,vat:16,excise:0, other:3.5}, stats:{'2022':120000000,'2023':140000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '300490': { duties:{mfn:10,vat:16,excise:0, other:0}, stats:{'2022':450000000,'2023':500000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '100590': { duties:{mfn:0, vat:16,excise:0, other:0}, stats:{'2022':650000000,'2023':700000000}, pref:{zlecaf_rate:0,eligible:true} },
+      '100630': { duties:{mfn:35,vat:16,excise:0, other:0}, stats:{'2022':180000000,'2023':200000000}, pref:{zlecaf_rate:20,eligible:true} },
+      '854140': { duties:{mfn:10,vat:16,excise:0, other:3.5}, stats:{'2022':220000000,'2023':250000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '252329': { duties:{mfn:25,vat:16,excise:0, other:3.5}, stats:{'2022':130000000,'2023':150000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '730890': { duties:{mfn:25,vat:16,excise:0, other:3.5}, stats:{'2022':100000000,'2023':120000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '940360': { duties:{mfn:25,vat:16,excise:0, other:3.5}, stats:{'2022':80000000,'2023':90000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '441113': { duties:{mfn:25,vat:16,excise:0, other:3.5}, stats:{'2022':50000000,'2023':60000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '711311': { duties:{mfn:35,vat:16,excise:0, other:3.5}, stats:{'2022':25000000,'2023':30000000}, pref:{zlecaf_rate:20,eligible:true} },
+      '220210': { duties:{mfn:25,vat:16,excise:10,other:3.5}, stats:{'2022':160000000,'2023':180000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '150910': { duties:{mfn:25,vat:16,excise:0, other:3.5}, stats:{'2022':8000000,'2023':10000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '090111': { duties:{mfn:25,vat:16,excise:0, other:3.5}, stats:{'2022':70000000,'2023':80000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '090240': { duties:{mfn:25,vat:16,excise:0, other:3.5}, stats:{'2022':60000000,'2023':70000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '310210': { duties:{mfn:10,vat:16,excise:0, other:3.5}, stats:{'2022':100000000,'2023':110000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '870332': { duties:{mfn:35,vat:16,excise:10,other:3.5}, stats:{'2022':350000000,'2023':400000000}, pref:{zlecaf_rate:25,eligible:true} },
+      '870421': { duties:{mfn:35,vat:16,excise:10,other:3.5}, stats:{'2022':180000000,'2023':220000000}, pref:{zlecaf_rate:25,eligible:true} }
+    },
+    EG: {
+      '100590': { duties:{mfn:5, vat:14,excise:0,other:0}, stats:{'2022':1200000000,'2023':1300000000}, pref:{zlecaf_rate:0,eligible:true} },
+      '100630': { duties:{mfn:20,vat:14,excise:0,other:0}, stats:{'2022':350000000,'2023':380000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '300490': { duties:{mfn:2, vat:14,excise:0,other:0}, stats:{'2022':900000000,'2023':1000000000}, pref:{zlecaf_rate:1,eligible:true} },
+      '392330': { duties:{mfn:20,vat:14,excise:0,other:0}, stats:{'2022':220000000,'2023':250000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '220210': { duties:{mfn:30,vat:14,excise:5,other:0}, stats:{'2022':260000000,'2023':280000000}, pref:{zlecaf_rate:15,eligible:true} },
+      '150910': { duties:{mfn:30,vat:14,excise:0,other:0}, stats:{'2022':20000000,'2023':25000000}, pref:{zlecaf_rate:15,eligible:true} },
+      '090111': { duties:{mfn:10,vat:14,excise:0,other:0}, stats:{'2022':180000000,'2023':200000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '090240': { duties:{mfn:10,vat:14,excise:0,other:0}, stats:{'2022':90000000,'2023':100000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '180690': { duties:{mfn:20,vat:14,excise:0,other:0}, stats:{'2022':140000000,'2023':160000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '252329': { duties:{mfn:20,vat:14,excise:0,other:0}, stats:{'2022':80000000,'2023':85000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '441113': { duties:{mfn:15,vat:14,excise:0,other:0}, stats:{'2022':30000000,'2023':35000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '940360': { duties:{mfn:30,vat:14,excise:0,other:0}, stats:{'2022':70000000,'2023':80000000}, pref:{zlecaf_rate:15,eligible:true} },
+      '711311': { duties:{mfn:10,vat:14,excise:0,other:0}, stats:{'2022':40000000,'2023':45000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '760200': { duties:{mfn:5, vat:14,excise:0,other:0}, stats:{'2022':50000000,'2023':60000000}, pref:{zlecaf_rate:2,eligible:true} },
+      '730890': { duties:{mfn:20,vat:14,excise:0,other:0}, stats:{'2022':120000000,'2023':140000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '850440': { duties:{mfn:20,vat:14,excise:0,other:0}, stats:{'2022':260000000,'2023':300000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '854140': { duties:{mfn:5, vat:14,excise:0,other:0}, stats:{'2022':320000000,'2023':360000000}, pref:{zlecaf_rate:2,eligible:true} },
+      '870332': { duties:{mfn:40,vat:14,excise:0,other:0}, stats:{'2022':700000000,'2023':800000000}, pref:{zlecaf_rate:25,eligible:true} },
+      '870421': { duties:{mfn:40,vat:14,excise:0,other:0}, stats:{'2022':200000000,'2023':250000000}, pref:{zlecaf_rate:25,eligible:true} }
+    },
+    NG: {
+      '100590': { duties:{mfn:5, vat:7.5,excise:0,other:0}, stats:{'2022':2200000000,'2023':2400000000}, pref:{zlecaf_rate:0,eligible:true} },
+      '100630': { duties:{mfn:30,vat:7.5,excise:0,other:0}, stats:{'2022':600000000,'2023':650000000}, pref:{zlecaf_rate:15,eligible:true} },
+      '300490': { duties:{mfn:5, vat:7.5,excise:0,other:0}, stats:{'2022':1200000000,'2023':1300000000}, pref:{zlecaf_rate:2,eligible:true} },
+      '392330': { duties:{mfn:20,vat:7.5,excise:0,other:0}, stats:{'2022':200000000,'2023':230000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '220210': { duties:{mfn:30,vat:7.5,excise:10,other:0}, stats:{'2022':400000000,'2023':450000000}, pref:{zlecaf_rate:15,eligible:true} },
+      '150910': { duties:{mfn:35,vat:7.5,excise:0,other:0}, stats:{'2022':30000000,'2023':35000000}, pref:{zlecaf_rate:20,eligible:true} },
+      '090111': { duties:{mfn:10,vat:7.5,excise:0,other:0}, stats:{'2022':250000000,'2023':300000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '090240': { duties:{mfn:10,vat:7.5,excise:0,other:0}, stats:{'2022':140000000,'2023':160000000}, pref:{zlecaf_rate:5,eligible:true} },
+      '180690': { duties:{mfn:20,vat:7.5,excise:0,other:0}, stats:{'2022':180000000,'2023':200000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '252329': { duties:{mfn:20,vat:7.5,excise:0,other:0}, stats:{'2022':90000000,'2023':100000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '441113': { duties:{mfn:15,vat:7.5,excise:0,other:0}, stats:{'2022':40000000,'2023':50000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '940360': { duties:{mfn:30,vat:7.5,excise:0,other:0}, stats:{'2022':85000000,'2023':90000000}, pref:{zlecaf_rate:15,eligible:true} },
+      '711311': { duties:{mfn:20,vat:7.5,excise:0,other:0}, stats:{'2022':45000000,'2023':50000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '760200': { duties:{mfn:5, vat:7.5,excise:0,other:0}, stats:{'2022':70000000,'2023':80000000}, pref:{zlecaf_rate:2,eligible:true} },
+      '730890': { duties:{mfn:20,vat:7.5,excise:0,other:0}, stats:{'2022':150000000,'2023':170000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '850440': { duties:{mfn:20,vat:7.5,excise:0,other:0}, stats:{'2022':280000000,'2023':310000000}, pref:{zlecaf_rate:10,eligible:true} },
+      '854140': { duties:{mfn:5, vat:7.5,excise:0,other:0}, stats:{'2022':260000000,'2023':300000000}, pref:{zlecaf_rate:2,eligible:true} },
+      '870332': { duties:{mfn:35,vat:7.5,excise:0,other:0}, stats:{'2022':800000000,'2023':900000000}, pref:{zlecaf_rate:25,eligible:true} },
+      '870421': { duties:{mfn:35,vat:7.5,excise:0,other:0}, stats:{'2022':220000000,'2023':260000000}, pref:{zlecaf_rate:25,eligible:true} }
+    }
+  }
+};
+const AL_DD_TIERS = [0,5,15,30,60];
+const COLOR_MAP = {
+  'Droit NPF (%)': '#2563eb',
+  'Droit ZLECAf (%)': '#22c55e',
+  'TVA (%)': '#f59e0b',
+  'Accise (%)': '#ef4444',
+  'Autres Taxes (%)': '#7c3aed',
+  'DAPS (%)': '#0ea5e9'
+};
+let CURRENT_REGIME = 'NPF';
+
+function normalizeAlgeriaDuty(dd){ const v = Number(dd); return Number.isFinite(v) && AL_DD_TIERS.includes(v) ? v : null; }
+function pickLatestYear(stats){ if(!stats) return {year:null,value:0}; const years = Object.keys(stats).sort().reverse(); for(const y of years){ const v = stats[y]; if(v!=null) return {year:y,value:Number(v)||0}; } return {year:null,value:0}; }
+function pickPrevYear(stats,lastYear){ if(!stats||!lastYear) return {year:null,value:0}; const years = Object.keys(stats).sort().reverse(); for(const y of years){ if(y!==lastYear) return {year:y,value:Number(stats[y])||0}; } return {year:null,value:0}; }
+function formatUSD(v){ if(v==null) return 'N/A'; return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'USD',minimumFractionDigits:0}).format(v); }
+function pct(a,b){ if(!b) return 0; return (a-b)/b*100; }
+
+function computeTopProducts(countryCode, n){
+  const td = data.trade_data?.[countryCode] || {};
+  const items = Object.entries(td).map(([hs6,obj])=>{ const {value} = pickLatestYear(obj.stats||{}); return {hs6,name:data.products[hs6]||hs6,value:Number(value)||0}; }).filter(e=>e.value>0);
+  const total = items.reduce((s,x)=>s+x.value,0) || 1;
+  items.sort((a,b)=>b.value-a.value);
+  return { list: items.slice(0,n), totalAvailable: items.length, totalValue: total };
+}
+
+const countrySelect = document.getElementById('country-select');
+const productSelect = document.getElementById('product-select');
+const topnSelect = document.getElementById('topn-select');
+const refreshBtn = document.getElementById('refresh-btn');
+const welcomeMessage = document.getElementById('welcome-message');
+const productDetails = document.getElementById('product-details');
+const chartStatus = document.getElementById('chart-status');
+const regimeNote = document.getElementById('regime-note');
+const dutiesRegimeLabel = document.getElementById('duties-regime-label');
+let importStatsChart, dutiesChart;
+
+function populateCountries(){
+  Object.keys(data.countries).forEach(code=>{ const opt=document.createElement('option'); opt.value=code; opt.textContent=`${code} — ${data.countries[code]}`; countrySelect.appendChild(opt); });
+}
+
+function populateProducts(countryCode){
+  productSelect.innerHTML = '<option value="">Sélectionner un produit</option>';
+  if(countryCode && data.trade_data[countryCode]){
+    const entries = Object.entries(data.trade_data[countryCode])
+      .map(([hs6,obj])=>({hs6,stat: (obj?.stats?.['2024'] ?? obj?.stats?.['2023'] ?? obj?.stats?.['2022'] ?? 0)}))
+      .filter(e=>data.products[e.hs6]);
+    entries.sort((a,b)=>(b.stat||0)-(a.stat||0));
+    entries.forEach(({hs6})=>{ const opt=document.createElement('option'); opt.value=hs6; opt.textContent=`${hs6} - ${data.products[hs6]}`; productSelect.appendChild(opt); });
+    productSelect.disabled = entries.length===0;
+    if(entries.length){ productSelect.value = entries[0].hs6; updateDisplay(countryCode, entries[0].hs6); }
+  }else{ productSelect.disabled = true; }
+}
+
+function createOrUpdateChart(chartInstance, canvasId, config){
+  if(!window.Chart){ return null; }
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  if(chartInstance){ chartInstance.data = config.data; chartInstance.options = config.options; chartInstance.update(); return chartInstance; }
+  return new Chart(ctx, config);
+}
+
+function updateImportStats(stats, productName){
+  const y2='2022', y3='2023';
+  const labels=[y2,y3];
+  const values=[Number(stats?.[y2] ?? 0), Number(stats?.[y3] ?? 0)];
+
+  const latest = {year: values[1]>0? y3 : (values[0]>0? y2 : null), value: values[1]>0? values[1] : values[0]};
+  const prev = latest.year===y3 ? {year:y2,value:values[0]} : {year:null,value:0};
+  document.getElementById('kpi-latest').textContent = formatUSD(latest.value||0);
+  document.getElementById('kpi-latest-year').textContent = latest.year ? `Année ${latest.year}` : '—';
+  document.getElementById('kpi-prev').textContent = prev.year ? formatUSD(prev.value||0) : '—';
+  document.getElementById('kpi-prev-year').textContent = prev.year ? `Année ${prev.year}` : '—';
+
+  if(window.Chart){
+    document.getElementById('import-fallback').classList.add('hidden');
+    document.getElementById('import-stats-chart').classList.remove('hidden');
+    const config={ type:'bar', data:{ labels, datasets:[{ label:`Importations de ${productName} (USD)`, data:values, borderWidth:1, borderRadius:4, backgroundColor:['#60a5fa','#3b82f6'] }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{ label:(ctx)=>`${ctx.label}: ${formatUSD(ctx.raw)}` } } }, scales:{ y:{ ticks:{ callback:(v)=>new Intl.NumberFormat('fr-FR').format(v) } } } } };
+    importStatsChart = createOrUpdateChart(importStatsChart,'import-stats-chart',config);
+  }else{
+    document.getElementById('import-stats-chart').classList.add('hidden');
+    const f = document.getElementById('import-fallback'); f.innerHTML='';
+    const max = Math.max(...values,1);
+    labels.forEach((lab,i)=>{
+      const row=document.createElement('div'); row.className='flex items-center gap-3';
+      const tag=document.createElement('div'); tag.className='w-16 text-right text-xs text-gray-600'; tag.textContent=lab;
+      const barWrap=document.createElement('div'); barWrap.className='flex-1 bg-gray-200 rounded-full h-3';
+      const bar=document.createElement('div'); bar.className='bar h-3 rounded-full'; bar.style.width=(values[i]/max*100)+'%';
+      barWrap.appendChild(bar);
+      const val=document.createElement('div'); val.className='w-28 text-right text-xs text-gray-700'; val.textContent = formatUSD(values[i]);
+      row.appendChild(tag); row.appendChild(barWrap); row.appendChild(val);
+      f.appendChild(row);
+    });
+    f.classList.remove('hidden');
+  }
+
+  const base = `Valeur 2022: ${formatUSD(values[0])} | Valeur 2023: ${formatUSD(values[1])}`;
+  document.getElementById('import-stats-summary').textContent = base;
+}
+
+function computeDutiesParts(duties, countryCode, pref, regime){
+  const src = duties||{}; const pf = pref||{};
+  let mfn = Number(src.mfn ?? 0);
+  let vat = Number(src.vat ?? 0);
+  let excise = Number(src.excise ?? 0);
+  let other = Number(src.other ?? 0);
+  let daps = Number(src.daps ?? 0);
+  const notes = [];
+
+  if(countryCode==='DZ'){
+    const norm = normalizeAlgeriaDuty(mfn);
+    if(norm===null){ notes.push(`Palier DD non-officiel détecté (${mfn}%). Affiché : n/a.`); mfn=0; } else { mfn=norm; }
+    notes.push('Barèmes DD ALG: 0/5/15/30/60');
+  }
+
+  let labelDuty = 'Droit NPF (%)';
+  if(regime==='ZLECAF'){
+    if(!pf.eligible){ notes.push('Produit non éligible ZLECAf (ou calendrier non ouvert).'); }
+    const zrate = Number(pf.zlecaf_rate ?? mfn);
+    labelDuty = 'Droit ZLECAf (%)';
+    if(pf.daps_applicable === false){ daps = 0; notes.push('DAPS non appliqué sous préférence (hypothèse).'); }
+    mfn = zrate;
+  }
+
+  const labels=[labelDuty,'TVA (%)','Accise (%)','Autres Taxes (%)'];
+  const values=[mfn,vat,excise,other];
+  if(daps>0){ labels.push('DAPS (%)'); values.push(daps); }
+  const colors = labels.map(l=> ({'Droit NPF (%)':'#2563eb','Droit ZLECAf (%)':'#22c55e','TVA (%)':'#f59e0b','Accise (%)':'#ef4444','Autres Taxes (%)':'#7c3aed','DAPS (%)':'#0ea5e9'}[l] || '#94a3b8'));
+  return {labels, values, colors, notes};
+}
+
+function updateDuties(duties, countryCode, pref, stats){
+  const {labels, values, colors, notes} = computeDutiesParts(duties, countryCode, pref, CURRENT_REGIME);
+  dutiesRegimeLabel.textContent = CURRENT_REGIME;
+
+  if(window.Chart){
+    document.getElementById('duties-fallback').classList.add('hidden');
+    document.getElementById('duties-chart').classList.remove('hidden');
+    const config={ type:'doughnut', data:{ labels:labels.filter((_,i)=> (values[i]??0)>0), datasets:[{ label:'Composition des taxes', data:values.filter(v=> (v??0)>0), borderColor:'#ffffff', borderWidth:2, backgroundColor: labels.filter((_,i)=> (values[i]??0)>0).map(l=> ({'Droit NPF (%)':'#2563eb','Droit ZLECAf (%)':'#22c55e','TVA (%)':'#f59e0b','Accise (%)':'#ef4444','Autres Taxes (%)':'#7c3aed','DAPS (%)':'#0ea5e9'}[l] || '#94a3b8')) }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'bottom'}, tooltip:{callbacks:{ label:(ctx)=>`${ctx.label}: ${ctx.raw}%` } } } } };
+    dutiesChart = createOrUpdateChart(dutiesChart,'duties-chart',config);
+  }else{
+    document.getElementById('duties-chart').classList.add('hidden');
+    const f = document.getElementById('duties-fallback'); f.innerHTML='';
+    labels.forEach((lab,i)=>{ const v=values[i]||0; if(!v) return; const row=document.createElement('div'); row.className='slice'; row.innerHTML=`<div class="w-36 text-gray-600">${lab}</div><div class="flex-1 bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full" style="width:${v}%"></div></div><div class="w-16 text-right">${v}%</div>`; f.appendChild(row); });
+    f.classList.remove('hidden');
+  }
+
+  const summaryBits = labels.map((lab,i)=> (values[i] ? `${lab.replace(' (%)','')} ${values[i]}%` : null)).filter(Boolean);
+  const notesTxt = notes.length ? ` • ${notes.join(' • ')}` : '';
+
+  let benefitLine = '';
+  const latest = pickLatestYear(stats||{});
+  if(latest.value>0){
+    const mfnDuty = Number(duties?.mfn ?? 0);
+    const zRate = Number((pref||{}).zlecaf_rate ?? mfnDuty);
+    const deltaPts = (mfnDuty - zRate);
+    if(deltaPts>0){
+      const saving = latest.value * (deltaPts/100);
+      benefitLine = ` | Bénéfice potentiel ZLECAf: −${deltaPts.toFixed(1)} pts  ≈ ${formatUSD(saving)}`;
+      document.getElementById('kpi-benefit').textContent = `−${deltaPts.toFixed(1)} pts (${formatUSD(saving)})`;
+    } else {
+      document.getElementById('kpi-benefit').textContent = '—';
+    }
+  }
+
+  document.getElementById('duties-summary').textContent = (summaryBits.join('  ·  ')||'—') + benefitLine + notesTxt;
+}
+
+function updatePSR(psr){
+  const c = document.getElementById('psr-details');
+  c.innerHTML = `<p><strong class="font-medium text-gray-800">Règle:</strong> ${psr.rule}</p>
+                 <p><strong class="font-medium text-gray-800">Type:</strong> ${psr.type}</p>
+                 ${psr.rvc? `<p><strong class="font-medium text-gray-800">VCR:</strong> ${psr.rvc}%</p>`:''}`;
+}
+
+function renderTopProducts(countryCode){
+  const tbody = document.getElementById('top-products-tbody');
+  const titleCountry = document.getElementById('top-products-country');
+  const count = document.getElementById('top-products-count');
+  const topN = Number(topnSelect.value||20);
+  titleCountry.textContent = data.countries[countryCode]||countryCode||'';
+  tbody.innerHTML='';
+  const { list, totalAvailable, totalValue } = computeTopProducts(countryCode, topN);
+  count.textContent = `${list.length} affichés sur ${totalAvailable} disponibles`;
+  if(!list.length){ const tr=document.createElement('tr'); tr.innerHTML='<td class="py-2" colspan="5">Aucune donnée exploitable.</td>'; tbody.appendChild(tr); return; }
+  list.forEach((it,idx)=>{
+    const tr=document.createElement('tr');
+    const share = (it.value/totalValue*100)||0;
+    tr.innerHTML = `<td class="py-2 pr-4 text-gray-500">${idx+1}</td>
+                    <td class="py-2 pr-4 font-mono">${it.hs6}</td>
+                    <td class="py-2 pr-4">${it.name}</td>
+                    <td class="py-2 pr-4">${formatUSD(it.value)}</td>
+                    <td class="py-2">${share.toFixed(1)}%</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function updateDisplay(countryCode, hs6){
+  chartStatus.textContent = window.Chart ? 'Graphiques : Chart.js (CDN) actif' : 'Graphiques : fallback sans CDN (texte/barres)';
+  if(!countryCode || !hs6){ welcomeMessage.classList.remove('hidden'); productDetails.classList.add('hidden'); return; }
+  const node = data.trade_data?.[countryCode]?.[hs6];
+  const tradeData = node || {};
+  const psrData = data.psr?.[hs6];
+  if(!node || !psrData){ welcomeMessage.classList.remove('hidden'); productDetails.classList.add('hidden'); return; }
+  welcomeMessage.classList.add('hidden'); productDetails.classList.remove('hidden');
+  const countryName = data.countries[countryCode]; const productName = data.products[hs6];
+  document.querySelector('#intro-paragraph p').textContent = `Analyse pour l'importation de "${productName} (${hs6})" en "${countryName}" : statistiques, simulation NPF vs ZLECAf, et ROS.`;
+
+  if(tradeData.pref?.eligible){ regimeNote.textContent = 'Éligible ZLECAf (simulation basée sur le taux préférentiel paramétré).'; }
+  else { regimeNote.textContent = 'Non éligible ZLECAf — la bascule en mode ZLECAf ne modifiera pas le droit de douane.'; }
+
+  updateImportStats(tradeData.stats, productName);
+  updateDuties(tradeData.duties, countryCode, tradeData.pref, tradeData.stats);
+  updatePSR(psrData);
+  renderTopProducts(countryCode);
+}
+
+countrySelect.addEventListener('change', (e)=>{ const code=e.target.value; populateProducts(code); if(!productSelect.value){ updateDisplay(null,null); } });
+productSelect.addEventListener('change', ()=>{ updateDisplay(countrySelect.value, productSelect.value); });
+topnSelect.addEventListener('change', ()=>{ if(countrySelect.value){ renderTopProducts(countrySelect.value); } });
+refreshBtn.addEventListener('click', ()=>{ updateDisplay(countrySelect.value, productSelect.value); });
+
+document.querySelectorAll('input[name="regime"]').forEach(r=>{
+  r.addEventListener('change', (e)=>{ CURRENT_REGIME = e.target.value; updateDisplay(countrySelect.value, productSelect.value); });
+});
+
+(function boot(){ populateCountries(); })();
+</script>
+</body>
+</html>
