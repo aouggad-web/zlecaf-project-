@@ -866,27 +866,104 @@ function ZLECAfCalculator() {
                   </div>
                 )}
 
-                {/* Règles d'origine */}
+                {/* Règles d'origine enrichies */}
                 {result && result.rules_of_origin && (
                   <div className="professional-card mt-xl">
                     <div className="card-content-pro">
                       <h3 className="card-title-pro mb-lg">
-                        📋 {t.rulesOrigin}
+                        📋 {t.rulesOrigin} - Code {result.hs_code}
                       </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
-                        <div>
-                          <div className="badge-pro badge-info mb-sm">
-                            Règle Applicable
+                      
+                      {/* Informations sur le produit */}
+                      <div className="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-4 mb-6">
+                        <div className="flex items-start gap-3">
+                          <div className="text-blue-600 text-lg">📦</div>
+                          <div>
+                            <h4 className="font-semibold text-gray-800 mb-1">
+                              Produit: {REFERENCE_PRODUCTS[result.hs_code] || `Code HS ${result.hs_code}`}
+                            </h4>
+                            <p className="text-gray-700 text-sm">
+                              Analyse des règles d'origine spécifiques pour l'éligibilité ZLECAf
+                            </p>
                           </div>
-                          <p className="text-gray-700">{result.rules_of_origin.rule}</p>
-                        </div>
-                        <div>
-                          <div className="badge-pro badge-success mb-sm">
-                            Exigence
-                          </div>
-                          <p className="text-gray-700">{result.rules_of_origin.requirement}</p>
                         </div>
                       </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <div className="badge-pro badge-info mb-3">
+                            Règle Applicable
+                          </div>
+                          <p className="text-gray-700 mb-2 font-medium">{result.rules_of_origin.rule}</p>
+                          <p className="text-xs text-gray-600">
+                            Type: {REFERENCE_PSR[result.hs_code]?.type || 'Standard'}
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <div className="badge-pro badge-success mb-3">
+                            Exigence VCR
+                          </div>
+                          <p className="text-gray-700 mb-2 font-medium">
+                            {REFERENCE_PSR[result.hs_code]?.rvc 
+                              ? `${REFERENCE_PSR[result.hs_code].rvc}% minimum`
+                              : result.rules_of_origin.requirement
+                            }
+                          </p>
+                          <p className="text-xs text-gray-600">
+                            Valeur ajoutée régionale minimum
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <div className="badge-pro badge-warning mb-3">
+                            Statut Éligibilité
+                          </div>
+                          <p className="text-gray-700 mb-2 font-medium">
+                            {calculationMode === 'ZLECAF' ? '✅ Éligible' : '⚠️ Non testé'}
+                          </p>
+                          <p className="text-xs text-gray-600">
+                            Basé sur le mode de calcul sélectionné
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Documentation requise */}
+                      {REFERENCE_PSR[result.hs_code] && (
+                        <div className="border-t pt-6 mt-6">
+                          <h4 className="font-semibold mb-4 text-gray-800">📋 Documentation Requise</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <ul className="space-y-2 text-sm text-gray-700">
+                              <li className="flex items-center gap-2">
+                                <span className="text-green-600">•</span>
+                                Certificat d'origine EUR.1 ou déclaration sur facture
+                              </li>
+                              <li className="flex items-center gap-2">
+                                <span className="text-green-600">•</span>
+                                Factures commerciales détaillées
+                              </li>
+                              <li className="flex items-center gap-2">
+                                <span className="text-green-600">•</span>
+                                Justificatifs de la valeur ajoutée régionale
+                              </li>
+                            </ul>
+                            <ul className="space-y-2 text-sm text-gray-700">
+                              <li className="flex items-center gap-2">
+                                <span className="text-green-600">•</span>
+                                Documents de transport (connaissement, CMR)
+                              </li>
+                              <li className="flex items-center gap-2">
+                                <span className="text-green-600">•</span>
+                                Certificats de conformité technique
+                              </li>
+                              <li className="flex items-center gap-2">
+                                <span className="text-green-600">•</span>
+                                Déclarations du fournisseur pour inputs
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
