@@ -372,6 +372,59 @@ function ZLECAfCalculator() {
 
       {/* Conteneur Principal */}
       <main className="main-container">
+        {/* Résumé Statistique Global */}
+        {statistics && activeTab === 'calculator' && (
+          <div className="professional-card mb-xl">
+            <div className="card-content-pro">
+              <div className="text-center mb-lg">
+                <h2 className="text-xl font-semibold text-gray-800 mb-sm">📊 Impact ZLECAf en Temps Réel</h2>
+                <p className="text-gray-600">Données basées sur {statistics.overview?.total_calculations || 0} calculs effectués</p>
+              </div>
+              
+              <div className="results-grid">
+                <div className="metric-card">
+                  <div className="metric-value text-green-600">
+                    {formatCurrency(statistics.overview?.total_savings || 0)}
+                  </div>
+                  <div className="metric-label">Économies Cumulées</div>
+                  <div className="metric-change positive">
+                    Sur {statistics.overview?.african_countries_members || 54} pays membres
+                  </div>
+                </div>
+
+                <div className="metric-card">
+                  <div className="metric-value">
+                    {((statistics.overview?.average_savings_rate || 0) * 100).toFixed(1)}%
+                  </div>
+                  <div className="metric-label">Taux d'Économie Moyen</div>
+                  <div className="metric-change">
+                    Comparé au régime NPF standard
+                  </div>
+                </div>
+
+                <div className="metric-card">
+                  <div className="metric-value">
+                    {formatNumber(statistics.overview?.combined_population || 1400000000)}
+                  </div>
+                  <div className="metric-label">Population Couverte</div>
+                  <div className="metric-change">
+                    Marché intérieur africain unifié
+                  </div>
+                </div>
+
+                <div className="metric-card">
+                  <div className="metric-value">
+                    {formatCurrency(statistics.overview?.estimated_combined_gdp || 3000000000000)}
+                  </div>
+                  <div className="metric-label">PIB Combiné</div>
+                  <div className="metric-change">
+                    Plus grand marché continental
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         {/* Onglet Calculateur */}
         {activeTab === 'calculator' && (
           <div className="fade-in-up">
