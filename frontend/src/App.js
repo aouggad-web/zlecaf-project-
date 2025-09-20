@@ -426,32 +426,14 @@ function ZLECAfCalculator() {
                     <label className="form-label-pro">
                       📦 {t.hsCodeLabel}
                     </label>
-                    <div className="space-y-2">
-                      <input
-                        type="text"
-                        className="form-input-pro"
-                        placeholder={t.hsCodePlaceholder}
-                        value={hsCode}
-                        onChange={(e) => setHsCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                        maxLength={6}
-                      />
-                      <select 
-                        className="form-input-pro form-select-pro text-sm"
-                        onChange={(e) => {
-                          if (e.target.value) {
-                            setHsCode(e.target.value);
-                          }
-                        }}
-                        value=""
-                      >
-                        <option value="">📋 Produits populaires ZLECAf...</option>
-                        {Object.entries(REFERENCE_PRODUCTS).map(([code, name]) => (
-                          <option key={code} value={code}>
-                            {code} - {name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                    <input
+                      type="text"
+                      className="form-input-pro"
+                      placeholder={t.hsCodePlaceholder}
+                      value={hsCode}
+                      onChange={(e) => setHsCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                      maxLength={6}
+                    />
                   </div>
 
                   <div className="form-group-pro">
