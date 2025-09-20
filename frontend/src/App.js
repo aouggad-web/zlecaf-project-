@@ -650,54 +650,102 @@ function ZLECAfCalculator() {
                             </thead>
                             <tbody>
                               <tr>
-                                <td>💼 Valeur Marchandise</td>
-                                <td>{formatCurrency(result.value)}</td>
-                                <td>{formatCurrency(result.value)}</td>
+                                <td className="font-medium">💼 Valeur Marchandise</td>
+                                <td className="font-semibold">{formatCurrency(result.value)}</td>
+                                <td className="font-semibold">{formatCurrency(result.value)}</td>
                                 <td className="text-gray-500">-</td>
                                 <td className="text-gray-500">-</td>
                               </tr>
                               <tr>
-                                <td>🏛️ Droits de Douane</td>
-                                <td>{formatCurrency(result.normal_tariff_amount)} ({(result.normal_tariff_rate * 100).toFixed(1)}%)</td>
-                                <td>{formatCurrency(result.zlecaf_tariff_amount)} ({(result.zlecaf_tariff_rate * 100).toFixed(1)}%)</td>
+                                <td className="font-medium">🏛️ Droits de Douane</td>
+                                <td>
+                                  <div className="font-semibold">{formatCurrency(result.normal_tariff_amount)}</div>
+                                  <div className="text-sm text-gray-600">Taux: {(result.normal_tariff_rate * 100).toFixed(1)}%</div>
+                                </td>
+                                <td>
+                                  <div className="font-semibold">{formatCurrency(result.zlecaf_tariff_amount)}</div>
+                                  <div className="text-sm text-gray-600">Taux: {(result.zlecaf_tariff_rate * 100).toFixed(1)}%</div>
+                                </td>
                                 <td className="text-green-600 font-semibold">{formatCurrency(result.tariff_savings || 0)}</td>
                                 <td className="text-green-600 font-semibold">
                                   {result.normal_tariff_amount > 0 ? (((result.tariff_savings || 0) / result.normal_tariff_amount) * 100).toFixed(1) : '0'}%
                                 </td>
                               </tr>
                               <tr>
-                                <td>🧾 TVA</td>
-                                <td>{formatCurrency(result.normal_vat_amount)} ({(result.normal_vat_rate * 100).toFixed(1)}%)</td>
-                                <td>{formatCurrency(result.zlecaf_vat_amount)} ({(result.zlecaf_vat_rate * 100).toFixed(1)}%)</td>
+                                <td className="font-medium">🧾 TVA</td>
+                                <td>
+                                  <div className="font-semibold">{formatCurrency(result.normal_vat_amount)}</div>
+                                  <div className="text-sm text-gray-600">
+                                    Taux: {(result.normal_vat_rate * 100).toFixed(1)}%<br/>
+                                    Base: {formatCurrency(result.value + result.normal_tariff_amount)}
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="font-semibold">{formatCurrency(result.zlecaf_vat_amount)}</div>
+                                  <div className="text-sm text-gray-600">
+                                    Taux: {(result.zlecaf_vat_rate * 100).toFixed(1)}%<br/>
+                                    Base: {formatCurrency(result.value + result.zlecaf_tariff_amount)}
+                                  </div>
+                                </td>
                                 <td className="text-green-600 font-semibold">{formatCurrency(result.vat_savings || 0)}</td>
                                 <td className="text-green-600 font-semibold">
                                   {result.normal_vat_amount > 0 ? (((result.vat_savings || 0) / result.normal_vat_amount) * 100).toFixed(1) : '0'}%
                                 </td>
                               </tr>
                               <tr>
-                                <td>📋 Autres Taxes</td>
-                                <td>{formatCurrency(result.normal_other_taxes)}</td>
-                                <td>{formatCurrency(result.zlecaf_other_taxes)}</td>
+                                <td className="font-medium">📋 Autres Taxes</td>
+                                <td>
+                                  <div className="font-semibold">{formatCurrency(result.normal_other_taxes)}</div>
+                                  <div className="text-sm text-gray-600">
+                                    Taux: {((result.normal_other_taxes / result.value) * 100).toFixed(2)}%
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="font-semibold">{formatCurrency(result.zlecaf_other_taxes)}</div>
+                                  <div className="text-sm text-gray-600">
+                                    Taux: {((result.zlecaf_other_taxes / result.value) * 100).toFixed(2)}%
+                                  </div>
+                                </td>
                                 <td className="text-green-600 font-semibold">{formatCurrency((result.normal_other_taxes || 0) - (result.zlecaf_other_taxes || 0))}</td>
                                 <td className="text-green-600 font-semibold">
                                   {result.normal_other_taxes > 0 ? ((((result.normal_other_taxes || 0) - (result.zlecaf_other_taxes || 0)) / result.normal_other_taxes) * 100).toFixed(1) : '0'}%
                                 </td>
                               </tr>
                               <tr>
-                                <td>🔧 Frais Manutention</td>
-                                <td>{formatCurrency(result.normal_handling_fees)}</td>
-                                <td>{formatCurrency(result.zlecaf_handling_fees)}</td>
+                                <td className="font-medium">🔧 Frais Manutention</td>
+                                <td>
+                                  <div className="font-semibold">{formatCurrency(result.normal_handling_fees)}</div>
+                                  <div className="text-sm text-gray-600">
+                                    Taux: {((result.normal_handling_fees / result.value) * 100).toFixed(2)}%
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="font-semibold">{formatCurrency(result.zlecaf_handling_fees)}</div>
+                                  <div className="text-sm text-gray-600">
+                                    Taux: {((result.zlecaf_handling_fees / result.value) * 100).toFixed(2)}%
+                                  </div>
+                                </td>
                                 <td className="text-green-600 font-semibold">{formatCurrency((result.normal_handling_fees || 0) - (result.zlecaf_handling_fees || 0))}</td>
                                 <td className="text-green-600 font-semibold">
                                   {result.normal_handling_fees > 0 ? ((((result.normal_handling_fees || 0) - (result.zlecaf_handling_fees || 0)) / result.normal_handling_fees) * 100).toFixed(1) : '0'}%
                                 </td>
                               </tr>
-                              <tr className="bg-gray-100 font-semibold">
-                                <td>💰 TOTAL</td>
-                                <td className="text-red-600">{formatCurrency(result.normal_total_cost)}</td>
-                                <td className="text-green-600">{formatCurrency(result.zlecaf_total_cost)}</td>
-                                <td className="text-green-600 text-lg">{formatCurrency(result.savings)}</td>
-                                <td className="text-green-600 text-lg">{result.savings_percentage?.toFixed(1)}%</td>
+                              <tr className="bg-gradient-to-r from-gray-100 to-gray-50 font-bold border-t-2 border-gray-300">
+                                <td className="text-lg">💰 COÛT TOTAL</td>
+                                <td className="text-red-600 text-lg">
+                                  <div>{formatCurrency(result.normal_total_cost)}</div>
+                                  <div className="text-sm font-normal text-gray-600">
+                                    Taux effectif: {((result.normal_total_cost - result.value) / result.value * 100).toFixed(1)}%
+                                  </div>
+                                </td>
+                                <td className="text-green-600 text-lg">
+                                  <div>{formatCurrency(result.zlecaf_total_cost)}</div>
+                                  <div className="text-sm font-normal text-gray-600">
+                                    Taux effectif: {((result.zlecaf_total_cost - result.value) / result.value * 100).toFixed(1)}%
+                                  </div>
+                                </td>
+                                <td className="text-green-600 text-xl font-bold">{formatCurrency(result.savings)}</td>
+                                <td className="text-green-600 text-xl font-bold">{result.savings_percentage?.toFixed(1)}%</td>
                               </tr>
                             </tbody>
                           </table>
