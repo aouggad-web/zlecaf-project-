@@ -18,7 +18,56 @@ import './App.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// Drapeaux des pays africains
+// Données enrichies basées sur la référence zlecaf.online
+const REFERENCE_PRODUCTS = {
+  '150910': "Huile d'olive, vierge",
+  '220210': 'Eaux sucrées (non alco.)',
+  '100590': 'Maïs (non semence)',
+  '100630': 'Riz blanchi',
+  '090111': 'Café, non torréfié',
+  '090240': 'Thé noir',
+  '180690': 'Chocolat & préparations cacao',
+  '310210': 'Urée',
+  '252329': 'Ciment Portland',
+  '392330': 'Bouteilles plastique',
+  '441113': 'MDF >9mm',
+  '940360': 'Meubles bois',
+  '711311': 'Bijoux en argent',
+  '760200': "Déchets d'aluminium",
+  '730890': 'Structures acier',
+  '850440': 'Convertisseurs statiques',
+  '854140': 'Panneaux PV',
+  '870332': 'Voitures 1500-3000cc',
+  '870421': 'Camions <=5t',
+  '300490': 'Médicaments dosés',
+  '010121': 'Chevaux reproducteurs',
+  '180100': 'Fèves de cacao'
+};
+
+const REFERENCE_PSR = {
+  '150910': { rule: 'CC ou CTH + VCR minimal', type: 'CC/CTH + VCR', rvc: 25 },
+  '220210': { rule: 'CTH ou VCR 60%', type: 'CTH/VCR', rvc: 60 },
+  '100590': { rule: 'WO (totalement obtenu)', type: 'WO', rvc: null },
+  '100630': { rule: 'CTH + VCR 40%', type: 'CTH + VCR', rvc: 40 },
+  '090111': { rule: 'WO', type: 'WO', rvc: null },
+  '090240': { rule: 'CTH ou VCR 40%', type: 'CTH/VCR', rvc: 40 },
+  '180690': { rule: 'CTH + VCR 35%', type: 'CTH + VCR', rvc: 35 },
+  '310210': { rule: 'CTH', type: 'CTH', rvc: null },
+  '252329': { rule: 'CTH', type: 'CTH', rvc: null },
+  '392330': { rule: 'CTH + VCR 40%', type: 'CTH + VCR', rvc: 40 },
+  '441113': { rule: 'CTH + VCR 35%', type: 'CTH + VCR', rvc: 35 },
+  '940360': { rule: 'CTH + VCR 35%', type: 'CTH + VCR', rvc: 35 },
+  '711311': { rule: 'CTH + VCR 35%', type: 'CTH + VCR', rvc: 35 },
+  '760200': { rule: 'CTH + VCR 35%', type: 'CTH + VCR', rvc: 35 },
+  '730890': { rule: 'CTH + VCR 35%', type: 'CTH + VCR', rvc: 35 },
+  '850440': { rule: 'CTH + VCR 40%', type: 'CTH + VCR', rvc: 40 },
+  '854140': { rule: 'CTH + VCR 40%', type: 'CTH + VCR', rvc: 40 },
+  '870332': { rule: 'CTH + VCR 40%', type: 'CTH + VCR', rvc: 40 },
+  '870421': { rule: 'CTH + VCR 40%', type: 'CTH + VCR', rvc: 40 },
+  '300490': { rule: 'CTH + VCR 40%', type: 'CTH + VCR', rvc: 40 },
+  '010121': { rule: 'Entièrement obtenus', type: 'WO', rvc: 100 },
+  '180100': { rule: 'Transformation substantielle', type: 'CTH + VCR', rvc: 40 }
+};
 const countryFlags = {
   'DZ': '🇩🇿', 'AO': '🇦🇴', 'BJ': '🇧🇯', 'BW': '🇧🇼', 'BF': '🇧🇫', 'BI': '🇧🇮', 'CM': '🇨🇲', 'CV': '🇨🇻',
   'CF': '🇨🇫', 'TD': '🇹🇩', 'KM': '🇰🇲', 'CG': '🇨🇬', 'CD': '🇨🇩', 'CI': '🇨🇮', 'DJ': '🇩🇯', 'EG': '🇪🇬',
