@@ -469,15 +469,58 @@ function ZLECAfCalculator() {
                   </div>
                 </div>
 
-                <div className="text-center mb-xl">
-                  <button
-                    className="btn-primary-pro"
-                    onClick={handleCalculate}
-                    disabled={loading}
-                  >
-                    {loading && <div className="loading-spinner" />}
-                    {loading ? t.calculating : t.calculateBtn}
-                  </button>
+                <div className="mb-xl">
+                  <div className="professional-card">
+                    <div className="card-content-pro">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-800 mb-2">Mode de Calcul</h3>
+                          <div className="flex gap-4">
+                            <label className="inline-flex items-center gap-2 cursor-pointer">
+                              <input 
+                                type="radio" 
+                                name="regime" 
+                                value="NPF" 
+                                checked={calculationMode === 'NPF'}
+                                onChange={(e) => setCalculationMode(e.target.value)}
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+                              />
+                              <span className="text-sm font-medium text-gray-700">
+                                🏛️ NPF (taux nationaux hors préférence)
+                              </span>
+                            </label>
+                            <label className="inline-flex items-center gap-2 cursor-pointer">
+                              <input 
+                                type="radio" 
+                                name="regime" 
+                                value="ZLECAF" 
+                                checked={calculationMode === 'ZLECAF'}
+                                onChange={(e) => setCalculationMode(e.target.value)}
+                                className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500"
+                              />
+                              <span className="text-sm font-medium text-gray-700">
+                                🌍 ZLECAf (préférence, si éligible)
+                              </span>
+                            </label>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-2">
+                            Le bénéfice ZLECAf suppose le respect de la règle d'origine et l'inclusion du produit dans le calendrier de démantèlement.
+                          </p>
+                        </div>
+                        
+                        <div className="text-center">
+                          <button
+                            className="btn-primary-pro"
+                            onClick={handleCalculate}
+                            disabled={loading}
+                          >
+                            {loading && <div className="loading-spinner" />}
+                            {loading ? t.calculating : t.calculateBtn}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Résultats avec graphiques donuts */}
