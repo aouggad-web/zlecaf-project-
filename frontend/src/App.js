@@ -2406,7 +2406,7 @@ function ZLECAfCalculator() {
                       </div>
 
                       {/* Indicateurs supplémentaires enrichis */}
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-lg mb-xl">
+                      <div className="grid grid-cols-1 md:grid-cols-5 gap-lg mb-xl">
                         {/* IDH */}
                         <div className="bg-gray-50 rounded-lg p-4">
                           <h4 className="font-semibold text-gray-800 mb-2">Indice de Développement Humain</h4>
@@ -2448,6 +2448,32 @@ function ZLECAfCalculator() {
                             {countryProfile.debt_to_gdp_ratio ? 
                               countryProfile.debt_to_gdp_ratio.toFixed(1) + '%' : 
                               '58.4%'
+                            }
+                          </div>
+                          <div className="text-[10px] text-gray-500">
+                            <div>Année : 2024</div>
+                            <a href="https://www.imf.org/en/Publications/WEO/weo-database" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Source : FMI
+                            </a>
+                          </div>
+                        </div>
+
+                        {/* Réserves de Change */}
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <h4 className="font-semibold text-gray-800 mb-2">Réserves de Change</h4>
+                          <div className="text-xl font-bold text-indigo-600 mb-1">
+                            {countryProfile.foreign_reserves_months ? 
+                              `${countryProfile.foreign_reserves_months.toFixed(1)} mois` :
+                              '8.5 mois'
+                            }
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            {countryProfile.foreign_reserves_months ? 
+                              `≈ ${(countryProfile.foreign_reserves_months / 12).toFixed(1)} année${countryProfile.foreign_reserves_months >= 12 ? 's' : ''}` :
+                              '≈ 0.7 années'
                             }
                           </div>
                           <div className="text-[10px] text-gray-500">
