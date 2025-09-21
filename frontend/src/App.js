@@ -2330,7 +2330,7 @@ function ZLECAfCalculator() {
                           <div className="metric-label">Population</div>
                           <div className="metric-change text-xs text-gray-500 mt-1">
                             <div>Année : 2024</div>
-                            <div className="text-xs">
+                            <div className="text-[10px]">
                               <a href="https://data.worldbank.org/indicator/SP.POP.TOTL" 
                                  target="_blank" 
                                  rel="noopener noreferrer"
