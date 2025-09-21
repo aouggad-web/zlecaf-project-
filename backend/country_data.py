@@ -66,30 +66,32 @@ REAL_COUNTRY_DATA = {
         "development_index": 0.586,
         "africa_rank": 8,
         "growth_forecast_2024": "2.8%",
+        "debt_to_gdp_ratio": 89.7,
+        "inflation_rate_2024": 13.8,
+        "foreign_reserves_months": 6.2,
+        "trade_balance_usd": 18.5,
+        "ease_of_doing_business_rank": 177,
         "risk_ratings": {
             "sp": "B-",
             "moodys": "B3",
             "fitch": "B-",
-            "scope": "B-",
-            "global_risk": "Élevé"
+            "coface": "D",
+            "global_risk": "Très Élevé"
         },
-        "key_sectors": [
-            {
-                "name": "Pétrole",
-                "pib_share": 50.0,
-                "description": "Industrie pétrolière"
-            },
-            {
-                "name": "Services",
-                "pib_share": 30.0,
-                "description": "Secteur tertiaire"
-            },
-            {
-                "name": "Agriculture",
-                "pib_share": 20.0,
-                "description": "Secteur primaire"
-            }
+        "export_products": [
+            {"name": "Pétrole brut", "share": 89.5, "value_usd": 32.1, "type": "Énergie"},
+            {"name": "Diamants", "share": 6.2, "value_usd": 2.2, "type": "Minier"},
+            {"name": "Produits pétroliers raffinés", "share": 2.1, "value_usd": 0.8, "type": "Énergie"},
+            {"name": "Café", "share": 1.2, "value_usd": 0.4, "type": "Agriculture"},
+            {"name": "Poisson", "share": 1.0, "value_usd": 0.4, "type": "Agriculture"}
         ],
+        "key_sectors": [
+            {"name": "Pétrole", "pib_share": 50.0, "description": "Extraction offshore"},
+            {"name": "Services", "pib_share": 30.0, "description": "Commerce et finance"},
+            {"name": "Agriculture", "pib_share": 20.0, "description": "Café et pêche"}
+        ],
+        "top_trade_partners": ["Chine", "Inde", "France", "Portugal", "Afrique du Sud"],
+        "investment_opportunities": ["Diversification économique", "Agriculture", "Pêche", "Tourisme"],
         "main_exports": [
             "Pétrole brut (92%)",
             "Diamants (4%)",
@@ -101,12 +103,12 @@ REAL_COUNTRY_DATA = {
             "Produits alimentaires (20%)"
         ],
         "zlecaf_potential": {
-            "level": "Modéré",
-            "description": "Potentiel commercial avec ratification ZLECAf",
+            "level": "Élevé",
+            "description": "Fort potentiel avec diversification économique",
             "key_opportunities": [
-                "Commerce intra-africain",
-                "Intégration régionale",
-                "Réduction tarifaire"
+                "Agriculture et pêche",
+                "Transformation des ressources",
+                "Commerce régional"
             ]
         }
     },
