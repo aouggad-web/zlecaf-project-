@@ -2473,7 +2473,7 @@ function ZLECAfCalculator() {
                               </div>
                             ))}
                           </div>
-                          <div className="text-xs text-gray-500 mt-4">
+                          <div className="text-[10px] text-gray-500 mt-4">
                             <a href="https://www.afdb.org/en/countries" 
                                target="_blank" 
                                rel="noopener noreferrer"
