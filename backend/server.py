@@ -340,7 +340,8 @@ class CountryEconomicProfile(BaseModel):
     gdp_usd: Optional[float] = None
     gdp_per_capita: Optional[float] = None
     inflation_rate: Optional[float] = None
-    debt_to_gdp_ratio: Optional[float] = None
+    external_debt_to_gdp_ratio: Optional[float] = None
+    internal_debt_to_gdp_ratio: Optional[float] = None
     foreign_reserves_months: Optional[float] = None
     trade_balance_usd: Optional[float] = None
     ease_of_doing_business_rank: Optional[int] = None
@@ -349,8 +350,10 @@ class CountryEconomicProfile(BaseModel):
     projections: Dict[str, Any] = {}
     risk_ratings: Dict[str, Any] = {}
     export_products: List[Dict[str, Any]] = []
+    competitive_export_products: List[Dict[str, Any]] = []
     top_trade_partners: List[str] = []
     investment_opportunities: List[str] = []
+    infrastructure: Dict[str, Any] = {}
     hdi_score: Optional[float] = None
     gdp_growth_rate: Optional[str] = None
     trade_openness: Optional[float] = None
