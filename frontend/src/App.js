@@ -558,7 +558,20 @@ const COUNTRY_COLORS = {
   'ZA': { primary: '#007A4D', secondary: '#002395' }, // Afrique du Sud : Vert et Bleu
   'NG': { primary: '#008751', secondary: '#FFFFFF' }, // Nigeria : Vert et Blanc
   'GH': { primary: '#CE1126', secondary: '#FCD116' }, // Ghana : Rouge et Or
-  'KE': { primary: '#BB0000', secondary: '#000000' }  // Kenya : Rouge et Noir
+  'KE': { primary: '#BB0000', secondary: '#000000' }, // Kenya : Rouge et Noir
+  'TN': { primary: '#E70013', secondary: '#FFFFFF' }, // Tunisie : Rouge et Blanc
+  'CI': { primary: '#FF9A00', secondary: '#009E60' }, // Côte d'Ivoire : Orange et Vert
+  'SN': { primary: '#00853F', secondary: '#FDEF42' }, // Sénégal : Vert et Jaune
+  'ET': { primary: '#DA020E', secondary: '#009639' }, // Éthiopie : Rouge et Vert
+  'UG': { primary: '#000000', secondary: '#FCDC04' }, // Ouganda : Noir et Jaune
+  'TZ': { primary: '#00A3DD', secondary: '#FCD116' }, // Tanzanie : Bleu et Jaune
+  'RW': { primary: '#00A1DE', secondary: '#FAD201' }, // Rwanda : Bleu et Jaune
+  'CM': { primary: '#007A5E', secondary: '#CE1126' }, // Cameroun : Vert et Rouge
+  'BF': { primary: '#CE1126', secondary: '#009639' }, // Burkina Faso : Rouge et Vert
+  'ML': { primary: '#14B53A', secondary: '#FCD116' }, // Mali : Vert et Jaune
+  'MW': { primary: '#CE1126', secondary: '#21873D' }, // Malawi : Rouge et Vert
+  'ZM': { primary: '#198A00', secondary: '#EF7D00' }, // Zambie : Vert et Orange
+  'ZW': { primary: '#009639', secondary: '#FFD100' }  // Zimbabwe : Vert et Jaune
 };
 
 // Fonction pour formater en millions USD
