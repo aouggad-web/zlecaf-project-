@@ -1186,7 +1186,7 @@ function ZLECAfCalculator() {
                 <div className="results-grid">
                   <div className="metric-card">
                     <div className="metric-value">
-                      {formatCurrency((TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] || 0) * 1000000)}
+                      {formatUSDMillion(TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] || 0)}
                     </div>
                     <div className="metric-label">{TRADE_STATISTICS[selectedCountries.origin]?.name} - Importations 2024</div>
                     <div className="metric-change">
@@ -1196,7 +1196,7 @@ function ZLECAfCalculator() {
 
                   <div className="metric-card">
                     <div className="metric-value">
-                      {formatCurrency((TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 0) * 1000000)}
+                      {formatUSDMillion(TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 0)}
                     </div>
                     <div className="metric-label">{TRADE_STATISTICS[selectedCountries.origin]?.name} - Exportations 2024</div>
                     <div className="metric-change">
@@ -1206,7 +1206,7 @@ function ZLECAfCalculator() {
 
                   <div className="metric-card">
                     <div className="metric-value">
-                      {formatCurrency((TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 0) * 1000000)}
+                      {formatUSDMillion(TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 0)}
                     </div>
                     <div className="metric-label">{TRADE_STATISTICS[selectedCountries.destination]?.name} - Importations 2024</div>
                     <div className="metric-change">
@@ -1216,11 +1216,180 @@ function ZLECAfCalculator() {
 
                   <div className="metric-card">
                     <div className="metric-value">
-                      {formatCurrency((TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0) * 1000000)}
+                      {formatUSDMillion(TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0)}
                     </div>
                     <div className="metric-label">{TRADE_STATISTICS[selectedCountries.destination]?.name} - Exportations 2024</div>
                     <div className="metric-change">
                       +{(((TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0) - (TRADE_STATISTICS[selectedCountries.destination]?.exports['2023'] || 0)) / (TRADE_STATISTICS[selectedCountries.destination]?.exports['2023'] || 1) * 100).toFixed(1)}% vs 2023
+                    </div>
+                  </div>
+                </div>
+
+                {/* Graphique comparatif */}
+                <div className="professional-card mb-xl">
+                  <div className="card-content-pro">
+                    <h3 className="card-title-pro mb-lg">
+                      📊 Comparaison Commerciale 2023-2024 (en millions USD)
+                    </h3>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl">
+                      {/* Graphique Importations */}
+                      <div className="bg-gray-50 rounded-lg p-6">
+                        <h4 className="font-semibold text-gray-800 mb-4 text-center">Importations</h4>
+                        <div className="space-y-4">
+                          <div>
+                            <div className="flex justify-between items-center mb-2">
+                              <span className="text-sm font-medium flex items-center gap-2">
+                                {countryFlags[selectedCountries.origin]} {TRADE_STATISTICS[selectedCountries.origin]?.name}
+                              </span>
+                              <span className="text-lg font-bold" style={{color: COUNTRY_COLORS[selectedCountries.origin]?.primary}}>
+                                {formatUSDMillion(TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] || 0)}
+                              </span>
+                            </div>
+                            <div className="flex gap-2">
+                              <div 
+                                className="h-8 rounded-md flex items-center justify-center text-white text-sm font-semibold"
+                                style={{
+                                  backgroundColor: COUNTRY_COLORS[selectedCountries.origin]?.primary,
+                                  width: `${(TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] || 0) / Math.max(TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] || 0, TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 0) * 100}%`,
+                                  minWidth: '60px'
+                                }}
+                              >
+                                2024
+                              </div>
+                            </div>
+                            <div className="flex gap-2 mt-1">
+                              <div 
+                                className="h-6 rounded-md flex items-center justify-center text-white text-xs"
+                                style={{
+                                  backgroundColor: COUNTRY_COLORS[selectedCountries.origin]?.secondary,
+                                  width: `${(TRADE_STATISTICS[selectedCountries.origin]?.imports['2023'] || 0) / Math.max(TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] || 0, TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 0) * 100}%`,
+                                  minWidth: '40px',
+                                  opacity: 0.7
+                                }}
+                              >
+                                2023
+                              </div>
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="flex justify-between items-center mb-2">
+                              <span className="text-sm font-medium flex items-center gap-2">
+                                {countryFlags[selectedCountries.destination]} {TRADE_STATISTICS[selectedCountries.destination]?.name}
+                              </span>
+                              <span className="text-lg font-bold" style={{color: COUNTRY_COLORS[selectedCountries.destination]?.primary}}>
+                                {formatUSDMillion(TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 0)}
+                              </span>
+                            </div>
+                            <div className="flex gap-2">
+                              <div 
+                                className="h-8 rounded-md flex items-center justify-center text-white text-sm font-semibold"
+                                style={{
+                                  backgroundColor: COUNTRY_COLORS[selectedCountries.destination]?.primary,
+                                  width: `${(TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 0) / Math.max(TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] || 0, TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 0) * 100}%`,
+                                  minWidth: '60px'
+                                }}
+                              >
+                                2024
+                              </div>
+                            </div>
+                            <div className="flex gap-2 mt-1">
+                              <div 
+                                className="h-6 rounded-md flex items-center justify-center text-white text-xs"
+                                style={{
+                                  backgroundColor: COUNTRY_COLORS[selectedCountries.destination]?.secondary,
+                                  width: `${(TRADE_STATISTICS[selectedCountries.destination]?.imports['2023'] || 0) / Math.max(TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] || 0, TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 0) * 100}%`,
+                                  minWidth: '40px',
+                                  opacity: 0.7
+                                }}
+                              >
+                                2023
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Graphique Exportations */}
+                      <div className="bg-gray-50 rounded-lg p-6">
+                        <h4 className="font-semibold text-gray-800 mb-4 text-center">Exportations</h4>
+                        <div className="space-y-4">
+                          <div>
+                            <div className="flex justify-between items-center mb-2">
+                              <span className="text-sm font-medium flex items-center gap-2">
+                                {countryFlags[selectedCountries.origin]} {TRADE_STATISTICS[selectedCountries.origin]?.name}
+                              </span>
+                              <span className="text-lg font-bold" style={{color: COUNTRY_COLORS[selectedCountries.origin]?.primary}}>
+                                {formatUSDMillion(TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 0)}
+                              </span>
+                            </div>
+                            <div className="flex gap-2">
+                              <div 
+                                className="h-8 rounded-md flex items-center justify-center text-white text-sm font-semibold"
+                                style={{
+                                  backgroundColor: COUNTRY_COLORS[selectedCountries.origin]?.primary,
+                                  width: `${(TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 0) / Math.max(TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 0, TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0) * 100}%`,
+                                  minWidth: '60px'
+                                }}
+                              >
+                                2024
+                              </div>
+                            </div>
+                            <div className="flex gap-2 mt-1">
+                              <div 
+                                className="h-6 rounded-md flex items-center justify-center text-white text-xs"
+                                style={{
+                                  backgroundColor: COUNTRY_COLORS[selectedCountries.origin]?.secondary,
+                                  width: `${(TRADE_STATISTICS[selectedCountries.origin]?.exports['2023'] || 0) / Math.max(TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 0, TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0) * 100}%`,
+                                  minWidth: '40px',
+                                  opacity: 0.7
+                                }}
+                              >
+                                2023
+                              </div>
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="flex justify-between items-center mb-2">
+                              <span className="text-sm font-medium flex items-center gap-2">
+                                {countryFlags[selectedCountries.destination]} {TRADE_STATISTICS[selectedCountries.destination]?.name}
+                              </span>
+                              <span className="text-lg font-bold" style={{color: COUNTRY_COLORS[selectedCountries.destination]?.primary}}>
+                                {formatUSDMillion(TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0)}
+                              </span>
+                            </div>
+                            <div className="flex gap-2">
+                              <div 
+                                className="h-8 rounded-md flex items-center justify-center text-white text-sm font-semibold"
+                                style={{
+                                  backgroundColor: COUNTRY_COLORS[selectedCountries.destination]?.primary,
+                                  width: `${(TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0) / Math.max(TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 0, TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0) * 100}%`,
+                                  minWidth: '60px'
+                                }}
+                              >
+                                2024
+                              </div>
+                            </div>
+                            <div className="flex gap-2 mt-1">
+                              <div 
+                                className="h-6 rounded-md flex items-center justify-center text-white text-xs"
+                                style={{
+                                  backgroundColor: COUNTRY_COLORS[selectedCountries.destination]?.secondary,
+                                  width: `${(TRADE_STATISTICS[selectedCountries.destination]?.exports['2023'] || 0) / Math.max(TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 0, TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0) * 100}%`,
+                                  minWidth: '40px',
+                                  opacity: 0.7
+                                }}
+                              >
+                                2023
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-center text-sm text-gray-500 mt-4">
+                      Sources : Données officielles OMC, UNCTAD, administrations douanières nationales - Statistiques 2023 et estimations 2024
                     </div>
                   </div>
                 </div>
