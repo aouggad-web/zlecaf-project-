@@ -166,36 +166,38 @@ REAL_COUNTRY_DATA = {
     },
     "BWA": {
         "name": "Botswana",
-        "gdp_usd_2024": 20.4,
-        "gdp_per_capita_2024": 8500,
+        "gdp_usd_2024": 20.3,
+        "gdp_per_capita_2024": 8466,
         "population_2024": 2400000,
-        "development_index": 0.693,
-        "africa_rank": 12,
-        "growth_forecast_2024": "4.2%",
+        "development_index": 0.735,
+        "africa_rank": 36,
+        "growth_forecast_2024": "4.1%",
+        "debt_to_gdp_ratio": 24.7,
+        "inflation_rate_2024": 4.8,
+        "foreign_reserves_months": 12.3,
+        "trade_balance_usd": 2.8,
+        "ease_of_doing_business_rank": 87,
         "risk_ratings": {
             "sp": "A-",
             "moodys": "A2",
             "fitch": "A-",
-            "scope": "A-",
+            "coface": "A3",
             "global_risk": "Faible"
         },
-        "key_sectors": [
-            {
-                "name": "Diamants",
-                "pib_share": 25.0,
-                "description": "Extraction diamantaire"
-            },
-            {
-                "name": "Services",
-                "pib_share": 50.0,
-                "description": "Services financiers et publics"
-            },
-            {
-                "name": "Agriculture",
-                "pib_share": 25.0,
-                "description": "Élevage bovin"
-            }
+        "export_products": [
+            {"name": "Diamants", "share": 79.2, "value_usd": 4.1, "type": "Minier"},
+            {"name": "Cuivre-nickel", "share": 8.4, "value_usd": 0.4, "type": "Minier"},
+            {"name": "Bœuf", "share": 4.1, "value_usd": 0.2, "type": "Agriculture"},
+            {"name": "Carbonate de sodium", "share": 3.2, "value_usd": 0.2, "type": "Minier"},
+            {"name": "Textiles", "share": 2.8, "value_usd": 0.1, "type": "Manufacture"}
         ],
+        "key_sectors": [
+            {"name": "Diamants", "pib_share": 18.0, "description": "Extraction diamantaire"},
+            {"name": "Services", "pib_share": 61.0, "description": "Services financiers"},
+            {"name": "Agriculture", "pib_share": 21.0, "description": "Élevage bovin"}
+        ],
+        "top_trade_partners": ["Belgique", "Afrique du Sud", "Namibie", "Royaume-Uni", "Inde"],
+        "investment_opportunities": ["Services financiers", "Énergie solaire", "Tourisme", "Agriculture"],
         "main_exports": [
             "Diamants (85%)",
             "Cuivre-nickel (7%)",
@@ -207,12 +209,12 @@ REAL_COUNTRY_DATA = {
             "Véhicules (15%)"
         ],
         "zlecaf_potential": {
-            "level": "Modéré",
-            "description": "Potentiel commercial avec ratification ZLECAf",
+            "level": "Élevé",
+            "description": "Excellent potentiel grâce à la stabilité économique",
             "key_opportunities": [
-                "Commerce intra-africain",
-                "Intégration régionale",
-                "Réduction tarifaire"
+                "Hub financier régional",
+                "Énergie solaire",
+                "Tourisme de luxe"
             ]
         }
     },
