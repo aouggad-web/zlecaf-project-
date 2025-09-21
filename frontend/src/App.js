@@ -2413,7 +2413,7 @@ function ZLECAfCalculator() {
                           <div className="text-2xl font-bold text-blue-600 mb-1">
                             {countryProfile.hdi_score || '0.65'}
                           </div>
-                          <div className="text-xs text-gray-500">
+                          <div className="text-[10px] text-gray-500">
                             <div>Année : 2023</div>
                             <a href="https://hdr.undp.org/data-center/country-insights" 
                                target="_blank" 
