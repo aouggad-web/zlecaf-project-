@@ -94,6 +94,7 @@ function ZLECAfCalculator() {
   const [activeTab, setActiveTab] = useState('calculator');
   const [language, setLanguage] = useState('fr');
   const [calculationMode, setCalculationMode] = useState('NPF');
+  const [selectedCountries, setSelectedCountries] = useState({origin: '', destination: ''});
 
   const texts = {
     fr: {
