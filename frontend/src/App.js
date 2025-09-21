@@ -1452,14 +1452,14 @@ function ZLECAfCalculator() {
                           </thead>
                           <tbody>
                             {TRADE_STATISTICS[selectedCountries.origin]?.top_exports.map((item, index) => {
-                              const totalExports = TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] * 1000000 || 1;
-                              const share = ((item.value * 1000000) / totalExports * 100);
+                              const totalExports = TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 1;
+                              const share = ((item.value) / totalExports * 100);
                               return (
                                 <tr key={index}>
                                   <td className="font-medium">{index + 1}</td>
                                   <td>{item.product}</td>
                                   <td className="font-mono text-sm">{item.code}</td>
-                                  <td className="font-semibold">{formatCurrency(item.value * 1000000)}</td>
+                                  <td className="font-semibold">{formatUSDMillion(item.value)}</td>
                                   <td>{share.toFixed(1)}%</td>
                                 </tr>
                               );
