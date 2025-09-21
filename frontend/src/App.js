@@ -276,6 +276,27 @@ const REFERENCE_PSR = {
   '180100': { rule: 'Transformation substantielle', type: 'CTH + VCR', rvc: 40 }
 };
 
+// Couleurs nationales des pays africains (basées sur leurs drapeaux)
+const COUNTRY_COLORS = {
+  'DZ': { primary: '#007A3D', secondary: '#CE1126' }, // Algérie : Vert et Rouge
+  'MA': { primary: '#C1272D', secondary: '#006233' }, // Maroc : Rouge et Vert
+  'EG': { primary: '#CE1126', secondary: '#000000' }, // Égypte : Rouge et Noir
+  'ZA': { primary: '#007A4D', secondary: '#002395' }, // Afrique du Sud : Vert et Bleu
+  'NG': { primary: '#008751', secondary: '#FFFFFF' }, // Nigeria : Vert et Blanc
+  'GH': { primary: '#CE1126', secondary: '#FCD116' }, // Ghana : Rouge et Or
+  'KE': { primary: '#BB0000', secondary: '#000000' }  // Kenya : Rouge et Noir
+};
+
+// Fonction pour formater en millions USD
+const formatMillionsUSD = (value) => {
+  if (!value) return '0 M$';
+  return `${(value / 1000).toFixed(1)} Mds$`;
+};
+
+const formatUSDMillion = (value) => {
+  if (!value) return '0 M$';
+  return `${value.toLocaleString('fr-FR')} M$`;
+};
 
 const countryFlags = {
   'DZ': '🇩🇿', 'AO': '🇦🇴', 'BJ': '🇧🇯', 'BW': '🇧🇼', 'BF': '🇧🇫', 'BI': '🇧🇮', 'CM': '🇨🇲', 'CV': '🇨🇻',
