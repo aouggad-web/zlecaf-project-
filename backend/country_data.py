@@ -6,36 +6,38 @@
 REAL_COUNTRY_DATA = {
     "DZA": {
         "name": "Algérie",
-        "gdp_usd_2024": 269.128,
+        "gdp_usd_2024": 269.1,
         "gdp_per_capita_2024": 5763,
         "population_2024": 46700000,
         "development_index": 0.745,
         "africa_rank": 3,
         "growth_forecast_2024": "3.2%",
+        "debt_to_gdp_ratio": 58.4,
+        "inflation_rate_2024": 7.2,
+        "foreign_reserves_months": 8.5,
+        "trade_balance_usd": 12.8,
+        "ease_of_doing_business_rank": 157,
         "risk_ratings": {
             "sp": "B+",
             "moodys": "B2",
             "fitch": "B+",
-            "scope": "B+",
+            "coface": "C",
             "global_risk": "Élevé"
         },
-        "key_sectors": [
-            {
-                "name": "Hydrocarbures",
-                "pib_share": 35.0,
-                "description": "Pétrole et gaz naturel"
-            },
-            {
-                "name": "Services",
-                "pib_share": 40.0,
-                "description": "Secteur tertiaire"
-            },
-            {
-                "name": "Industrie",
-                "pib_share": 25.0,
-                "description": "Secteur secondaire"
-            }
+        "export_products": [
+            {"name": "Hydrocarbures", "share": 92.0, "value_usd": 38.2, "type": "Énergie"},
+            {"name": "Produits chimiques", "share": 3.2, "value_usd": 1.3, "type": "Industrie"},
+            {"name": "Produits alimentaires", "share": 2.1, "value_usd": 0.9, "type": "Agriculture"},
+            {"name": "Métaux", "share": 1.5, "value_usd": 0.6, "type": "Minier"},
+            {"name": "Textiles", "share": 1.2, "value_usd": 0.5, "type": "Manufacture"}
         ],
+        "key_sectors": [
+            {"name": "Hydrocarbures", "pib_share": 35.0, "description": "Pétrole et gaz naturel"},
+            {"name": "Services", "pib_share": 40.0, "description": "Commerce et télécommunications"},
+            {"name": "Industrie", "pib_share": 25.0, "description": "Agroalimentaire et textile"}
+        ],
+        "top_trade_partners": ["Espagne", "Italie", "France", "Turquie", "Brésil"],
+        "investment_opportunities": ["Énergies renouvelables", "Agroalimentaire", "Tourisme", "TIC"],
         "main_exports": [
             "Hydrocarbures (85%)",
             "Produits chimiques (5%)",
