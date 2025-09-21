@@ -2394,7 +2394,7 @@ function ZLECAfCalculator() {
                           <div className="metric-change">
                             Année : 2024
                           </div>
-                          <div className="text-xs text-gray-400 mt-2 leading-tight">
+                          <div className="text-[10px] text-gray-400 mt-2 leading-tight">
                             <a href="https://www.afdb.org/en/knowledge/publications/african-economic-outlook" 
                                target="_blank" 
                                rel="noopener noreferrer"
