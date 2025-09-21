@@ -266,6 +266,9 @@ function ZLECAfCalculator() {
 
     try {
       setLoading(true);
+      // Sauvegarder les pays sélectionnés pour les statistiques
+      setSelectedCountries({origin: originCountry, destination: destinationCountry});
+      
       const response = await axios.post(`${API}/calculate-tariff`, {
         origin_country: originCountry,
         destination_country: destinationCountry,
