@@ -397,9 +397,12 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 1289,
         "population_2024": 121600000,
         "development_index": 0.498,
+        "hdi_africa_rank": 40,
+        "hdi_world_rank": 175,
         "africa_rank": 6,
         "growth_forecast_2024": "6.1%",
-        "debt_to_gdp_ratio": 34.2,
+        "external_debt_to_gdp_ratio": 26.8,  # Dette extérieure modérée - Source: National Bank of Ethiopia
+        "internal_debt_to_gdp_ratio": 7.4,   # Dette intérieure faible - Source: National Bank of Ethiopia
         "inflation_rate_2024": 28.1,
         "foreign_reserves_months": 1.8,
         "trade_balance_usd": -8.2,
@@ -408,8 +411,7 @@ REAL_COUNTRY_DATA = {
             "sp": "Non noté",
             "moodys": "Non noté",
             "fitch": "Non noté",
-            "coface": "D",
-            "global_risk": "Élevé"
+            "coface": "D"
         },
         "export_products": [
             {"name": "Café", "share": 28.4, "value_usd": 1.2, "type": "Agriculture"},
@@ -418,6 +420,21 @@ REAL_COUNTRY_DATA = {
             {"name": "Légumineuses", "share": 12.1, "value_usd": 0.5, "type": "Agriculture"},
             {"name": "Fleurs coupées", "share": 8.4, "value_usd": 0.4, "type": "Agriculture"}
         ],
+        "competitive_export_products": [
+            {"name": "Café de spécialité", "advantage": "Berceau du café + variétés uniques", "potential_usd": 3.8, "type": "Agriculture"},
+            {"name": "Textiles et cuir", "advantage": "Main d'œuvre + élevage important", "potential_usd": 2.1, "type": "Manufacture"},
+            {"name": "Énergie hydroélectrique", "advantage": "Potentiel énorme + export régional", "potential_usd": 4.5, "type": "Énergie"},
+            {"name": "Fleurs d'exportation", "advantage": "Climat favorable + proximité Europe", "potential_usd": 1.2, "type": "Agriculture"}
+        ],
+        "infrastructure": {
+            "routes_km": 120171,
+            "routes_pavees_pct": 17.0,
+            "voies_ferrees_km": 659,
+            "ports_principaux": 0,  # Pays enclavé
+            "ports_details": ["Accès via Djibouti", "Port de Berbera (Somaliland)"],
+            "aeroports_internationaux": 4,
+            "aeroports_details": ["Addis-Abeba Bole", "Dire Dawa Aba Tenna Dejazmach Yilma", "Bahir Dar", "Mekele"]
+        },
         "key_sectors": [
             {"name": "Agriculture", "pib_share": 37.0, "description": "Café et céréales"},
             {"name": "Services", "pib_share": 45.0, "description": "Commerce et transport"},
