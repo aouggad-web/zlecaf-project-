@@ -533,9 +533,12 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 2065,
         "population_2024": 213400000,
         "development_index": 0.535,
+        "hdi_africa_rank": 35,
+        "hdi_world_rank": 163,
         "africa_rank": 1,
         "growth_forecast_2024": "3.3%",
-        "debt_to_gdp_ratio": 35.7,
+        "external_debt_to_gdp_ratio": 28.7,  # Dette extérieure raisonnable - Source: Central Bank of Nigeria
+        "internal_debt_to_gdp_ratio": 7.0,   # Dette intérieure faible - Source: Central Bank of Nigeria
         "inflation_rate_2024": 22.4,
         "foreign_reserves_months": 8.1,
         "trade_balance_usd": 15.2,
@@ -544,8 +547,7 @@ REAL_COUNTRY_DATA = {
             "sp": "B-",
             "moodys": "B2",
             "fitch": "B",
-            "coface": "C",
-            "global_risk": "Élevé"
+            "coface": "C"
         },
         "export_products": [
             {"name": "Pétrole brut", "share": 86.2, "value_usd": 52.8, "type": "Énergie"},
@@ -554,6 +556,21 @@ REAL_COUNTRY_DATA = {
             {"name": "Caoutchouc", "share": 1.8, "value_usd": 1.1, "type": "Agriculture"},
             {"name": "Cuir", "share": 1.2, "value_usd": 0.7, "type": "Agriculture"}
         ],
+        "competitive_export_products": [
+            {"name": "Cacao premium", "advantage": "4ème producteur mondial + qualité supérieure", "potential_usd": 4.2, "type": "Agriculture"},
+            {"name": "Gaz naturel liquéfié", "advantage": "Réserves importantes + proximité marchés", "potential_usd": 12.8, "type": "Énergie"},
+            {"name": "Services technologiques", "advantage": "Hub tech africain + population jeune", "potential_usd": 8.5, "type": "Services"},
+            {"name": "Produits agroalimentaires", "advantage": "Marché intérieur + potentiel export", "potential_usd": 6.3, "type": "Agriculture"}
+        ],
+        "infrastructure": {
+            "routes_km": 195000,
+            "routes_pavees_pct": 28.2,
+            "voies_ferrees_km": 3798,
+            "ports_principaux": 6,
+            "ports_details": ["Lagos Apapa", "Port Harcourt", "Warri", "Calabar", "Onne", "Tin Can Island"],
+            "aeroports_internationaux": 5,
+            "aeroports_details": ["Lagos Murtala Muhammed", "Abuja Nnamdi Azikiwe", "Kano Mallam Aminu", "Port Harcourt", "Enugu"]
+        },
         "key_sectors": [
             {"name": "Services", "pib_share": 54.0, "description": "Télécommunications et finance"},
             {"name": "Pétrole", "pib_share": 8.0, "description": "Extraction pétrolière"},
