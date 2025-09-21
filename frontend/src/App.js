@@ -310,6 +310,218 @@ const TRADE_STATISTICS = {
       { product: 'Matières plastiques', value: 300, code: '39' },
       { product: 'Autres manufactures', value: 200, code: 'Divers' }
     ]
+  },
+  'GH': {
+    name: 'Ghana',
+    imports: { '2023': 18400, '2024': 20100 },
+    exports: { '2023': 15800, '2024': 17200 },
+    top_import_partners: [
+      { country: 'Chine', value: 4200, flag: '🇨🇳' },
+      { country: 'USA', value: 3100, flag: '🇺🇸' },
+      { country: 'Inde', value: 2400, flag: '🇮🇳' },
+      { country: 'Royaume-Uni', value: 1900, flag: '🇬🇧' },
+      { country: 'Allemagne', value: 1500, flag: '🇩🇪' },
+      { country: 'Pays-Bas', value: 1200, flag: '🇳🇱' },
+      { country: 'France', value: 1000, flag: '🇫🇷' },
+      { country: 'Italie', value: 800, flag: '🇮🇹' },
+      { country: 'Corée du Sud', value: 600, flag: '🇰🇷' },
+      { country: 'Brésil', value: 500, flag: '🇧🇷' }
+    ],
+    top_export_partners: [
+      { country: 'Inde', value: 3200, flag: '🇮🇳' },
+      { country: 'Suisse', value: 2800, flag: '🇨🇭' },
+      { country: 'Chine', value: 2400, flag: '🇨🇳' },
+      { country: 'USA', value: 1900, flag: '🇺🇸' },
+      { country: 'Pays-Bas', value: 1500, flag: '🇳🇱' },
+      { country: 'Allemagne', value: 1200, flag: '🇩🇪' },
+      { country: 'France', value: 900, flag: '🇫🇷' },
+      { country: 'Italie', value: 700, flag: '🇮🇹' },
+      { country: 'Royaume-Uni', value: 600, flag: '🇬🇧' },
+      { country: 'Burkina Faso', value: 400, flag: '🇧🇫' }
+    ],
+    top_imports: [
+      { product: 'Hydrocarbures', value: 4200, code: '27' },
+      { product: 'Machines et équipements', value: 3100, code: '84' },
+      { product: 'Véhicules automobiles', value: 2400, code: '87' },
+      { product: 'Céréales', value: 1900, code: '10' },
+      { product: 'Fer et acier', value: 1500, code: '72' },
+      { product: 'Équipements électriques', value: 1200, code: '85' },
+      { product: 'Produits pharmaceutiques', value: 1000, code: '30' },
+      { product: 'Textiles', value: 800, code: '52-63' },
+      { product: 'Produits chimiques', value: 600, code: '28-38' },
+      { product: 'Matières plastiques', value: 500, code: '39' }
+    ],
+    top_exports: [
+      { product: 'Or', value: 8900, code: '71' },
+      { product: 'Cacao', value: 2800, code: '18' },
+      { product: 'Pétrole brut', value: 1900, code: '27' },
+      { product: 'Produits agricoles', value: 900, code: '01-24' },
+      { product: 'Bois et dérivés', value: 600, code: '44' },
+      { product: 'Produits alimentaires', value: 400, code: '16-22' },
+      { product: 'Textiles', value: 300, code: '52-63' },
+      { product: 'Produits chimiques', value: 200, code: '28-38' },
+      { product: 'Machines', value: 150, code: '84' },
+      { product: 'Autres manufactures', value: 100, code: 'Divers' }
+    ]
+  },
+  'KE': {
+    name: 'Kenya',
+    imports: { '2023': 22800, '2024': 25200 },
+    exports: { '2023': 8900, '2024': 10100 },
+    top_import_partners: [
+      { country: 'Chine', value: 5400, flag: '🇨🇳' },
+      { country: 'Inde', value: 3800, flag: '🇮🇳' },
+      { country: 'UAE', value: 2900, flag: '🇦🇪' },
+      { country: 'Arabie Saoudite', value: 2200, flag: '🇸🇦' },
+      { country: 'Japon', value: 1800, flag: '🇯🇵' },
+      { country: 'USA', value: 1400, flag: '🇺🇸' },
+      { country: 'Allemagne', value: 1200, flag: '🇩🇪' },
+      { country: 'Royaume-Uni', value: 1000, flag: '🇬🇧' },
+      { country: 'France', value: 900, flag: '🇫🇷' },
+      { country: 'Malaisie', value: 700, flag: '🇲🇾' }
+    ],
+    top_export_partners: [
+      { country: 'USA', value: 1200, flag: '🇺🇸' },
+      { country: 'Pays-Bas', value: 1000, flag: '🇳🇱' },
+      { country: 'Pakistan', value: 800, flag: '🇵🇰' },
+      { country: 'Royaume-Uni', value: 700, flag: '🇬🇧' },
+      { country: 'UAE', value: 600, flag: '🇦🇪' },
+      { country: 'Allemagne', value: 500, flag: '🇩🇪' },
+      { country: 'Égypte', value: 400, flag: '🇪🇬' },
+      { country: 'Ouganda', value: 350, flag: '🇺🇬' },
+      { country: 'Tanzanie', value: 300, flag: '🇹🇿' },
+      { country: 'Rwanda', value: 250, flag: '🇷🇼' }
+    ],
+    top_imports: [
+      { product: 'Hydrocarbures', value: 5400, code: '27' },
+      { product: 'Machines et équipements', value: 3800, code: '84' },
+      { product: 'Véhicules automobiles', value: 2900, code: '87' },
+      { product: 'Fer et acier', value: 2200, code: '72' },
+      { product: 'Équipements électriques', value: 1800, code: '85' },
+      { product: 'Produits pharmaceutiques', value: 1400, code: '30' },
+      { product: 'Produits chimiques', value: 1200, code: '28-38' },
+      { product: 'Céréales', value: 1000, code: '10' },
+      { product: 'Textiles', value: 900, code: '52-63' },
+      { product: 'Matières plastiques', value: 700, code: '39' }
+    ],
+    top_exports: [
+      { product: 'Thé', value: 2400, code: '09' },
+      { product: 'Café', value: 1800, code: '09' },
+      { product: 'Fleurs coupées', value: 1200, code: '06' },
+      { product: 'Légumes', value: 900, code: '07' },
+      { product: 'Textiles', value: 800, code: '52-63' },
+      { product: 'Produits alimentaires', value: 600, code: '16-22' },
+      { product: 'Cuir et maroquinerie', value: 500, code: '41-43' },
+      { product: 'Produits chimiques', value: 400, code: '28-38' },
+      { product: 'Machines', value: 300, code: '84' },
+      { product: 'Autres produits', value: 200, code: 'Divers' }
+    ]
+  },
+  'TN': {
+    name: 'Tunisie',
+    imports: { '2023': 24800, '2024': 26900 },
+    exports: { '2023': 19400, '2024': 21200 },
+    top_import_partners: [
+      { country: 'France', value: 4200, flag: '🇫🇷' },
+      { country: 'Italie', value: 3800, flag: '🇮🇹' },
+      { country: 'Allemagne', value: 3200, flag: '🇩🇪' },
+      { country: 'Chine', value: 2900, flag: '🇨🇳' },
+      { country: 'Algérie', value: 2400, flag: '🇩🇿' },
+      { country: 'Turquie', value: 1800, flag: '🇹🇷' },
+      { country: 'Espagne', value: 1600, flag: '🇪🇸' },
+      { country: 'Russie', value: 1200, flag: '🇷🇺' },
+      { country: 'Brésil', value: 900, flag: '🇧🇷' },
+      { country: 'Libye', value: 800, flag: '🇱🇾' }
+    ],
+    top_export_partners: [
+      { country: 'France', value: 5200, flag: '🇫🇷' },
+      { country: 'Italie', value: 4100, flag: '🇮🇹' },
+      { country: 'Allemagne', value: 2800, flag: '🇩🇪' },
+      { country: 'Espagne', value: 1900, flag: '🇪🇸' },
+      { country: 'Libye', value: 1600, flag: '🇱🇾' },
+      { country: 'Algérie', value: 1200, flag: '🇩🇿' },
+      { country: 'USA', value: 900, flag: '🇺🇸' },
+      { country: 'Turquie', value: 700, flag: '🇹🇷' },
+      { country: 'Maroc', value: 600, flag: '🇲🇦' },
+      { country: 'Royaume-Uni', value: 500, flag: '🇬🇧' }
+    ],
+    top_imports: [
+      { product: 'Hydrocarbures', value: 6200, code: '27' },
+      { product: 'Machines et équipements', value: 4100, code: '84' },
+      { product: 'Équipements électriques', value: 2800, code: '85' },
+      { product: 'Véhicules automobiles', value: 2400, code: '87' },
+      { product: 'Fer et acier', value: 1900, code: '72' },
+      { product: 'Textiles', value: 1600, code: '52-63' },
+      { product: 'Produits chimiques', value: 1400, code: '28-38' },
+      { product: 'Céréales', value: 1200, code: '10' },
+      { product: 'Matières plastiques', value: 900, code: '39' },
+      { product: 'Produits pharmaceutiques', value: 800, code: '30' }
+    ],
+    top_exports: [
+      { product: 'Textiles et habillement', value: 6800, code: '52-63' },
+      { product: 'Équipements électriques', value: 4200, code: '85' },
+      { product: 'Machines', value: 2900, code: '84' },
+      { product: 'Hydrocarbures', value: 2100, code: '27' },
+      { product: 'Produits chimiques', value: 1800, code: '28-38' },
+      { product: 'Produits agricoles', value: 1400, code: '01-24' },
+      { product: 'Produits alimentaires', value: 1100, code: '16-22' },
+      { product: 'Cuir et maroquinerie', value: 800, code: '41-43' },
+      { product: 'Matières plastiques', value: 600, code: '39' },
+      { product: 'Autres manufactures', value: 400, code: 'Divers' }
+    ]
+  },
+  'CI': {
+    name: 'Côte d\'Ivoire',
+    imports: { '2023': 16200, '2024': 17800 },
+    exports: { '2023': 15600, '2024': 17100 },
+    top_import_partners: [
+      { country: 'France', value: 2800, flag: '🇫🇷' },
+      { country: 'Chine', value: 2400, flag: '🇨🇳' },
+      { country: 'Nigeria', value: 1900, flag: '🇳🇬' },
+      { country: 'Inde', value: 1600, flag: '🇮🇳' },
+      { country: 'Allemagne', value: 1200, flag: '🇩🇪' },
+      { country: 'Italie', value: 1000, flag: '🇮🇹' },
+      { country: 'Espagne', value: 800, flag: '🇪🇸' },
+      { country: 'Belgique', value: 700, flag: '🇧🇪' },
+      { country: 'Pays-Bas', value: 600, flag: '🇳🇱' },
+      { country: 'Turquie', value: 500, flag: '🇹🇷' }
+    ],
+    top_export_partners: [
+      { country: 'Pays-Bas', value: 3200, flag: '🇳🇱' },
+      { country: 'USA', value: 2800, flag: '🇺🇸' },
+      { country: 'France', value: 2400, flag: '🇫🇷' },
+      { country: 'Allemagne', value: 1900, flag: '🇩🇪' },
+      { country: 'Belgique', value: 1600, flag: '🇧🇪' },
+      { country: 'Malaisie', value: 1200, flag: '🇲🇾' },
+      { country: 'Espagne', value: 900, flag: '🇪🇸' },
+      { country: 'Italie', value: 700, flag: '🇮🇹' },
+      { country: 'Ghana', value: 600, flag: '🇬🇭' },
+      { country: 'Burkina Faso', value: 500, flag: '🇧🇫' }
+    ],
+    top_imports: [
+      { product: 'Hydrocarbures', value: 3200, code: '27' },
+      { product: 'Machines et équipements', value: 2800, code: '84' },
+      { product: 'Véhicules automobiles', value: 2100, code: '87' },
+      { product: 'Céréales', value: 1800, code: '10' },
+      { product: 'Fer et acier', value: 1400, code: '72' },
+      { product: 'Équipements électriques', value: 1200, code: '85' },
+      { product: 'Produits pharmaceutiques', value: 900, code: '30' },
+      { product: 'Textiles', value: 800, code: '52-63' },
+      { product: 'Produits chimiques', value: 700, code: '28-38' },
+      { product: 'Matières plastiques', value: 600, code: '39' }
+    ],
+    top_exports: [
+      { product: 'Cacao', value: 8900, code: '18' },
+      { product: 'Pétrole brut', value: 3200, code: '27' },
+      { product: 'Café', value: 1800, code: '09' },
+      { product: 'Noix de cajou', value: 1200, code: '08' },
+      { product: 'Caoutchouc', value: 900, code: '40' },
+      { product: 'Bois et dérivés', value: 700, code: '44' },
+      { product: 'Coton', value: 600, code: '52' },
+      { product: 'Produits chimiques', value: 400, code: '28-38' },
+      { product: 'Textiles', value: 300, code: '52-63' },
+      { product: 'Autres agricoles', value: 200, code: '01-24' }
+    ]
   }
   // Ajout des autres pays suit...
 };
