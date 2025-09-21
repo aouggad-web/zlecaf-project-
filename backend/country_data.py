@@ -577,9 +577,12 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 3832,
         "population_2024": 37300000,
         "development_index": 0.686,
+        "hdi_africa_rank": 7,
+        "hdi_world_rank": 123,
         "africa_rank": 7,
         "growth_forecast_2024": "3.1%",
-        "debt_to_gdp_ratio": 71.8,
+        "external_debt_to_gdp_ratio": 31.4,  # Dette extérieure modérée - Source: Bank Al-Maghrib
+        "internal_debt_to_gdp_ratio": 40.4,  # Dette intérieure modérée - Source: Bank Al-Maghrib
         "inflation_rate_2024": 4.9,
         "foreign_reserves_months": 5.8,
         "trade_balance_usd": -26.4,
@@ -588,8 +591,7 @@ REAL_COUNTRY_DATA = {
             "sp": "BB-",
             "moodys": "Ba1",
             "fitch": "BB+",
-            "coface": "A4",
-            "global_risk": "Modéré"
+            "coface": "A4"
         },
         "export_products": [
             {"name": "Phosphates", "share": 18.2, "value_usd": 5.8, "type": "Minier"},
@@ -598,6 +600,21 @@ REAL_COUNTRY_DATA = {
             {"name": "Produits alimentaires", "share": 11.2, "value_usd": 3.6, "type": "Agriculture"},
             {"name": "Produits chimiques", "share": 9.4, "value_usd": 3.0, "type": "Industrie"}
         ],
+        "competitive_export_products": [
+            {"name": "Phosphates et dérivés", "advantage": "1er exportateur mondial + réserves 75%", "potential_usd": 12.8, "type": "Minier"},
+            {"name": "Automobiles", "advantage": "Hub industriel + main d'œuvre qualifiée", "potential_usd": 8.5, "type": "Manufacture"},
+            {"name": "Énergies renouvelables", "advantage": "Potentiel solaire/éolien + projets mega", "potential_usd": 6.2, "type": "Énergie"},
+            {"name": "Produits agricoles", "advantage": "Diversité climatique + proximité Europe", "potential_usd": 4.8, "type": "Agriculture"}
+        ],
+        "infrastructure": {
+            "routes_km": 57625,
+            "routes_pavees_pct": 70.0,
+            "voies_ferrees_km": 2067,
+            "ports_principaux": 13,
+            "ports_details": ["Casablanca", "Tanger Med", "Agadir", "Safi", "Mohammedia", "Nador West Med"],
+            "aeroports_internationaux": 15,
+            "aeroports_details": ["Casablanca Mohammed V", "Marrakech Menara", "Agadir Al Massira", "Fès Saïs", "Rabat-Salé"]
+        },
         "key_sectors": [
             {"name": "Services", "pib_share": 56.0, "description": "Tourisme et finance"},
             {"name": "Industrie", "pib_share": 30.0, "description": "Automobile et textile"},
