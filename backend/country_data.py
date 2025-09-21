@@ -131,9 +131,12 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 1574,
         "population_2024": 12300000,
         "development_index": 0.515,
+        "hdi_africa_rank": 38,
+        "hdi_world_rank": 166,
         "africa_rank": 38,
         "growth_forecast_2024": "6.1%",
-        "debt_to_gdp_ratio": 54.8,
+        "external_debt_to_gdp_ratio": 42.1,  # Dette extérieure modérée - Source: BCEAO
+        "internal_debt_to_gdp_ratio": 12.7,  # Dette intérieure faible - Source: BCEAO
         "inflation_rate_2024": 3.2,
         "foreign_reserves_months": 4.1,
         "trade_balance_usd": -2.1,
@@ -142,8 +145,7 @@ REAL_COUNTRY_DATA = {
             "sp": "B",
             "moodys": "B1",
             "fitch": "B",
-            "coface": "C",
-            "global_risk": "Modéré"
+            "coface": "C"
         },
         "export_products": [
             {"name": "Coton", "share": 31.5, "value_usd": 0.8, "type": "Agriculture"},
@@ -152,6 +154,21 @@ REAL_COUNTRY_DATA = {
             {"name": "Or", "share": 12.1, "value_usd": 0.3, "type": "Minier"},
             {"name": "Karité", "share": 8.3, "value_usd": 0.2, "type": "Agriculture"}
         ],
+        "competitive_export_products": [
+            {"name": "Coton biologique", "advantage": "Qualité reconnue + certification bio", "potential_usd": 1.4, "type": "Agriculture"},
+            {"name": "Noix de cajou transformées", "advantage": "3ème producteur mondial + valeur ajoutée", "potential_usd": 1.1, "type": "Agriculture"},
+            {"name": "Services portuaires", "advantage": "Port de Cotonou + desserte régionale", "potential_usd": 0.8, "type": "Services"},
+            {"name": "Karité transformé", "advantage": "Matière première locale + demande cosmétique", "potential_usd": 0.6, "type": "Agriculture"}
+        ],
+        "infrastructure": {
+            "routes_km": 16000,
+            "routes_pavees_pct": 31.6,
+            "voies_ferrees_km": 438,
+            "ports_principaux": 1,
+            "ports_details": ["Cotonou (Port autonome)", "Porto-Novo"],
+            "aeroports_internationaux": 1,
+            "aeroports_details": ["Cotonou Cardinal Bernardin Gantin"]
+        },
         "key_sectors": [
             {"name": "Agriculture", "pib_share": 26.0, "description": "Coton et cultures vivrières"},
             {"name": "Services", "pib_share": 52.0, "description": "Commerce et transport"},
