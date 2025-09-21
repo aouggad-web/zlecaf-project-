@@ -69,9 +69,12 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 3508,
         "population_2024": 35400000,
         "development_index": 0.586,
+        "hdi_africa_rank": 28,
+        "hdi_world_rank": 148,
         "africa_rank": 8,
         "growth_forecast_2024": "2.8%",
-        "debt_to_gdp_ratio": 89.7,
+        "external_debt_to_gdp_ratio": 32.4,  # Dette extérieure modérée - Source: Banco Nacional de Angola
+        "internal_debt_to_gdp_ratio": 57.3,  # Dette intérieure importante - Source: Banco Nacional de Angola
         "inflation_rate_2024": 13.8,
         "foreign_reserves_months": 6.2,
         "trade_balance_usd": 18.5,
@@ -80,8 +83,7 @@ REAL_COUNTRY_DATA = {
             "sp": "B-",
             "moodys": "B3",
             "fitch": "B-",
-            "coface": "D",
-            "global_risk": "Très Élevé"
+            "coface": "D"
         },
         "export_products": [
             {"name": "Pétrole brut", "share": 89.5, "value_usd": 32.1, "type": "Énergie"},
@@ -90,6 +92,21 @@ REAL_COUNTRY_DATA = {
             {"name": "Café", "share": 1.2, "value_usd": 0.4, "type": "Agriculture"},
             {"name": "Poisson", "share": 1.0, "value_usd": 0.4, "type": "Agriculture"}
         ],
+        "competitive_export_products": [
+            {"name": "Diamants de qualité", "advantage": "4ème producteur mondial + qualité gemme", "potential_usd": 3.8, "type": "Minier"},
+            {"name": "Café robusta", "advantage": "Climat favorable + tradition + potentiel bio", "potential_usd": 1.2, "type": "Agriculture"},
+            {"name": "Poisson transformé", "advantage": "Côte atlantique riche + marchés régionaux", "potential_usd": 0.9, "type": "Agriculture"},
+            {"name": "Bois tropical", "advantage": "Forêts importantes + demande internationale", "potential_usd": 0.7, "type": "Agriculture"}
+        ],
+        "infrastructure": {
+            "routes_km": 76000,
+            "routes_pavees_pct": 19.4,
+            "voies_ferrees_km": 2761,
+            "ports_principaux": 5,
+            "ports_details": ["Luanda", "Lobito", "Namibe", "Cabinda", "Soyo"],
+            "aeroports_internationaux": 4,
+            "aeroports_details": ["Luanda Quatro de Fevereiro", "Benguela", "Cabinda", "Lubango"]
+        },
         "key_sectors": [
             {"name": "Pétrole", "pib_share": 50.0, "description": "Extraction offshore"},
             {"name": "Services", "pib_share": 30.0, "description": "Commerce et finance"},
