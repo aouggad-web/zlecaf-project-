@@ -457,9 +457,12 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 2445,
         "population_2024": 33900000,
         "development_index": 0.632,
+        "hdi_africa_rank": 18,
+        "hdi_world_rank": 133,
         "africa_rank": 13,
         "growth_forecast_2024": "5.8%",
-        "debt_to_gdp_ratio": 88.1,
+        "external_debt_to_gdp_ratio": 58.3,  # Dette extérieure élevée - Source: Bank of Ghana
+        "internal_debt_to_gdp_ratio": 29.8,  # Dette intérieure modérée - Source: Bank of Ghana
         "inflation_rate_2024": 23.2,
         "foreign_reserves_months": 3.2,
         "trade_balance_usd": 1.8,
@@ -468,8 +471,7 @@ REAL_COUNTRY_DATA = {
             "sp": "B-",
             "moodys": "B3",
             "fitch": "B-",
-            "coface": "C",
-            "global_risk": "Élevé"
+            "coface": "C"
         },
         "export_products": [
             {"name": "Or", "share": 36.2, "value_usd": 5.8, "type": "Minier"},
@@ -478,6 +480,21 @@ REAL_COUNTRY_DATA = {
             {"name": "Manganèse", "share": 4.8, "value_usd": 0.8, "type": "Minier"},
             {"name": "Noix de cajou", "share": 3.2, "value_usd": 0.5, "type": "Agriculture"}
         ],
+        "competitive_export_products": [
+            {"name": "Cacao transformé", "advantage": "2ème producteur mondial + transformation locale", "potential_usd": 4.8, "type": "Agriculture"},
+            {"name": "Or raffiné", "advantage": "Production importante + raffinage local", "potential_usd": 8.2, "type": "Minier"},
+            {"name": "Services financiers", "advantage": "Hub financier régional + stabilité", "potential_usd": 2.1, "type": "Services"},
+            {"name": "TIC et fintech", "advantage": "Leader tech régional + population connectée", "potential_usd": 1.8, "type": "Services"}
+        ],
+        "infrastructure": {
+            "routes_km": 109515,
+            "routes_pavees_pct": 13.1,
+            "voies_ferrees_km": 947,
+            "ports_principaux": 2,
+            "ports_details": ["Tema", "Takoradi"],
+            "aeroports_internationaux": 1,
+            "aeroports_details": ["Accra Kotoka"]
+        },
         "key_sectors": [
             {"name": "Services", "pib_share": 54.0, "description": "Commerce et finance"},
             {"name": "Industrie", "pib_share": 25.0, "description": "Mines et pétrole"},
