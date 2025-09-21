@@ -1147,77 +1147,231 @@ function ZLECAfCalculator() {
         {/* Onglet Statistiques */}
         {activeTab === 'statistics' && (
           <div className="fade-in-up">
-            <div className="professional-card">
-              <div className="card-header-pro">
-                <h2 className="card-title-pro">
-                  📊 {t.statisticsTitle}
-                </h2>
-                <p className="card-description-pro">
-                  {t.statisticsDesc}
-                </p>
-              </div>
-              <div className="card-content-pro">
-                {statistics && (
-                  <>
-                    <div className="results-grid mb-xl">
-                      <div className="metric-card">
-                        <div className="metric-value">
-                          {statistics.overview?.african_countries_members || 54}
-                        </div>
-                        <div className="metric-label">Pays Membres</div>
-                      </div>
-                      <div className="metric-card">
-                        <div className="metric-value">
-                          {formatNumber(statistics.overview?.combined_population || 0)}
-                        </div>
-                        <div className="metric-label">Population Totale</div>
-                      </div>
-                      <div className="metric-card">
-                        <div className="metric-value">
-                          {formatCurrency(statistics.overview?.estimated_combined_gdp || 0)}
-                        </div>
-                        <div className="metric-label">PIB Combiné</div>
-                      </div>
-                      <div className="metric-card">
-                        <div className="metric-value">
-                          {formatCurrency(statistics.overview?.total_savings || 0)}
-                        </div>
-                        <div className="metric-label">Économies Calculées</div>
+            {selectedCountries.origin && selectedCountries.destination ? (
+              <div className="space-y-xl">
+                {/* Header avec pays sélectionnés */}
+                <div className="professional-card">
+                  <div className="card-header-pro">
+                    <h2 className="card-title-pro">
+                      📊 Données Commerciales Bilatérales
+                    </h2>
+                    <p className="card-description-pro">
+                      Statistiques détaillées : {countryFlags[selectedCountries.origin]} {TRADE_STATISTICS[selectedCountries.origin]?.name} ↔ {countryFlags[selectedCountries.destination]} {TRADE_STATISTICS[selectedCountries.destination]?.name}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Résumé des échanges */}
+                <div className="results-grid">
+                  <div className="metric-card">
+                    <div className="metric-value">
+                      {formatCurrency((TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] || 0) * 1000000)}
+                    </div>
+                    <div className="metric-label">{TRADE_STATISTICS[selectedCountries.origin]?.name} - Importations 2024</div>
+                    <div className="metric-change">
+                      +{(((TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] || 0) - (TRADE_STATISTICS[selectedCountries.origin]?.imports['2023'] || 0)) / (TRADE_STATISTICS[selectedCountries.origin]?.imports['2023'] || 1) * 100).toFixed(1)}% vs 2023
+                    </div>
+                  </div>
+
+                  <div className="metric-card">
+                    <div className="metric-value">
+                      {formatCurrency((TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 0) * 1000000)}
+                    </div>
+                    <div className="metric-label">{TRADE_STATISTICS[selectedCountries.origin]?.name} - Exportations 2024</div>
+                    <div className="metric-change">
+                      +{(((TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] || 0) - (TRADE_STATISTICS[selectedCountries.origin]?.exports['2023'] || 0)) / (TRADE_STATISTICS[selectedCountries.origin]?.exports['2023'] || 1) * 100).toFixed(1)}% vs 2023
+                    </div>
+                  </div>
+
+                  <div className="metric-card">
+                    <div className="metric-value">
+                      {formatCurrency((TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 0) * 1000000)}
+                    </div>
+                    <div className="metric-label">{TRADE_STATISTICS[selectedCountries.destination]?.name} - Importations 2024</div>
+                    <div className="metric-change">
+                      +{(((TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 0) - (TRADE_STATISTICS[selectedCountries.destination]?.imports['2023'] || 0)) / (TRADE_STATISTICS[selectedCountries.destination]?.imports['2023'] || 1) * 100).toFixed(1)}% vs 2023
+                    </div>
+                  </div>
+
+                  <div className="metric-card">
+                    <div className="metric-value">
+                      {formatCurrency((TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0) * 1000000)}
+                    </div>
+                    <div className="metric-label">{TRADE_STATISTICS[selectedCountries.destination]?.name} - Exportations 2024</div>
+                    <div className="metric-change">
+                      +{(((TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 0) - (TRADE_STATISTICS[selectedCountries.destination]?.exports['2023'] || 0)) / (TRADE_STATISTICS[selectedCountries.destination]?.exports['2023'] || 1) * 100).toFixed(1)}% vs 2023
+                    </div>
+                  </div>
+                </div>
+
+                {/* Top 10 Importations et Exportations */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl">
+                  {/* Top 10 Importations Pays Origine */}
+                  <div className="professional-card">
+                    <div className="card-content-pro">
+                      <h3 className="card-title-pro mb-lg">
+                        📈 Top 10 Importations - {TRADE_STATISTICS[selectedCountries.origin]?.name}
+                      </h3>
+                      <div className="overflow-x-auto">
+                        <table className="table-pro">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Produit</th>
+                              <th>Code HS</th>
+                              <th>Valeur (USD)</th>
+                              <th>Part</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {TRADE_STATISTICS[selectedCountries.origin]?.top_imports.map((item, index) => {
+                              const totalImports = TRADE_STATISTICS[selectedCountries.origin]?.imports['2024'] * 1000000 || 1;
+                              const share = ((item.value * 1000000) / totalImports * 100);
+                              return (
+                                <tr key={index}>
+                                  <td className="font-medium">{index + 1}</td>
+                                  <td>{item.product}</td>
+                                  <td className="font-mono text-sm">{item.code}</td>
+                                  <td className="font-semibold">{formatCurrency(item.value * 1000000)}</td>
+                                  <td>{share.toFixed(1)}%</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
                       </div>
                     </div>
+                  </div>
 
-                    {/* Projections */}
-                    {statistics.projections && (
-                      <div className="professional-card">
-                        <div className="card-content-pro">
-                          <h3 className="card-title-pro mb-lg">
-                            🚀 {t.projections}
-                          </h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
-                            <div>
-                              <h4 className="font-semibold text-lg mb-md">Projections 2025</h4>
-                              <ul className="space-y-2">
-                                <li>📈 Augmentation commerce: {statistics.projections['2025']?.trade_volume_increase}</li>
-                                <li>📋 Éliminations tarifaires: {statistics.projections['2025']?.tariff_eliminations}</li>
-                                <li>🛣️ Nouveaux corridors: {statistics.projections['2025']?.new_trade_corridors}</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-lg mb-md">Projections 2030</h4>
-                              <ul className="space-y-2">
-                                <li>📊 Augmentation commerce: {statistics.projections['2030']?.trade_volume_increase}</li>
-                                <li>💰 Augmentation PIB: {statistics.projections['2030']?.gdp_increase}</li>
-                                <li>🏭 Boost industrialisation: {statistics.projections['2030']?.industrialization_boost}</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
+                  {/* Top 10 Exportations Pays Origine */}
+                  <div className="professional-card">
+                    <div className="card-content-pro">
+                      <h3 className="card-title-pro mb-lg">
+                        📊 Top 10 Exportations - {TRADE_STATISTICS[selectedCountries.origin]?.name}
+                      </h3>
+                      <div className="overflow-x-auto">
+                        <table className="table-pro">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Produit</th>
+                              <th>Code HS</th>
+                              <th>Valeur (USD)</th>
+                              <th>Part</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {TRADE_STATISTICS[selectedCountries.origin]?.top_exports.map((item, index) => {
+                              const totalExports = TRADE_STATISTICS[selectedCountries.origin]?.exports['2024'] * 1000000 || 1;
+                              const share = ((item.value * 1000000) / totalExports * 100);
+                              return (
+                                <tr key={index}>
+                                  <td className="font-medium">{index + 1}</td>
+                                  <td>{item.product}</td>
+                                  <td className="font-mono text-sm">{item.code}</td>
+                                  <td className="font-semibold">{formatCurrency(item.value * 1000000)}</td>
+                                  <td>{share.toFixed(1)}%</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
                       </div>
-                    )}
-                  </>
-                )}
+                    </div>
+                  </div>
+
+                  {/* Top 10 Importations Pays Destination */}
+                  <div className="professional-card">
+                    <div className="card-content-pro">
+                      <h3 className="card-title-pro mb-lg">
+                        📈 Top 10 Importations - {TRADE_STATISTICS[selectedCountries.destination]?.name}
+                      </h3>
+                      <div className="overflow-x-auto">
+                        <table className="table-pro">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Produit</th>
+                              <th>Code HS</th>
+                              <th>Valeur (USD)</th>
+                              <th>Part</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {TRADE_STATISTICS[selectedCountries.destination]?.top_imports.map((item, index) => {
+                              const totalImports = TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] * 1000000 || 1;
+                              const share = ((item.value * 1000000) / totalImports * 100);
+                              return (
+                                <tr key={index}>
+                                  <td className="font-medium">{index + 1}</td>
+                                  <td>{item.product}</td>
+                                  <td className="font-mono text-sm">{item.code}</td>
+                                  <td className="font-semibold">{formatCurrency(item.value * 1000000)}</td>
+                                  <td>{share.toFixed(1)}%</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Top 10 Exportations Pays Destination */}
+                  <div className="professional-card">
+                    <div className="card-content-pro">
+                      <h3 className="card-title-pro mb-lg">
+                        📊 Top 10 Exportations - {TRADE_STATISTICS[selectedCountries.destination]?.name}
+                      </h3>
+                      <div className="overflow-x-auto">
+                        <table className="table-pro">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Produit</th>
+                              <th>Code HS</th>
+                              <th>Valeur (USD)</th>
+                              <th>Part</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {TRADE_STATISTICS[selectedCountries.destination]?.top_exports.map((item, index) => {
+                              const totalExports = TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] * 1000000 || 1;
+                              const share = ((item.value * 1000000) / totalExports * 100);
+                              return (
+                                <tr key={index}>
+                                  <td className="font-medium">{index + 1}</td>
+                                  <td>{item.product}</td>
+                                  <td className="font-mono text-sm">{item.code}</td>
+                                  <td className="font-semibold">{formatCurrency(item.value * 1000000)}</td>
+                                  <td>{share.toFixed(1)}%</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="professional-card">
+                <div className="card-content-pro">
+                  <div className="text-center py-12 text-gray-600">
+                    <div className="text-6xl mb-4">📊</div>
+                    <h2 className="text-2xl font-semibold mb-2">Statistiques Bilatérales</h2>
+                    <p>Effectuez d'abord un calcul dans l'onglet <strong>Calculateur</strong> pour voir les statistiques détaillées des deux pays sélectionnés.</p>
+                    <button
+                      className="btn-primary-pro mt-6"
+                      onClick={() => setActiveTab('calculator')}
+                    >
+                      Aller au Calculateur
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
