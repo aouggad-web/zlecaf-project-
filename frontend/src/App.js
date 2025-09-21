@@ -2447,7 +2447,7 @@ function ZLECAfCalculator() {
                           <div className="text-2xl font-bold text-purple-600 mb-1">
                             {countryProfile.trade_openness || '65'}%
                           </div>
-                          <div className="text-xs text-gray-500">
+                          <div className="text-[10px] text-gray-500">
                             <div>Année : 2024</div>
                             <a href="https://data.worldbank.org/indicator/NE.TRD.GNFS.ZS" 
                                target="_blank" 
