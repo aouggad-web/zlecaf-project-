@@ -303,7 +303,7 @@ const TRADE_STATISTICS = {
       { product: 'Gaz naturel', value: 8200, code: '27' },
       { product: 'Produits agricoles', value: 2800, code: '01-24' },
       { product: 'Produits chimiques', value: 1400, code: '28-38' },
-      { country: 'Cuir et maroquinerie', value: 900, code: '41-43' },
+      { product: 'Cuir et maroquinerie', value: 900, code: '41-43' },
       { product: 'Textiles', value: 600, code: '52-63' },
       { product: 'Produits alimentaires', value: 500, code: '16-22' },
       { product: 'Machines', value: 400, code: '84' },
