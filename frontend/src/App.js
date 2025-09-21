@@ -2573,30 +2573,35 @@ function ZLECAfCalculator() {
                         </div>
                       </div>
 
-                      {/* Section Produits d'Exportation */}
-                      {countryProfile.export_products && countryProfile.export_products.length > 0 && (
+                      {/* Section Produits à Avantage Concurrentiel */}
+                      {countryProfile.competitive_export_products && countryProfile.competitive_export_products.length > 0 && (
                         <div className="border-t pt-lg mb-xl">
-                          <h4 className="font-semibold mb-lg text-gray-800">🚢 Principaux Produits d'Exportation</h4>
+                          <h4 className="font-semibold mb-lg text-gray-800">🏆 Produits à Avantage Concurrentiel</h4>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {countryProfile.export_products.slice(0, 6).map((product, index) => (
-                              <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div className="flex items-center gap-3">
-                                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${
-                                    product.type === 'Énergie' ? 'bg-red-500' :
-                                    product.type === 'Agriculture' ? 'bg-green-500' :
-                                    product.type === 'Minier' ? 'bg-yellow-600' :
-                                    product.type === 'Industrie' ? 'bg-blue-500' : 'bg-purple-500'
-                                  }`}>
-                                    {index + 1}
+                            {countryProfile.competitive_export_products.slice(0, 6).map((product, index) => (
+                              <div key={index} className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <div className="flex items-center justify-between mb-2">
+                                  <div className="flex items-center gap-3">
+                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${
+                                      product.type === 'Énergie' ? 'bg-red-500' :
+                                      product.type === 'Agriculture' ? 'bg-green-500' :
+                                      product.type === 'Minier' ? 'bg-yellow-600' :
+                                      product.type === 'Industrie' ? 'bg-blue-500' : 'bg-purple-500'
+                                    }`}>
+                                      🏆
+                                    </div>
+                                    <div>
+                                      <div className="font-medium text-gray-800">{product.name}</div>
+                                      <div className="text-sm text-gray-600">{product.type}</div>
+                                    </div>
                                   </div>
-                                  <div>
-                                    <div className="font-medium text-gray-800">{product.name}</div>
-                                    <div className="text-sm text-gray-600">{product.type}</div>
+                                  <div className="text-right">
+                                    <div className="font-semibold text-blue-600">{product.potential_usd?.toFixed(1)} Mds$</div>
+                                    <div className="text-xs text-blue-500">Potentiel</div>
                                   </div>
                                 </div>
-                                <div className="text-right">
-                                  <div className="font-semibold text-gray-800">{product.share?.toFixed(1)}%</div>
-                                  <div className="text-sm text-gray-600">{product.value_usd?.toFixed(1)} Mds$</div>
+                                <div className="text-sm text-gray-700 bg-white p-2 rounded italic">
+                                  <strong>Avantage :</strong> {product.advantage}
                                 </div>
                               </div>
                             ))}
@@ -2606,7 +2611,85 @@ function ZLECAfCalculator() {
                                target="_blank" 
                                rel="noopener noreferrer"
                                className="text-blue-600 hover:underline">
-                              Source : OEC Atlas - Données d'exportation
+                              Source : Analyse concurrentielle - OEC Atlas
+                            </a>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Section Infrastructures */}
+                      {countryProfile.infrastructure && Object.keys(countryProfile.infrastructure).length > 0 && (
+                        <div className="border-t pt-lg mb-xl">
+                          <h4 className="font-semibold mb-lg text-gray-800">🏗️ Infrastructures</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            {/* Routes */}
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="text-2xl">🛣️</span>
+                                <h5 className="font-semibold text-gray-800">Routes</h5>
+                              </div>
+                              <div className="text-lg font-bold text-gray-800 mb-1">
+                                {countryProfile.infrastructure.routes_km?.toLocaleString() || '108,302'} km
+                              </div>
+                              <div className="text-sm text-gray-600">
+                                {countryProfile.infrastructure.routes_pavees_pct || '76.8'}% pavées
+                              </div>
+                            </div>
+
+                            {/* Voies ferrées */}
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="text-2xl">🚂</span>
+                                <h5 className="font-semibold text-gray-800">Voies Ferrées</h5>
+                              </div>
+                              <div className="text-lg font-bold text-gray-800 mb-1">
+                                {countryProfile.infrastructure.voies_ferrees_km?.toLocaleString() || '3,973'} km
+                              </div>
+                              <div className="text-sm text-gray-600">
+                                Réseau national
+                              </div>
+                            </div>
+
+                            {/* Ports */}
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="text-2xl">🚢</span>
+                                <h5 className="font-semibold text-gray-800">Ports</h5>
+                              </div>
+                              <div className="text-lg font-bold text-gray-800 mb-1">
+                                {countryProfile.infrastructure.ports_principaux || '11'} ports
+                              </div>
+                              <div className="text-sm text-gray-600">
+                                {countryProfile.infrastructure.ports_details?.slice(0, 2).join(', ') || 'Alger, Oran'}...
+                              </div>
+                            </div>
+
+                            {/* Aéroports */}
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="text-2xl">✈️</span>
+                                <h5 className="font-semibold text-gray-800">Aéroports</h5>
+                              </div>
+                              <div className="text-lg font-bold text-gray-800 mb-1">
+                                {countryProfile.infrastructure.aeroports_internationaux || '13'} intl.
+                              </div>
+                              <div className="text-sm text-gray-600">
+                                {countryProfile.infrastructure.aeroports_details?.slice(0, 2).join(', ') || 'Alger, Oran'}...
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-[10px] text-gray-500 mt-4">
+                            <a href="https://www.cia.gov/the-world-factbook/" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline mr-4">
+                              Source : CIA World Factbook
+                            </a>
+                            <a href="https://data.worldbank.org/topic/infrastructure" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Banque Mondiale - Infrastructures
                             </a>
                           </div>
                         </div>
