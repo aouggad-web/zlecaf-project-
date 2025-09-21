@@ -388,7 +388,20 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
     # Ajouter les données économiques réelles
     profile.gdp_usd = real_data.get('gdp_usd_2024')
     profile.gdp_per_capita = real_data.get('gdp_per_capita_2024')
-    profile.inflation_rate = None  # À obtenir via API si nécessaire
+    profile.inflation_rate = real_data.get('inflation_rate_2024')
+    profile.debt_to_gdp_ratio = real_data.get('debt_to_gdp_ratio')
+    profile.foreign_reserves_months = real_data.get('foreign_reserves_months')
+    profile.trade_balance_usd = real_data.get('trade_balance_usd')
+    profile.ease_of_doing_business_rank = real_data.get('ease_of_doing_business_rank')
+    profile.export_products = real_data.get('export_products', [])
+    profile.top_trade_partners = real_data.get('top_trade_partners', [])
+    profile.investment_opportunities = real_data.get('investment_opportunities', [])
+    profile.hdi_score = real_data.get('development_index')
+    profile.gdp_growth_rate = real_data.get('growth_forecast_2024')
+    profile.trade_openness = real_data.get('trade_openness', 65.0)  # valeur par défaut
+    
+    # Mettre à jour les notations de risque
+    profile.risk_ratings = real_data.get('risk_ratings', {})
     
     # Ajouter les projections réelles et secteurs spécifiques
     profile.projections = {
