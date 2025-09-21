@@ -172,9 +172,12 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 8466,
         "population_2024": 2400000,
         "development_index": 0.735,
+        "hdi_africa_rank": 6,
+        "hdi_world_rank": 100,
         "africa_rank": 36,
         "growth_forecast_2024": "4.1%",
-        "debt_to_gdp_ratio": 24.7,
+        "external_debt_to_gdp_ratio": 18.2,  # Dette extérieure faible - Source: Bank of Botswana
+        "internal_debt_to_gdp_ratio": 6.5,   # Dette intérieure très faible - Source: Bank of Botswana  
         "inflation_rate_2024": 4.8,
         "foreign_reserves_months": 12.3,
         "trade_balance_usd": 2.8,
@@ -183,8 +186,7 @@ REAL_COUNTRY_DATA = {
             "sp": "A-",
             "moodys": "A2",
             "fitch": "A-",
-            "coface": "A3",
-            "global_risk": "Faible"
+            "coface": "A3"
         },
         "export_products": [
             {"name": "Diamants", "share": 79.2, "value_usd": 4.1, "type": "Minier"},
@@ -193,6 +195,21 @@ REAL_COUNTRY_DATA = {
             {"name": "Carbonate de sodium", "share": 3.2, "value_usd": 0.2, "type": "Minier"},
             {"name": "Textiles", "share": 2.8, "value_usd": 0.1, "type": "Manufacture"}
         ],
+        "competitive_export_products": [
+            {"name": "Diamants premium", "advantage": "2ème producteur mondial + qualité exceptionnelle", "potential_usd": 5.8, "type": "Minier"},
+            {"name": "Bœuf de qualité", "advantage": "Élevage sans hormones + certification UE", "potential_usd": 0.8, "type": "Agriculture"},
+            {"name": "Services financiers", "advantage": "Stabilité politique + hub régional", "potential_usd": 1.2, "type": "Services"},
+            {"name": "Énergie solaire", "advantage": "Ensoleillement optimal + technologie disponible", "potential_usd": 2.1, "type": "Énergie"}
+        ],
+        "infrastructure": {
+            "routes_km": 17916,
+            "routes_pavees_pct": 31.4,
+            "voies_ferrees_km": 888,
+            "ports_principaux": 0,  # Pays enclavé
+            "ports_details": ["Accès via Afrique du Sud (Durban, Le Cap)"],
+            "aeroports_internationaux": 2,
+            "aeroports_details": ["Gaborone Sir Seretse Khama", "Francistown"]
+        },
         "key_sectors": [
             {"name": "Diamants", "pib_share": 18.0, "description": "Extraction diamantaire"},
             {"name": "Services", "pib_share": 61.0, "description": "Services financiers"},
