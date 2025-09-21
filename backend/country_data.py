@@ -706,6 +706,7 @@ REAL_COUNTRY_DATA = {
         "internal_debt_to_gdp_ratio": 27.3,  # Dette intérieure modérée - Source: South African Reserve Bank
         "inflation_rate_2024": 4.6,
         "foreign_reserves_months": 4.9,
+        "energy_cost_usd_kwh": 0.095,  # Coût moyen - Source: AIE
         "trade_balance_usd": 8.2,
         "ease_of_doing_business_rank": 84,
         "risk_ratings": {
@@ -749,6 +750,127 @@ REAL_COUNTRY_DATA = {
             "level": "Très Élevé",
             "description": "Économie la plus industrialisée d'Afrique",
             "key_opportunities": ["Hub industriel continental", "Services financiers", "Énergies renouvelables"]
+        }
+    },
+
+    "TUN": {  # Tunisie
+        "name": "Tunisie",
+        "gdp_usd_2024": 47.6,
+        "gdp_per_capita_2024": 3954,
+        "population_2024": 12000000,
+        "development_index": 0.731,
+        "hdi_africa_rank": 4,
+        "hdi_world_rank": 97,
+        "africa_rank": 21,
+        "growth_forecast_2024": "2.4%",
+        "external_debt_to_gdp_ratio": 78.1,  # Dette extérieure élevée - Source: Banque Centrale de Tunisie
+        "internal_debt_to_gdp_ratio": 12.8,  # Dette intérieure modérée - Source: Banque Centrale de Tunisie
+        "inflation_rate_2024": 8.1,
+        "foreign_reserves_months": 2.8,
+        "energy_cost_usd_kwh": 0.089,  # Coût moyen - Source: AIE
+        "trade_balance_usd": -8.4,
+        "ease_of_doing_business_rank": 78,
+        "risk_ratings": {
+            "sp": "Non noté",
+            "moodys": "Non noté",
+            "fitch": "Non noté",
+            "coface": "C"
+        },
+        "export_products": [
+            {"name": "Textiles et vêtements", "share": 23.8, "value_usd": 3.2, "type": "Manufacture"},
+            {"name": "Équipements électriques", "share": 18.4, "value_usd": 2.5, "type": "Manufacture"},
+            {"name": "Phosphates", "share": 12.1, "value_usd": 1.6, "type": "Minier"},
+            {"name": "Produits agricoles", "share": 11.8, "value_usd": 1.6, "type": "Agriculture"},
+            {"name": "Huile d'olive", "share": 8.2, "value_usd": 1.1, "type": "Agriculture"}
+        ],
+        "competitive_export_products": [
+            {"name": "Textiles techniques", "advantage": "Savoir-faire + proximité Europe", "potential_usd": 4.8, "type": "Manufacture"},
+            {"name": "Huile d'olive premium", "advantage": "Qualité reconnue + tradition", "potential_usd": 2.1, "type": "Agriculture"},
+            {"name": "Composants automobiles", "advantage": "Main d'œuvre qualifiée + localisation", "potential_usd": 3.5, "type": "Manufacture"},
+            {"name": "Services offshore", "advantage": "Compétences IT + langue française", "potential_usd": 1.8, "type": "Services"}
+        ],
+        "infrastructure": {
+            "routes_km": 20000,
+            "routes_pavees_pct": 69.0,
+            "voies_ferrees_km": 2165,
+            "ports_principaux": 7,
+            "ports_details": ["Tunis La Goulette", "Bizerte", "Sousse", "Sfax", "Gabès", "Rades"],
+            "aeroports_internationaux": 7,
+            "aeroports_details": ["Tunis Carthage", "Monastir Habib Bourguiba", "Djerba Zarzis", "Sfax", "Tozeur"]
+        },
+        "key_sectors": [
+            {"name": "Services", "pib_share": 61.0, "description": "Tourisme et services"},
+            {"name": "Industrie", "pib_share": 26.0, "description": "Textile et manufacture"},
+            {"name": "Agriculture", "pib_share": 13.0, "description": "Olives et agrumes"}
+        ],
+        "top_trade_partners": ["France", "Italie", "Allemagne", "Chine", "Algérie"],
+        "investment_opportunities": ["Énergies renouvelables", "Tourisme", "TIC", "Agroalimentaire"],
+        "main_exports": ["Textiles (24%)", "Équipements électriques (18%)", "Phosphates (12%)"],
+        "main_imports": ["Machines et équipements (20%)", "Carburants (18%)", "Produits alimentaires (15%)"],
+        "zlecaf_potential": {
+            "level": "Élevé",
+            "description": "Hub méditerranéen avec expertise manufacturière",
+            "key_opportunities": ["Manufacture", "Hub logistique", "Énergies renouvelables"]
+        }
+    },
+
+    "RWA": {  # Rwanda
+        "name": "Rwanda",
+        "gdp_usd_2024": 13.9,
+        "gdp_per_capita_2024": 1051,
+        "population_2024": 13200000,
+        "development_index": 0.534,
+        "hdi_africa_rank": 36,
+        "hdi_world_rank": 165,
+        "africa_rank": 44,
+        "growth_forecast_2024": "7.9%",
+        "external_debt_to_gdp_ratio": 73.2,  # Dette extérieure élevée - Source: Banque Nationale du Rwanda
+        "inflation_rate_2024": 13.4,
+        "foreign_reserves_months": 4.2,
+        "energy_cost_usd_kwh": 0.223,  # Coût élevé - Source: AIE
+        "trade_balance_usd": -2.8,
+        "ease_of_doing_business_rank": 38,
+        "risk_ratings": {
+            "sp": "B",
+            "moodys": "B2",
+            "fitch": "B+",
+            "coface": "C"
+        },
+        "export_products": [
+            {"name": "Thé", "share": 31.2, "value_usd": 0.15, "type": "Agriculture"},
+            {"name": "Café", "share": 24.8, "value_usd": 0.12, "type": "Agriculture"},
+            {"name": "Minerais (étain, tungstène)", "share": 18.4, "value_usd": 0.09, "type": "Minier"},
+            {"name": "Peaux et cuirs", "share": 12.1, "value_usd": 0.06, "type": "Agriculture"},
+            {"name": "Tourisme", "share": 8.2, "value_usd": 0.04, "type": "Services"}
+        ],
+        "competitive_export_products": [
+            {"name": "Café de spécialité", "advantage": "Altitude idéale + qualité premium", "potential_usd": 0.8, "type": "Agriculture"},
+            {"name": "Services TIC", "advantage": "Transformation digitale + politique favorable", "potential_usd": 1.2, "type": "Services"},
+            {"name": "Écotourisme", "advantage": "Gorilles + sécurité + organisation", "potential_usd": 0.9, "type": "Services"},
+            {"name": "Horticulture", "advantage": "Climat + proximité marchés", "potential_usd": 0.4, "type": "Agriculture"}
+        ],
+        "infrastructure": {
+            "routes_km": 14008,
+            "routes_pavees_pct": 19.0,
+            "voies_ferrees_km": 0,
+            "ports_principaux": 0,  # Pays enclavé
+            "ports_details": ["Accès via Dar es Salaam (Tanzanie)", "Mombasa (Kenya)"],
+            "aeroports_internationaux": 1,
+            "aeroports_details": ["Kigali"]
+        },
+        "key_sectors": [
+            {"name": "Services", "pib_share": 44.0, "description": "TIC et tourisme"},
+            {"name": "Agriculture", "pib_share": 28.0, "description": "Café et thé"},
+            {"name": "Industrie", "pib_share": 28.0, "description": "Manufacture légère"}
+        ],
+        "top_trade_partners": ["Chine", "Kenya", "Ouganda", "États-Unis", "Belgique"],
+        "investment_opportunities": ["TIC", "Tourisme", "Agriculture", "Manufacture"],
+        "main_exports": ["Thé (31%)", "Café (25%)", "Minerais (18%)"],
+        "main_imports": ["Machines et équipements (25%)", "Carburants (20%)", "Produits alimentaires (18%)"],
+        "zlecaf_potential": {
+            "level": "Élevé",
+            "description": "Modèle de transformation économique rapide",
+            "key_opportunities": ["Hub TIC régional", "Tourisme premium", "Manufacture"]
         }
     }
 }
