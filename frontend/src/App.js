@@ -1462,14 +1462,48 @@ function ZLECAfCalculator() {
                   </div>
                 </div>
 
-                {/* Top 10 Importations et Exportations */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl">
-                  {/* Top 10 Importations Pays Origine */}
+                {/* Top 10 avec graphiques */}
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-xl">
+                  {/* Top 10 Importations Pays Origine avec graphique */}
                   <div className="professional-card">
                     <div className="card-content-pro">
                       <h3 className="card-title-pro mb-lg">
-                        📈 Top 10 Importations - {TRADE_STATISTICS[selectedCountries.origin]?.name}
+                        📈 Top 10 Importations - {TRADE_STATISTICS[selectedCountries.origin]?.name} (2024)
                       </h3>
+                      
+                      {/* Graphique en barres horizontales */}
+                      <div className="mb-lg bg-gray-50 rounded-lg p-4">
+                        <div className="space-y-3">
+                          {TRADE_STATISTICS[selectedCountries.origin]?.top_imports.slice(0, 5).map((item, index) => {
+                            const maxValue = TRADE_STATISTICS[selectedCountries.origin]?.top_imports[0]?.value || 1;
+                            const percentage = (item.value / maxValue) * 100;
+                            return (
+                              <div key={index} className="flex items-center gap-3">
+                                <div className="w-4 text-sm font-bold text-gray-600">#{index + 1}</div>
+                                <div className="flex-1">
+                                  <div className="flex justify-between items-center mb-1">
+                                    <span className="text-sm font-medium text-gray-800 truncate">{item.product}</span>
+                                    <span className="text-sm font-bold" style={{color: COUNTRY_COLORS[selectedCountries.origin]?.primary}}>
+                                      {formatUSDMillion(item.value)}
+                                    </span>
+                                  </div>
+                                  <div className="w-full bg-gray-200 rounded-full h-3">
+                                    <div 
+                                      className="h-3 rounded-full transition-all duration-500"
+                                      style={{
+                                        backgroundColor: COUNTRY_COLORS[selectedCountries.origin]?.primary,
+                                        width: `${percentage}%`
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Tableau détaillé */}
                       <div className="overflow-x-auto">
                         <table className="table-pro">
                           <thead>
@@ -1477,7 +1511,7 @@ function ZLECAfCalculator() {
                               <th>#</th>
                               <th>Produit</th>
                               <th>Code HS</th>
-                              <th>Valeur (USD)</th>
+                              <th>Valeur (M$)</th>
                               <th>Part</th>
                             </tr>
                           </thead>
@@ -1501,12 +1535,46 @@ function ZLECAfCalculator() {
                     </div>
                   </div>
 
-                  {/* Top 10 Exportations Pays Origine */}
+                  {/* Top 10 Exportations Pays Origine avec graphique */}
                   <div className="professional-card">
                     <div className="card-content-pro">
                       <h3 className="card-title-pro mb-lg">
-                        📊 Top 10 Exportations - {TRADE_STATISTICS[selectedCountries.origin]?.name}
+                        📊 Top 10 Exportations - {TRADE_STATISTICS[selectedCountries.origin]?.name} (2024)
                       </h3>
+                      
+                      {/* Graphique en barres horizontales */}
+                      <div className="mb-lg bg-gray-50 rounded-lg p-4">
+                        <div className="space-y-3">
+                          {TRADE_STATISTICS[selectedCountries.origin]?.top_exports.slice(0, 5).map((item, index) => {
+                            const maxValue = TRADE_STATISTICS[selectedCountries.origin]?.top_exports[0]?.value || 1;
+                            const percentage = (item.value / maxValue) * 100;
+                            return (
+                              <div key={index} className="flex items-center gap-3">
+                                <div className="w-4 text-sm font-bold text-gray-600">#{index + 1}</div>
+                                <div className="flex-1">
+                                  <div className="flex justify-between items-center mb-1">
+                                    <span className="text-sm font-medium text-gray-800 truncate">{item.product}</span>
+                                    <span className="text-sm font-bold" style={{color: COUNTRY_COLORS[selectedCountries.origin]?.secondary}}>
+                                      {formatUSDMillion(item.value)}
+                                    </span>
+                                  </div>
+                                  <div className="w-full bg-gray-200 rounded-full h-3">
+                                    <div 
+                                      className="h-3 rounded-full transition-all duration-500"
+                                      style={{
+                                        backgroundColor: COUNTRY_COLORS[selectedCountries.origin]?.secondary,
+                                        width: `${percentage}%`
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Tableau détaillé */}
                       <div className="overflow-x-auto">
                         <table className="table-pro">
                           <thead>
@@ -1514,7 +1582,7 @@ function ZLECAfCalculator() {
                               <th>#</th>
                               <th>Produit</th>
                               <th>Code HS</th>
-                              <th>Valeur (USD)</th>
+                              <th>Valeur (M$)</th>
                               <th>Part</th>
                             </tr>
                           </thead>
@@ -1537,77 +1605,80 @@ function ZLECAfCalculator() {
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  {/* Top 10 Importations Pays Destination */}
+                {/* Graphiques des partenaires commerciaux */}
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-xl mt-xl">
+                  {/* Top 10 Partenaires Importateurs */}
                   <div className="professional-card">
                     <div className="card-content-pro">
                       <h3 className="card-title-pro mb-lg">
-                        📈 Top 10 Importations - {TRADE_STATISTICS[selectedCountries.destination]?.name}
+                        🌍 Top 10 Fournisseurs - {TRADE_STATISTICS[selectedCountries.origin]?.name} (2024)
                       </h3>
-                      <div className="overflow-x-auto">
-                        <table className="table-pro">
-                          <thead>
-                            <tr>
-                              <th>#</th>
-                              <th>Produit</th>
-                              <th>Code HS</th>
-                              <th>Valeur (USD)</th>
-                              <th>Part</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {TRADE_STATISTICS[selectedCountries.destination]?.top_imports.map((item, index) => {
-                              const totalImports = TRADE_STATISTICS[selectedCountries.destination]?.imports['2024'] || 1;
-                              const share = ((item.value) / totalImports * 100);
-                              return (
-                                <tr key={index}>
-                                  <td className="font-medium">{index + 1}</td>
-                                  <td>{item.product}</td>
-                                  <td className="font-mono text-sm">{item.code}</td>
-                                  <td className="font-semibold">{formatUSDMillion(item.value)}</td>
-                                  <td>{share.toFixed(1)}%</td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
+                      
+                      {/* Graphique des partenaires */}
+                      <div className="space-y-3 bg-gray-50 rounded-lg p-4 mb-lg">
+                        {TRADE_STATISTICS[selectedCountries.origin]?.top_import_partners?.slice(0, 8).map((partner, index) => {
+                          const maxValue = TRADE_STATISTICS[selectedCountries.origin]?.top_import_partners[0]?.value || 1;
+                          const percentage = (partner.value / maxValue) * 100;
+                          return (
+                            <div key={index} className="flex items-center gap-3">
+                              <div className="w-6 text-sm font-bold text-gray-600">#{index + 1}</div>
+                              <div className="w-8 text-xl">{partner.flag}</div>
+                              <div className="flex-1">
+                                <div className="flex justify-between items-center mb-1">
+                                  <span className="text-sm font-medium text-gray-800">{partner.country}</span>
+                                  <span className="text-sm font-bold text-blue-600">
+                                    {formatUSDMillion(partner.value)}
+                                  </span>
+                                </div>
+                                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                  <div 
+                                    className="bg-blue-500 h-2.5 rounded-full transition-all duration-500"
+                                    style={{ width: `${percentage}%` }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
 
-                  {/* Top 10 Exportations Pays Destination */}
+                  {/* Top 10 Partenaires Exportateurs */}
                   <div className="professional-card">
                     <div className="card-content-pro">
                       <h3 className="card-title-pro mb-lg">
-                        📊 Top 10 Exportations - {TRADE_STATISTICS[selectedCountries.destination]?.name}
+                        🚢 Top 10 Clients - {TRADE_STATISTICS[selectedCountries.origin]?.name} (2024)
                       </h3>
-                      <div className="overflow-x-auto">
-                        <table className="table-pro">
-                          <thead>
-                            <tr>
-                              <th>#</th>
-                              <th>Produit</th>
-                              <th>Code HS</th>
-                              <th>Valeur (USD)</th>
-                              <th>Part</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {TRADE_STATISTICS[selectedCountries.destination]?.top_exports.map((item, index) => {
-                              const totalExports = TRADE_STATISTICS[selectedCountries.destination]?.exports['2024'] || 1;
-                              const share = ((item.value) / totalExports * 100);
-                              return (
-                                <tr key={index}>
-                                  <td className="font-medium">{index + 1}</td>
-                                  <td>{item.product}</td>
-                                  <td className="font-mono text-sm">{item.code}</td>
-                                  <td className="font-semibold">{formatUSDMillion(item.value)}</td>
-                                  <td>{share.toFixed(1)}%</td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
+                      
+                      {/* Graphique des partenaires */}
+                      <div className="space-y-3 bg-gray-50 rounded-lg p-4 mb-lg">
+                        {TRADE_STATISTICS[selectedCountries.origin]?.top_export_partners?.slice(0, 8).map((partner, index) => {
+                          const maxValue = TRADE_STATISTICS[selectedCountries.origin]?.top_export_partners[0]?.value || 1;
+                          const percentage = (partner.value / maxValue) * 100;
+                          return (
+                            <div key={index} className="flex items-center gap-3">
+                              <div className="w-6 text-sm font-bold text-gray-600">#{index + 1}</div>
+                              <div className="w-8 text-xl">{partner.flag}</div>
+                              <div className="flex-1">
+                                <div className="flex justify-between items-center mb-1">
+                                  <span className="text-sm font-medium text-gray-800">{partner.country}</span>
+                                  <span className="text-sm font-bold text-green-600">
+                                    {formatUSDMillion(partner.value)}
+                                  </span>
+                                </div>
+                                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                  <div 
+                                    className="bg-green-500 h-2.5 rounded-full transition-all duration-500"
+                                    style={{ width: `${percentage}%` }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
