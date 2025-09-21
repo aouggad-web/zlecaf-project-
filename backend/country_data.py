@@ -1,7 +1,7 @@
-# Données économiques complètes des 54 pays ZLECAf mises à jour
-# Sources: PNUD, Banque Mondiale, FMI, S&P, Moody's, Fitch, Scope
+# Données économiques enrichies des 54 pays ZLECAf
+# Sources: FMI, Banque Mondiale, S&P, Moody's, Fitch, Coface, BAD, OCDE
 # Codes ISO3 pour compatibilité API
-# Dernière mise à jour: 2024-09-16
+# Dernière mise à jour: 2024-09-21
 
 REAL_COUNTRY_DATA = {
     "DZA": {
