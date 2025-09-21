@@ -223,7 +223,7 @@ const TRADE_STATISTICS = {
   },
   'KE': {
     name: 'Kenya',
-    imports: { '2023': 22800, '2024': 25200 },
+    imports: { '2023': 18400, '2024': 20100 },
     exports: { '2023': 8900, '2024': 10100 },
     top_imports: [
       { product: 'Hydrocarbures', value: 5400, code: '27' },
