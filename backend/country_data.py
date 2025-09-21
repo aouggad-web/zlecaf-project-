@@ -337,9 +337,12 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 4295,
         "population_2024": 109200000,
         "development_index": 0.731,
+        "hdi_africa_rank": 4,
+        "hdi_world_rank": 97,
         "africa_rank": 2,
         "growth_forecast_2024": "4.8%",
-        "debt_to_gdp_ratio": 89.2,
+        "external_debt_to_gdp_ratio": 34.8,  # Dette extérieure modérée - Source: Central Bank of Egypt
+        "internal_debt_to_gdp_ratio": 54.4,  # Dette intérieure importante - Source: Central Bank of Egypt
         "inflation_rate_2024": 33.1,
         "foreign_reserves_months": 3.1,
         "trade_balance_usd": -32.8,
@@ -348,8 +351,7 @@ REAL_COUNTRY_DATA = {
             "sp": "B",
             "moodys": "B2",
             "fitch": "B+",
-            "coface": "C",
-            "global_risk": "Élevé"
+            "coface": "C"
         },
         "export_products": [
             {"name": "Pétrole brut", "share": 16.8, "value_usd": 8.2, "type": "Énergie"},
@@ -358,6 +360,21 @@ REAL_COUNTRY_DATA = {
             {"name": "Textiles", "share": 9.8, "value_usd": 4.8, "type": "Manufacture"},
             {"name": "Produits alimentaires", "share": 8.4, "value_usd": 4.1, "type": "Agriculture"}
         ],
+        "competitive_export_products": [
+            {"name": "Gaz naturel liquéfié", "advantage": "Réserves importantes + position géostratégique", "potential_usd": 18.5, "type": "Énergie"},
+            {"name": "Coton longue fibre", "advantage": "Qualité mondiale + savoir-faire ancestral", "potential_usd": 2.8, "type": "Agriculture"},
+            {"name": "Services du Canal de Suez", "advantage": "Monopole géographique + modernisation", "potential_usd": 8.2, "type": "Services"},
+            {"name": "Industrie automobile", "advantage": "Hub régional + main d'œuvre qualifiée", "potential_usd": 4.5, "type": "Manufacture"}
+        ],
+        "infrastructure": {
+            "routes_km": 137430,
+            "routes_pavees_pct": 81.0,
+            "voies_ferrees_km": 5195,
+            "ports_principaux": 15,
+            "ports_details": ["Alexandrie", "Port-Saïd", "Damiette", "Suez", "Safaga", "El Dekheila"],
+            "aeroports_internationaux": 9,
+            "aeroports_details": ["Le Caire", "Alexandrie Borg El Arab", "Hurghada", "Charm el-Cheikh", "Louxor"]
+        },
         "key_sectors": [
             {"name": "Services", "pib_share": 52.0, "description": "Tourisme et canal de Suez"},
             {"name": "Industrie", "pib_share": 36.0, "description": "Pétrole et manufacture"},
