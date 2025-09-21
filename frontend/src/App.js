@@ -2407,11 +2407,15 @@ function ZLECAfCalculator() {
 
                       {/* Indicateurs supplémentaires enrichis */}
                       <div className="grid grid-cols-1 md:grid-cols-6 gap-lg mb-xl">
-                        {/* IDH */}
+                        {/* IDH avec rangs */}
                         <div className="bg-gray-50 rounded-lg p-4">
                           <h4 className="font-semibold text-gray-800 mb-2">Indice de Développement Humain</h4>
                           <div className="text-2xl font-bold text-blue-600 mb-1">
                             {countryProfile.hdi_score || '0.65'}
+                          </div>
+                          <div className="text-sm text-gray-600 mb-1">
+                            {countryProfile.hdi_africa_rank && `#${countryProfile.hdi_africa_rank} Afrique`}
+                            {countryProfile.hdi_world_rank && ` • #${countryProfile.hdi_world_rank} Monde`}
                           </div>
                           <div className="text-[10px] text-gray-500">
                             <div>Année : 2023</div>
