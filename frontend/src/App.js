@@ -1749,13 +1749,13 @@ function ZLECAfCalculator() {
                   </div>
                 </div>
 
-                {/* Graphiques des partenaires commerciaux */}
+                {/* Graphiques des partenaires commerciaux - COMPLET POUR LES DEUX PAYS */}
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-xl mt-xl">
-                  {/* Top 10 Partenaires Importateurs */}
+                  {/* Top 10 Fournisseurs Pays Origine */}
                   <div className="professional-card">
                     <div className="card-content-pro">
                       <h3 className="card-title-pro mb-lg">
-                        🌍 Top 10 Fournisseurs - {TRADE_STATISTICS[selectedCountries.origin]?.name} (2024)
+                        🌍 Top 10 Fournisseurs - {countryFlags[selectedCountries.origin]} {TRADE_STATISTICS[selectedCountries.origin]?.name} (2024)
                       </h3>
                       
                       {/* Graphique des partenaires */}
@@ -1788,17 +1788,91 @@ function ZLECAfCalculator() {
                     </div>
                   </div>
 
-                  {/* Top 10 Partenaires Exportateurs */}
+                  {/* Top 10 Fournisseurs Pays Destination */}
                   <div className="professional-card">
                     <div className="card-content-pro">
                       <h3 className="card-title-pro mb-lg">
-                        🚢 Top 10 Clients - {TRADE_STATISTICS[selectedCountries.origin]?.name} (2024)
+                        🌍 Top 10 Fournisseurs - {countryFlags[selectedCountries.destination]} {TRADE_STATISTICS[selectedCountries.destination]?.name} (2024)
+                      </h3>
+                      
+                      {/* Graphique des partenaires */}
+                      <div className="space-y-3 bg-gray-50 rounded-lg p-4 mb-lg">
+                        {TRADE_STATISTICS[selectedCountries.destination]?.top_import_partners?.slice(0, 8).map((partner, index) => {
+                          const maxValue = TRADE_STATISTICS[selectedCountries.destination]?.top_import_partners[0]?.value || 1;
+                          const percentage = (partner.value / maxValue) * 100;
+                          return (
+                            <div key={index} className="flex items-center gap-3">
+                              <div className="w-6 text-sm font-bold text-gray-600">#{index + 1}</div>
+                              <div className="w-8 text-xl">{partner.flag}</div>
+                              <div className="flex-1">
+                                <div className="flex justify-between items-center mb-1">
+                                  <span className="text-sm font-medium text-gray-800">{partner.country}</span>
+                                  <span className="text-sm font-bold text-blue-600">
+                                    {formatUSDMillion(partner.value)}
+                                  </span>
+                                </div>
+                                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                  <div 
+                                    className="bg-blue-500 h-2.5 rounded-full transition-all duration-500"
+                                    style={{ width: `${percentage}%` }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Top 10 Clients Pays Origine */}
+                  <div className="professional-card">
+                    <div className="card-content-pro">
+                      <h3 className="card-title-pro mb-lg">
+                        🚢 Top 10 Clients - {countryFlags[selectedCountries.origin]} {TRADE_STATISTICS[selectedCountries.origin]?.name} (2024)
                       </h3>
                       
                       {/* Graphique des partenaires */}
                       <div className="space-y-3 bg-gray-50 rounded-lg p-4 mb-lg">
                         {TRADE_STATISTICS[selectedCountries.origin]?.top_export_partners?.slice(0, 8).map((partner, index) => {
                           const maxValue = TRADE_STATISTICS[selectedCountries.origin]?.top_export_partners[0]?.value || 1;
+                          const percentage = (partner.value / maxValue) * 100;
+                          return (
+                            <div key={index} className="flex items-center gap-3">
+                              <div className="w-6 text-sm font-bold text-gray-600">#{index + 1}</div>
+                              <div className="w-8 text-xl">{partner.flag}</div>
+                              <div className="flex-1">
+                                <div className="flex justify-between items-center mb-1">
+                                  <span className="text-sm font-medium text-gray-800">{partner.country}</span>
+                                  <span className="text-sm font-bold text-green-600">
+                                    {formatUSDMillion(partner.value)}
+                                  </span>
+                                </div>
+                                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                  <div 
+                                    className="bg-green-500 h-2.5 rounded-full transition-all duration-500"
+                                    style={{ width: `${percentage}%` }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Top 10 Clients Pays Destination */}
+                  <div className="professional-card">
+                    <div className="card-content-pro">
+                      <h3 className="card-title-pro mb-lg">
+                        🚢 Top 10 Clients - {countryFlags[selectedCountries.destination]} {TRADE_STATISTICS[selectedCountries.destination]?.name} (2024)
+                      </h3>
+                      
+                      {/* Graphique des partenaires */}
+                      <div className="space-y-3 bg-gray-50 rounded-lg p-4 mb-lg">
+                        {TRADE_STATISTICS[selectedCountries.destination]?.top_export_partners?.slice(0, 8).map((partner, index) => {
+                          const maxValue = TRADE_STATISTICS[selectedCountries.destination]?.top_export_partners[0]?.value || 1;
                           const percentage = (partner.value / maxValue) * 100;
                           return (
                             <div key={index} className="flex items-center gap-3">
