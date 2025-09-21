@@ -2430,7 +2430,7 @@ function ZLECAfCalculator() {
                           <div className="text-2xl font-bold text-green-600 mb-1">
                             +{countryProfile.gdp_growth_rate || '4.2'}%
                           </div>
-                          <div className="text-xs text-gray-500">
+                          <div className="text-[10px] text-gray-500">
                             <div>Année : 2024</div>
                             <a href="https://www.imf.org/en/Publications/WEO/weo-database" 
                                target="_blank" 
