@@ -697,9 +697,12 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 6966,
         "population_2024": 60100000,
         "development_index": 0.713,
+        "hdi_africa_rank": 5,
+        "hdi_world_rank": 109,
         "africa_rank": 4,
         "growth_forecast_2024": "1.8%",
-        "debt_to_gdp_ratio": 69.4,
+        "external_debt_to_gdp_ratio": 42.1,  # Dette extérieure modérée - Source: South African Reserve Bank
+        "internal_debt_to_gdp_ratio": 27.3,  # Dette intérieure modérée - Source: South African Reserve Bank
         "inflation_rate_2024": 4.6,
         "foreign_reserves_months": 4.9,
         "trade_balance_usd": 8.2,
@@ -708,8 +711,7 @@ REAL_COUNTRY_DATA = {
             "sp": "BB-",
             "moodys": "Ba2",
             "fitch": "BB-",
-            "coface": "A4",
-            "global_risk": "Modéré"
+            "coface": "A4"
         },
         "export_products": [
             {"name": "Métaux précieux", "share": 28.4, "value_usd": 28.9, "type": "Minier"},
@@ -718,6 +720,21 @@ REAL_COUNTRY_DATA = {
             {"name": "Véhicules", "share": 8.9, "value_usd": 9.1, "type": "Manufacture"},
             {"name": "Produits chimiques", "share": 7.2, "value_usd": 7.3, "type": "Industrie"}
         ],
+        "competitive_export_products": [
+            {"name": "Platine et métaux du groupe platine", "advantage": "80% réserves mondiales + technologie", "potential_usd": 18.5, "type": "Minier"},
+            {"name": "Automobiles premium", "advantage": "Hub manufacturier + marques internationales", "potential_usd": 12.8, "type": "Manufacture"},
+            {"name": "Vin de qualité", "advantage": "Terroir unique + réputation mondiale", "potential_usd": 2.1, "type": "Agriculture"},
+            {"name": "Services financiers", "advantage": "Marché financier développé + expertise", "potential_usd": 8.4, "type": "Services"}
+        ],
+        "infrastructure": {
+            "routes_km": 747014,
+            "routes_pavees_pct": 22.3,
+            "voies_ferrees_km": 20192,
+            "ports_principaux": 8,
+            "ports_details": ["Durban", "Le Cap", "Port Elizabeth", "East London", "Richards Bay", "Saldanha Bay"],
+            "aeroports_internationaux": 10,
+            "aeroports_details": ["Johannesburg OR Tambo", "Le Cap", "Durban King Shaka", "Port Elizabeth", "Bloemfontein"]
+        },
         "key_sectors": [
             {"name": "Services", "pib_share": 61.0, "description": "Finance et services"},
             {"name": "Industrie", "pib_share": 27.0, "description": "Mines et manufacture"},
