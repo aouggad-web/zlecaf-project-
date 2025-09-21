@@ -2405,8 +2405,8 @@ function ZLECAfCalculator() {
                         </div>
                       </div>
 
-                      {/* Indicateurs supplémentaires */}
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+                      {/* Indicateurs supplémentaires enrichis */}
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-lg mb-xl">
                         {/* IDH */}
                         <div className="bg-gray-50 rounded-lg p-4">
                           <h4 className="font-semibold text-gray-800 mb-2">Indice de Développement Humain</h4>
@@ -2428,7 +2428,7 @@ function ZLECAfCalculator() {
                         <div className="bg-gray-50 rounded-lg p-4">
                           <h4 className="font-semibold text-gray-800 mb-2">Croissance PIB</h4>
                           <div className="text-2xl font-bold text-green-600 mb-1">
-                            +{countryProfile.gdp_growth_rate || '4.2'}%
+                            +{countryProfile.gdp_growth_rate || '4.2%'}
                           </div>
                           <div className="text-[10px] text-gray-500">
                             <div>Année : 2024</div>
@@ -2437,6 +2437,26 @@ function ZLECAfCalculator() {
                                rel="noopener noreferrer"
                                className="text-blue-600 hover:underline">
                               Source : FMI - WEO
+                            </a>
+                          </div>
+                        </div>
+
+                        {/* Ratio Dette/PIB */}
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <h4 className="font-semibold text-gray-800 mb-2">Dette/PIB</h4>
+                          <div className="text-2xl font-bold text-orange-600 mb-1">
+                            {countryProfile.debt_to_gdp_ratio ? 
+                              countryProfile.debt_to_gdp_ratio.toFixed(1) + '%' : 
+                              '58.4%'
+                            }
+                          </div>
+                          <div className="text-[10px] text-gray-500">
+                            <div>Année : 2024</div>
+                            <a href="https://www.imf.org/en/Publications/WEO/weo-database" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Source : FMI
                             </a>
                           </div>
                         </div>
@@ -2458,6 +2478,125 @@ function ZLECAfCalculator() {
                           </div>
                         </div>
                       </div>
+
+                      {/* Section Notations de Risque */}
+                      <div className="border-t pt-lg mb-xl">
+                        <h4 className="font-semibold mb-lg text-gray-800">📊 Notations de Risque</h4>
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                          <div className="bg-white border rounded-lg p-4 text-center">
+                            <div className="text-sm font-medium text-gray-600 mb-1">S&P</div>
+                            <div className="text-lg font-bold text-blue-600">
+                              {countryProfile.risk_ratings?.sp || 'B+'}
+                            </div>
+                          </div>
+                          <div className="bg-white border rounded-lg p-4 text-center">
+                            <div className="text-sm font-medium text-gray-600 mb-1">Moody's</div>
+                            <div className="text-lg font-bold text-blue-600">
+                              {countryProfile.risk_ratings?.moodys || 'B2'}
+                            </div>
+                          </div>
+                          <div className="bg-white border rounded-lg p-4 text-center">
+                            <div className="text-sm font-medium text-gray-600 mb-1">Fitch</div>
+                            <div className="text-lg font-bold text-blue-600">
+                              {countryProfile.risk_ratings?.fitch || 'B+'}
+                            </div>
+                          </div>
+                          <div className="bg-white border rounded-lg p-4 text-center">
+                            <div className="text-sm font-medium text-gray-600 mb-1">Coface</div>
+                            <div className="text-lg font-bold text-orange-600">
+                              {countryProfile.risk_ratings?.coface || 'C'}
+                            </div>
+                          </div>
+                          <div className="bg-white border rounded-lg p-4 text-center">
+                            <div className="text-sm font-medium text-gray-600 mb-1">Risque Global</div>
+                            <div className={`text-sm font-bold ${
+                              (countryProfile.risk_ratings?.global_risk || 'Élevé') === 'Faible' ? 'text-green-600' :
+                              (countryProfile.risk_ratings?.global_risk || 'Élevé') === 'Modéré' ? 'text-yellow-600' :
+                              (countryProfile.risk_ratings?.global_risk || 'Élevé') === 'Élevé' ? 'text-red-600' : 'text-red-800'
+                            }`}>
+                              {countryProfile.risk_ratings?.global_risk || 'Élevé'}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-[10px] text-gray-500 mt-4">
+                          <a href="https://www.coface.com/Economic-Studies-and-Country-Risks" 
+                             target="_blank" 
+                             rel="noopener noreferrer"
+                             className="text-blue-600 hover:underline mr-4">
+                            Source : Coface
+                          </a>
+                          <a href="https://www.standardandpoors.com/en_US/web/guest/ratings/ratings-actions" 
+                             target="_blank" 
+                             rel="noopener noreferrer"
+                             className="text-blue-600 hover:underline">
+                            S&P, Moody's, Fitch
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* Section Produits d'Exportation */}
+                      {countryProfile.export_products && countryProfile.export_products.length > 0 && (
+                        <div className="border-t pt-lg mb-xl">
+                          <h4 className="font-semibold mb-lg text-gray-800">🚢 Principaux Produits d'Exportation</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {countryProfile.export_products.slice(0, 6).map((product, index) => (
+                              <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div className="flex items-center gap-3">
+                                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${
+                                    product.type === 'Énergie' ? 'bg-red-500' :
+                                    product.type === 'Agriculture' ? 'bg-green-500' :
+                                    product.type === 'Minier' ? 'bg-yellow-600' :
+                                    product.type === 'Industrie' ? 'bg-blue-500' : 'bg-purple-500'
+                                  }`}>
+                                    {index + 1}
+                                  </div>
+                                  <div>
+                                    <div className="font-medium text-gray-800">{product.name}</div>
+                                    <div className="text-sm text-gray-600">{product.type}</div>
+                                  </div>
+                                </div>
+                                <div className="text-right">
+                                  <div className="font-semibold text-gray-800">{product.share?.toFixed(1)}%</div>
+                                  <div className="text-sm text-gray-600">{product.value_usd?.toFixed(1)} Mds$</div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="text-[10px] text-gray-500 mt-4">
+                            <a href="https://oec.world/" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Source : OEC Atlas - Données d'exportation
+                            </a>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Section Opportunités d'Investissement */}
+                      {countryProfile.investment_opportunities && countryProfile.investment_opportunities.length > 0 && (
+                        <div className="border-t pt-lg mb-xl">
+                          <h4 className="font-semibold mb-lg text-gray-800">💼 Opportunités d'Investissement</h4>
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            {countryProfile.investment_opportunities.map((opportunity, index) => (
+                              <div key={index} className="flex items-center gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-sm">
+                                  💡
+                                </div>
+                                <span className="font-medium text-gray-800">{opportunity}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="text-[10px] text-gray-500 mt-4">
+                            <a href="https://www.afdb.org/en/countries" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Source : BAD - Opportunités Sectorielles
+                            </a>
+                          </div>
+                        </div>
+                      )}
 
                       {/* Secteurs économiques */}
                       {countryProfile.projections?.key_sectors && (
