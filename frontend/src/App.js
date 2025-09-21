@@ -1463,7 +1463,7 @@ function ZLECAfCalculator() {
           <div className="fade-in-up">
             {selectedCountries.origin && selectedCountries.destination ? (
               <div className="space-y-xl">
-                {/* Header avec pays sélectionnés */}
+                {/* Header avec pays sélectionnés et sélecteur */}
                 <div className="professional-card">
                   <div className="card-header-pro">
                     <h2 className="card-title-pro">
@@ -1472,6 +1472,45 @@ function ZLECAfCalculator() {
                     <p className="card-description-pro">
                       Statistiques détaillées : {countryFlags[selectedCountries.origin]} {TRADE_STATISTICS[selectedCountries.origin]?.name} ↔ {countryFlags[selectedCountries.destination]} {TRADE_STATISTICS[selectedCountries.destination]?.name}
                     </p>
+                  </div>
+                  <div className="card-content-pro">
+                    <div className="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-4 mb-6">
+                      <div className="flex flex-col md:flex-row md:items-center gap-4">
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Changer la Comparaison</h4>
+                          <p className="text-sm text-gray-600">Sélectionnez deux pays pour analyser leurs échanges commerciaux</p>
+                        </div>
+                        <div className="flex flex-col md:flex-row gap-3">
+                          <select 
+                            className="form-input-pro form-select-pro min-w-48"
+                            value={selectedCountries.origin}
+                            onChange={(e) => setSelectedCountries(prev => ({...prev, origin: e.target.value}))}
+                          >
+                            <option value="">Pays d'origine</option>
+                            {Object.entries(TRADE_STATISTICS).map(([code, data]) => (
+                              <option key={code} value={code}>
+                                {countryFlags[code]} {data.name}
+                              </option>
+                            ))}
+                          </select>
+                          <div className="flex items-center justify-center">
+                            <span className="text-2xl">↔</span>
+                          </div>  
+                          <select 
+                            className="form-input-pro form-select-pro min-w-48"
+                            value={selectedCountries.destination}
+                            onChange={(e) => setSelectedCountries(prev => ({...prev, destination: e.target.value}))}
+                          >
+                            <option value="">Pays de destination</option>
+                            {Object.entries(TRADE_STATISTICS).map(([code, data]) => (
+                              <option key={code} value={code}>
+                                {countryFlags[code]} {data.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
