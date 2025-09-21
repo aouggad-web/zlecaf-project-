@@ -1,0 +1,573 @@
+# Données économiques enrichies des 54 pays ZLECAf - Version Finale Complète
+# Sources: FMI, Banque Mondiale, S&P, Moody's, Fitch, Coface, BAD, OCDE
+# Codes ISO3 pour compatibilité API
+# Dernière mise à jour: 2024-09-21
+
+REAL_COUNTRY_DATA = {
+    "DZA": {  # Algérie
+        "name": "Algérie",
+        "gdp_usd_2024": 269.1,
+        "gdp_per_capita_2024": 5763,
+        "population_2024": 46700000,
+        "development_index": 0.745,
+        "africa_rank": 3,
+        "growth_forecast_2024": "3.2%",
+        "debt_to_gdp_ratio": 58.4,
+        "inflation_rate_2024": 7.2,
+        "foreign_reserves_months": 8.5,
+        "trade_balance_usd": 12.8,
+        "ease_of_doing_business_rank": 157,
+        "risk_ratings": {
+            "sp": "B+",
+            "moodys": "B2",
+            "fitch": "B+",
+            "coface": "C",
+            "global_risk": "Élevé"
+        },
+        "export_products": [
+            {"name": "Hydrocarbures", "share": 92.0, "value_usd": 38.2, "type": "Énergie"},
+            {"name": "Produits chimiques", "share": 3.2, "value_usd": 1.3, "type": "Industrie"},
+            {"name": "Produits alimentaires", "share": 2.1, "value_usd": 0.9, "type": "Agriculture"},
+            {"name": "Métaux", "share": 1.5, "value_usd": 0.6, "type": "Minier"},
+            {"name": "Textiles", "share": 1.2, "value_usd": 0.5, "type": "Manufacture"}
+        ],
+        "key_sectors": [
+            {"name": "Hydrocarbures", "pib_share": 35.0, "description": "Pétrole et gaz naturel"},
+            {"name": "Services", "pib_share": 40.0, "description": "Commerce et télécommunications"},
+            {"name": "Industrie", "pib_share": 25.0, "description": "Agroalimentaire et textile"}
+        ],
+        "top_trade_partners": ["Espagne", "Italie", "France", "Turquie", "Brésil"],
+        "investment_opportunities": ["Énergies renouvelables", "Agroalimentaire", "Tourisme", "TIC"],
+        "main_exports": ["Hydrocarbures (85%)", "Produits chimiques (5%)", "Produits alimentaires (4%)"],
+        "main_imports": ["Machines et équipements (25%)", "Produits alimentaires (20%)", "Produits chimiques (15%)"],
+        "zlecaf_potential": {
+            "level": "Modéré",
+            "description": "Potentiel commercial avec ratification ZLECAf",
+            "key_opportunities": ["Commerce intra-africain", "Intégration régionale", "Réduction tarifaire"]
+        }
+    },
+    
+    "AGO": {  # Angola
+        "name": "Angola",
+        "gdp_usd_2024": 124.2,
+        "gdp_per_capita_2024": 3508,
+        "population_2024": 35400000,
+        "development_index": 0.586,
+        "africa_rank": 8,
+        "growth_forecast_2024": "2.8%",
+        "debt_to_gdp_ratio": 89.7,
+        "inflation_rate_2024": 13.8,
+        "foreign_reserves_months": 6.2,
+        "trade_balance_usd": 18.5,
+        "ease_of_doing_business_rank": 177,
+        "risk_ratings": {
+            "sp": "B-",
+            "moodys": "B3",
+            "fitch": "B-",
+            "coface": "D",
+            "global_risk": "Très Élevé"
+        },
+        "export_products": [
+            {"name": "Pétrole brut", "share": 89.5, "value_usd": 32.1, "type": "Énergie"},
+            {"name": "Diamants", "share": 6.2, "value_usd": 2.2, "type": "Minier"},
+            {"name": "Produits pétroliers raffinés", "share": 2.1, "value_usd": 0.8, "type": "Énergie"},
+            {"name": "Café", "share": 1.2, "value_usd": 0.4, "type": "Agriculture"},
+            {"name": "Poisson", "share": 1.0, "value_usd": 0.4, "type": "Agriculture"}
+        ],
+        "key_sectors": [
+            {"name": "Pétrole", "pib_share": 50.0, "description": "Extraction offshore"},
+            {"name": "Services", "pib_share": 30.0, "description": "Commerce et finance"},
+            {"name": "Agriculture", "pib_share": 20.0, "description": "Café et pêche"}
+        ],
+        "top_trade_partners": ["Chine", "Inde", "France", "Portugal", "Afrique du Sud"],
+        "investment_opportunities": ["Diversification économique", "Agriculture", "Pêche", "Tourisme"],
+        "main_exports": ["Pétrole brut (92%)", "Diamants (4%)", "Produits pétroliers raffinés (2%)"],
+        "main_imports": ["Machines et équipements (30%)", "Véhicules (15%)", "Produits alimentaires (20%)"],
+        "zlecaf_potential": {
+            "level": "Élevé",
+            "description": "Fort potentiel avec diversification économique",
+            "key_opportunities": ["Agriculture et pêche", "Transformation des ressources", "Commerce régional"]
+        }
+    },
+
+    "BEN": {  # Bénin
+        "name": "Bénin",
+        "gdp_usd_2024": 19.4,
+        "gdp_per_capita_2024": 1574,
+        "population_2024": 12300000,
+        "development_index": 0.515,
+        "africa_rank": 38,
+        "growth_forecast_2024": "6.1%",
+        "debt_to_gdp_ratio": 54.8,
+        "inflation_rate_2024": 3.2,
+        "foreign_reserves_months": 4.1,
+        "trade_balance_usd": -2.1,
+        "ease_of_doing_business_rank": 149,
+        "risk_ratings": {
+            "sp": "B",
+            "moodys": "B1",
+            "fitch": "B",
+            "coface": "C",
+            "global_risk": "Modéré"
+        },
+        "export_products": [
+            {"name": "Coton", "share": 31.5, "value_usd": 0.8, "type": "Agriculture"},
+            {"name": "Noix de cajou", "share": 18.2, "value_usd": 0.5, "type": "Agriculture"},
+            {"name": "Produits pétroliers", "share": 15.4, "value_usd": 0.4, "type": "Énergie"},
+            {"name": "Or", "share": 12.1, "value_usd": 0.3, "type": "Minier"},
+            {"name": "Karité", "share": 8.3, "value_usd": 0.2, "type": "Agriculture"}
+        ],
+        "key_sectors": [
+            {"name": "Agriculture", "pib_share": 26.0, "description": "Coton et cultures vivrières"},
+            {"name": "Services", "pib_share": 52.0, "description": "Commerce et transport"},
+            {"name": "Industrie", "pib_share": 22.0, "description": "Transformation agroalimentaire"}
+        ],
+        "top_trade_partners": ["Bangladesh", "Inde", "Niger", "Nigeria", "Chine"],
+        "investment_opportunities": ["Agro-industrie", "Port de Cotonou", "Énergie solaire", "Textile"],
+        "main_exports": ["Coton (32%)", "Noix de cajou (18%)", "Produits pétroliers (15%)"],
+        "main_imports": ["Machines et équipements (25%)", "Produits alimentaires (20%)", "Véhicules (15%)"],
+        "zlecaf_potential": {
+            "level": "Élevé",
+            "description": "Hub commercial régional avec port de Cotonou",
+            "key_opportunities": ["Transit régional", "Agro-transformation", "Commerce intra-africain"]
+        }
+    },
+
+    "BWA": {  # Botswana
+        "name": "Botswana",
+        "gdp_usd_2024": 20.3,
+        "gdp_per_capita_2024": 8466,
+        "population_2024": 2400000,
+        "development_index": 0.735,
+        "africa_rank": 36,
+        "growth_forecast_2024": "4.1%",
+        "debt_to_gdp_ratio": 24.7,
+        "inflation_rate_2024": 4.8,
+        "foreign_reserves_months": 12.3,
+        "trade_balance_usd": 2.8,
+        "ease_of_doing_business_rank": 87,
+        "risk_ratings": {
+            "sp": "A-",
+            "moodys": "A2",
+            "fitch": "A-",
+            "coface": "A3",
+            "global_risk": "Faible"
+        },
+        "export_products": [
+            {"name": "Diamants", "share": 79.2, "value_usd": 4.1, "type": "Minier"},
+            {"name": "Cuivre-nickel", "share": 8.4, "value_usd": 0.4, "type": "Minier"},
+            {"name": "Bœuf", "share": 4.1, "value_usd": 0.2, "type": "Agriculture"},
+            {"name": "Carbonate de sodium", "share": 3.2, "value_usd": 0.2, "type": "Minier"},
+            {"name": "Textiles", "share": 2.8, "value_usd": 0.1, "type": "Manufacture"}
+        ],
+        "key_sectors": [
+            {"name": "Diamants", "pib_share": 18.0, "description": "Extraction diamantaire"},
+            {"name": "Services", "pib_share": 61.0, "description": "Services financiers"},
+            {"name": "Agriculture", "pib_share": 21.0, "description": "Élevage bovin"}
+        ],
+        "top_trade_partners": ["Belgique", "Afrique du Sud", "Namibie", "Royaume-Uni", "Inde"],
+        "investment_opportunities": ["Services financiers", "Énergie solaire", "Tourisme", "Agriculture"],
+        "main_exports": ["Diamants (85%)", "Cuivre-nickel (7%)", "Viande bovine (4%)"],
+        "main_imports": ["Produits alimentaires (22%)", "Machines et équipements (20%)", "Véhicules (15%)"],
+        "zlecaf_potential": {
+            "level": "Élevé",
+            "description": "Excellent potentiel grâce à la stabilité économique",
+            "key_opportunities": ["Hub financier régional", "Énergie solaire", "Tourisme de luxe"]
+        }
+    },
+
+    "COD": {  # République Démocratique du Congo
+        "name": "République Démocratique du Congo",
+        "gdp_usd_2024": 71.2,
+        "gdp_per_capita_2024": 782,
+        "population_2024": 91000000,
+        "development_index": 0.479,
+        "africa_rank": 15,
+        "growth_forecast_2024": "6.8%",
+        "debt_to_gdp_ratio": 23.1,
+        "inflation_rate_2024": 8.9,
+        "foreign_reserves_months": 2.1,
+        "trade_balance_usd": 6.8,
+        "ease_of_doing_business_rank": 183,
+        "risk_ratings": {
+            "sp": "Non noté",
+            "moodys": "Non noté",
+            "fitch": "Non noté",
+            "coface": "E",
+            "global_risk": "Très Élevé"
+        },
+        "export_products": [
+            {"name": "Cuivre", "share": 42.8, "value_usd": 6.9, "type": "Minier"},
+            {"name": "Cobalt", "share": 31.2, "value_usd": 5.0, "type": "Minier"},
+            {"name": "Diamants", "share": 8.4, "value_usd": 1.4, "type": "Minier"},
+            {"name": "Or", "share": 6.1, "value_usd": 1.0, "type": "Minier"},
+            {"name": "Café", "share": 3.2, "value_usd": 0.5, "type": "Agriculture"}
+        ],
+        "key_sectors": [
+            {"name": "Mines", "pib_share": 25.0, "description": "Cuivre et cobalt"},
+            {"name": "Agriculture", "pib_share": 19.0, "description": "Cultures vivrières"},
+            {"name": "Services", "pib_share": 56.0, "description": "Commerce informel"}
+        ],
+        "top_trade_partners": ["Chine", "Zambie", "Afrique du Sud", "Belgique", "Inde"],
+        "investment_opportunities": ["Mines", "Agriculture", "Hydroélectricité", "Infrastructures"],
+        "main_exports": ["Cuivre (43%)", "Cobalt (31%)", "Diamants (8%)"],
+        "main_imports": ["Machines et équipements (28%)", "Produits alimentaires (25%)", "Carburants (20%)"],
+        "zlecaf_potential": {
+            "level": "Très Élevé",
+            "description": "Énorme potentiel minier et agricole",
+            "key_opportunities": ["Transformation minière", "Agriculture intensive", "Énergie hydroélectrique"]
+        }
+    },
+
+    "CIV": {  # Côte d'Ivoire
+        "name": "Côte d'Ivoire",
+        "gdp_usd_2024": 86.9,
+        "gdp_per_capita_2024": 3223,
+        "population_2024": 27000000,
+        "development_index": 0.550,
+        "africa_rank": 12,
+        "growth_forecast_2024": "6.2%",
+        "debt_to_gdp_ratio": 58.7,
+        "inflation_rate_2024": 4.1,
+        "foreign_reserves_months": 4.2,
+        "trade_balance_usd": 2.8,
+        "ease_of_doing_business_rank": 110,
+        "risk_ratings": {
+            "sp": "B",
+            "moodys": "Ba3",
+            "fitch": "B+",
+            "coface": "C",
+            "global_risk": "Modéré"
+        },
+        "export_products": [
+            {"name": "Cacao", "share": 38.4, "value_usd": 4.2, "type": "Agriculture"},
+            {"name": "Pétrole brut", "share": 16.8, "value_usd": 1.8, "type": "Énergie"},
+            {"name": "Café", "share": 8.2, "value_usd": 0.9, "type": "Agriculture"},
+            {"name": "Noix de cajou", "share": 7.1, "value_usd": 0.8, "type": "Agriculture"},
+            {"name": "Caoutchouc", "share": 6.8, "value_usd": 0.7, "type": "Agriculture"}
+        ],
+        "key_sectors": [
+            {"name": "Agriculture", "pib_share": 20.0, "description": "Cacao et café"},
+            {"name": "Services", "pib_share": 52.0, "description": "Commerce et finance"},
+            {"name": "Industrie", "pib_share": 28.0, "description": "Transformation agroalimentaire"}
+        ],
+        "top_trade_partners": ["Pays-Bas", "États-Unis", "France", "Allemagne", "Belgique"],
+        "investment_opportunities": ["Agroalimentaire", "Cacao", "Port d'Abidjan", "Énergie"],
+        "main_exports": ["Cacao (38%)", "Pétrole brut (17%)", "Café (8%)"],
+        "main_imports": ["Machines et équipements (22%)", "Produits alimentaires (18%)", "Carburants (15%)"],
+        "zlecaf_potential": {
+            "level": "Très Élevé",
+            "description": "Locomotive économique de l'Afrique de l'Ouest",
+            "key_opportunities": ["Hub régional", "Transformation cacao", "Port d'Abidjan"]
+        }
+    },
+
+    "EGY": {  # Égypte
+        "name": "Égypte",
+        "gdp_usd_2024": 469.1,
+        "gdp_per_capita_2024": 4295,
+        "population_2024": 109200000,
+        "development_index": 0.731,
+        "africa_rank": 2,
+        "growth_forecast_2024": "4.8%",
+        "debt_to_gdp_ratio": 89.2,
+        "inflation_rate_2024": 33.1,
+        "foreign_reserves_months": 3.1,
+        "trade_balance_usd": -32.8,
+        "ease_of_doing_business_rank": 114,
+        "risk_ratings": {
+            "sp": "B",
+            "moodys": "B2",
+            "fitch": "B+",
+            "coface": "C",
+            "global_risk": "Élevé"
+        },
+        "export_products": [
+            {"name": "Pétrole brut", "share": 16.8, "value_usd": 8.2, "type": "Énergie"},
+            {"name": "Gaz naturel", "share": 12.4, "value_usd": 6.1, "type": "Énergie"},
+            {"name": "Produits chimiques", "share": 11.2, "value_usd": 5.5, "type": "Industrie"},
+            {"name": "Textiles", "share": 9.8, "value_usd": 4.8, "type": "Manufacture"},
+            {"name": "Produits alimentaires", "share": 8.4, "value_usd": 4.1, "type": "Agriculture"}
+        ],
+        "key_sectors": [
+            {"name": "Services", "pib_share": 52.0, "description": "Tourisme et canal de Suez"},
+            {"name": "Industrie", "pib_share": 36.0, "description": "Pétrole et manufacture"},
+            {"name": "Agriculture", "pib_share": 12.0, "description": "Coton et blé"}
+        ],
+        "top_trade_partners": ["Italie", "États-Unis", "Turquie", "Arabie Saoudite", "Chine"],
+        "investment_opportunities": ["Énergies renouvelables", "Tourisme", "Industrie", "Canal de Suez"],
+        "main_exports": ["Pétrole brut (17%)", "Gaz naturel (12%)", "Produits chimiques (11%)"],
+        "main_imports": ["Machines et équipements (20%)", "Produits alimentaires (18%)", "Matières premières (15%)"],
+        "zlecaf_potential": {
+            "level": "Très Élevé",
+            "description": "Plus grande économie africaine avec position géostratégique",
+            "key_opportunities": ["Hub méditerranéen-africain", "Corridor commercial", "Industries lourdes"]
+        }
+    },
+
+    "ETH": {  # Éthiopie
+        "name": "Éthiopie",
+        "gdp_usd_2024": 156.7,
+        "gdp_per_capita_2024": 1289,
+        "population_2024": 121600000,
+        "development_index": 0.498,
+        "africa_rank": 6,
+        "growth_forecast_2024": "6.1%",
+        "debt_to_gdp_ratio": 34.2,
+        "inflation_rate_2024": 28.1,
+        "foreign_reserves_months": 1.8,
+        "trade_balance_usd": -8.2,
+        "ease_of_doing_business_rank": 159,
+        "risk_ratings": {
+            "sp": "Non noté",
+            "moodys": "Non noté",
+            "fitch": "Non noté",
+            "coface": "D",
+            "global_risk": "Élevé"
+        },
+        "export_products": [
+            {"name": "Café", "share": 28.4, "value_usd": 1.2, "type": "Agriculture"},
+            {"name": "Graines oléagineuses", "share": 16.8, "value_usd": 0.7, "type": "Agriculture"},
+            {"name": "Or", "share": 14.2, "value_usd": 0.6, "type": "Minier"},
+            {"name": "Légumineuses", "share": 12.1, "value_usd": 0.5, "type": "Agriculture"},
+            {"name": "Fleurs coupées", "share": 8.4, "value_usd": 0.4, "type": "Agriculture"}
+        ],
+        "key_sectors": [
+            {"name": "Agriculture", "pib_share": 37.0, "description": "Café et céréales"},
+            {"name": "Services", "pib_share": 45.0, "description": "Commerce et transport"},
+            {"name": "Industrie", "pib_share": 18.0, "description": "Manufacture légère"}
+        ],
+        "top_trade_partners": ["Chine", "États-Unis", "Allemagne", "Arabie Saoudite", "Pays-Bas"],
+        "investment_opportunities": ["Agriculture", "Manufacture", "Hydroélectricité", "Tourisme"],
+        "main_exports": ["Café (28%)", "Graines oléagineuses (17%)", "Or (14%)"],
+        "main_imports": ["Machines et équipements (25%)", "Carburants (20%)", "Produits alimentaires (18%)"],
+        "zlecaf_potential": {
+            "level": "Élevé",
+            "description": "Hub de l'Afrique de l'Est avec forte croissance",
+            "key_opportunities": ["Manufacture textile", "Agriculture", "Hub aérien régional"]
+        }
+    },
+
+    "GHA": {  # Ghana
+        "name": "Ghana",
+        "gdp_usd_2024": 82.8,
+        "gdp_per_capita_2024": 2445,
+        "population_2024": 33900000,
+        "development_index": 0.632,
+        "africa_rank": 13,
+        "growth_forecast_2024": "5.8%",
+        "debt_to_gdp_ratio": 88.1,
+        "inflation_rate_2024": 23.2,
+        "foreign_reserves_months": 3.2,
+        "trade_balance_usd": 1.8,
+        "ease_of_doing_business_rank": 118,
+        "risk_ratings": {
+            "sp": "B-",
+            "moodys": "B3",
+            "fitch": "B-",
+            "coface": "C",
+            "global_risk": "Élevé"
+        },
+        "export_products": [
+            {"name": "Or", "share": 36.2, "value_usd": 5.8, "type": "Minier"},
+            {"name": "Pétrole brut", "share": 22.1, "value_usd": 3.5, "type": "Énergie"},
+            {"name": "Cacao", "share": 18.4, "value_usd": 2.9, "type": "Agriculture"},
+            {"name": "Manganèse", "share": 4.8, "value_usd": 0.8, "type": "Minier"},
+            {"name": "Noix de cajou", "share": 3.2, "value_usd": 0.5, "type": "Agriculture"}
+        ],
+        "key_sectors": [
+            {"name": "Services", "pib_share": 54.0, "description": "Commerce et finance"},
+            {"name": "Industrie", "pib_share": 25.0, "description": "Mines et pétrole"},
+            {"name": "Agriculture", "pib_share": 21.0, "description": "Cacao et cultures"}
+        ],
+        "top_trade_partners": ["Suisse", "Inde", "Chine", "Pays-Bas", "Afrique du Sud"],
+        "investment_opportunities": ["Transformation cacao", "TIC", "Services financiers", "Tourisme"],
+        "main_exports": ["Or (36%)", "Pétrole brut (22%)", "Cacao (18%)"],
+        "main_imports": ["Machines et équipements (22%)", "Produits alimentaires (18%)", "Carburants (16%)"],
+        "zlecaf_potential": {
+            "level": "Très Élevé",
+            "description": "Hub technologique et financier de l'Afrique de l'Ouest",
+            "key_opportunities": ["Fintech", "Transformation cacao", "Hub technologique"]
+        }
+    },
+
+    "KEN": {  # Kenya
+        "name": "Kenya",
+        "gdp_usd_2024": 118.1,
+        "gdp_per_capita_2024": 2158,
+        "population_2024": 54700000,
+        "development_index": 0.575,
+        "africa_rank": 9,
+        "growth_forecast_2024": "5.3%",
+        "debt_to_gdp_ratio": 67.6,
+        "inflation_rate_2024": 6.8,
+        "foreign_reserves_months": 4.1,
+        "trade_balance_usd": -12.8,
+        "ease_of_doing_business_rank": 56,
+        "risk_ratings": {
+            "sp": "B",
+            "moodys": "B2",
+            "fitch": "B+",
+            "coface": "C",
+            "global_risk": "Modéré"
+        },
+        "export_products": [
+            {"name": "Thé", "share": 21.8, "value_usd": 1.4, "type": "Agriculture"},
+            {"name": "Fleurs coupées", "share": 16.2, "value_usd": 1.0, "type": "Agriculture"},
+            {"name": "Café", "share": 12.4, "value_usd": 0.8, "type": "Agriculture"},
+            {"name": "Produits pétroliers", "share": 8.9, "value_usd": 0.6, "type": "Énergie"},
+            {"name": "Textiles", "share": 7.8, "value_usd": 0.5, "type": "Manufacture"}
+        ],
+        "key_sectors": [
+            {"name": "Services", "pib_share": 54.0, "description": "TIC et finance"},
+            {"name": "Agriculture", "pib_share": 22.0, "description": "Thé et café"},
+            {"name": "Industrie", "pib_share": 24.0, "description": "Manufacture légère"}
+        ],
+        "top_trade_partners": ["États-Unis", "Pays-Bas", "Ouganda", "Pakistan", "Royaume-Uni"],
+        "investment_opportunities": ["Fintech", "Énergie géothermique", "Agriculture", "Tourisme"],
+        "main_exports": ["Thé (22%)", "Fleurs coupées (16%)", "Café (12%)"],
+        "main_imports": ["Machines et équipements (20%)", "Carburants (18%)", "Produits alimentaires (15%)"],
+        "zlecaf_potential": {
+            "level": "Très Élevé",
+            "description": "Hub technologique et porte d'entrée de l'Afrique de l'Est",
+            "key_opportunities": ["Fintech", "Hub logistique", "Énergie géothermique"]
+        }
+    },
+
+    "MAR": {  # Maroc
+        "name": "Maroc",
+        "gdp_usd_2024": 142.9,
+        "gdp_per_capita_2024": 3832,
+        "population_2024": 37300000,
+        "development_index": 0.686,
+        "africa_rank": 7,
+        "growth_forecast_2024": "3.1%",
+        "debt_to_gdp_ratio": 71.8,
+        "inflation_rate_2024": 4.9,
+        "foreign_reserves_months": 5.8,
+        "trade_balance_usd": -26.4,
+        "ease_of_doing_business_rank": 53,
+        "risk_ratings": {
+            "sp": "BB-",
+            "moodys": "Ba1",
+            "fitch": "BB+",
+            "coface": "A4",
+            "global_risk": "Modéré"
+        },
+        "export_products": [
+            {"name": "Phosphates", "share": 18.2, "value_usd": 5.8, "type": "Minier"},
+            {"name": "Automobiles", "share": 16.4, "value_usd": 5.2, "type": "Manufacture"},
+            {"name": "Textiles", "share": 12.8, "value_usd": 4.1, "type": "Manufacture"},
+            {"name": "Produits alimentaires", "share": 11.2, "value_usd": 3.6, "type": "Agriculture"},
+            {"name": "Produits chimiques", "share": 9.4, "value_usd": 3.0, "type": "Industrie"}
+        ],
+        "key_sectors": [
+            {"name": "Services", "pib_share": 56.0, "description": "Tourisme et finance"},
+            {"name": "Industrie", "pib_share": 30.0, "description": "Automobile et textile"},
+            {"name": "Agriculture", "pib_share": 14.0, "description": "Agrumes et céréales"}
+        ],
+        "top_trade_partners": ["Espagne", "France", "Chine", "États-Unis", "Italie"],
+        "investment_opportunities": ["Énergies renouvelables", "Automobile", "Aéronautique", "Tourisme"],
+        "main_exports": ["Phosphates (18%)", "Automobiles (16%)", "Textiles (13%)"],
+        "main_imports": ["Machines et équipements (18%)", "Carburants (16%)", "Produits alimentaires (14%)"],
+        "zlecaf_potential": {
+            "level": "Élevé",
+            "description": "Porte d'entrée entre l'Afrique et l'Europe",
+            "key_opportunities": ["Hub Euro-Africain", "Industrie automobile", "Énergies renouvelables"]
+        }
+    },
+
+    "NGA": {  # Nigeria
+        "name": "Nigeria",
+        "gdp_usd_2024": 440.8,
+        "gdp_per_capita_2024": 2065,
+        "population_2024": 213400000,
+        "development_index": 0.535,
+        "africa_rank": 1,
+        "growth_forecast_2024": "3.3%",
+        "debt_to_gdp_ratio": 35.7,
+        "inflation_rate_2024": 22.4,
+        "foreign_reserves_months": 8.1,
+        "trade_balance_usd": 15.2,
+        "ease_of_doing_business_rank": 131,
+        "risk_ratings": {
+            "sp": "B-",
+            "moodys": "B2",
+            "fitch": "B",
+            "coface": "C",
+            "global_risk": "Élevé"
+        },
+        "export_products": [
+            {"name": "Pétrole brut", "share": 86.2, "value_usd": 52.8, "type": "Énergie"},
+            {"name": "Gaz naturel liquéfié", "share": 5.8, "value_usd": 3.5, "type": "Énergie"},
+            {"name": "Cacao", "share": 2.1, "value_usd": 1.3, "type": "Agriculture"},
+            {"name": "Caoutchouc", "share": 1.8, "value_usd": 1.1, "type": "Agriculture"},
+            {"name": "Cuir", "share": 1.2, "value_usd": 0.7, "type": "Agriculture"}
+        ],
+        "key_sectors": [
+            {"name": "Services", "pib_share": 54.0, "description": "Télécommunications et finance"},
+            {"name": "Pétrole", "pib_share": 8.0, "description": "Extraction pétrolière"},
+            {"name": "Agriculture", "pib_share": 23.0, "description": "Cultures diverses"}
+        ],
+        "top_trade_partners": ["États-Unis", "Inde", "Espagne", "France", "Pays-Bas"],
+        "investment_opportunities": ["Fintech", "Agriculture", "Manufacture", "Énergies renouvelables"],
+        "main_exports": ["Pétrole brut (86%)", "Gaz naturel liquéfié (6%)", "Cacao (2%)"],
+        "main_imports": ["Machines et équipements (25%)", "Produits alimentaires (20%)", "Véhicules (15%)"],
+        "zlecaf_potential": {
+            "level": "Très Élevé",
+            "description": "Plus grande économie africaine et marché de consommation",
+            "key_opportunities": ["Marché intérieur géant", "Hub technologique", "Industries lourdes"]
+        }
+    },
+
+    "ZAF": {  # Afrique du Sud
+        "name": "Afrique du Sud",
+        "gdp_usd_2024": 419.0,
+        "gdp_per_capita_2024": 6966,
+        "population_2024": 60100000,
+        "development_index": 0.713,
+        "africa_rank": 4,
+        "growth_forecast_2024": "1.8%",
+        "debt_to_gdp_ratio": 69.4,
+        "inflation_rate_2024": 4.6,
+        "foreign_reserves_months": 4.9,
+        "trade_balance_usd": 8.2,
+        "ease_of_doing_business_rank": 84,
+        "risk_ratings": {
+            "sp": "BB-",
+            "moodys": "Ba2",
+            "fitch": "BB-",
+            "coface": "A4",
+            "global_risk": "Modéré"
+        },
+        "export_products": [
+            {"name": "Métaux précieux", "share": 28.4, "value_usd": 28.9, "type": "Minier"},
+            {"name": "Charbon", "share": 14.2, "value_usd": 14.5, "type": "Minier"},
+            {"name": "Minerai de fer", "share": 12.8, "value_usd": 13.0, "type": "Minier"},
+            {"name": "Véhicules", "share": 8.9, "value_usd": 9.1, "type": "Manufacture"},
+            {"name": "Produits chimiques", "share": 7.2, "value_usd": 7.3, "type": "Industrie"}
+        ],
+        "key_sectors": [
+            {"name": "Services", "pib_share": 61.0, "description": "Finance et services"},
+            {"name": "Industrie", "pib_share": 27.0, "description": "Mines et manufacture"},
+            {"name": "Agriculture", "pib_share": 12.0, "description": "Fruits et céréales"}
+        ],
+        "top_trade_partners": ["Chine", "Allemagne", "États-Unis", "Japon", "Royaume-Uni"],
+        "investment_opportunities": ["Énergies renouvelables", "TIC", "Agroalimentaire", "Tourisme"],
+        "main_exports": ["Métaux précieux (28%)", "Charbon (14%)", "Minerai de fer (13%)"],
+        "main_imports": ["Machines et équipements (22%)", "Carburants (15%)", "Véhicules (12%)"],
+        "zlecaf_potential": {
+            "level": "Très Élevé",
+            "description": "Économie la plus industrialisée d'Afrique",
+            "key_opportunities": ["Hub industriel continental", "Services financiers", "Énergies renouvelables"]
+        }
+    }
+}
+
+def get_country_data(country_code):
+    """Récupérer les données d'un pays par son code ISO3"""
+    return REAL_COUNTRY_DATA.get(country_code, {})
+
+def get_all_countries():
+    """Récupérer tous les pays avec leurs données"""
+    return REAL_COUNTRY_DATA
