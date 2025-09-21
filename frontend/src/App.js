@@ -2531,7 +2531,7 @@ function ZLECAfCalculator() {
                       {/* Section Notations de Risque */}
                       <div className="border-t pt-lg mb-xl">
                         <h4 className="font-semibold mb-lg text-gray-800">📊 Notations de Risque</h4>
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                           <div className="bg-white border rounded-lg p-4 text-center">
                             <div className="text-sm font-medium text-gray-600 mb-1">S&P</div>
                             <div className="text-lg font-bold text-blue-600">
@@ -2554,16 +2554,6 @@ function ZLECAfCalculator() {
                             <div className="text-sm font-medium text-gray-600 mb-1">Coface</div>
                             <div className="text-lg font-bold text-orange-600">
                               {countryProfile.risk_ratings?.coface || 'C'}
-                            </div>
-                          </div>
-                          <div className="bg-white border rounded-lg p-4 text-center">
-                            <div className="text-sm font-medium text-gray-600 mb-1">Risque Global</div>
-                            <div className={`text-sm font-bold ${
-                              (countryProfile.risk_ratings?.global_risk || 'Élevé') === 'Faible' ? 'text-green-600' :
-                              (countryProfile.risk_ratings?.global_risk || 'Élevé') === 'Modéré' ? 'text-yellow-600' :
-                              (countryProfile.risk_ratings?.global_risk || 'Élevé') === 'Élevé' ? 'text-red-600' : 'text-red-800'
-                            }`}>
-                              {countryProfile.risk_ratings?.global_risk || 'Élevé'}
                             </div>
                           </div>
                         </div>
