@@ -2406,7 +2406,7 @@ function ZLECAfCalculator() {
                       </div>
 
                       {/* Indicateurs supplémentaires enrichis */}
-                      <div className="grid grid-cols-1 md:grid-cols-5 gap-lg mb-xl">
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-lg mb-xl">
                         {/* IDH */}
                         <div className="bg-gray-50 rounded-lg p-4">
                           <h4 className="font-semibold text-gray-800 mb-2">Indice de Développement Humain</h4>
@@ -2441,22 +2441,42 @@ function ZLECAfCalculator() {
                           </div>
                         </div>
 
-                        {/* Ratio Dette/PIB */}
+                        {/* Dette Extérieure */}
                         <div className="bg-gray-50 rounded-lg p-4">
-                          <h4 className="font-semibold text-gray-800 mb-2">Dette/PIB</h4>
-                          <div className="text-2xl font-bold text-orange-600 mb-1">
-                            {countryProfile.debt_to_gdp_ratio ? 
-                              countryProfile.debt_to_gdp_ratio.toFixed(1) + '%' : 
-                              '58.4%'
+                          <h4 className="font-semibold text-gray-800 mb-2">Dette Extérieure</h4>
+                          <div className="text-2xl font-bold text-green-600 mb-1">
+                            {countryProfile.external_debt_to_gdp_ratio ? 
+                              countryProfile.external_debt_to_gdp_ratio.toFixed(1) + '%' : 
+                              '2.8%'
                             }
                           </div>
                           <div className="text-[10px] text-gray-500">
                             <div>Année : 2024</div>
-                            <a href="https://www.imf.org/en/Publications/WEO/weo-database" 
+                            <a href="https://www.bank-of-algeria.dz/" 
                                target="_blank" 
                                rel="noopener noreferrer"
                                className="text-blue-600 hover:underline">
-                              Source : FMI
+                              Source : Banque Centrale
+                            </a>
+                          </div>
+                        </div>
+
+                        {/* Dette Intérieure */}
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <h4 className="font-semibold text-gray-800 mb-2">Dette Intérieure</h4>
+                          <div className="text-2xl font-bold text-orange-600 mb-1">
+                            {countryProfile.internal_debt_to_gdp_ratio ? 
+                              countryProfile.internal_debt_to_gdp_ratio.toFixed(1) + '%' : 
+                              '55.6%'
+                            }
+                          </div>
+                          <div className="text-[10px] text-gray-500">
+                            <div>Année : 2024</div>
+                            <a href="https://www.bank-of-algeria.dz/" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Source : Banque Centrale
                             </a>
                           </div>
                         </div>
@@ -2487,15 +2507,18 @@ function ZLECAfCalculator() {
                           </div>
                         </div>
 
-                        {/* Commerce */}
+                        {/* Facilité des Affaires */}
                         <div className="bg-gray-50 rounded-lg p-4">
-                          <h4 className="font-semibold text-gray-800 mb-2">Ouverture Commerciale</h4>
+                          <h4 className="font-semibold text-gray-800 mb-2">Facilité des Affaires</h4>
                           <div className="text-2xl font-bold text-purple-600 mb-1">
-                            {countryProfile.trade_openness || '65'}%
+                            #{countryProfile.ease_of_doing_business_rank || '157'}
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            /190 pays
                           </div>
                           <div className="text-[10px] text-gray-500">
-                            <div>Année : 2024</div>
-                            <a href="https://data.worldbank.org/indicator/NE.TRD.GNFS.ZS" 
+                            <div>Année : 2020</div>
+                            <a href="https://www.doingbusiness.org/" 
                                target="_blank" 
                                rel="noopener noreferrer"
                                className="text-blue-600 hover:underline">
