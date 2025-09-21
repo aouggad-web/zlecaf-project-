@@ -80,6 +80,7 @@ REAL_COUNTRY_DATA = {
         "internal_debt_to_gdp_ratio": 57.3,  # Dette intérieure importante - Source: Banco Nacional de Angola
         "inflation_rate_2024": 13.8,
         "foreign_reserves_months": 6.2,
+        "energy_cost_usd_kwh": 0.178,  # Coût élevé - Source: AIE
         "trade_balance_usd": 18.5,
         "ease_of_doing_business_rank": 177,
         "risk_ratings": {
