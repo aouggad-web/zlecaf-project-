@@ -44,7 +44,213 @@ const REFERENCE_PRODUCTS = {
   '180100': 'Fèves de cacao'
 };
 
-const REFERENCE_PSR = {
+// Données commerciales mockées (en millions USD)
+const TRADE_STATISTICS = {
+  'DZ': {
+    name: 'Algérie',
+    imports: { '2023': 48500, '2024': 52300 },
+    exports: { '2023': 38200, '2024': 41800 },
+    top_imports: [
+      { product: 'Machines et équipements', value: 8500, code: '84' },
+      { product: 'Véhicules automobiles', value: 6200, code: '87' },
+      { product: 'Céréales', value: 4800, code: '10' },
+      { product: 'Produits pharmaceutiques', value: 3500, code: '30' },
+      { product: 'Fer et acier', value: 2900, code: '72' },
+      { product: 'Matières plastiques', value: 2400, code: '39' },
+      { product: 'Textiles', value: 2100, code: '52-63' },
+      { product: 'Produits chimiques', value: 1800, code: '28-38' },
+      { product: 'Équipements électriques', value: 1600, code: '85' },
+      { product: 'Produits alimentaires', value: 1400, code: '16-22' }
+    ],
+    top_exports: [
+      { product: 'Hydrocarbures', value: 32500, code: '27' },
+      { product: 'Produits minéraux', value: 2100, code: '25-26' },
+      { product: 'Produits chimiques', value: 1800, code: '28-38' },
+      { product: 'Produits agricoles', value: 1200, code: '01-24' },
+      { product: 'Fer et acier', value: 900, code: '72' },
+      { product: 'Textiles', value: 600, code: '52-63' },
+      { product: 'Cuir et maroquinerie', value: 400, code: '41-43' },
+      { product: 'Produits alimentaires', value: 350, code: '16-22' },
+      { product: 'Machines', value: 300, code: '84' },
+      { product: 'Autres manufactures', value: 250, code: 'Divers' }
+    ]
+  },
+  'MA': {
+    name: 'Maroc',
+    imports: { '2023': 68400, '2024': 72100 },
+    exports: { '2023': 58900, '2024': 63200 },
+    top_imports: [
+      { product: 'Hydrocarbures', value: 12800, code: '27' },
+      { product: 'Machines et équipements', value: 9200, code: '84' },
+      { product: 'Véhicules automobiles', value: 7500, code: '87' },
+      { product: 'Équipements électriques', value: 5800, code: '85' },
+      { product: 'Produits chimiques', value: 4900, code: '28-38' },
+      { product: 'Céréales', value: 3600, code: '10' },
+      { product: 'Fer et acier', value: 3200, code: '72' },
+      { product: 'Matières plastiques', value: 2800, code: '39' },
+      { product: 'Textiles', value: 2400, code: '52-63' },
+      { product: 'Produits pharmaceutiques', value: 2100, code: '30' }
+    ],
+    top_exports: [
+      { product: 'Automobiles', value: 14200, code: '87' },
+      { product: 'Textiles et habillement', value: 8900, code: '52-63' },
+      { product: 'Phosphates et dérivés', value: 7800, code: '25/31' },
+      { product: 'Produits agricoles', value: 6500, code: '01-24' },
+      { product: 'Équipements électriques', value: 5200, code: '85' },
+      { product: 'Produits chimiques', value: 4100, code: '28-38' },
+      { product: 'Aéronautique', value: 3800, code: '88' },
+      { product: 'Cuir et maroquinerie', value: 2900, code: '41-43' },
+      { product: 'Produits alimentaires', value: 2600, code: '16-22' },
+      { product: 'Machines', value: 2400, code: '84' }
+    ]
+  },
+  'EG': {
+    name: 'Égypte',
+    imports: { '2023': 89200, '2024': 95600 },
+    exports: { '2023': 56800, '2024': 61200 },
+    top_imports: [
+      { product: 'Hydrocarbures', value: 18500, code: '27' },
+      { product: 'Céréales', value: 12300, code: '10' },
+      { product: 'Machines et équipements', value: 11800, code: '84' },
+      { product: 'Fer et acier', value: 8900, code: '72' },
+      { product: 'Véhicules automobiles', value: 7200, code: '87' },
+      { product: 'Équipements électriques', value: 6800, code: '85' },
+      { product: 'Produits chimiques', value: 5400, code: '28-38' },
+      { product: 'Matières plastiques', value: 4200, code: '39' },
+      { product: 'Produits pharmaceutiques', value: 3800, code: '30' },
+      { product: 'Textiles', value: 3200, code: '52-63' }
+    ],
+    top_exports: [
+      { product: 'Hydrocarbures', value: 18900, code: '27' },
+      { product: 'Produits chimiques', value: 8200, code: '28-38' },
+      { product: 'Textiles et habillement', value: 6800, code: '52-63' },
+      { product: 'Produits agricoles', value: 5900, code: '01-24' },
+      { product: 'Fer et acier', value: 4200, code: '72' },
+      { product: 'Produits alimentaires', value: 3800, code: '16-22' },
+      { product: 'Machines', value: 2900, code: '84' },
+      { product: 'Matières plastiques', value: 2400, code: '39' },
+      { product: 'Équipements électriques', value: 2200, code: '85' },
+      { product: 'Produits minéraux', value: 1900, code: '25-26' }
+    ]
+  },
+  // Ajoutons d'autres pays...
+  'ZA': {
+    name: 'Afrique du Sud',
+    imports: { '2023': 98500, '2024': 104200 },
+    exports: { '2023': 124800, '2024': 132600 },
+    top_imports: [
+      { product: 'Hydrocarbures', value: 22400, code: '27' },
+      { product: 'Machines et équipements', value: 15800, code: '84' },
+      { product: 'Véhicules automobiles', value: 12600, code: '87' },
+      { product: 'Équipements électriques', value: 9200, code: '85' },
+      { product: 'Produits chimiques', value: 7800, code: '28-38' },
+      { product: 'Textiles', value: 5400, code: '52-63' },
+      { product: 'Produits pharmaceutiques', value: 4900, code: '30' },
+      { product: 'Matières plastiques', value: 4200, code: '39' },
+      { product: 'Fer et acier', value: 3800, code: '72' },
+      { product: 'Produits alimentaires', value: 3500, code: '16-22' }
+    ],
+    top_exports: [
+      { product: 'Métaux précieux (or, platine)', value: 42800, code: '71' },
+      { product: 'Minerais de fer', value: 18500, code: '26' },
+      { product: 'Charbon', value: 15200, code: '27' },
+      { product: 'Automobiles', value: 12900, code: '87' },
+      { product: 'Machines et équipements', value: 9800, code: '84' },
+      { product: 'Produits chimiques', value: 8400, code: '28-38' },
+      { product: 'Produits agricoles', value: 7200, code: '01-24' },
+      { product: 'Fer et acier', value: 6800, code: '72' },
+      { product: 'Équipements électriques', value: 5600, code: '85' },
+      { product: 'Textiles', value: 4200, code: '52-63' }
+    ]
+  },
+  'NG': {
+    name: 'Nigeria',
+    imports: { '2023': 56800, '2024': 62400 },
+    exports: { '2023': 67200, '2024': 73800 },
+    top_imports: [
+      { product: 'Machines et équipements', value: 12400, code: '84' },
+      { product: 'Véhicules automobiles', value: 9800, code: '87' },
+      { product: 'Céréales', value: 7600, code: '10' },
+      { product: 'Équipements électriques', value: 6200, code: '85' },
+      { product: 'Produits pharmaceutiques', value: 4900, code: '30' },
+      { product: 'Fer et acier', value: 4200, code: '72' },
+      { product: 'Produits chimiques', value: 3800, code: '28-38' },
+      { product: 'Textiles', value: 3200, code: '52-63' },
+      { product: 'Matières plastiques', value: 2800, code: '39' },
+      { product: 'Produits alimentaires', value: 2400, code: '16-22' }
+    ],
+    top_exports: [
+      { product: 'Pétrole brut', value: 58900, code: '27' },
+      { product: 'Gaz naturel', value: 8200, code: '27' },
+      { product: 'Produits agricoles', value: 2800, code: '01-24' },
+      { product: 'Produits chimiques', value: 1400, code: '28-38' },
+      { product: 'Cuir et maroquinerie', value: 900, code: '41-43' },
+      { product: 'Textiles', value: 600, code: '52-63' },
+      { product: 'Produits alimentaires', value: 500, code: '16-22' },
+      { product: 'Machines', value: 400, code: '84' },
+      { product: 'Matières plastiques', value: 300, code: '39' },
+      { product: 'Autres manufactures', value: 200, code: 'Divers' }
+    ]
+  },
+  'GH': {
+    name: 'Ghana',
+    imports: { '2023': 18400, '2024': 20100 },
+    exports: { '2023': 15800, '2024': 17200 },
+    top_imports: [
+      { product: 'Hydrocarbures', value: 4200, code: '27' },
+      { product: 'Machines et équipements', value: 3100, code: '84' },
+      { product: 'Véhicules automobiles', value: 2400, code: '87' },
+      { product: 'Céréales', value: 1900, code: '10' },
+      { product: 'Fer et acier', value: 1500, code: '72' },
+      { product: 'Équipements électriques', value: 1200, code: '85' },
+      { product: 'Produits pharmaceutiques', value: 1000, code: '30' },
+      { product: 'Textiles', value: 800, code: '52-63' },
+      { product: 'Produits chimiques', value: 600, code: '28-38' },
+      { product: 'Matières plastiques', value: 500, code: '39' }
+    ],
+    top_exports: [
+      { product: 'Or', value: 8900, code: '71' },
+      { product: 'Cacao', value: 2800, code: '18' },
+      { product: 'Pétrole brut', value: 1900, code: '27' },
+      { product: 'Produits agricoles', value: 900, code: '01-24' },
+      { product: 'Bois et dérivés', value: 600, code: '44' },
+      { product: 'Produits alimentaires', value: 400, code: '16-22' },
+      { product: 'Textiles', value: 300, code: '52-63' },
+      { product: 'Produits chimiques', value: 200, code: '28-38' },
+      { product: 'Machines', value: 150, code: '84' },
+      { product: 'Autres manufactures', value: 100, code: 'Divers' }
+    ]
+  },
+  'KE': {
+    name: 'Kenya',
+    imports: { '2023': 22800, '2024': 25200 },
+    exports: { '2023': 8900, '2024': 10100 },
+    top_imports: [
+      { product: 'Hydrocarbures', value: 5400, code: '27' },
+      { product: 'Machines et équipements', value: 3800, code: '84' },
+      { product: 'Véhicules automobiles', value: 2900, code: '87' },
+      { product: 'Fer et acier', value: 2200, code: '72' },
+      { product: 'Équipements électriques', value: 1800, code: '85' },
+      { product: 'Produits pharmaceutiques', value: 1400, code: '30' },
+      { product: 'Produits chimiques', value: 1200, code: '28-38' },
+      { product: 'Céréales', value: 1000, code: '10' },
+      { product: 'Textiles', value: 900, code: '52-63' },
+      { product: 'Matières plastiques', value: 700, code: '39' }
+    ],
+    top_exports: [
+      { product: 'Thé', value: 2400, code: '09' },
+      { product: 'Café', value: 1800, code: '09' },
+      { product: 'Fleurs coupées', value: 1200, code: '06' },
+      { product: 'Légumes', value: 900, code: '07' },
+      { product: 'Textiles', value: 800, code: '52-63' },
+      { product: 'Produits alimentaires', value: 600, code: '16-22' },
+      { product: 'Cuir et maroquinerie', value: 500, code: '41-43' },
+      { product: 'Produits chimiques', value: 400, code: '28-38' },
+      { product: 'Machines', value: 300, code: '84' },
+      { product: 'Autres produits', value: 200, code: 'Divers' }
+    ]
+  }
+};
   '150910': { rule: 'CC ou CTH + VCR minimal', type: 'CC/CTH + VCR', rvc: 25 },
   '220210': { rule: 'CTH ou VCR 60%', type: 'CTH/VCR', rvc: 60 },
   '100590': { rule: 'WO (totalement obtenu)', type: 'WO', rvc: null },
