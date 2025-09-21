@@ -201,6 +201,7 @@ REAL_COUNTRY_DATA = {
         "internal_debt_to_gdp_ratio": 6.5,   # Dette intérieure très faible - Source: Bank of Botswana  
         "inflation_rate_2024": 4.8,
         "foreign_reserves_months": 12.3,
+        "energy_cost_usd_kwh": 0.117,  # Coût moyen - Source: AIE
         "trade_balance_usd": 2.8,
         "ease_of_doing_business_rank": 87,
         "risk_ratings": {
