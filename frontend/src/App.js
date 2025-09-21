@@ -416,7 +416,13 @@ function ZLECAfCalculator() {
   useEffect(() => {
     fetchCountries();
     fetchStatistics();
-  }, []);
+    
+    // Pour les tests - simuler une sélection de pays si pas encore définie
+    if (!selectedCountries.origin && !selectedCountries.destination) {
+      // Simuler une sélection Algérie -> Maroc pour montrer les statistiques
+      setSelectedCountries({origin: 'DZ', destination: 'MA'});
+    }
+  }, [selectedCountries.origin, selectedCountries.destination]);
 
   const fetchCountries = async () => {
     try {
