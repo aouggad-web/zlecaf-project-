@@ -12,17 +12,17 @@ REAL_COUNTRY_DATA = {
         "development_index": 0.745,
         "africa_rank": 3,
         "growth_forecast_2024": "3.2%",
-        "debt_to_gdp_ratio": 58.4,
+        "external_debt_to_gdp_ratio": 2.8,  # Dette extérieure très faible - Source: Banque d'Algérie
+        "internal_debt_to_gdp_ratio": 55.6, # Dette intérieure plus élevée - Source: Banque d'Algérie
         "inflation_rate_2024": 7.2,
         "foreign_reserves_months": 8.5,
         "trade_balance_usd": 12.8,
-        "ease_of_doing_business_rank": 157,
+        "ease_of_doing_business_rank": 157, # Banque Mondiale Doing Business 2020
         "risk_ratings": {
             "sp": "B+",
             "moodys": "B2",
             "fitch": "B+",
-            "coface": "C",
-            "global_risk": "Élevé"
+            "coface": "C"
         },
         "export_products": [
             {"name": "Hydrocarbures", "share": 92.0, "value_usd": 38.2, "type": "Énergie"},
@@ -31,6 +31,22 @@ REAL_COUNTRY_DATA = {
             {"name": "Métaux", "share": 1.5, "value_usd": 0.6, "type": "Minier"},
             {"name": "Textiles", "share": 1.2, "value_usd": 0.5, "type": "Manufacture"}
         ],
+        "competitive_export_products": [
+            {"name": "Gaz naturel liquéfié", "advantage": "Réserves importantes + proximité Europe", "potential_usd": 15.2, "type": "Énergie"},
+            {"name": "Phosphates", "advantage": "Gisements de qualité + infrastructure existante", "potential_usd": 2.1, "type": "Minier"},
+            {"name": "Dates", "advantage": "Qualité premium + tradition ancestrale", "potential_usd": 0.8, "type": "Agriculture"},
+            {"name": "Produits sidérurgiques", "advantage": "Matières premières locales + marché régional", "potential_usd": 1.5, "type": "Industrie"},
+            {"name": "Ciment", "advantage": "Matières premières + demande régionale forte", "potential_usd": 0.9, "type": "Industrie"}
+        ],
+        "infrastructure": {
+            "routes_km": 108302,
+            "routes_pavees_pct": 76.8,
+            "voies_ferrees_km": 3973,
+            "ports_principaux": 11,
+            "ports_details": ["Alger", "Oran", "Annaba", "Skikda", "Bejaia", "Mostaganem"],
+            "aeroports_internationaux": 13,
+            "aeroports_details": ["Alger Houari Boumediene", "Oran Ahmed Ben Bella", "Constantine", "Annaba"]
+        },
         "key_sectors": [
             {"name": "Hydrocarbures", "pib_share": 35.0, "description": "Pétrole et gaz naturel"},
             {"name": "Services", "pib_share": 40.0, "description": "Commerce et télécommunications"},
