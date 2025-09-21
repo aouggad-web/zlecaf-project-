@@ -2375,7 +2375,7 @@ function ZLECAfCalculator() {
                           <div className="metric-change">
                             Année : 2024
                           </div>
-                          <div className="text-xs text-gray-400 mt-2 leading-tight">
+                          <div className="text-[10px] text-gray-400 mt-2 leading-tight">
                             <a href="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD" 
                                target="_blank" 
                                rel="noopener noreferrer"
