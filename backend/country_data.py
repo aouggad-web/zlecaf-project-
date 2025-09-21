@@ -517,9 +517,12 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 2158,
         "population_2024": 54700000,
         "development_index": 0.575,
+        "hdi_africa_rank": 30,
+        "hdi_world_rank": 152,
         "africa_rank": 9,
         "growth_forecast_2024": "5.3%",
-        "debt_to_gdp_ratio": 67.6,
+        "external_debt_to_gdp_ratio": 38.9,  # Dette extérieure modérée - Source: Central Bank of Kenya
+        "internal_debt_to_gdp_ratio": 28.7,  # Dette intérieure modérée - Source: Central Bank of Kenya
         "inflation_rate_2024": 6.8,
         "foreign_reserves_months": 4.1,
         "trade_balance_usd": -12.8,
@@ -528,8 +531,7 @@ REAL_COUNTRY_DATA = {
             "sp": "B",
             "moodys": "B2",
             "fitch": "B+",
-            "coface": "C",
-            "global_risk": "Modéré"
+            "coface": "C"
         },
         "export_products": [
             {"name": "Thé", "share": 21.8, "value_usd": 1.4, "type": "Agriculture"},
@@ -538,6 +540,21 @@ REAL_COUNTRY_DATA = {
             {"name": "Produits pétroliers", "share": 8.9, "value_usd": 0.6, "type": "Énergie"},
             {"name": "Textiles", "share": 7.8, "value_usd": 0.5, "type": "Manufacture"}
         ],
+        "competitive_export_products": [
+            {"name": "Thé de qualité", "advantage": "3ème exportateur mondial + qualité reconnue", "potential_usd": 2.8, "type": "Agriculture"},
+            {"name": "Fleurs d'exportation", "advantage": "Leader mondial + climat favorable", "potential_usd": 1.8, "type": "Agriculture"},
+            {"name": "Services financiers digitaux", "advantage": "M-Pesa leader + innovation fintech", "potential_usd": 3.2, "type": "Services"},
+            {"name": "Tourisme de safari", "advantage": "Faune unique + infrastructure développée", "potential_usd": 4.1, "type": "Services"}
+        ],
+        "infrastructure": {
+            "routes_km": 177800,
+            "routes_pavees_pct": 11.9,
+            "voies_ferrees_km": 3334,
+            "ports_principaux": 1,
+            "ports_details": ["Mombasa", "Lamu (en développement)"],
+            "aeroports_internationaux": 4,
+            "aeroports_details": ["Nairobi Jomo Kenyatta", "Mombasa Moi", "Eldoret", "Kisumu"]
+        },
         "key_sectors": [
             {"name": "Services", "pib_share": 54.0, "description": "TIC et finance"},
             {"name": "Agriculture", "pib_share": 22.0, "description": "Thé et café"},
