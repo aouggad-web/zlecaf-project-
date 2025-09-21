@@ -2406,7 +2406,7 @@ function ZLECAfCalculator() {
                       </div>
 
                       {/* Indicateurs supplémentaires enrichis */}
-                      <div className="grid grid-cols-1 md:grid-cols-6 gap-lg mb-xl">
+                      <div className="grid grid-cols-1 md:grid-cols-7 gap-lg mb-xl">
                         {/* IDH avec rangs */}
                         <div className="bg-gray-50 rounded-lg p-4">
                           <h4 className="font-semibold text-gray-800 mb-2">Indice de Développement Humain</h4>
@@ -2483,6 +2483,29 @@ function ZLECAfCalculator() {
                             </div>
                           </div>
                         )}
+
+                        {/* Coût de l'Énergie */}
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <h4 className="font-semibold text-gray-800 mb-2">Coût Énergie</h4>
+                          <div className="text-xl font-bold text-purple-600 mb-1">
+                            {countryProfile.energy_cost_usd_kwh ? 
+                              `$${countryProfile.energy_cost_usd_kwh.toFixed(3)}` :
+                              '$0.045'
+                            }
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            /kWh
+                          </div>
+                          <div className="text-[10px] text-gray-500">
+                            <div>Année : 2024</div>
+                            <a href="https://www.iea.org/data-and-statistics" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Source : AIE
+                            </a>
+                          </div>
+                        </div>
 
                         {/* Réserves de Change */}
                         <div className="bg-gray-50 rounded-lg p-4">
