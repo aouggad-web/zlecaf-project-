@@ -648,6 +648,7 @@ REAL_COUNTRY_DATA = {
         "internal_debt_to_gdp_ratio": 7.0,   # Dette intérieure faible - Source: Central Bank of Nigeria
         "inflation_rate_2024": 22.4,
         "foreign_reserves_months": 8.1,
+        "energy_cost_usd_kwh": 0.085,  # Coût subventionné - Source: AIE
         "trade_balance_usd": 15.2,
         "ease_of_doing_business_rank": 131,
         "risk_ratings": {
