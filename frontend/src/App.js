@@ -2465,25 +2465,24 @@ function ZLECAfCalculator() {
                           </div>
                         </div>
 
-                        {/* Dette Intérieure */}
-                        <div className="bg-gray-50 rounded-lg p-4">
-                          <h4 className="font-semibold text-gray-800 mb-2">Dette Intérieure</h4>
-                          <div className="text-2xl font-bold text-orange-600 mb-1">
-                            {countryProfile.internal_debt_to_gdp_ratio ? 
-                              countryProfile.internal_debt_to_gdp_ratio.toFixed(1) + '%' : 
-                              '55.6%'
-                            }
+                        {/* Dette Intérieure - n'afficher que si disponible */}
+                        {countryProfile.internal_debt_to_gdp_ratio && (
+                          <div className="bg-gray-50 rounded-lg p-4">
+                            <h4 className="font-semibold text-gray-800 mb-2">Dette Intérieure</h4>
+                            <div className="text-2xl font-bold text-orange-600 mb-1">
+                              {countryProfile.internal_debt_to_gdp_ratio.toFixed(1)}%
+                            </div>
+                            <div className="text-[10px] text-gray-500">
+                              <div>Année : 2024</div>
+                              <a href="https://www.bank-of-algeria.dz/" 
+                                 target="_blank" 
+                                 rel="noopener noreferrer"
+                                 className="text-blue-600 hover:underline">
+                                Source : Banque Centrale
+                              </a>
+                            </div>
                           </div>
-                          <div className="text-[10px] text-gray-500">
-                            <div>Année : 2024</div>
-                            <a href="https://www.bank-of-algeria.dz/" 
-                               target="_blank" 
-                               rel="noopener noreferrer"
-                               className="text-blue-600 hover:underline">
-                              Source : Banque Centrale
-                            </a>
-                          </div>
-                        </div>
+                        )}
 
                         {/* Réserves de Change */}
                         <div className="bg-gray-50 rounded-lg p-4">
