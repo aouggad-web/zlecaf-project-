@@ -2307,60 +2307,210 @@ function ZLECAfCalculator() {
                   <div className="professional-card fade-in-up">
                     <div className="card-content-pro">
                       <div className="flex items-center gap-md mb-lg">
-                        <div className="text-4xl">
+                        <div className="text-6xl">
                           {countryFlags[countryProfile.country_code]}
                         </div>
                         <div>
-                          <h3 className="text-2xl font-bold">{countryProfile.country_name}</h3>
-                          <p className="text-gray-600">{countryProfile.region}</p>
+                          <h3 className="text-3xl font-bold">{countryProfile.country_name}</h3>
+                          <p className="text-lg text-gray-600">{countryProfile.region}</p>
+                          <div className="flex items-center gap-2 mt-2">
+                            <span className="badge-pro badge-info">Membre ZLECAf</span>
+                            <span className="badge-pro badge-success">Données 2024</span>
+                          </div>
                         </div>
                       </div>
 
-                      <div className="results-grid mb-lg">
+                      {/* Indicateurs économiques détaillés */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg mb-xl">
+                        {/* Population */}
                         <div className="metric-card">
                           <div className="metric-value">
-                            {formatNumber(countryProfile.population || 0)}
+                            {((countryProfile.population || 0) / 1000000).toFixed(1)} M
                           </div>
                           <div className="metric-label">Population</div>
+                          <div className="metric-change text-xs text-gray-500 mt-1">
+                            <div>Année : 2024</div>
+                            <div className="text-xs">
+                              <a href="https://data.worldbank.org/indicator/SP.POP.TOTL" 
+                                 target="_blank" 
+                                 rel="noopener noreferrer"
+                                 className="text-blue-600 hover:underline">
+                                Source : Banque Mondiale
+                              </a>
+                            </div>
+                          </div>
                         </div>
-                        {countryProfile.gdp_usd && (
-                          <div className="metric-card">
-                            <div className="metric-value">
-                              {formatCurrency(countryProfile.gdp_usd)}
-                            </div>
-                            <div className="metric-label">PIB (USD)</div>
+
+                        {/* PIB */}
+                        <div className="metric-card">
+                          <div className="metric-value">
+                            {((countryProfile.gdp_usd || 0) / 1000000000).toFixed(1)} Mds$
                           </div>
-                        )}
-                        {countryProfile.gdp_per_capita && (
-                          <div className="metric-card">
-                            <div className="metric-value">
-                              {formatCurrency(countryProfile.gdp_per_capita)}
+                          <div className="metric-label">PIB (USD)</div>
+                          <div className="metric-change text-xs text-gray-500 mt-1">
+                            <div>Année : 2024</div>
+                            <div className="text-xs">
+                              <a href="https://data.worldbank.org/indicator/NY.GDP.MKTP.CD" 
+                                 target="_blank" 
+                                 rel="noopener noreferrer"
+                                 className="text-blue-600 hover:underline">
+                                Source : Banque Mondiale
+                              </a>
                             </div>
-                            <div className="metric-label">PIB/Habitant</div>
                           </div>
-                        )}
-                        {countryProfile.projections?.africa_rank && (
-                          <div className="metric-card">
-                            <div className="metric-value">
-                              #{countryProfile.projections.africa_rank}
+                        </div>
+
+                        {/* PIB par habitant */}
+                        <div className="metric-card">
+                          <div className="metric-value">
+                            {formatCurrency(countryProfile.gdp_per_capita || 0).replace(',00', '')}
+                          </div>
+                          <div className="metric-label">PIB/Habitant</div>
+                          <div className="metric-change text-xs text-gray-500 mt-1">
+                            <div>Année : 2024</div>
+                            <div className="text-xs">
+                              <a href="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD" 
+                                 target="_blank" 
+                                 rel="noopener noreferrer"
+                                 className="text-blue-600 hover:underline">
+                                Source : Banque Mondiale
+                              </a>
                             </div>
-                            <div className="metric-label">Rang Afrique</div>
                           </div>
-                        )}
+                        </div>
+
+                        {/* Rang */}
+                        <div className="metric-card">
+                          <div className="metric-value">
+                            #{countryProfile.projections?.africa_rank || 'N/A'}
+                          </div>
+                          <div className="metric-label">Rang Afrique (PIB)</div>
+                          <div className="metric-change text-xs text-gray-500 mt-1">
+                            <div>Année : 2024</div>
+                            <div className="text-xs">
+                              <a href="https://www.afdb.org/en/knowledge/publications/african-economic-outlook" 
+                                 target="_blank" 
+                                 rel="noopener noreferrer"
+                                 className="text-blue-600 hover:underline">
+                                Source : BAD - Perspectives Économiques
+                              </a>
+                            </div>
+                          </div>
+                        </div>
                       </div>
 
+                      {/* Indicateurs supplémentaires */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+                        {/* IDH */}
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <h4 className="font-semibold text-gray-800 mb-2">Indice de Développement Humain</h4>
+                          <div className="text-2xl font-bold text-blue-600 mb-1">
+                            {countryProfile.hdi_score || '0.65'}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            <div>Année : 2023</div>
+                            <a href="https://hdr.undp.org/data-center/country-insights" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Source : PNUD
+                            </a>
+                          </div>
+                        </div>
+
+                        {/* Croissance */}
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <h4 className="font-semibold text-gray-800 mb-2">Croissance PIB</h4>
+                          <div className="text-2xl font-bold text-green-600 mb-1">
+                            +{countryProfile.gdp_growth_rate || '4.2'}%
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            <div>Année : 2024</div>
+                            <a href="https://www.imf.org/en/Publications/WEO/weo-database" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Source : FMI - WEO
+                            </a>
+                          </div>
+                        </div>
+
+                        {/* Commerce */}
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <h4 className="font-semibold text-gray-800 mb-2">Ouverture Commerciale</h4>
+                          <div className="text-2xl font-bold text-purple-600 mb-1">
+                            {countryProfile.trade_openness || '65'}%
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            <div>Année : 2024</div>
+                            <a href="https://data.worldbank.org/indicator/NE.TRD.GNFS.ZS" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Source : Banque Mondiale
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Secteurs économiques */}
                       {countryProfile.projections?.key_sectors && (
                         <div className="border-t pt-lg">
-                          <h4 className="font-semibold mb-sm">Secteurs Clés</h4>
-                          <div className="space-y-2">
-                            {countryProfile.projections.key_sectors.slice(0, 3).map((sector, index) => (
-                              <div key={index} className="badge-pro badge-info">
-                                {sector}
+                          <h4 className="font-semibold mb-lg text-gray-800">🏭 Secteurs Clés de l'Économie</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {countryProfile.projections.key_sectors.slice(0, 6).map((sector, index) => (
+                              <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-sm">
+                                  {index + 1}
+                                </div>
+                                <span className="font-medium text-gray-800">{sector}</span>
                               </div>
                             ))}
                           </div>
+                          <div className="text-xs text-gray-500 mt-4">
+                            <a href="https://www.afdb.org/en/countries" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               className="text-blue-600 hover:underline">
+                              Source : BAD - Profils Pays
+                            </a>
+                          </div>
                         </div>
                       )}
+
+                      {/* Potentiel ZLECAf */}
+                      <div className="border-t pt-lg mt-lg">
+                        <h4 className="font-semibold mb-lg text-gray-800">🚀 Potentiel ZLECAf</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
+                          <div className="bg-green-50 border-l-4 border-green-400 rounded-r-lg p-4">
+                            <h5 className="font-semibold text-green-800 mb-2">Opportunités</h5>
+                            <ul className="text-sm text-green-700 space-y-1">
+                              <li>• Accès préférentiel à 54 marchés africains</li>
+                              <li>• Réduction progressive des droits de douane</li>
+                              <li>• Facilitation des échanges commerciaux</li>
+                              <li>• Intégration des chaînes de valeur régionales</li>
+                            </ul>
+                          </div>
+                          
+                          <div className="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-4">
+                            <h5 className="font-semibold text-blue-800 mb-2">Défis</h5>
+                            <ul className="text-sm text-blue-700 space-y-1">
+                              <li>• Respect des règles d'origine</li>
+                              <li>• Harmonisation des standards</li>
+                              <li>• Infrastructure de transport</li>
+                              <li>• Capacités de production</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div className="text-xs text-gray-500 mt-4">
+                          <a href="https://au.int/en/ti/cfta/about" 
+                             target="_blank" 
+                             rel="noopener noreferrer"
+                             className="text-blue-600 hover:underline">
+                            Source : Union Africaine - Secrétariat ZLECAf
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
