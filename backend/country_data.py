@@ -875,6 +875,189 @@ REAL_COUNTRY_DATA = {
             "description": "Modèle de transformation économique rapide",
             "key_opportunities": ["Hub TIC régional", "Tourisme premium", "Manufacture"]
         }
+    },
+
+    "SEN": {  # Sénégal
+        "name": "Sénégal",
+        "gdp_usd_2024": 31.2,
+        "gdp_per_capita_2024": 1789,
+        "population_2024": 17400000,
+        "development_index": 0.511,
+        "hdi_africa_rank": 39,
+        "hdi_world_rank": 170,
+        "africa_rank": 31,
+        "growth_forecast_2024": "8.8%",
+        "external_debt_to_gdp_ratio": 68.1,
+        "internal_debt_to_gdp_ratio": 8.2,
+        "inflation_rate_2024": 3.4,
+        "foreign_reserves_months": 4.8,
+        "energy_cost_usd_kwh": 0.198,
+        "trade_balance_usd": -3.1,
+        "ease_of_doing_business_rank": 123,
+        "risk_ratings": {
+            "sp": "B+",
+            "moodys": "Ba3",
+            "fitch": "B+",
+            "coface": "B"
+        },
+        "export_products": [
+            {"name": "Poisson", "share": 19.8, "value_usd": 0.6, "type": "Agriculture"},
+            {"name": "Phosphates", "share": 16.2, "value_usd": 0.5, "type": "Minier"},
+            {"name": "Arachides", "share": 12.4, "value_usd": 0.4, "type": "Agriculture"},
+            {"name": "Or", "share": 11.8, "value_usd": 0.4, "type": "Minier"},
+            {"name": "Produits chimiques", "share": 9.6, "value_usd": 0.3, "type": "Industrie"}
+        ],
+        "competitive_export_products": [
+            {"name": "Produits halieutiques transformés", "advantage": "Côte atlantique riche + transformation", "potential_usd": 1.8, "type": "Agriculture"},
+            {"name": "Phosphates et dérivés", "advantage": "Réserves importantes + industrie chimique", "potential_usd": 1.2, "type": "Minier"},
+            {"name": "Services financiers", "advantage": "Hub régional + stabilité politique", "potential_usd": 0.9, "type": "Services"},
+            {"name": "Arachides transformées", "advantage": "Production importante + valeur ajoutée", "potential_usd": 0.7, "type": "Agriculture"}
+        ],
+        "infrastructure": {
+            "routes_km": 16900,
+            "routes_pavees_pct": 29.3,
+            "voies_ferrees_km": 906,
+            "ports_principaux": 1,
+            "ports_details": ["Dakar"],
+            "aeroports_internationaux": 1,
+            "aeroports_details": ["Dakar Blaise Diagne"]
+        },
+        "key_sectors": [
+            {"name": "Services", "pib_share": 58.0, "description": "Commerce et finance"},
+            {"name": "Agriculture", "pib_share": 17.0, "description": "Arachides et pêche"},
+            {"name": "Industrie", "pib_share": 25.0, "description": "Transformation alimentaire"}
+        ],
+        "top_trade_partners": ["France", "Mali", "Suisse", "Inde", "Chine"],
+        "investment_opportunities": ["Pêche", "Agro-industrie", "Services financiers", "Tourisme"],
+        "main_exports": ["Poisson (20%)", "Phosphates (16%)", "Arachides (12%)"],
+        "main_imports": ["Machines et équipements (22%)", "Produits alimentaires (18%)", "Carburants (16%)"],
+        "zlecaf_potential": {
+            "level": "Élevé",
+            "description": "Hub régional avec port stratégique",
+            "key_opportunities": ["Hub logistique", "Pêche industrielle", "Services régionaux"]
+        }
+    },
+
+    "UGA": {  # Ouganda
+        "name": "Ouganda",
+        "gdp_usd_2024": 48.1,
+        "gdp_per_capita_2024": 1015,
+        "population_2024": 47400000,
+        "development_index": 0.544,
+        "hdi_africa_rank": 34,
+        "hdi_world_rank": 166,
+        "africa_rank": 19,
+        "growth_forecast_2024": "6.0%",
+        "external_debt_to_gdp_ratio": 41.8,
+        "internal_debt_to_gdp_ratio": 8.9,
+        "inflation_rate_2024": 5.3,
+        "foreign_reserves_months": 4.1,
+        "energy_cost_usd_kwh": 0.167,
+        "trade_balance_usd": -4.2,
+        "ease_of_doing_business_rank": 116,
+        "risk_ratings": {
+            "sp": "B",
+            "moodys": "B2",
+            "fitch": "B",
+            "coface": "C"
+        },
+        "export_products": [
+            {"name": "Café", "share": 20.1, "value_usd": 0.9, "type": "Agriculture"},
+            {"name": "Or", "share": 16.8, "value_usd": 0.8, "type": "Minier"},
+            {"name": "Thé", "share": 8.2, "value_usd": 0.4, "type": "Agriculture"},
+            {"name": "Poisson", "share": 7.9, "value_usd": 0.4, "type": "Agriculture"},
+            {"name": "Coton", "share": 6.1, "value_usd": 0.3, "type": "Agriculture"}
+        ],
+        "competitive_export_products": [
+            {"name": "Café arabica de qualité", "advantage": "Altitude + climat favorable + tradition", "potential_usd": 2.1, "type": "Agriculture"},
+            {"name": "Hydroélectricité", "advantage": "Potentiel énorme + export régional", "potential_usd": 1.8, "type": "Énergie"},
+            {"name": "Produits agricoles transformés", "advantage": "Diversité agricole + main d'œuvre", "potential_usd": 1.4, "type": "Agriculture"},
+            {"name": "Tourisme", "advantage": "Faune + parcs nationaux + gorilles", "potential_usd": 1.1, "type": "Services"}
+        ],
+        "infrastructure": {
+            "routes_km": 83000,
+            "routes_pavees_pct": 23.0,
+            "voies_ferrees_km": 1244,
+            "ports_principaux": 0,
+            "ports_details": ["Accès via Mombasa (Kenya)", "Dar es Salaam (Tanzanie)"],
+            "aeroports_internationaux": 1,
+            "aeroports_details": ["Entebbe"]
+        },
+        "key_sectors": [
+            {"name": "Agriculture", "pib_share": 24.0, "description": "Café et cultures"},
+            {"name": "Services", "pib_share": 54.0, "description": "Commerce et finance"},
+            {"name": "Industrie", "pib_share": 22.0, "description": "Transformation alimentaire"}
+        ],
+        "top_trade_partners": ["Kenya", "Rwanda", "États-Unis", "Pays-Bas", "Allemagne"],
+        "investment_opportunities": ["Agriculture", "Hydroélectricité", "Tourisme", "Manufacture"],
+        "main_exports": ["Café (20%)", "Or (17%)", "Thé (8%)"],
+        "main_imports": ["Machines et équipements (24%)", "Carburants (18%)", "Produits alimentaires (16%)"],
+        "zlecaf_potential": {
+            "level": "Élevé",
+            "description": "Hub énergétique et agricole de l'Afrique de l'Est",
+            "key_opportunities": ["Export énergétique", "Agriculture", "Hub logistique"]
+        }
+    },
+
+    "TZA": {  # Tanzanie
+        "name": "Tanzanie",
+        "gdp_usd_2024": 75.7,
+        "gdp_per_capita_2024": 1192,
+        "population_2024": 63500000,
+        "development_index": 0.549,
+        "hdi_africa_rank": 33,
+        "hdi_world_rank": 160,
+        "africa_rank": 14,
+        "growth_forecast_2024": "5.2%",
+        "external_debt_to_gdp_ratio": 38.7,
+        "internal_debt_to_gdp_ratio": 4.1,
+        "inflation_rate_2024": 4.8,
+        "foreign_reserves_months": 4.9,
+        "energy_cost_usd_kwh": 0.189,
+        "trade_balance_usd": -2.8,
+        "ease_of_doing_business_rank": 141,
+        "risk_ratings": {
+            "sp": "Non noté",
+            "moodys": "Non noté",
+            "fitch": "Non noté",
+            "coface": "C"
+        },
+        "export_products": [
+            {"name": "Or", "share": 39.2, "value_usd": 2.8, "type": "Minier"},
+            {"name": "Noix de cajou", "share": 7.8, "value_usd": 0.6, "type": "Agriculture"},
+            {"name": "Café", "share": 4.9, "value_usd": 0.4, "type": "Agriculture"},
+            {"name": "Coton", "share": 4.1, "value_usd": 0.3, "type": "Agriculture"},
+            {"name": "Thé", "share": 3.8, "value_usd": 0.3, "type": "Agriculture"}
+        ],
+        "competitive_export_products": [
+            {"name": "Or et métaux précieux", "advantage": "Réserves importantes + développement minier", "potential_usd": 4.8, "type": "Minier"},
+            {"name": "Tourisme de safari", "advantage": "Serengeti + Kilimandjaro + côte", "potential_usd": 3.2, "type": "Services"},
+            {"name": "Gaz naturel", "advantage": "Découvertes récentes + potentiel énorme", "potential_usd": 8.1, "type": "Énergie"},
+            {"name": "Noix de cajou transformées", "advantage": "3ème producteur mondial + transformation", "potential_usd": 1.4, "type": "Agriculture"}
+        ],
+        "infrastructure": {
+            "routes_km": 91049,
+            "routes_pavees_pct": 7.1,
+            "voies_ferrees_km": 3682,
+            "ports_principaux": 1,
+            "ports_details": ["Dar es Salaam", "Mtwara", "Tanga"],
+            "aeroports_internationaux": 3,
+            "aeroports_details": ["Dar es Salaam Julius Nyerere", "Kilimandjaro", "Zanzibar"]
+        },
+        "key_sectors": [
+            {"name": "Agriculture", "pib_share": 27.0, "description": "Cultures et élevage"},
+            {"name": "Services", "pib_share": 47.0, "description": "Commerce et tourisme"},
+            {"name": "Industrie", "pib_share": 26.0, "description": "Mines et manufacture"}
+        ],
+        "top_trade_partners": ["Inde", "Chine", "Japon", "Kenya", "Pays-Bas"],
+        "investment_opportunities": ["Gaz naturel", "Tourisme", "Agriculture", "Mines"],
+        "main_exports": ["Or (39%)", "Noix de cajou (8%)", "Café (5%)"],
+        "main_imports": ["Machines et équipements (21%)", "Carburants (19%)", "Produits alimentaires (15%)"],
+        "zlecaf_potential": {
+            "level": "Très Élevé",
+            "description": "Hub portuaire et énergétique majeur",
+            "key_opportunities": ["Hub logistique régional", "Gaz naturel", "Tourisme"]
+        }
     }
 }
 
