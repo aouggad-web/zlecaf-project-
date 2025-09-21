@@ -18,6 +18,7 @@ REAL_COUNTRY_DATA = {
         "internal_debt_to_gdp_ratio": 55.6, # Dette intérieure plus élevée - Source: Banque d'Algérie
         "inflation_rate_2024": 7.2,
         "foreign_reserves_months": 8.5,
+        "energy_cost_usd_kwh": 0.045,  # Énergie très subventionnée - Source: AIE
         "trade_balance_usd": 12.8,
         "ease_of_doing_business_rank": 157, # Banque Mondiale Doing Business 2020
         "risk_ratings": {
