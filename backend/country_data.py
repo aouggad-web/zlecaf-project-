@@ -10,6 +10,8 @@ REAL_COUNTRY_DATA = {
         "gdp_per_capita_2024": 5763,
         "population_2024": 46700000,
         "development_index": 0.745,
+        "hdi_africa_rank": 3,
+        "hdi_world_rank": 91,
         "africa_rank": 3,
         "growth_forecast_2024": "3.2%",
         "external_debt_to_gdp_ratio": 2.8,  # Dette extérieure très faible - Source: Banque d'Algérie
