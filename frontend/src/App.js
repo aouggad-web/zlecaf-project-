@@ -2457,7 +2457,7 @@ function ZLECAfCalculator() {
 
                         {/* Dette Extérieure */}
                         <div className="bg-gray-50 rounded-lg p-4">
-                          <h4 className="font-semibold text-gray-800 mb-2">Dette Extérieure</h4>
+                          <h4 className="font-semibold text-gray-800 mb-2">{t.externalDebt}</h4>
                           <div className="text-2xl font-bold text-green-600 mb-1">
                             {countryProfile.external_debt_to_gdp_ratio ? 
                               countryProfile.external_debt_to_gdp_ratio.toFixed(1) + '%' : 
@@ -2465,9 +2465,9 @@ function ZLECAfCalculator() {
                             }
                           </div>
                           <div className="text-[10px] text-gray-500">
-                            <div>Année : 2024</div>
+                            <div>{t.year} : 2024</div>
                             <div className="text-blue-600">
-                              Source : {countryProfile.external_debt_source || 'FMI - Debt Sustainability Analysis 2024'}
+                              {t.source} : {countryProfile.external_debt_source || (language === 'en' ? 'IMF - Debt Sustainability Analysis 2024' : 'FMI - Debt Sustainability Analysis 2024')}
                             </div>
                           </div>
                         </div>
@@ -2475,14 +2475,14 @@ function ZLECAfCalculator() {
                         {/* Dette Intérieure - n'afficher que si disponible */}
                         {countryProfile.internal_debt_to_gdp_ratio && (
                           <div className="bg-gray-50 rounded-lg p-4">
-                            <h4 className="font-semibold text-gray-800 mb-2">Dette Intérieure</h4>
+                            <h4 className="font-semibold text-gray-800 mb-2">{t.internalDebt}</h4>
                             <div className="text-2xl font-bold text-orange-600 mb-1">
                               {countryProfile.internal_debt_to_gdp_ratio.toFixed(1)}%
                             </div>
                             <div className="text-[10px] text-gray-500">
-                              <div>Année : 2024</div>
+                              <div>{t.year} : 2024</div>
                               <div className="text-blue-600">
-                                Source : {countryProfile.internal_debt_source || 'Banque Mondiale - Public Debt Statistics 2024'}
+                                {t.source} : {countryProfile.internal_debt_source || (language === 'en' ? 'World Bank - Public Debt Statistics 2024' : 'Banque Mondiale - Public Debt Statistics 2024')}
                               </div>
                             </div>
                           </div>
@@ -2490,7 +2490,7 @@ function ZLECAfCalculator() {
 
                         {/* Coût de l'Énergie */}
                         <div className="bg-gray-50 rounded-lg p-4">
-                          <h4 className="font-semibold text-gray-800 mb-2">Coût Énergie</h4>
+                          <h4 className="font-semibold text-gray-800 mb-2">{t.energyCost}</h4>
                           <div className="text-xl font-bold text-purple-600 mb-1">
                             {countryProfile.energy_cost_usd_kwh ? 
                               `$${countryProfile.energy_cost_usd_kwh.toFixed(3)}` :
