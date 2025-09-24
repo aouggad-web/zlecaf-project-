@@ -697,9 +697,14 @@ function ZLECAfCalculator() {
       unionAfricaine: "African Union",
       banqueMondiale: "World Bank",
       fmi: "IMF",
-      bad: "AfDB",
+      bad: "AfDB", 
       unctad: "UNCTAD",
-      oec: "OEC Atlas"
+      oec: "OEC Atlas",
+      externalDebt: "External Debt",
+      internalDebt: "Internal Debt",
+      energyCost: "Energy Cost", 
+      year: "Year",
+      source: "Source"
     }
   };
 
