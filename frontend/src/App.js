@@ -653,7 +653,12 @@ function ZLECAfCalculator() {
       fmi: "FMI",
       bad: "BAD",
       unctad: "UNCTAD",
-      oec: "OEC Atlas"
+      oec: "OEC Atlas",
+      externalDebt: "Dette Extérieure",
+      internalDebt: "Dette Intérieure", 
+      energyCost: "Coût Énergie",
+      year: "Année",
+      source: "Source"
     },
     en: {
       title: "AfCFTA Digital Hub",
