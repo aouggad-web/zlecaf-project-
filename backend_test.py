@@ -214,6 +214,147 @@ class ZLECAfAPITester:
             self.log_test(f"Rules of Origin - {hs_code}", False, str(e))
             return False
 
+    def test_newly_added_countries(self):
+        """Test spécifique pour les pays nouvellement ajoutés"""
+        newly_added_countries = [
+            ("MU", "Maurice"),
+            ("SC", "Seychelles"), 
+            ("TD", "Tchad"),
+            ("LY", "Libye")
+        ]
+        
+        print("\n🔍 Test des pays nouvellement ajoutés:")
+        for code, name in newly_added_countries:
+            success = self.test_country_profile(code, name)
+            if success:
+                # Test des nouveaux champs spécifiques
+                try:
+                    response = self.session.get(f"{self.api_url}/country-profile/{code}")
+                    if response.status_code == 200:
+                        profile = response.json()
+                        new_fields = [
+                            'hdi_africa_rank', 'hdi_world_rank', 'external_debt_to_gdp_ratio',
+                            'internal_debt_to_gdp_ratio', 'energy_cost_usd_kwh', 'infrastructure',
+                            'competitive_export_products'
+                        ]
+                        
+                        missing_new_fields = [field for field in new_fields if field not in profile]
+                        if not missing_new_fields:
+                            self.log_test(f"New Fields - {name}", True, 
+                                        f"Tous les nouveaux champs présents")
+                        else:
+                            self.log_test(f"New Fields - {name}", False, 
+                                        f"Champs manquants: {missing_new_fields}")
+                except Exception as e:
+                    self.log_test(f"New Fields - {name}", False, str(e))
+
+    def test_data_integrity_all_countries(self):
+        """Test d'intégrité des données pour tous les 54 pays"""
+        print("\n🔍 Test d'intégrité des données pour tous les pays:")
+        
+        try:
+            response = self.session.get(f"{self.api_url}/countries")
+            if response.status_code == 200:
+                countries = response.json()
+                
+                # Test un échantillon représentatif de tous les pays
+                sample_countries = [
+                    ("DZ", "Algérie"), ("EG", "Égypte"), ("MA", "Maroc"), ("TN", "Tunisie"),  # Afrique du Nord
+                    ("NG", "Nigeria"), ("GH", "Ghana"), ("SN", "Sénégal"), ("CI", "Côte d'Ivoire"),  # Afrique de l'Ouest
+                    ("KE", "Kenya"), ("ET", "Éthiopie"), ("TZ", "Tanzanie"), ("UG", "Ouganda"),  # Afrique de l'Est
+                    ("ZA", "Afrique du Sud"), ("BW", "Botswana"), ("NA", "Namibie"),  # Afrique Australe
+                    ("CM", "Cameroun"), ("CD", "République Démocratique du Congo"), ("AO", "Angola")  # Afrique Centrale
+                ]
+                
+                for code, name in sample_countries:
+                    try:
+                        profile_response = self.session.get(f"{self.api_url}/country-profile/{code}")
+                        if profile_response.status_code == 200:
+                            profile = profile_response.json()
+                            
+                            # Vérifier les champs essentiels
+                            essential_fields = ['country_code', 'country_name', 'region', 'population']
+                            missing_essential = [field for field in essential_fields if field not in profile]
+                            
+                            if not missing_essential:
+                                self.log_test(f"Data Integrity - {name}", True, 
+                                            f"Champs essentiels présents")
+                            else:
+                                self.log_test(f"Data Integrity - {name}", False, 
+                                            f"Champs essentiels manquants: {missing_essential}")
+                        else:
+                            self.log_test(f"Data Integrity - {name}", False, 
+                                        f"Erreur HTTP: {profile_response.status_code}")
+                    except Exception as e:
+                        self.log_test(f"Data Integrity - {name}", False, str(e))
+                        
+        except Exception as e:
+            self.log_test("Data Integrity Test", False, str(e))
+
+    def test_performance_verification(self):
+        """Test de performance des endpoints"""
+        print("\n⚡ Test de performance:")
+        
+        import time
+        
+        # Test performance country profile
+        start_time = time.time()
+        response = self.session.get(f"{self.api_url}/country-profile/NG")
+        country_profile_time = time.time() - start_time
+        
+        if response.status_code == 200 and country_profile_time < 5.0:
+            self.log_test("Performance - Country Profile", True, 
+                        f"Temps de réponse: {country_profile_time:.2f}s")
+        else:
+            self.log_test("Performance - Country Profile", False, 
+                        f"Temps de réponse trop lent: {country_profile_time:.2f}s")
+        
+        # Test performance statistics
+        start_time = time.time()
+        response = self.session.get(f"{self.api_url}/statistics")
+        stats_time = time.time() - start_time
+        
+        if response.status_code == 200 and stats_time < 3.0:
+            self.log_test("Performance - Statistics", True, 
+                        f"Temps de réponse: {stats_time:.2f}s")
+        else:
+            self.log_test("Performance - Statistics", False, 
+                        f"Temps de réponse trop lent: {stats_time:.2f}s")
+
+    def test_edge_cases(self):
+        """Test des cas limites et gestion d'erreurs"""
+        print("\n🚨 Test des cas limites:")
+        
+        # Test pays invalide
+        response = self.session.get(f"{self.api_url}/country-profile/XX")
+        if response.status_code == 404:
+            self.log_test("Edge Case - Invalid Country", True, "Erreur 404 correcte")
+        else:
+            self.log_test("Edge Case - Invalid Country", False, 
+                        f"Code de statut inattendu: {response.status_code}")
+        
+        # Test calcul tarif avec pays invalide
+        payload = {
+            "origin_country": "XX",
+            "destination_country": "NG",
+            "hs_code": "010121",
+            "value": 1000
+        }
+        response = self.session.post(f"{self.api_url}/calculate-tariff", json=payload)
+        if response.status_code == 400:
+            self.log_test("Edge Case - Invalid Origin Country", True, "Erreur 400 correcte")
+        else:
+            self.log_test("Edge Case - Invalid Origin Country", False, 
+                        f"Code de statut inattendu: {response.status_code}")
+        
+        # Test règles d'origine avec code SH invalide
+        response = self.session.get(f"{self.api_url}/rules-of-origin/999999")
+        if response.status_code == 404:
+            self.log_test("Edge Case - Invalid HS Code", True, "Erreur 404 correcte")
+        else:
+            self.log_test("Edge Case - Invalid HS Code", False, 
+                        f"Code de statut inattendu: {response.status_code}")
+
     def run_comprehensive_tests(self):
         """Exécuter tous les tests avec les cas suggérés"""
         print("🚀 Démarrage des tests complets de l'API ZLECAf")
@@ -255,6 +396,18 @@ class ZLECAfAPITester:
         # Test 6: Règles d'origine pour les codes SH testés
         for _, _, hs_code, _, _ in test_cases:
             self.test_rules_of_origin(hs_code)
+        
+        # Test 7: Pays nouvellement ajoutés
+        self.test_newly_added_countries()
+        
+        # Test 8: Intégrité des données pour tous les pays
+        self.test_data_integrity_all_countries()
+        
+        # Test 9: Performance
+        self.test_performance_verification()
+        
+        # Test 10: Cas limites
+        self.test_edge_cases()
         
         # Résultats finaux
         print("=" * 60)
