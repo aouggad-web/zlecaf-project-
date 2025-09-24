@@ -341,9 +341,12 @@ class CountryEconomicProfile(BaseModel):
     gdp_per_capita: Optional[float] = None
     inflation_rate: Optional[float] = None
     external_debt_to_gdp_ratio: Optional[float] = None
+    external_debt_source: Optional[str] = None
     internal_debt_to_gdp_ratio: Optional[float] = None 
+    internal_debt_source: Optional[str] = None
     foreign_reserves_months: Optional[float] = None
     energy_cost_usd_kwh: Optional[float] = None
+    energy_cost_source: Optional[str] = None
     trade_balance_usd: Optional[float] = None
     ease_of_doing_business_rank: Optional[int] = None
     region: str
