@@ -73,7 +73,50 @@ REAL_COUNTRY_DATA = {
 
 def get_country_data(country_code):
     """Récupérer les données d'un pays par son code ISO3"""
-    return REAL_COUNTRY_DATA.get(country_code, {})
+    return REAL_COUNTRY_DATA.get(country_code, {,
+
+    "BDI": {'name': 'Burundi', 'gdp_usd_2024': 3.0, 'gdp_per_capita_2024': 238, 'population_2024': 12600000, 'external_debt_to_gdp_ratio': 49.7, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 8.2, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "BFA": {'name': 'Burkina Faso', 'gdp_usd_2024': 18.7, 'gdp_per_capita_2024': 831, 'population_2024': 22500000, 'external_debt_to_gdp_ratio': 31.8, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 11.2, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "CAF": {'name': 'République Centrafricaine', 'gdp_usd_2024': 2.4, 'gdp_per_capita_2024': 468, 'population_2024': 5100000, 'external_debt_to_gdp_ratio': 48.9, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 15.8, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "CMR": {'name': 'Cameroun', 'gdp_usd_2024': 45.2, 'gdp_per_capita_2024': 1663, 'population_2024': 27200000, 'external_debt_to_gdp_ratio': 35.8, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 15.2, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "COG": {'name': 'République du Congo', 'gdp_usd_2024': 12.9, 'gdp_per_capita_2024': 2289, 'population_2024': 5600000, 'external_debt_to_gdp_ratio': 88.1, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 18.9, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "COM": {'name': 'Comores', 'gdp_usd_2024': 1.4, 'gdp_per_capita_2024': 1554, 'population_2024': 900000, 'external_debt_to_gdp_ratio': 32.1, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 8.9, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "CPV": {'name': 'Cap-Vert', 'gdp_usd_2024': 2.2, 'gdp_per_capita_2024': 3869, 'population_2024': 570000, 'external_debt_to_gdp_ratio': 98.1, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 22.8, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "DJI": {'name': 'Djibouti', 'gdp_usd_2024': 3.9, 'gdp_per_capita_2024': 3814, 'population_2024': 1000000, 'external_debt_to_gdp_ratio': 78.1, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 4.2, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "ERI": {'name': 'Érythrée', 'gdp_usd_2024': 2.1, 'gdp_per_capita_2024': 587, 'population_2024': 3600000, 'external_debt_to_gdp_ratio': 165.7, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 32.1, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "GAB": {'name': 'Gabon', 'gdp_usd_2024': 20.8, 'gdp_per_capita_2024': 8917, 'population_2024': 2300000, 'external_debt_to_gdp_ratio': 58.9, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 9.8, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "GNQ": {'name': 'Guinée Équatoriale', 'gdp_usd_2024': 12.3, 'gdp_per_capita_2024': 8456, 'population_2024': 1450000, 'external_debt_to_gdp_ratio': 26.8, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 1.8, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "LBY": {'name': 'Libye', 'gdp_usd_2024': 45.8, 'gdp_per_capita_2024': 6716, 'population_2024': 6800000, 'external_debt_to_gdp_ratio': 155.8, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 89.4, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "LSO": {'name': 'Lesotho', 'gdp_usd_2024': 2.5, 'gdp_per_capita_2024': 1164, 'population_2024': 2100000, 'external_debt_to_gdp_ratio': 41.8, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 3.2, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "MUS": {'name': 'Maurice', 'gdp_usd_2024': 14.4, 'gdp_per_capita_2024': 11328, 'population_2024': 1270000, 'external_debt_to_gdp_ratio': 89.4, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 6.1, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "SDN": {'name': 'Soudan', 'gdp_usd_2024': 20.0, 'gdp_per_capita_2024': 441, 'population_2024': 45400000, 'external_debt_to_gdp_ratio': 256.7, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 78.9, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "SOM": {'name': 'Somalie', 'gdp_usd_2024': 8.3, 'gdp_per_capita_2024': 499, 'population_2024': 16600000, 'external_debt_to_gdp_ratio': 64.4, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 0.8, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "SSD": {'name': 'Soudan du Sud', 'gdp_usd_2024': 3.1, 'gdp_per_capita_2024': 275, 'population_2024': 11300000, 'external_debt_to_gdp_ratio': 34.2, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 8.9, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "STP": {'name': 'São Tomé-et-Príncipe', 'gdp_usd_2024': 0.5, 'gdp_per_capita_2024': 2267, 'population_2024': 220000, 'external_debt_to_gdp_ratio': 87.9, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 12.1, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "SWZ": {'name': 'Eswatini', 'gdp_usd_2024': 4.7, 'gdp_per_capita_2024': 4019, 'population_2024': 1170000, 'external_debt_to_gdp_ratio': 41.8, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 8.2, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "SYC": {'name': 'Seychelles', 'gdp_usd_2024': 1.9, 'gdp_per_capita_2024': 18795, 'population_2024': 100000, 'external_debt_to_gdp_ratio': 67.8, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 4.2, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'},
+
+    "TCD": {'name': 'Tchad', 'gdp_usd_2024': 11.8, 'gdp_per_capita_2024': 695, 'population_2024': 17000000, 'external_debt_to_gdp_ratio': 48.9, 'external_debt_source': 'FMI - Debt Sustainability Analysis 2024', 'internal_debt_to_gdp_ratio': 8.1, 'internal_debt_source': 'Banque Mondiale - Public Debt Statistics 2024'}
+})
 
 def get_all_countries():
     """Récupérer tous les pays avec leurs données"""
