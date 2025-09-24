@@ -2471,12 +2471,9 @@ function ZLECAfCalculator() {
                             </div>
                             <div className="text-[10px] text-gray-500">
                               <div>Année : 2024</div>
-                              <a href="https://www.bank-of-algeria.dz/" 
-                                 target="_blank" 
-                                 rel="noopener noreferrer"
-                                 className="text-blue-600 hover:underline">
-                                Source : Banque Centrale
-                              </a>
+                              <div className="text-blue-600">
+                                Source : {countryProfile.internal_debt_source || 'Banque Mondiale - Public Debt Statistics 2024'}
+                              </div>
                             </div>
                           </div>
                         )}
