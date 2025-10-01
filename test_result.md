@@ -237,6 +237,7 @@ metadata:
 
 test_plan:
   current_focus:
+    - "HDI data accuracy verification completed"
     - "All backend API endpoints tested and verified"
   stuck_tasks: []
   test_all: true
