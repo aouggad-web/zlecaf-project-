@@ -479,7 +479,10 @@ class ZLECAfAPITester:
         # Test 9: Performance
         self.test_performance_verification()
         
-        # Test 10: Cas limites
+        # Test 10: Précision des données HDI
+        self.test_hdi_data_accuracy()
+        
+        # Test 11: Cas limites
         self.test_edge_cases()
         
         # Résultats finaux
