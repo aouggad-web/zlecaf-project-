@@ -230,3 +230,7 @@ test_plan:
 agent_communication:
   - agent: "testing"
     message: "Comprehensive backend testing completed successfully. All 46 tests passed (100% success rate). API endpoints are fully functional with excellent performance. All 54 African countries accessible with complete economic data including newly added fields. Error handling working correctly for edge cases. Backend is production-ready."
+  - agent: "user"
+    message: "User reported incorrect HDI data for Algeria - should be 0.763 according to UNDP data (https://hdr.undp.org/data-center/specific-country-data#/countries/DZA). Also requested verification for all other African countries HDI data."
+  - agent: "main"
+    message: "Verified user report - Algeria HDI should be 0.763. Retrieved official UNDP HDI data for all 54 African countries. Need to add missing HDI fields (hdi_score, hdi_africa_rank, hdi_world_rank) to country_data.py and update backend to handle these fields properly."
