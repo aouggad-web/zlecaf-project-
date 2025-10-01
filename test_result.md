@@ -105,6 +105,18 @@
 user_problem_statement: "Test the ZLECAf backend application thoroughly after completing the population of all 54 African countries with comprehensive economic data. Please verify API endpoints functionality, data integrity checks, performance verification, and edge cases."
 
 backend:
+  - task: "HDI data correction for all African countries"
+    implemented: false
+    working: false
+    file: "/app/backend/country_data.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "user"
+        comment: "User reported Algeria HDI incorrect - should be 0.763. Missing HDI data (hdi_score, hdi_africa_rank, hdi_world_rank) for all countries in country_data.py"
+
   - task: "GET /api/countries endpoint"
     implemented: true
     working: true
