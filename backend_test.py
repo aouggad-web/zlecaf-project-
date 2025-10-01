@@ -321,6 +321,79 @@ class ZLECAfAPITester:
             self.log_test("Performance - Statistics", False, 
                         f"Temps de réponse trop lent: {stats_time:.2f}s")
 
+    def test_hdi_data_accuracy(self):
+        """Test spécifique pour la précision des données HDI selon les valeurs UNDP officielles"""
+        print("\n📊 Test de précision des données HDI:")
+        
+        # Données HDI officielles UNDP à vérifier
+        expected_hdi_data = {
+            "DZ": {"hdi_score": 0.763, "hdi_africa_rank": 13, "hdi_world_rank": 91, "name": "Algérie"},
+            "MA": {"hdi_score": 0.710, "hdi_africa_rank": 21, "hdi_world_rank": 113, "name": "Maroc"},
+            "EG": {"hdi_score": 0.727, "hdi_africa_rank": 17, "hdi_world_rank": 105, "name": "Égypte"},
+            "NG": {"hdi_score": 0.548, "hdi_africa_rank": 38, "hdi_world_rank": 161, "name": "Nigeria"},
+            "ZA": {"hdi_score": 0.710, "hdi_africa_rank": 22, "hdi_world_rank": 113, "name": "Afrique du Sud"},
+            "KE": {"hdi_score": 0.601, "hdi_africa_rank": 31, "hdi_world_rank": 146, "name": "Kenya"}
+        }
+        
+        hdi_test_passed = 0
+        hdi_test_total = len(expected_hdi_data)
+        
+        for country_code, expected_data in expected_hdi_data.items():
+            try:
+                response = self.session.get(f"{self.api_url}/country-profile/{country_code}")
+                
+                if response.status_code == 200:
+                    profile = response.json()
+                    
+                    # Vérifier la présence des champs HDI
+                    hdi_fields = ['hdi_score', 'hdi_africa_rank', 'hdi_world_rank']
+                    missing_fields = [field for field in hdi_fields if field not in profile]
+                    
+                    if missing_fields:
+                        self.log_test(f"HDI Data - {expected_data['name']}", False, 
+                                    f"Champs HDI manquants: {missing_fields}")
+                        continue
+                    
+                    # Vérifier la précision des valeurs HDI
+                    actual_hdi_score = profile.get('hdi_score')
+                    actual_africa_rank = profile.get('hdi_africa_rank')
+                    actual_world_rank = profile.get('hdi_world_rank')
+                    
+                    # Tolérance pour les scores HDI (±0.001)
+                    hdi_score_match = (actual_hdi_score is not None and 
+                                     abs(actual_hdi_score - expected_data['hdi_score']) <= 0.001)
+                    
+                    # Vérification exacte pour les rangs
+                    africa_rank_match = actual_africa_rank == expected_data['hdi_africa_rank']
+                    world_rank_match = actual_world_rank == expected_data['hdi_world_rank']
+                    
+                    if hdi_score_match and africa_rank_match and world_rank_match:
+                        self.log_test(f"HDI Data - {expected_data['name']}", True, 
+                                    f"HDI: {actual_hdi_score}, Afrique: #{actual_africa_rank}, Monde: #{actual_world_rank}")
+                        hdi_test_passed += 1
+                    else:
+                        errors = []
+                        if not hdi_score_match:
+                            errors.append(f"HDI attendu: {expected_data['hdi_score']}, reçu: {actual_hdi_score}")
+                        if not africa_rank_match:
+                            errors.append(f"Rang Afrique attendu: {expected_data['hdi_africa_rank']}, reçu: {actual_africa_rank}")
+                        if not world_rank_match:
+                            errors.append(f"Rang Monde attendu: {expected_data['hdi_world_rank']}, reçu: {actual_world_rank}")
+                        
+                        self.log_test(f"HDI Data - {expected_data['name']}", False, 
+                                    f"Données incorrectes: {'; '.join(errors)}")
+                else:
+                    self.log_test(f"HDI Data - {expected_data['name']}", False, 
+                                f"Erreur HTTP: {response.status_code}")
+                    
+            except Exception as e:
+                self.log_test(f"HDI Data - {expected_data['name']}", False, str(e))
+        
+        # Résumé du test HDI
+        print(f"   📈 Résumé HDI: {hdi_test_passed}/{hdi_test_total} pays avec données HDI correctes")
+        
+        return hdi_test_passed == hdi_test_total
+
     def test_edge_cases(self):
         """Test des cas limites et gestion d'erreurs"""
         print("\n🚨 Test des cas limites:")
