@@ -249,3 +249,5 @@ agent_communication:
     message: "User reported incorrect HDI data for Algeria - should be 0.763 according to UNDP data (https://hdr.undp.org/data-center/specific-country-data#/countries/DZA). Also requested verification for all other African countries HDI data."
   - agent: "main"
     message: "Verified user report - Algeria HDI should be 0.763. Retrieved official UNDP HDI data for all 54 African countries. Need to add missing HDI fields (hdi_score, hdi_africa_rank, hdi_world_rank) to country_data.py and update backend to handle these fields properly."
+  - agent: "testing"
+    message: "HDI data accuracy verification completed successfully. All 6 requested countries (Algeria, Morocco, Egypt, Nigeria, South Africa, Kenya) now have correct HDI values matching UNDP official data. Enhanced backend_test.py with dedicated HDI accuracy testing. All 52 comprehensive tests passed (100% success rate). The HDI data correction has been successfully implemented and verified."
