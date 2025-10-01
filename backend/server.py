@@ -412,7 +412,7 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
     profile.top_trade_partners = real_data.get('top_trade_partners', [])
     profile.investment_opportunities = real_data.get('investment_opportunities', [])
     profile.infrastructure = real_data.get('infrastructure', {})
-    profile.hdi_score = real_data.get('development_index')
+    profile.hdi_score = real_data.get('hdi_score')
     profile.hdi_africa_rank = real_data.get('hdi_africa_rank')
     profile.hdi_world_rank = real_data.get('hdi_world_rank')
     profile.gdp_growth_rate = real_data.get('growth_forecast_2024')
