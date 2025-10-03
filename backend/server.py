@@ -597,7 +597,7 @@ async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
     
     # Autres taxes spécifiques par pays (taxes d'accise, taxes environnementales, etc.)
     country_other_tax_rates = {
-        "DZ": 0.05, "MA": 0.03, "EG": 0.04, "ZA": 0.02, "NG": 0.03, "GH": 0.02, "KE": 0.03,
+        "DZ": 0.0403, "MA": 0.03, "EG": 0.04, "ZA": 0.02, "NG": 0.03, "GH": 0.02, "KE": 0.03,
         "default": 0.025
     }
     
