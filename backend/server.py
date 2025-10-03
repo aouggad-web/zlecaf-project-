@@ -618,11 +618,12 @@ async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
     if sector_code == "87":
         zlecaf_tariff_rate = 0.05  # 5% au lieu de l'élimination complète
     
-    # Calcul des droits de douane
+    # Calcul des droits de douane sur valeur CIF
+    # Note: En pratique, utiliser valeur CIF, ici simplifiée avec valeur FOB
     normal_tariff_amount = request.value * normal_tariff_rate
     zlecaf_tariff_amount = request.value * zlecaf_tariff_rate
     
-    # Calcul de la TVA (appliquée sur valeur + droits de douane)
+    # Calcul de la TVA (appliquée sur valeur + droits de douane selon méthode internationale)
     vat_rate = country_vat_rates.get(dest_code, country_vat_rates["default"])
     normal_vat_base = request.value + normal_tariff_amount
     zlecaf_vat_base = request.value + zlecaf_tariff_amount
