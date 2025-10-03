@@ -630,24 +630,13 @@ async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
     normal_vat_amount = normal_vat_base * vat_rate
     zlecaf_vat_amount = zlecaf_vat_base * vat_rate
     
-    # Autres taxes spécifiques
-    other_tax_rate = country_other_tax_rates.get(dest_code, country_other_tax_rates["default"])
-    normal_other_taxes = request.value * other_tax_rate
-    zlecaf_other_taxes = request.value * other_tax_rate  # Généralement inchangées
+    # Calcul des totaux SIMPLIFIÉS - Seulement droits + TVA 
+    normal_total_cost = request.value + normal_tariff_amount + normal_vat_amount
+    zlecaf_total_cost = request.value + zlecaf_tariff_amount + zlecaf_vat_amount
     
-    # Frais de manutention/dossier
-    handling_fee_rate = country_handling_fees.get(dest_code, country_handling_fees["default"])
-    normal_handling_fees = request.value * handling_fee_rate
-    zlecaf_handling_fees = request.value * handling_fee_rate * 0.5  # Réduction des frais administratifs
-    
-    # Calcul des totaux
-    normal_total_cost = request.value + normal_tariff_amount + normal_vat_amount + normal_other_taxes + normal_handling_fees
-    zlecaf_total_cost = request.value + zlecaf_tariff_amount + zlecaf_vat_amount + zlecaf_other_taxes + zlecaf_handling_fees
-    
-    # Calcul des économies détaillées
+    # Calcul des économies
     tariff_savings = normal_tariff_amount - zlecaf_tariff_amount
     vat_savings = normal_vat_amount - zlecaf_vat_amount
-    other_savings = (normal_other_taxes - zlecaf_other_taxes) + (normal_handling_fees - zlecaf_handling_fees)
     total_savings = normal_total_cost - zlecaf_total_cost
     savings_percentage = (total_savings / normal_total_cost) * 100 if normal_total_cost > 0 else 0
     
