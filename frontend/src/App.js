@@ -1277,25 +1277,7 @@ function ZLECAfCalculator() {
                                   {result.normal_vat_amount > 0 ? (((result.vat_savings || 0) / result.normal_vat_amount) * 100).toFixed(1) : '0'}%
                                 </td>
                               </tr>
-                              <tr>
-                                <td className="font-medium">📋 Autres Taxes</td>
-                                <td>
-                                  <div className="font-semibold">{formatCurrency(result.normal_other_taxes)}</div>
-                                  <div className="text-sm text-gray-600">
-                                    Taux: {((result.normal_other_taxes / result.value) * 100).toFixed(2)}%
-                                  </div>
-                                </td>
-                                <td>
-                                  <div className="font-semibold">{formatCurrency(result.zlecaf_other_taxes)}</div>
-                                  <div className="text-sm text-gray-600">
-                                    Taux: {((result.zlecaf_other_taxes / result.value) * 100).toFixed(2)}%
-                                  </div>
-                                </td>
-                                <td className="text-green-600 font-semibold">{formatCurrency((result.normal_other_taxes || 0) - (result.zlecaf_other_taxes || 0))}</td>
-                                <td className="text-green-600 font-semibold">
-                                  {result.normal_other_taxes > 0 ? ((((result.normal_other_taxes || 0) - (result.zlecaf_other_taxes || 0)) / result.normal_other_taxes) * 100).toFixed(1) : '0'}%
-                                </td>
-                              </tr>
+                              {/* Ligne "Autres taxes" supprimée du tableau */}
                               <tr>
                                 <td className="font-medium">🔧 Frais Manutention</td>
                                 <td>
