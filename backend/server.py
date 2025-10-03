@@ -677,7 +677,7 @@ async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
         savings_percentage=savings_percentage,
         tariff_savings=tariff_savings,
         vat_savings=vat_savings,
-        other_savings=other_savings,
+        other_savings=0.0,
         rules_of_origin=rules,
         top_african_producers=top_producers,
         origin_country_data=wb_data.get(origin_country['wb_code'], {}),
