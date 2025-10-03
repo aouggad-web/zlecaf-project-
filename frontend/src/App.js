@@ -1177,18 +1177,7 @@ function ZLECAfCalculator() {
                               <div className="text-xs text-gray-600">({(result.zlecaf_vat_rate * 100).toFixed(1)}%)</div>
                             </div>
                           </div>
-                          <div className="flex items-center justify-between gap-2">
-                            <div className="flex items-center gap-2">
-                              <div className="w-4 h-4 bg-gray-400 rounded-full"></div>
-                              <span className="text-sm font-medium">Autres:</span>
-                            </div>
-                            <div className="text-sm text-right">
-                              <div className="font-semibold">{formatCurrency(result.zlecaf_other_taxes + result.zlecaf_handling_fees)}</div>
-                              <div className="text-xs text-gray-600">
-                                ({(((result.zlecaf_other_taxes + result.zlecaf_handling_fees) / result.value) * 100).toFixed(1)}%)
-                              </div>
-                            </div>
-                          </div>
+                          {/* Section "Autres taxes" supprimée */}
                         </div>
                       </div>
 
