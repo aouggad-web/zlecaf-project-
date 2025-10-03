@@ -1183,7 +1183,7 @@ function ZLECAfCalculator() {
 
                       <div className="metric-card" style={{gridColumn: 'span 2'}}>
                         <h4 className="font-semibold mb-md text-center">Économies Détaillées</h4>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-lg">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
                           <div className="text-center">
                             <div className="metric-value text-green-600">
                               {formatCurrency(result.tariff_savings || 0)}
