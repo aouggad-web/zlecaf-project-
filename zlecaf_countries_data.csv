@@ -1,0 +1,55 @@
+code_iso3,nom_pays,gdp_usd_2024,gdp_per_capita_2024,population_2024,external_debt_to_gdp_ratio,external_debt_source,internal_debt_to_gdp_ratio,internal_debt_source,hdi_score,hdi_world_rank,hdi_africa_rank
+DZA,Algérie,269.1,5763,46700000,2.8,FMI - Debt Sustainability Analysis 2024,55.6,Banque Mondiale - Public Debt Statistics 2024,0.74,96,3
+AGO,Angola,124.2,3618,34300000,32.4,FMI - Debt Sustainability Analysis 2024,57.3,Banque Mondiale - Public Debt Statistics 2024,0.634,135,22
+BEN,Bénin,18.9,1453,13000000,42.1,FMI - Debt Sustainability Analysis 2024,8.9,Banque Mondiale - Public Debt Statistics 2024,0.601,146,28
+BWA,Botswana,20.4,8258,2500000,18.2,FMI - Debt Sustainability Analysis 2024,2.1,Banque Mondiale - Public Debt Statistics 2024,0.726,107,7
+CIV,Côte d'Ivoire,78.9,2846,27700000,58.7,FMI - Debt Sustainability Analysis 2024,12.1,Banque Mondiale - Public Debt Statistics 2024,0.674,137,20
+COD,République Démocratique du Congo,71.2,782,91000000,23.1,FMI - Debt Sustainability Analysis 2024,4.8,Banque Mondiale - Public Debt Statistics 2024,0.601,146,31
+EGY,Égypte,515.1,4836,106500000,35.2,FMI - Debt Sustainability Analysis 2024,89.1,Banque Mondiale - Public Debt Statistics 2024,0.71,114,10
+ETH,Éthiopie,156.1,1290,121000000,26.8,FMI - Debt Sustainability Analysis 2024,7.4,Banque Mondiale - Public Debt Statistics 2024,0.548,162,40
+GHA,Ghana,79.1,2445,32400000,66.9,FMI - Debt Sustainability Analysis 2024,44.8,Banque Mondiale - Public Debt Statistics 2024,0.679,134,18
+GIN,Guinée,20.8,1524,13700000,41.8,FMI - Debt Sustainability Analysis 2024,12.1,Banque Mondiale - Public Debt Statistics 2024,0.548,162,41
+GMB,Gambie,2.2,887,2500000,88.2,FMI - Debt Sustainability Analysis 2024,11.7,Banque Mondiale - Public Debt Statistics 2024,0.601,146,29
+GNB,Guinée-Bissau,1.8,887,2000000,69.8,FMI - Debt Sustainability Analysis 2024,8.9,Banque Mondiale - Public Debt Statistics 2024,0.591,150,33
+KEN,Kenya,118.1,2179,54200000,67.1,FMI - Debt Sustainability Analysis 2024,2.8,Banque Mondiale - Public Debt Statistics 2024,0.601,146,26
+LBR,Libéria,4.3,832,5200000,34.8,FMI - Debt Sustainability Analysis 2024,6.1,Banque Mondiale - Public Debt Statistics 2024,0.552,158,39
+MAR,Maroc,148.4,3952,37500000,38.2,FMI - Debt Sustainability Analysis 2024,26.8,Banque Mondiale - Public Debt Statistics 2024,0.693,124,16
+MDG,Madagascar,17.9,623,28700000,38.1,FMI - Debt Sustainability Analysis 2024,4.2,Banque Mondiale - Public Debt Statistics 2024,0.593,149,32
+MLI,Mali,19.9,915,21800000,35.8,FMI - Debt Sustainability Analysis 2024,7.9,Banque Mondiale - Public Debt Statistics 2024,0.521,168,44
+MOZ,Mozambique,18.5,573,32300000,88.9,FMI - Debt Sustainability Analysis 2024,12.4,Banque Mondiale - Public Debt Statistics 2024,0.586,152,35
+MRT,Mauritanie,9.7,2019,4800000,89.4,FMI - Debt Sustainability Analysis 2024,12.1,Banque Mondiale - Public Debt Statistics 2024,0.458,184,53
+MWI,Malawi,13.2,665,19900000,60.1,FMI - Debt Sustainability Analysis 2024,8.7,Banque Mondiale - Public Debt Statistics 2024,0.601,146,27
+NAM,Namibie,12.4,4856,2600000,69.8,FMI - Debt Sustainability Analysis 2024,9.1,Banque Mondiale - Public Debt Statistics 2024,0.713,112,9
+NER,Niger,16.6,652,25500000,54.2,FMI - Debt Sustainability Analysis 2024,8.9,Banque Mondiale - Public Debt Statistics 2024,0.516,170,46
+NGA,Nigeria,440.8,2065,213400000,28.7,FMI - Debt Sustainability Analysis 2024,7.0,Banque Mondiale - Public Debt Statistics 2024,0.557,157,38
+RWA,Rwanda,13.3,1024,13000000,73.8,FMI - Debt Sustainability Analysis 2024,8.1,Banque Mondiale - Public Debt Statistics 2024,0.568,154,36
+SEN,Sénégal,29.6,1675,17700000,75.8,FMI - Debt Sustainability Analysis 2024,9.2,Banque Mondiale - Public Debt Statistics 2024,0.587,151,34
+SLE,Sierra Leone,4.1,507,8100000,73.8,FMI - Debt Sustainability Analysis 2024,11.2,Banque Mondiale - Public Debt Statistics 2024,0.542,164,42
+TGO,Togo,8.4,998,8400000,54.8,FMI - Debt Sustainability Analysis 2024,9.1,Banque Mondiale - Public Debt Statistics 2024,0.601,146,29
+TUN,Tunisie,47.6,3954,12000000,78.1,FMI - Debt Sustainability Analysis 2024,12.8,Banque Mondiale - Public Debt Statistics 2024,0.731,102,4
+TZA,Tanzanie,75.7,1192,63500000,38.1,FMI - Debt Sustainability Analysis 2024,4.8,Banque Mondiale - Public Debt Statistics 2024,0.601,146,30
+UGA,Ouganda,48.4,1036,46700000,48.9,FMI - Debt Sustainability Analysis 2024,5.2,Banque Mondiale - Public Debt Statistics 2024,0.62,146,24
+ZAF,Afrique du Sud,419.0,6994,59900000,58.2,FMI - Debt Sustainability Analysis 2024,12.1,Banque Mondiale - Public Debt Statistics 2024,0.717,110,8
+ZMB,Zambie,29.8,1555,19200000,133.7,FMI - Debt Sustainability Analysis 2024,18.9,Banque Mondiale - Public Debt Statistics 2024,0.653,133,21
+ZWE,Zimbabwe,31.1,2027,15300000,65.1,FMI - Debt Sustainability Analysis 2024,8.2,Banque Mondiale - Public Debt Statistics 2024,0.613,142,25
+BDI,Burundi,3.0,238,12600000,49.7,FMI - Debt Sustainability Analysis 2024,8.2,Banque Mondiale - Public Debt Statistics 2024,0.532,167,43
+BFA,Burkina Faso,18.7,831,22500000,31.8,FMI - Debt Sustainability Analysis 2024,11.2,Banque Mondiale - Public Debt Statistics 2024,0.562,156,37
+CAF,République Centrafricaine,2.4,468,5100000,48.9,FMI - Debt Sustainability Analysis 2024,15.8,Banque Mondiale - Public Debt Statistics 2024,0.508,172,47
+CMR,Cameroun,45.2,1663,27200000,35.8,FMI - Debt Sustainability Analysis 2024,15.2,Banque Mondiale - Public Debt Statistics 2024,0.685,133,17
+COG,République du Congo,12.9,2289,5600000,88.1,FMI - Debt Sustainability Analysis 2024,18.9,Banque Mondiale - Public Debt Statistics 2024,0.696,122,14
+COM,Comores,1.4,1554,900000,32.1,FMI - Debt Sustainability Analysis 2024,8.9,Banque Mondiale - Public Debt Statistics 2024,0.674,136,19
+CPV,Cap-Vert,2.2,3869,570000,98.1,FMI - Debt Sustainability Analysis 2024,22.8,Banque Mondiale - Public Debt Statistics 2024,0.694,123,15
+DJI,Djibouti,3.9,3814,1000000,78.1,FMI - Debt Sustainability Analysis 2024,4.2,Banque Mondiale - Public Debt Statistics 2024,0.601,146,31
+ERI,Érythrée,2.1,587,3600000,165.7,FMI - Debt Sustainability Analysis 2024,32.1,Banque Mondiale - Public Debt Statistics 2024,0.483,179,51
+GAB,Gabon,20.8,8917,2300000,58.9,FMI - Debt Sustainability Analysis 2024,9.8,Banque Mondiale - Public Debt Statistics 2024,0.727,105,6
+GNQ,Guinée Équatoriale,12.3,8456,1450000,26.8,FMI - Debt Sustainability Analysis 2024,1.8,Banque Mondiale - Public Debt Statistics 2024,0.701,117,11
+LBY,Libye,45.8,6716,6800000,155.8,FMI - Debt Sustainability Analysis 2024,89.4,Banque Mondiale - Public Debt Statistics 2024,0.73,103,5
+LSO,Lesotho,2.5,1164,2100000,41.8,FMI - Debt Sustainability Analysis 2024,3.2,Banque Mondiale - Public Debt Statistics 2024,0.628,137,23
+MUS,Maurice,14.4,11328,1270000,89.4,FMI - Debt Sustainability Analysis 2024,6.1,Banque Mondiale - Public Debt Statistics 2024,0.802,71,2
+SDN,Soudan,20.0,441,45400000,256.7,FMI - Debt Sustainability Analysis 2024,78.9,Banque Mondiale - Public Debt Statistics 2024,0.438,185,54
+SOM,Somalie,8.3,499,16600000,64.4,FMI - Debt Sustainability Analysis 2024,0.8,Banque Mondiale - Public Debt Statistics 2024,0.487,177,49
+SSD,Soudan du Sud,3.1,275,11300000,34.2,FMI - Debt Sustainability Analysis 2024,8.9,Banque Mondiale - Public Debt Statistics 2024,0.492,176,48
+STP,São Tomé-et-Príncipe,0.5,2267,220000,87.9,FMI - Debt Sustainability Analysis 2024,12.1,Banque Mondiale - Public Debt Statistics 2024,0.698,120,13
+SWZ,Eswatini,4.7,4019,1170000,41.8,FMI - Debt Sustainability Analysis 2024,8.2,Banque Mondiale - Public Debt Statistics 2024,0.7,118,12
+SYC,Seychelles,1.9,18795,100000,67.8,FMI - Debt Sustainability Analysis 2024,4.2,Banque Mondiale - Public Debt Statistics 2024,0.802,67,1
+TCD,Tchad,11.8,695,17000000,48.9,FMI - Debt Sustainability Analysis 2024,8.1,Banque Mondiale - Public Debt Statistics 2024,0.517,169,45

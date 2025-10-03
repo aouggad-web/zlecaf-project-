@@ -1,0 +1,7 @@
+metric,value,description
+total_countries,54,Nombre total de pays africains dans ZLECAf
+total_gdp_billions_usd,3122.5,PIB total cumulé (milliards USD)
+total_population_millions,1387.8,Population totale (millions)
+average_hdi,0.619,HDI moyen des pays africains
+tariff_lines_count,60,Nombre de lignes tarifaires configurées
+countries_with_tariffs,1,Pays avec barèmes tarifaires configurés
