@@ -1196,12 +1196,7 @@ function ZLECAfCalculator() {
                             </div>
                             <div className="metric-label">Économie TVA</div>
                           </div>
-                          <div className="text-center">
-                            <div className="metric-value text-green-600">
-                              {formatCurrency(result.other_savings || 0)}
-                            </div>
-                            <div className="metric-label">Autres Économies</div>
-                          </div>
+                          {/* Section "Autres Économies" supprimée */}
                         </div>
                         <div className="border-t pt-lg mt-lg">
                           <div className="text-center">
