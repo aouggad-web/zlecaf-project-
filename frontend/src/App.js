@@ -2759,6 +2759,67 @@ function ZLECAfCalculator() {
                           </a>
                         </div>
                       </div>
+                      
+                      {/* Section Sources LYRA-PRO */}
+                      {countryProfile.source_urls && (
+                        <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                          <h4 className="text-sm font-semibold text-blue-800 mb-3 flex items-center">
+                            🔍 Sources Officielles LYRA-PRO
+                            <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">
+                              Validé {countryProfile.source_urls.validation_date}
+                            </span>
+                          </h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                            {countryProfile.source_urls.gdp && (
+                              <div className="flex items-center">
+                                <span className="text-blue-600 mr-2">📊</span>
+                                <a href={countryProfile.source_urls.gdp} 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   className="text-blue-700 hover:underline">
+                                  PIB & Croissance - FMI
+                                </a>
+                              </div>
+                            )}
+                            {countryProfile.source_urls.population && (
+                              <div className="flex items-center">
+                                <span className="text-blue-600 mr-2">👥</span>
+                                <a href={countryProfile.source_urls.population} 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   className="text-blue-700 hover:underline">
+                                  Population - Banque Mondiale
+                                </a>
+                              </div>
+                            )}
+                            {countryProfile.source_urls.hdi && (
+                              <div className="flex items-center">
+                                <span className="text-blue-600 mr-2">📈</span>
+                                <a href={countryProfile.source_urls.hdi} 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   className="text-blue-700 hover:underline">
+                                  HDI & Rankings - UNDP
+                                </a>
+                              </div>
+                            )}
+                            {countryProfile.source_urls.debt && (
+                              <div className="flex items-center">
+                                <span className="text-blue-600 mr-2">💳</span>
+                                <a href={countryProfile.source_urls.debt} 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   className="text-blue-700 hover:underline">
+                                  Dette Publique - BM/FMI
+                                </a>
+                              </div>
+                            )}
+                          </div>
+                          <div className="mt-3 pt-3 border-t border-blue-200 text-xs text-blue-600">
+                            <span className="font-medium">LYRA-PRO:</span> Toutes les données validées selon méthodologie 4-D avec sources officielles cross-vérifiées
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
