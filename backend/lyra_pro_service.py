@@ -5,9 +5,7 @@ Extraction automatisée de données vraies et vérifiées
 """
 
 import json
-import asyncio
 from typing import Dict, List, Any
-import aiohttp
 
 class LyraProService:
     """
