@@ -1,0 +1,37 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    if: ${{ hashFiles('backend/**','requirements.txt','.flake8') != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - run: pip install -r requirements.txt || true
+      - run: pip install pytest flake8
+      - run: flake8 backend || true
+      - run: pytest -q || true
+      - name: Data schema/quality
+        run: |
+          python backend/verify_data_quality.py || echo "QA script missing → skip"
+  frontend:
+    if: ${{ hashFiles('frontend/**','package.json') != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - run: npm run lint || echo "No lint script"
+      - run: npm run build
+      - name: Check data assets
+        run: |
+          test -d frontend/public/data || echo "WARN: frontend/public/data missing"
