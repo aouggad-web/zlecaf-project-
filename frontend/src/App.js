@@ -1161,8 +1161,7 @@ function ZLECAfCalculator() {
                               <span className="text-sm font-medium">Droits:</span>
                             </div>
                             <div className="text-sm text-right">
-                              <div className="font-semibold">{formatCurrency(result.zlecaf_tariff_amount)}</div>
-                              <div className="text-xs text-gray-600">({(result.zlecaf_tariff_rate * 100).toFixed(1)}%)</div>
+                              <div className="font-semibold text-lg">{(result.zlecaf_tariff_rate * 100).toFixed(1)}%</div>
                             </div>
                           </div>
                           <div className="flex items-center justify-between gap-2">
