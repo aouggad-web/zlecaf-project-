@@ -431,7 +431,7 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
         "gdp_growth_projection_2025": real_data.get('growth_projection_2025', '3.2%'),
         "gdp_growth_projection_2026": real_data.get('growth_projection_2026', '3.5%'),
         "development_index": real_data.get('development_index', 0.500),
-        "africa_rank": real_data.get('africa_rank', 25),
+        "africa_rank": real_data.get('gdp_africa_rank', None),
         "key_sectors": [f"{sector['name']} ({sector['pib_share']}% PIB): {sector['description']}" 
                        for sector in real_data.get('key_sectors', [])],
         "zlecaf_potential_level": real_data.get('zlecaf_potential', {}).get('level', 'Modéré'),
