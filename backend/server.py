@@ -435,8 +435,8 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
         "zlecaf_opportunities": real_data.get('zlecaf_potential', {}).get('key_opportunities', []),
         "main_exports": real_data.get('main_exports', []),
         "main_imports": real_data.get('main_imports', []),
-        "investment_climate_score": "B+",  # À personnaliser par pays
-        "infrastructure_index": 6.7,      # À personnaliser par pays
+        "investment_climate_score": real_data.get('investment_climate_score', 'Non évalué'),
+        "infrastructure_index": real_data.get('infrastructure_index', 'Non disponible'),
         "business_environment_rank": real_data.get('africa_rank', 25)
     }
     
