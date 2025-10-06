@@ -1170,8 +1170,7 @@ function ZLECAfCalculator() {
                               <span className="text-sm font-medium">TVA:</span>
                             </div>
                             <div className="text-sm text-right">
-                              <div className="font-semibold">{formatCurrency(result.zlecaf_vat_amount)}</div>
-                              <div className="text-xs text-gray-600">({(result.zlecaf_vat_rate * 100).toFixed(1)}%)</div>
+                              <div className="font-semibold text-lg">{(result.zlecaf_vat_rate * 100).toFixed(1)}%</div>
                             </div>
                           </div>
                           {/* Section "Autres taxes" supprimée */}
