@@ -364,6 +364,7 @@ class CountryEconomicProfile(BaseModel):
     gdp_africa_rank: Optional[int] = None
     gdp_growth_rate: Optional[str] = None
     trade_openness: Optional[float] = None
+    source_urls: Optional[Dict[str, Any]] = None
 
 # Routes
 @api_router.get("/")
