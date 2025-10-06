@@ -361,6 +361,7 @@ class CountryEconomicProfile(BaseModel):
     hdi_score: Optional[float] = None
     hdi_africa_rank: Optional[int] = None
     hdi_world_rank: Optional[int] = None
+    gdp_africa_rank: Optional[int] = None
     gdp_growth_rate: Optional[str] = None
     trade_openness: Optional[float] = None
 
