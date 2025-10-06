@@ -1071,7 +1071,7 @@ function ZLECAfCalculator() {
                               transform="rotate(-90 90 90)"
                             />
                             <text x="90" y="85" textAnchor="middle" className="text-lg font-bold fill-current text-gray-800">
-                              {formatCurrency(result.normal_total_cost)}
+                              {((result.normal_total_cost - result.value) / result.value * 100).toFixed(1)}%
                             </text>
                             <text x="90" y="100" textAnchor="middle" className="text-sm fill-current text-gray-600">
                               Total NPF
