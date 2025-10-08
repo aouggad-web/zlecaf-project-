@@ -334,6 +334,40 @@ class CountryEconomicProfile(BaseModel):
 async def root():
     return {"message": "Système Commercial ZLECAf API - Version Complète"}
 
+@api_router.get("/health")
+async def health_check():
+    """Health check endpoint for monitoring service availability"""
+    health_status = {
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat(),
+        "service": "ZLECAf API",
+        "version": "2.0.0",
+        "checks": {}
+    }
+    
+    # Check MongoDB connection
+    try:
+        await db.command("ping")
+        health_status["checks"]["database"] = {
+            "status": "healthy",
+            "message": "MongoDB connection successful"
+        }
+    except Exception as e:
+        health_status["status"] = "unhealthy"
+        health_status["checks"]["database"] = {
+            "status": "unhealthy",
+            "message": f"MongoDB connection failed: {str(e)}"
+        }
+        logger.error(f"Database health check failed: {str(e)}")
+    
+    # Check external API clients
+    health_status["checks"]["external_apis"] = {
+        "world_bank": "configured",
+        "oec": "configured"
+    }
+    
+    return health_status
+
 @api_router.get("/countries", response_model=List[CountryInfo])
 async def get_countries():
     """Récupérer la liste des pays membres de la ZLECAf"""
