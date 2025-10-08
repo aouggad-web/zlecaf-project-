@@ -598,6 +598,51 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+@api_router.get("/health")
+async def health_check():
+    """Vérifier la disponibilité des fichiers de données"""
+    from pathlib import Path
+    import os
+    
+    files = [
+        'zlecaf_tariff_lines_by_country.json',
+        'zlecaf_africa_vs_world_tariffs.xlsx',
+        'zlecaf_rules_of_origin.json',
+        'zlecaf_dismantling_schedule.csv',
+        'zlecaf_tariff_origin_phase.json',
+    ]
+    
+    # Déterminer le chemin vers public/data
+    project_root = Path(__file__).parent.parent
+    data_dir = project_root / 'frontend' / 'public' / 'data'
+    
+    status = {}
+    latest_mtime = None
+    
+    for filename in files:
+        filepath = data_dir / filename
+        try:
+            stat_info = filepath.stat()
+            status[filename] = stat_info.st_size > 0  # Fichier existe et n'est pas vide
+            mtime = stat_info.st_mtime
+            if latest_mtime is None or mtime > latest_mtime:
+                latest_mtime = mtime
+        except (FileNotFoundError, OSError):
+            status[filename] = False
+    
+    ok = all(status.values())
+    
+    response_data = {
+        "ok": ok,
+        "files": status
+    }
+    
+    if latest_mtime:
+        from datetime import datetime
+        response_data["lastUpdated"] = datetime.fromtimestamp(latest_mtime).isoformat()
+    
+    return response_data
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()

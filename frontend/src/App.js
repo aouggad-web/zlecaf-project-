@@ -13,6 +13,7 @@ import { Progress } from './components/ui/progress';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table';
 import { toast } from './hooks/use-toast';
 import { Toaster } from './components/ui/toaster';
+import Health from './components/Health';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -997,6 +998,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<ZLECAfCalculator />} />
+        <Route path="/health" element={<Health />} />
       </Routes>
     </BrowserRouter>
   );

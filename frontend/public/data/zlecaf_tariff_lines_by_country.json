@@ -1,0 +1,30 @@
+{
+  "generated_at": "2025-10-08T15:08:36.916993",
+  "countries": [
+    {
+      "code": "DZ",
+      "name": "Algérie",
+      "tariff_lines": 5000
+    },
+    {
+      "code": "EG",
+      "name": "Égypte",
+      "tariff_lines": 6500
+    },
+    {
+      "code": "KE",
+      "name": "Kenya",
+      "tariff_lines": 5800
+    },
+    {
+      "code": "NG",
+      "name": "Nigéria",
+      "tariff_lines": 7200
+    },
+    {
+      "code": "ZA",
+      "name": "Afrique du Sud",
+      "tariff_lines": 8100
+    }
+  ]
+}
