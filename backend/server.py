@@ -598,6 +598,44 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+@api_router.get("/health")
+async def health_check():
+    """
+    Vérifie l'état des fichiers de données ZLECAf
+    Utilisé pour la supervision (Netlify, UptimeRobot, etc.)
+    """
+    from pathlib import Path
+    
+    files = [
+        'zlecaf_tariff_lines_by_country.json',
+        'zlecaf_africa_vs_world_tariffs.xlsx',
+        'zlecaf_rules_of_origin.json',
+        'zlecaf_dismantling_schedule.csv',
+        'zlecaf_tariff_origin_phase.json',
+    ]
+    
+    # Chemin vers le répertoire de données du frontend
+    base_path = Path(__file__).parent.parent / 'frontend' / 'public' / 'data'
+    
+    status = {}
+    for filename in files:
+        file_path = base_path / filename
+        try:
+            # Vérifier si le fichier existe et est lisible
+            status[filename] = file_path.exists() and file_path.is_file()
+        except Exception:
+            status[filename] = False
+    
+    # API est OK si tous les fichiers sont présents
+    all_ok = all(status.values())
+    
+    return {
+        "ok": all_ok,
+        "files": status,
+        "message": "All data files present" if all_ok else "Some data files are missing",
+        "timestamp": datetime.now().isoformat()
+    }
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
