@@ -1,0 +1,20 @@
+{
+  "generated_at": "2025-10-08T15:18:54.173990",
+  "phases": {
+    "Category A": {
+      "description": "Démantèlement immédiat (0-3 ans)",
+      "duration_years": 3,
+      "percentage_tariff_lines": 90
+    },
+    "Category B": {
+      "description": "Démantèlement progressif (0-5 ans)",
+      "duration_years": 5,
+      "percentage_tariff_lines": 7
+    },
+    "Category C": {
+      "description": "Produits sensibles (0-10 ans)",
+      "duration_years": 10,
+      "percentage_tariff_lines": 3
+    }
+  }
+}

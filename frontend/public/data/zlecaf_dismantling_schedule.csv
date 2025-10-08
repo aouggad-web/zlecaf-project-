@@ -1,0 +1,10 @@
+Country,Category,Year,Tariff_Rate
+Algeria,Category A,2024,5.0
+Algeria,Category A,2025,2.5
+Algeria,Category A,2026,0.0
+Egypt,Category A,2024,4.0
+Egypt,Category A,2025,2.0
+Egypt,Category A,2026,0.0
+Kenya,Category B,2024,8.0
+Kenya,Category B,2027,4.0
+Kenya,Category B,2030,0.0
