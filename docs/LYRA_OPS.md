@@ -114,19 +114,64 @@ Pour passer en production avec de vraies sources de données:
 
 ## Badge de Statut (Optionnel)
 
-Vous pouvez ajouter un badge dans votre `README.md` pour afficher le statut du workflow:
+Vous pouvez ajouter des badges dans votre `README.md` pour afficher le statut du workflow et de la santé de l'API:
 
+### Badge CI (Build Status)
 ```markdown
 ![Lyra+ Ops](https://github.com/aouggad-web/zlecaf-project-/actions/workflows/lyra_plus_ops.yml/badge.svg)
 ```
 
-## Monitoring
+### Badge Health Status
+Pour un badge dynamique qui vérifie l'API Health en temps réel, vous pouvez utiliser shields.io:
+
+```markdown
+![API Health](https://img.shields.io/badge/dynamic/json?url=https://etape-suivante.preview.emergentagent.com/api/health&query=$.ok&label=Health&style=flat-square&logo=heart&logoColor=white&color=success&failColor=critical)
+```
+
+### Badge combiné dans le README
+```markdown
+## Status
+
+![Lyra+ Ops](https://github.com/aouggad-web/zlecaf-project-/actions/workflows/lyra_plus_ops.yml/badge.svg)
+![API Health](https://img.shields.io/website?url=https%3A%2F%2Fetape-suivante.preview.emergentagent.com%2Fapi%2Fhealth&style=flat-square&label=API&up_message=online&down_message=offline)
+```
+
+## Monitoring et Observabilité
+
+### Dashboard Health Frontend
+
+La page `/health` fournit un dashboard d'observabilité complet qui affiche:
+
+- **Statut global**: OK (vert) ou DEGRADED (rouge)
+- **Liste des fichiers**: État de chaque fichier de données (présent/manquant)
+- **Dernière mise à jour**: Timestamp de la dernière génération des datasets
+- **Informations sur le workflow**: Lien vers la documentation du cron hebdomadaire
+
+Accédez au dashboard sur: `http://localhost:3000/health` (développement) ou `https://votre-domaine.com/health` (production)
+
+### Monitoring Avancé
 
 Pour un monitoring avancé, vous pouvez:
 
-1. Ajouter un badge "Health" dans le README qui vérifie `/api/health`
-2. Configurer des alertes GitHub Actions pour les échecs du workflow
-3. Intégrer avec un service de monitoring externe (Datadog, New Relic, etc.)
+1. **Ajouter des badges dans le README** qui vérifient `/api/health`
+2. **Configurer des alertes GitHub Actions** pour les échecs du workflow:
+   - Aller dans Settings → Notifications → Actions
+   - Activer les notifications par email pour les échecs de workflow
+3. **Intégrer avec un service de monitoring externe**:
+   - Datadog: Utilisez le check HTTP pour pinguer `/api/health`
+   - New Relic: Configurez un Synthetic Monitor
+   - UptimeRobot: Ajoutez un monitor HTTP avec vérification JSON
+4. **Configurer des webhooks** pour recevoir des notifications:
+   - Dans le workflow, ajouter une étape de notification (Slack, Discord, etc.)
+   - Exemple pour Slack:
+     ```yaml
+     - name: Notify on failure
+       if: failure()
+       uses: slackapi/slack-github-action@v1
+       with:
+         webhook-url: ${{ secrets.SLACK_WEBHOOK }}
+         payload: '{"text":"❌ Lyra+ Ops workflow failed!"}'
+     ```
 
 ## Troubleshooting
 
@@ -147,6 +192,37 @@ Pour un monitoring avancé, vous pouvez:
 1. Vérifier que les fichiers existent dans `frontend/public/data/`
 2. Générer les datasets: `python backend/make_release.py --demo`
 3. Redémarrer le serveur backend
+
+## Exemple de Section README
+
+Voici un exemple de section à ajouter dans votre `README.md` principal:
+
+```markdown
+## 🔄 Lyra+ Ops - Monitoring & Datasets
+
+[![Lyra+ Ops](https://github.com/aouggad-web/zlecaf-project-/actions/workflows/lyra_plus_ops.yml/badge.svg)](https://github.com/aouggad-web/zlecaf-project-/actions/workflows/lyra_plus_ops.yml)
+
+### Datasets Automatiques
+
+Les datasets ZLECAf sont automatiquement rafraîchis chaque lundi à 06:15 UTC via GitHub Actions.
+
+- **Fichiers générés**: 5 datasets (JSON, CSV, Excel)
+- **Localisation**: `frontend/public/data/`
+- **API Health**: `/api/health` - Vérifiez la disponibilité des données en temps réel
+- **Dashboard**: `/health` - Interface web de monitoring
+
+### Vérification Rapide
+
+```bash
+# Générer les datasets localement
+python backend/make_release.py --demo
+
+# Vérifier le statut via l'API
+curl http://localhost:8000/api/health | jq
+```
+
+Pour plus de détails, consultez [docs/LYRA_OPS.md](docs/LYRA_OPS.md).
+```
 
 ## Support
 
