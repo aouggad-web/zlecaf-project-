@@ -97,3 +97,8 @@ android-sdk/ -e
 # Environment files
 *.env
 *.env.*
+
+# Lyra Plus Pipeline Results
+pipeline_results_*.json
+data_report.md
+validation_report.txt
