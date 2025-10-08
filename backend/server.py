@@ -334,6 +334,24 @@ class CountryEconomicProfile(BaseModel):
 async def root():
     return {"message": "Système Commercial ZLECAf API - Version Complète"}
 
+@api_router.get("/health")
+async def health_check():
+    """Health check endpoint for monitoring"""
+    try:
+        # Test MongoDB connection
+        await db.command('ping')
+        db_status = "healthy"
+    except Exception as e:
+        db_status = f"unhealthy: {str(e)}"
+    
+    return {
+        "status": "ok" if db_status == "healthy" else "degraded",
+        "service": "ZLECAf API",
+        "version": "2.0.0",
+        "database": db_status,
+        "timestamp": datetime.now().isoformat()
+    }
+
 @api_router.get("/countries", response_model=List[CountryInfo])
 async def get_countries():
     """Récupérer la liste des pays membres de la ZLECAf"""
