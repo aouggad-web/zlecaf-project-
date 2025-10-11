@@ -49,12 +49,12 @@ def create_validation_file():
         # Obtenir la feuille de travail
         ws = writer.sheets['Données à Valider']
         
-        # Définir les styles
-        header_fill = PatternFill(start_color='4F81BD', end_color='4F81BD', fill_type='solid')
+        # Définir les styles - African-inspired color scheme
+        header_fill = PatternFill(start_color='2E7D32', end_color='2E7D32', fill_type='solid')  # African green
         header_font = Font(color='FFFFFF', bold=True)
-        validation_fill = PatternFill(start_color='FFFF99', end_color='FFFF99', fill_type='solid')
-        error_fill = PatternFill(start_color='FFB6C1', end_color='FFB6C1', fill_type='solid')
-        complete_fill = PatternFill(start_color='90EE90', end_color='90EE90', fill_type='solid')
+        validation_fill = PatternFill(start_color='FFF9C4', end_color='FFF9C4', fill_type='solid')  # Light gold/amber
+        error_fill = PatternFill(start_color='FFCCBC', end_color='FFCCBC', fill_type='solid')  # Light orange
+        complete_fill = PatternFill(start_color='A5D6A7', end_color='A5D6A7', fill_type='solid')  # Light green
         
         thin_border = Border(
             left=Side(style='thin'), right=Side(style='thin'),
