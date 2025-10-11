@@ -806,10 +806,13 @@ function ZLECAfCalculator() {
 
           <TabsContent value="rules">
             <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Règles d'Origine ZLECAf</CardTitle>
-                  <CardDescription>
+              <Card className="shadow-xl border-t-4 border-t-orange-500">
+                <CardHeader className="bg-gradient-to-r from-orange-50 to-red-50">
+                  <CardTitle className="text-2xl font-bold text-orange-700 flex items-center gap-2">
+                    <span>📜</span>
+                    <span>Règles d'Origine ZLECAf</span>
+                  </CardTitle>
+                  <CardDescription className="font-semibold text-gray-700">
                     Entrez un code SH6 pour consulter les règles d'origine spécifiques
                   </CardDescription>
                 </CardHeader>
@@ -820,23 +823,28 @@ function ZLECAfCalculator() {
                       value={hsCode}
                       onChange={(e) => setHsCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
                       maxLength={6}
+                      className="text-lg font-semibold border-2 border-orange-300 focus:border-orange-500"
                     />
-                    <Button onClick={() => fetchRulesOfOrigin(hsCode)} disabled={hsCode.length !== 6}>
-                      Consulter
+                    <Button 
+                      onClick={() => fetchRulesOfOrigin(hsCode)} 
+                      disabled={hsCode.length !== 6}
+                      className="bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold px-6"
+                    >
+                      🔍 Consulter
                     </Button>
                   </div>
                 </CardContent>
               </Card>
 
               {rulesOfOrigin && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Règles pour le Code SH {rulesOfOrigin.hs_code}</CardTitle>
-                    <CardDescription>
+                <Card className="shadow-2xl border-l-4 border-l-amber-500">
+                  <CardHeader className="bg-gradient-to-r from-amber-100 to-yellow-100">
+                    <CardTitle className="text-xl font-bold text-amber-800">Règles pour le Code SH {rulesOfOrigin.hs_code}</CardTitle>
+                    <CardDescription className="font-semibold text-amber-700">
                       Secteur: {getSectorName(rulesOfOrigin.hs_code)}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-4 pt-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <h4 className="font-semibold mb-2">Type de Règle</h4>
