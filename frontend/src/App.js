@@ -347,11 +347,19 @@ function ZLECAfCalculator() {
 
       <div className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="calculator">{t.calculatorTab}</TabsTrigger>
-            <TabsTrigger value="statistics">{t.statisticsTab}</TabsTrigger>
-            <TabsTrigger value="rules">{t.rulesTab}</TabsTrigger>
-            <TabsTrigger value="profiles">{t.profilesTab}</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-4 bg-gradient-to-r from-red-100 via-yellow-100 to-green-100 p-2 shadow-lg">
+            <TabsTrigger value="calculator" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-600 data-[state=active]:to-blue-600 data-[state=active]:text-white font-bold">
+              🧮 {t.calculatorTab}
+            </TabsTrigger>
+            <TabsTrigger value="statistics" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-pink-600 data-[state=active]:text-white font-bold">
+              📈 {t.statisticsTab}
+            </TabsTrigger>
+            <TabsTrigger value="rules" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-600 data-[state=active]:to-red-600 data-[state=active]:text-white font-bold">
+              📜 {t.rulesTab}
+            </TabsTrigger>
+            <TabsTrigger value="profiles" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white font-bold">
+              🌍 {t.profilesTab}
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="calculator">
