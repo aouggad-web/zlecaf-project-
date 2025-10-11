@@ -399,7 +399,7 @@ function ZLECAfCalculator() {
                       maxLength={6}
                     />
                     {hsCode.length >= 2 && (
-                      <p className="text-sm text-blue-600">
+                      <p className="text-sm text-sky-600">
                         {getSectorName(hsCode)}
                       </p>
                     )}
@@ -814,7 +814,7 @@ function ZLECAfCalculator() {
                         )}
                         
                         <div className="text-center">
-                          <p className="text-2xl font-bold text-purple-600">
+                          <p className="text-2xl font-bold text-violet-600">
                             {countryProfile.projections?.development_index || 'N/A'}
                           </p>
                           <p className="text-sm text-gray-600">Indice de développement</p>
@@ -860,8 +860,8 @@ function ZLECAfCalculator() {
                           {/* Risque global */}
                           <div className="mt-3 text-center">
                             <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                              countryProfile.risk_ratings?.global_risk === 'Très Faible' ? 'bg-green-100 text-green-800' :
-                              countryProfile.risk_ratings?.global_risk === 'Faible' ? 'bg-green-100 text-green-700' :
+                              countryProfile.risk_ratings?.global_risk === 'Très Faible' ? 'bg-emerald-100 text-emerald-800' :
+                              countryProfile.risk_ratings?.global_risk === 'Faible' ? 'bg-emerald-100 text-emerald-700' :
                               countryProfile.risk_ratings?.global_risk === 'Modéré' ? 'bg-yellow-100 text-yellow-800' :
                               countryProfile.risk_ratings?.global_risk === 'Élevé' ? 'bg-orange-100 text-orange-800' :
                               countryProfile.risk_ratings?.global_risk === 'Très Élevé' ? 'bg-red-100 text-red-800' :
