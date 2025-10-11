@@ -585,69 +585,89 @@ function ZLECAfCalculator() {
 
                 {/* Métriques principales avec style amélioré */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {/* Statistiques d'importation du pays partenaire */}
+                  {/* Statistiques d'importation avec graphique */}
                   {partnerImportStats && (
-                    <Card>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg">{t.partnerImports}</CardTitle>
-                        <CardDescription>
+                    <Card className="shadow-lg border-l-4 border-l-blue-500">
+                      <CardHeader className="pb-2 bg-gradient-to-r from-blue-50 to-cyan-50">
+                        <CardTitle className="text-lg font-bold text-blue-700">{t.partnerImports}</CardTitle>
+                        <CardDescription className="font-semibold">
                           {countryFlags[destinationCountry]} {getCountryName(destinationCountry)} - SH {hsCode}
                         </CardDescription>
                       </CardHeader>
-                      <CardContent>
-                        <div className="space-y-2">
-                          <div className="flex justify-between">
-                            <span className="text-sm">2023:</span>
-                            <span className="font-bold">${(partnerImportStats.year_2023 / 1000000).toFixed(0)}M</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm">2022:</span>
-                            <span className="font-bold">${(partnerImportStats.year_2022 / 1000000).toFixed(0)}M</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm">Croissance:</span>
-                            <Badge variant={parseFloat(partnerImportStats.growth_rate) > 0 ? "default" : "destructive"}>
-                              {partnerImportStats.growth_rate}%
-                            </Badge>
-                          </div>
+                      <CardContent className="pt-4">
+                        <ResponsiveContainer width="100%" height={150}>
+                          <BarChart data={[
+                            { année: '2022', montant: partnerImportStats.year_2022 / 1000000 },
+                            { année: '2023', montant: partnerImportStats.year_2023 / 1000000 }
+                          ]}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="année" />
+                            <YAxis />
+                            <Tooltip formatter={(value) => `$${value.toFixed(0)}M`} />
+                            <Bar dataKey="montant" fill="#3b82f6" />
+                          </BarChart>
+                        </ResponsiveContainer>
+                        <div className="mt-3 text-center">
+                          <Badge variant={parseFloat(partnerImportStats.growth_rate) > 0 ? "default" : "destructive"} className="text-base px-4 py-1">
+                            📊 Croissance: {partnerImportStats.growth_rate}%
+                          </Badge>
                         </div>
                       </CardContent>
                     </Card>
                   )}
 
-                  {/* Graphique donut simulé pour la part SH2 */}
+                  {/* Graphique donut pour la part SH2 */}
                   {partnerImportStats && (
-                    <Card>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg">Part du Secteur</CardTitle>
-                        <CardDescription>
+                    <Card className="shadow-lg border-l-4 border-l-green-500">
+                      <CardHeader className="pb-2 bg-gradient-to-r from-green-50 to-emerald-50">
+                        <CardTitle className="text-lg font-bold text-green-700">Part du Secteur</CardTitle>
+                        <CardDescription className="font-semibold">
                           SH{hsCode.substring(0, 2)} dans les importations totales
                         </CardDescription>
                       </CardHeader>
-                      <CardContent>
-                        <div className="text-center">
-                          <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-green-400 to-blue-500 mb-2">
-                            <span className="text-white font-bold text-lg">
-                              {partnerImportStats.share_of_total_imports}%
-                            </span>
-                          </div>
-                          <p className="text-sm text-gray-600">
-                            du secteur SH{hsCode.substring(0, 2)}
-                          </p>
-                        </div>
+                      <CardContent className="pt-4">
+                        <ResponsiveContainer width="100%" height={150}>
+                          <PieChart>
+                            <Pie
+                              data={[
+                                { name: `SH${hsCode.substring(0, 2)}`, value: parseFloat(partnerImportStats.share_of_total_imports) },
+                                { name: 'Autres secteurs', value: 100 - parseFloat(partnerImportStats.share_of_total_imports) }
+                              ]}
+                              cx="50%"
+                              cy="50%"
+                              innerRadius={40}
+                              outerRadius={60}
+                              paddingAngle={5}
+                              dataKey="value"
+                            >
+                              <Cell fill="#10b981" />
+                              <Cell fill="#e5e7eb" />
+                            </Pie>
+                            <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
+                          </PieChart>
+                        </ResponsiveContainer>
+                        <p className="text-center font-bold text-green-600 mt-2">
+                          {partnerImportStats.share_of_total_imports}% du secteur
+                        </p>
                       </CardContent>
                     </Card>
                   )}
 
-                  <Card>
+                  <Card className="shadow-lg border-l-4 border-l-yellow-500 bg-gradient-to-br from-yellow-50 to-orange-50">
                     <CardHeader className="pb-2">
-                      <CardTitle className="text-lg">Économies Totales</CardTitle>
+                      <CardTitle className="text-lg font-bold text-yellow-700 flex items-center gap-2">
+                        <span>💰</span>
+                        <span>Économies Totales</span>
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-2xl font-bold text-green-600">
+                      <p className="text-4xl font-extrabold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                         {formatCurrency(statistics.overview.total_savings)}
                       </p>
-                      <p className="text-sm text-gray-600">économisées via ZLECAf</p>
+                      <p className="text-sm text-gray-700 font-semibold mt-2">économisées via ZLECAf</p>
+                      <Badge className="mt-3 bg-gradient-to-r from-green-600 to-blue-600 text-white">
+                        {statistics.overview.calculations_count} calculs effectués
+                      </Badge>
                     </CardContent>
                   </Card>
                 </div>
