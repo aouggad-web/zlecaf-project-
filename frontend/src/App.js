@@ -554,8 +554,8 @@ function ZLECAfCalculator() {
                           Principaux pays exportateurs pour le code SH {result.hs_code}
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="pt-4">
-                        <ResponsiveContainer width="100%" height={250}>
+                      <CardContent className="pt-4" style={{ minHeight: '280px' }}>
+                        <ResponsiveContainer width="100%" height={250} debounce={300}>
                           <BarChart 
                             data={result.top_african_producers.map((producer, index) => ({
                               pays: `${index + 1}. ${producer.country_name}`,
