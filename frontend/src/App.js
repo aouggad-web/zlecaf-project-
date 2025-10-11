@@ -440,71 +440,96 @@ function ZLECAfCalculator() {
                 </CardContent>
               </Card>
 
-              {/* Résultats complets */}
+              {/* Résultats complets avec visualisations */}
               {result && (
                 <div className="space-y-4">
-                  <Card className="border-green-200">
-                    <CardHeader>
-                      <CardTitle className="flex items-center space-x-2 text-green-700">
+                  <Card className="border-l-4 border-l-green-500 shadow-xl bg-gradient-to-br from-white to-green-50">
+                    <CardHeader className="bg-gradient-to-r from-green-600 to-yellow-500 text-white rounded-t-lg">
+                      <CardTitle className="flex items-center space-x-2 text-2xl">
                         <span>💰</span>
                         <span>Résultats Détaillés</span>
                       </CardTitle>
-                      <CardDescription>
+                      <CardDescription className="text-yellow-100 font-semibold">
                         {countryFlags[result.origin_country]} {getCountryName(result.origin_country)} → {countryFlags[result.destination_country]} {getCountryName(result.destination_country)}
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-4">
+                    <CardContent className="space-y-6 pt-6">
+                      {/* Comparaison visuelle avec graphique */}
+                      <div className="bg-white p-4 rounded-lg shadow-md">
+                        <h4 className="font-bold text-lg mb-4 text-gray-800">📊 Comparaison Tarifaire</h4>
+                        <ResponsiveContainer width="100%" height={250}>
+                          <BarChart data={[
+                            { name: 'Tarif NPF', montant: result.normal_tariff_amount, taux: result.normal_tariff_rate * 100 },
+                            { name: 'Tarif ZLECAf', montant: result.zlecaf_tariff_amount, taux: result.zlecaf_tariff_rate * 100 },
+                            { name: 'Économie', montant: result.savings, taux: result.savings_percentage }
+                          ]}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip formatter={(value) => formatCurrency(value)} />
+                            <Legend />
+                            <Bar dataKey="montant" fill="#10b981" name="Montant (USD)" />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <p className="text-sm font-medium text-gray-600">{t.normalTariff}</p>
-                          <p className="text-2xl font-bold text-red-600">
+                        <div className="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl shadow-md border-2 border-red-300">
+                          <p className="text-sm font-semibold text-red-700 mb-2">{t.normalTariff}</p>
+                          <p className="text-3xl font-bold text-red-600">
                             {formatCurrency(result.normal_tariff_amount)}
                           </p>
-                          <p className="text-sm text-gray-500">
-                            {(result.normal_tariff_rate * 100).toFixed(1)}% de {formatCurrency(result.value)}
+                          <p className="text-sm text-red-600 mt-2 font-medium">
+                            {(result.normal_tariff_rate * 100).toFixed(1)}% • {formatCurrency(result.value)}
                           </p>
                         </div>
 
-                        <div className="space-y-2">
-                          <p className="text-sm font-medium text-gray-600">{t.zlecafTariff}</p>
-                          <p className="text-2xl font-bold text-green-600">
+                        <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-md border-2 border-green-300">
+                          <p className="text-sm font-semibold text-green-700 mb-2">{t.zlecafTariff}</p>
+                          <p className="text-3xl font-bold text-green-600">
                             {formatCurrency(result.zlecaf_tariff_amount)}
                           </p>
-                          <p className="text-sm text-gray-500">
-                            {(result.zlecaf_tariff_rate * 100).toFixed(1)}% de {formatCurrency(result.value)}
+                          <p className="text-sm text-green-600 mt-2 font-medium">
+                            {(result.zlecaf_tariff_rate * 100).toFixed(1)}% • {formatCurrency(result.value)}
                           </p>
                         </div>
                       </div>
 
-                      <Separator />
+                      <Separator className="my-4" />
 
-                      <div className="text-center space-y-2">
-                        <p className="text-sm font-medium text-gray-600">{t.savings}</p>
-                        <p className="text-3xl font-bold text-blue-600">
+                      <div className="text-center bg-gradient-to-r from-yellow-100 via-orange-100 to-red-100 p-8 rounded-2xl shadow-lg border-4 border-yellow-400">
+                        <p className="text-lg font-bold text-gray-700 mb-2">{t.savings}</p>
+                        <p className="text-5xl font-extrabold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-3">
                           {formatCurrency(result.savings)}
                         </p>
-                        <Badge variant="secondary" className="text-lg px-3 py-1">
-                          {result.savings_percentage.toFixed(1)}% d'économie
+                        <Badge className="text-xl px-6 py-2 bg-gradient-to-r from-green-600 to-blue-600 text-white shadow-lg">
+                          🎉 {result.savings_percentage.toFixed(1)}% d'économie
                         </Badge>
-                        <Progress value={result.savings_percentage} className="w-full mt-2" />
+                        <Progress value={result.savings_percentage} className="w-full mt-4 h-3" />
                       </div>
 
-                      {/* Règles d'origine */}
-                      <div className="bg-amber-50 p-4 rounded-lg">
-                        <h4 className="font-semibold text-amber-800 mb-2">{t.rulesOrigin}</h4>
-                        <p className="text-sm text-amber-700">
-                          <strong>Type:</strong> {result.rules_of_origin.rule}
-                        </p>
-                        <p className="text-sm text-amber-700">
-                          <strong>Exigence:</strong> {result.rules_of_origin.requirement}
-                        </p>
-                        <Progress 
-                          value={result.rules_of_origin.regional_content} 
-                          className="w-full mt-2"
-                        />
-                        <p className="text-xs text-amber-600 mt-1">
-                          Contenu régional minimum: {result.rules_of_origin.regional_content}%
-                        </p>
+                      {/* Règles d'origine avec style africain */}
+                      <div className="bg-gradient-to-r from-amber-100 to-orange-100 p-6 rounded-xl border-l-4 border-orange-500 shadow-lg">
+                        <h4 className="font-bold text-xl text-orange-800 mb-3 flex items-center gap-2">
+                          <span>📜</span> {t.rulesOrigin}
+                        </h4>
+                        <div className="bg-white p-4 rounded-lg space-y-2">
+                          <p className="text-sm text-amber-800 font-semibold">
+                            <strong className="text-orange-600">Type:</strong> {result.rules_of_origin.rule}
+                          </p>
+                          <p className="text-sm text-amber-800 font-semibold">
+                            <strong className="text-orange-600">Exigence:</strong> {result.rules_of_origin.requirement}
+                          </p>
+                          <div className="mt-3">
+                            <Progress 
+                              value={result.rules_of_origin.regional_content} 
+                              className="w-full h-3"
+                            />
+                            <p className="text-sm text-amber-700 mt-2 font-bold text-center">
+                              🌍 Contenu régional minimum: {result.rules_of_origin.regional_content}% africain
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
