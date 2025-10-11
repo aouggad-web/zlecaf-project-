@@ -9,9 +9,21 @@
   --african-turquoise: #06AED5;
 }
 
+/* Stabilisation globale - désactive animations problématiques */
+* {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 /* African pattern animations */
