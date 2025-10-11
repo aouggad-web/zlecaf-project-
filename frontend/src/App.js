@@ -618,8 +618,8 @@ function ZLECAfCalculator() {
                           {countryFlags[destinationCountry]} {getCountryName(destinationCountry)} - SH {hsCode}
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="pt-4">
-                        <ResponsiveContainer width="100%" height={150}>
+                      <CardContent className="pt-4" style={{ minHeight: '180px' }}>
+                        <ResponsiveContainer width="100%" height={150} debounce={300}>
                           <BarChart data={[
                             { année: '2022', montant: partnerImportStats.year_2022 / 1000000 },
                             { année: '2023', montant: partnerImportStats.year_2023 / 1000000 }
