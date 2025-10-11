@@ -707,22 +707,24 @@ function ZLECAfCalculator() {
                   </CardHeader>
                   <CardContent className="pt-6">
                     {/* Graphique de projections */}
-                    <ResponsiveContainer width="100%" height={300}>
-                      <LineChart data={[
-                        { année: '2024', volume: 0, pib: 0, industrialisation: 0 },
-                        { année: '2025', volume: 15, pib: 0, industrialisation: 0 },
-                        { année: '2030', volume: 52, pib: 35, industrialisation: 35 }
-                      ]}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="année" />
-                        <YAxis label={{ value: 'Pourcentage (%)', angle: -90, position: 'insideLeft' }} />
-                        <Tooltip formatter={(value) => `${value}%`} />
-                        <Legend />
-                        <Line type="monotone" dataKey="volume" stroke="#10b981" strokeWidth={3} name="Volume commercial" dot={{ r: 6 }} />
-                        <Line type="monotone" dataKey="pib" stroke="#3b82f6" strokeWidth={3} name="PIB" dot={{ r: 6 }} />
-                        <Line type="monotone" dataKey="industrialisation" stroke="#f59e0b" strokeWidth={3} name="Industrialisation" dot={{ r: 6 }} />
-                      </LineChart>
-                    </ResponsiveContainer>
+                    <div style={{ minHeight: '320px' }}>
+                      <ResponsiveContainer width="100%" height={300} debounce={300}>
+                        <LineChart data={[
+                          { année: '2024', volume: 0, pib: 0, industrialisation: 0 },
+                          { année: '2025', volume: 15, pib: 0, industrialisation: 0 },
+                          { année: '2030', volume: 52, pib: 35, industrialisation: 35 }
+                        ]}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="année" />
+                          <YAxis label={{ value: 'Pourcentage (%)', angle: -90, position: 'insideLeft' }} />
+                          <Tooltip formatter={(value) => `${value}%`} />
+                          <Legend />
+                          <Line type="monotone" dataKey="volume" stroke="#10b981" strokeWidth={3} name="Volume commercial" dot={{ r: 6 }} />
+                          <Line type="monotone" dataKey="pib" stroke="#3b82f6" strokeWidth={3} name="PIB" dot={{ r: 6 }} />
+                          <Line type="monotone" dataKey="industrialisation" stroke="#f59e0b" strokeWidth={3} name="Industrialisation" dot={{ r: 6 }} />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                       <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border-2 border-blue-300 shadow-lg">
