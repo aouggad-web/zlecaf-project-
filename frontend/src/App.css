@@ -26,25 +26,21 @@ body {
   overflow-x: hidden;
 }
 
-/* African pattern animations */
+/* African pattern animations - DISABLED FOR STABILITY */
 @keyframes african-pulse {
   0%, 100% {
-    transform: scale(1);
     opacity: 1;
   }
   50% {
-    transform: scale(1.05);
-    opacity: 0.9;
+    opacity: 0.95;
   }
 }
 
 @keyframes slide-in {
   from {
-    transform: translateY(20px);
     opacity: 0;
   }
   to {
-    transform: translateY(0);
     opacity: 1;
   }
 }
@@ -58,19 +54,19 @@ body {
   }
 }
 
-/* Card entrance animations */
+/* Card entrance animations - DISABLED */
 .card-animate {
-  animation: slide-in 0.5s ease-out;
+  /* animation: slide-in 0.5s ease-out; */
 }
 
-/* Button hover effects */
+/* Button hover effects - MINIMAL */
 button {
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
 }
 
 button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  /* transform: translateY(-2px); */
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); */
 }
 
 /* Enhanced shadows for cards */
