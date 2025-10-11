@@ -963,7 +963,7 @@ function ZLECAfCalculator() {
                           </div>
                         )}
                         
-                        <div className="bg-gradient-to-br from-purple-50 to-pink-100 p-6 rounded-xl shadow-lg border-2 border-purple-300 text-center hover-lift">
+                        <div className="bg-gradient-to-br from-purple-50 to-pink-100 p-6 rounded-xl shadow-lg border-2 border-purple-300 text-center">
                           <p className="text-sm font-bold text-purple-700 mb-2">📊 Développement</p>
                           <p className="text-3xl font-extrabold text-purple-600">
                             {countryProfile.projections?.development_index || 'N/A'}
