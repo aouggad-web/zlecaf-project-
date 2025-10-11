@@ -977,10 +977,10 @@ function ZLECAfCalculator() {
                           <p className="text-xs text-orange-600 mt-1 font-semibold">sur 54 pays</p>
                         </div>
                       </div>
-                        
-                        {/* Notations de risque */}
-                        <div className="col-span-full mt-4">
-                          <h4 className="font-semibold mb-3 text-gray-800">Notations de Risque Souverain</h4>
+                      
+                      {/* Notations de risque */}
+                      <div className="mt-6">
+                        <h4 className="font-semibold mb-3 text-gray-800 text-xl">🏛️ Notations de Risque Souverain</h4>
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                             <div className="bg-blue-50 p-3 rounded-lg text-center">
                               <p className="text-lg font-bold text-blue-600">
