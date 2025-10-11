@@ -324,6 +324,7 @@ class CountryEconomicProfile(BaseModel):
     gdp_usd: Optional[float] = None
     gdp_per_capita: Optional[float] = None
     inflation_rate: Optional[float] = None
+    unemployment_rate: Optional[float] = None
     region: str
     trade_profile: Dict[str, Any] = {}
     projections: Dict[str, Any] = {}
@@ -422,6 +423,7 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
     profile.gdp_usd = real_data.get('gdp_usd_2024')
     profile.gdp_per_capita = real_data.get('gdp_per_capita_2024')
     profile.inflation_rate = None  # À obtenir via API si nécessaire
+    profile.unemployment_rate = real_data.get('unemployment_rate', None)
     
     # Ajouter les projections réelles et secteurs spécifiques
     profile.projections = {

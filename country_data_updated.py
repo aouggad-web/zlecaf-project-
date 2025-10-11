@@ -10,6 +10,7 @@ REAL_COUNTRY_DATA = {
         "development_index": 0.5,
         "africa_rank": 25,
         "growth_forecast_2024": "3.0%",
+        "unemployment_rate": 32.9,
         "key_sectors": [
             {
                 "name": "Agriculture",
@@ -51,6 +52,7 @@ REAL_COUNTRY_DATA = {
         "development_index": 0.5,
         "africa_rank": 25,
         "growth_forecast_2024": "3.0%",
+        "unemployment_rate": 12.6,
         "key_sectors": [
             {
                 "name": "Agriculture",
@@ -92,6 +94,7 @@ REAL_COUNTRY_DATA = {
         "development_index": 0.5,
         "africa_rank": 25,
         "growth_forecast_2024": "3.0%",
+        "unemployment_rate": 15.8,
         "key_sectors": [
             {
                 "name": "Agriculture",
