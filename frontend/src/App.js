@@ -356,14 +356,14 @@ function ZLECAfCalculator() {
 
           <TabsContent value="calculator">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Formulaire de calcul */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
+              {/* Formulaire de calcul avec style africain */}
+              <Card className="shadow-2xl border-t-4 border-t-green-600 hover-lift">
+                <CardHeader className="bg-gradient-to-r from-green-50 to-yellow-50">
+                  <CardTitle className="flex items-center space-x-2 text-2xl text-green-700">
                     <span>📊</span>
                     <span>{t.calculatorTitle}</span>
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-gray-700 font-semibold">
                     {t.calculatorDesc}
                   </CardDescription>
                 </CardHeader>
