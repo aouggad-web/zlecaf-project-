@@ -944,7 +944,7 @@ function ZLECAfCalculator() {
                     <CardContent className="pt-6">
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                         {countryProfile.gdp_usd && (
-                          <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-6 rounded-xl shadow-lg border-2 border-green-300 text-center hover-lift">
+                          <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-6 rounded-xl shadow-lg border-2 border-green-300 text-center">
                             <p className="text-sm font-bold text-green-700 mb-2">💰 PIB Total</p>
                             <p className="text-3xl font-extrabold text-green-600">
                               ${countryProfile.gdp_usd.toFixed(1)}B
