@@ -463,9 +463,9 @@ function ZLECAfCalculator() {
                     </CardHeader>
                     <CardContent className="space-y-6 pt-6">
                       {/* Comparaison visuelle avec graphique */}
-                      <div className="bg-white p-4 rounded-lg shadow-md">
+                      <div className="bg-white p-4 rounded-lg shadow-md" style={{ minHeight: '280px' }}>
                         <h4 className="font-bold text-lg mb-4 text-gray-800">📊 Comparaison Tarifaire</h4>
-                        <ResponsiveContainer width="100%" height={250}>
+                        <ResponsiveContainer width="100%" height={250} debounce={300}>
                           <BarChart data={[
                             { name: 'Tarif NPF', montant: result.normal_tariff_amount, taux: result.normal_tariff_rate * 100 },
                             { name: 'Tarif ZLECAf', montant: result.zlecaf_tariff_amount, taux: result.zlecaf_tariff_rate * 100 },
