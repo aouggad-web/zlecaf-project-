@@ -570,7 +570,20 @@ function ZLECAfCalculator() {
           <TabsContent value="statistics">
             {statistics && (
               <div className="space-y-6">
-                {/* Nouvelles métriques modifiées */}
+                {/* En-tête des statistiques avec style africain */}
+                <Card className="bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-white shadow-2xl border-none">
+                  <CardHeader>
+                    <CardTitle className="text-3xl flex items-center gap-3">
+                      <span>📈</span>
+                      <span>Statistiques ZLECAf</span>
+                    </CardTitle>
+                    <CardDescription className="text-yellow-100 text-lg font-semibold">
+                      Vue d'ensemble du commerce intra-africain
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+
+                {/* Métriques principales avec style amélioré */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* Statistiques d'importation du pays partenaire */}
                   {partnerImportStats && (
