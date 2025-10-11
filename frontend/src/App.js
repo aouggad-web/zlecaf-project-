@@ -1021,7 +1021,6 @@ function ZLECAfCalculator() {
                               🏛️ Risque Global: {countryProfile.risk_ratings?.global_risk || 'Non évalué'}
                             </span>
                           </div>
-                        </div>
                       </div>
                     </CardContent>
                   </Card>
