@@ -954,7 +954,7 @@ function ZLECAfCalculator() {
                         )}
                         
                         {countryProfile.gdp_per_capita && (
-                          <div className="bg-gradient-to-br from-blue-50 to-cyan-100 p-6 rounded-xl shadow-lg border-2 border-blue-300 text-center hover-lift">
+                          <div className="bg-gradient-to-br from-blue-50 to-cyan-100 p-6 rounded-xl shadow-lg border-2 border-blue-300 text-center">
                             <p className="text-sm font-bold text-blue-700 mb-2">👤 PIB/Habitant</p>
                             <p className="text-3xl font-extrabold text-blue-600">
                               ${formatNumber(Math.round(countryProfile.gdp_per_capita))}
