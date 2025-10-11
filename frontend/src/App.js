@@ -971,7 +971,7 @@ function ZLECAfCalculator() {
                           <p className="text-xs text-purple-600 mt-1 font-semibold">indice</p>
                         </div>
                         
-                        <div className="bg-gradient-to-br from-orange-50 to-red-100 p-6 rounded-xl shadow-lg border-2 border-orange-300 text-center hover-lift">
+                        <div className="bg-gradient-to-br from-orange-50 to-red-100 p-6 rounded-xl shadow-lg border-2 border-orange-300 text-center">
                           <p className="text-sm font-bold text-orange-700 mb-2">🏆 Rang Afrique</p>
                           <p className="text-3xl font-extrabold text-orange-600">
                             #{countryProfile.projections?.africa_rank || 'N/A'}
