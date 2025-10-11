@@ -672,45 +672,85 @@ function ZLECAfCalculator() {
                   </Card>
                 </div>
 
-                {/* Projections */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t.projections}</CardTitle>
+                {/* Projections avec visualisation graphique */}
+                <Card className="shadow-2xl border-t-4 border-t-purple-500">
+                  <CardHeader className="bg-gradient-to-r from-purple-100 to-pink-100">
+                    <CardTitle className="text-2xl font-bold text-purple-700 flex items-center gap-2">
+                      <span>🚀</span>
+                      <span>{t.projections}</span>
+                    </CardTitle>
+                    <CardDescription className="font-semibold">Croissance prévue du commerce intra-africain</CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-semibold mb-3 text-blue-600">Horizon 2025</h4>
-                        <div className="space-y-2">
-                          <div className="flex justify-between">
-                            <span>Augmentation volume commercial:</span>
-                            <Badge variant="secondary">{statistics.projections['2025'].trade_volume_increase}</Badge>
+                  <CardContent className="pt-6">
+                    {/* Graphique de projections */}
+                    <ResponsiveContainer width="100%" height={300}>
+                      <LineChart data={[
+                        { année: '2024', volume: 0, pib: 0, industrialisation: 0 },
+                        { année: '2025', volume: 15, pib: 0, industrialisation: 0 },
+                        { année: '2030', volume: 52, pib: 35, industrialisation: 35 }
+                      ]}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="année" />
+                        <YAxis label={{ value: 'Pourcentage (%)', angle: -90, position: 'insideLeft' }} />
+                        <Tooltip formatter={(value) => `${value}%`} />
+                        <Legend />
+                        <Line type="monotone" dataKey="volume" stroke="#10b981" strokeWidth={3} name="Volume commercial" dot={{ r: 6 }} />
+                        <Line type="monotone" dataKey="pib" stroke="#3b82f6" strokeWidth={3} name="PIB" dot={{ r: 6 }} />
+                        <Line type="monotone" dataKey="industrialisation" stroke="#f59e0b" strokeWidth={3} name="Industrialisation" dot={{ r: 6 }} />
+                      </LineChart>
+                    </ResponsiveContainer>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                      <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border-2 border-blue-300 shadow-lg">
+                        <h4 className="font-bold text-xl mb-4 text-blue-700 flex items-center gap-2">
+                          <span>📅</span>
+                          <span>Horizon 2025</span>
+                        </h4>
+                        <div className="space-y-3">
+                          <div className="bg-white p-3 rounded-lg shadow">
+                            <div className="flex justify-between items-center">
+                              <span className="font-semibold">📊 Volume commercial:</span>
+                              <Badge className="bg-blue-600 text-white text-base">{statistics.projections['2025'].trade_volume_increase}</Badge>
+                            </div>
                           </div>
-                          <div className="flex justify-between">
-                            <span>Éliminations tarifaires:</span>
-                            <Badge variant="outline">{statistics.projections['2025'].tariff_eliminations}</Badge>
+                          <div className="bg-white p-3 rounded-lg shadow">
+                            <div className="flex justify-between items-center">
+                              <span className="font-semibold">✂️ Éliminations tarifaires:</span>
+                              <Badge className="bg-green-600 text-white text-base">{statistics.projections['2025'].tariff_eliminations}</Badge>
+                            </div>
                           </div>
-                          <div className="flex justify-between">
-                            <span>Nouveaux corridors commerciaux:</span>
-                            <Badge variant="default">{statistics.projections['2025'].new_trade_corridors}</Badge>
+                          <div className="bg-white p-3 rounded-lg shadow">
+                            <div className="flex justify-between items-center">
+                              <span className="font-semibold">🛣️ Nouveaux corridors:</span>
+                              <Badge className="bg-purple-600 text-white text-base">{statistics.projections['2025'].new_trade_corridors}</Badge>
+                            </div>
                           </div>
                         </div>
                       </div>
                       
-                      <div>
-                        <h4 className="font-semibold mb-3 text-green-600">Horizon 2030</h4>
-                        <div className="space-y-2">
-                          <div className="flex justify-between">
-                            <span>Augmentation volume commercial:</span>
-                            <Badge variant="secondary">{statistics.projections['2030'].trade_volume_increase}</Badge>
+                      <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-2 border-green-300 shadow-lg">
+                        <h4 className="font-bold text-xl mb-4 text-green-700 flex items-center gap-2">
+                          <span>🎯</span>
+                          <span>Horizon 2030</span>
+                        </h4>
+                        <div className="space-y-3">
+                          <div className="bg-white p-3 rounded-lg shadow">
+                            <div className="flex justify-between items-center">
+                              <span className="font-semibold">📊 Volume commercial:</span>
+                              <Badge className="bg-green-600 text-white text-base">{statistics.projections['2030'].trade_volume_increase}</Badge>
+                            </div>
                           </div>
-                          <div className="flex justify-between">
-                            <span>Augmentation PIB:</span>
-                            <Badge variant="outline">{statistics.projections['2030'].gdp_increase}</Badge>
+                          <div className="bg-white p-3 rounded-lg shadow">
+                            <div className="flex justify-between items-center">
+                              <span className="font-semibold">💹 PIB:</span>
+                              <Badge className="bg-blue-600 text-white text-base">{statistics.projections['2030'].gdp_increase}</Badge>
+                            </div>
                           </div>
-                          <div className="flex justify-between">
-                            <span>Boost industrialisation:</span>
-                            <Badge variant="default">{statistics.projections['2030'].industrialization_boost}</Badge>
+                          <div className="bg-white p-3 rounded-lg shadow">
+                            <div className="flex justify-between items-center">
+                              <span className="font-semibold">🏭 Industrialisation:</span>
+                              <Badge className="bg-orange-600 text-white text-base">{statistics.projections['2030'].industrialization_boost}</Badge>
+                            </div>
                           </div>
                         </div>
                       </div>
