@@ -433,9 +433,9 @@ function ZLECAfCalculator() {
                   <Button 
                     onClick={calculateTariff}
                     disabled={loading}
-                    className="w-full bg-gradient-to-r from-green-600 to-blue-600"
+                    className="w-full bg-gradient-to-r from-red-600 via-yellow-500 to-green-600 text-white font-bold text-lg py-6 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
                   >
-                    {loading ? 'Calcul en cours...' : t.calculateBtn}
+                    {loading ? '⏳ Calcul en cours...' : `🧮 ${t.calculateBtn}`}
                   </Button>
                 </CardContent>
               </Card>
