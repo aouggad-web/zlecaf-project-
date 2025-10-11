@@ -813,7 +813,7 @@ function ZLECAfCalculator() {
                           </div>
                         )}
                         
-                        {countryProfile.unemployment_rate !== null && countryProfile.unemployment_rate !== undefined && (
+                        {countryProfile.unemployment_rate != null && (
                           <div className="text-center">
                             <p className="text-2xl font-bold text-red-600">
                               {countryProfile.unemployment_rate.toFixed(1)}%
