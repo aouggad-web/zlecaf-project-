@@ -293,40 +293,52 @@ function ZLECAfCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b-2 border-green-600">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
+      {/* Header with African-inspired design */}
+      <div className="relative bg-gradient-to-r from-red-600 via-yellow-500 to-green-600 shadow-2xl border-b-4 border-yellow-500 overflow-hidden">
+        {/* African pattern overlay */}
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,.1) 10px, rgba(0,0,0,.1) 20px),
+                           repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(0,0,0,.1) 10px, rgba(0,0,0,.1) 20px)`
+        }}></div>
+        
+        <div className="container mx-auto px-4 py-8 relative z-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">🌍</span>
+              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-yellow-400 transform hover:scale-110 transition-transform">
+                <span className="text-4xl">🌍</span>
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">
+              <div className="text-white">
+                <h1 className="text-4xl md:text-5xl font-bold drop-shadow-lg">
                   {t.title}
                 </h1>
-                <p className="text-gray-600 mt-1">
+                <p className="text-yellow-100 mt-2 text-lg font-semibold drop-shadow">
                   {t.subtitle}
                 </p>
+                <div className="flex items-center gap-2 mt-2">
+                  <Badge className="bg-white text-green-700 hover:bg-yellow-100">54 Pays Membres</Badge>
+                  <Badge className="bg-white text-red-700 hover:bg-yellow-100">1.3B+ Population</Badge>
+                </div>
               </div>
             </div>
             
-            {/* Sélecteur de langue */}
+            {/* Sélecteur de langue avec style amélioré */}
             <div className="flex space-x-2">
               <Button 
                 variant={language === 'fr' ? 'default' : 'outline'}
-                size="sm"
+                size="lg"
+                className={language === 'fr' ? 'bg-white text-green-700 hover:bg-yellow-100 font-bold shadow-lg' : 'bg-white/20 text-white border-white hover:bg-white/30'}
                 onClick={() => setLanguage('fr')}
               >
-                🇫🇷 FR
+                🇫🇷 Français
               </Button>
               <Button 
                 variant={language === 'en' ? 'default' : 'outline'}
-                size="sm"
+                size="lg"
+                className={language === 'en' ? 'bg-white text-green-700 hover:bg-yellow-100 font-bold shadow-lg' : 'bg-white/20 text-white border-white hover:bg-white/30'}
                 onClick={() => setLanguage('en')}
               >
-                🇬🇧 EN
+                🇬🇧 English
               </Button>
             </div>
           </div>
