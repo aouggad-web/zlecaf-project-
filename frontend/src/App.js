@@ -939,39 +939,44 @@ function ZLECAfCalculator() {
                         {countryProfile.region} • 👥 Population: {formatNumber(countryProfile.population)} habitants
                       </CardDescription>
                     </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <CardContent className="pt-6">
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                         {countryProfile.gdp_usd && (
-                          <div className="text-center">
-                            <p className="text-2xl font-bold text-green-600">
+                          <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-6 rounded-xl shadow-lg border-2 border-green-300 text-center hover-lift">
+                            <p className="text-sm font-bold text-green-700 mb-2">💰 PIB Total</p>
+                            <p className="text-3xl font-extrabold text-green-600">
                               ${countryProfile.gdp_usd.toFixed(1)}B
                             </p>
-                            <p className="text-sm text-gray-600">PIB (milliards USD)</p>
+                            <p className="text-xs text-green-600 mt-1 font-semibold">milliards USD</p>
                           </div>
                         )}
                         
                         {countryProfile.gdp_per_capita && (
-                          <div className="text-center">
-                            <p className="text-2xl font-bold text-blue-600">
+                          <div className="bg-gradient-to-br from-blue-50 to-cyan-100 p-6 rounded-xl shadow-lg border-2 border-blue-300 text-center hover-lift">
+                            <p className="text-sm font-bold text-blue-700 mb-2">👤 PIB/Habitant</p>
+                            <p className="text-3xl font-extrabold text-blue-600">
                               ${formatNumber(Math.round(countryProfile.gdp_per_capita))}
                             </p>
-                            <p className="text-sm text-gray-600">PIB par habitant</p>
+                            <p className="text-xs text-blue-600 mt-1 font-semibold">USD par personne</p>
                           </div>
                         )}
                         
-                        <div className="text-center">
-                          <p className="text-2xl font-bold text-purple-600">
+                        <div className="bg-gradient-to-br from-purple-50 to-pink-100 p-6 rounded-xl shadow-lg border-2 border-purple-300 text-center hover-lift">
+                          <p className="text-sm font-bold text-purple-700 mb-2">📊 Développement</p>
+                          <p className="text-3xl font-extrabold text-purple-600">
                             {countryProfile.projections?.development_index || 'N/A'}
                           </p>
-                          <p className="text-sm text-gray-600">Indice de développement</p>
+                          <p className="text-xs text-purple-600 mt-1 font-semibold">indice</p>
                         </div>
                         
-                        <div className="text-center">
-                          <p className="text-2xl font-bold text-orange-600">
+                        <div className="bg-gradient-to-br from-orange-50 to-red-100 p-6 rounded-xl shadow-lg border-2 border-orange-300 text-center hover-lift">
+                          <p className="text-sm font-bold text-orange-700 mb-2">🏆 Rang Afrique</p>
+                          <p className="text-3xl font-extrabold text-orange-600">
                             #{countryProfile.projections?.africa_rank || 'N/A'}
                           </p>
-                          <p className="text-sm text-gray-600">Rang en Afrique</p>
+                          <p className="text-xs text-orange-600 mt-1 font-semibold">sur 54 pays</p>
                         </div>
+                      </div>
                         
                         {/* Notations de risque */}
                         <div className="col-span-full mt-4">
