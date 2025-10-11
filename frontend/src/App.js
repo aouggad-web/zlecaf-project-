@@ -1035,8 +1035,8 @@ function ZLECAfCalculator() {
                     <CardContent className="pt-6">
                       {/* Graphique de croissance */}
                       {countryProfile.projections && (
-                        <div className="mb-6">
-                          <ResponsiveContainer width="100%" height={200}>
+                        <div className="mb-6" style={{ minHeight: '220px' }}>
+                          <ResponsiveContainer width="100%" height={200} debounce={300}>
                             <AreaChart data={[
                               { année: '2024', croissance: parseFloat(countryProfile.projections.gdp_growth_forecast_2024?.replace('%', '') || 0) },
                               { année: '2025', croissance: parseFloat(countryProfile.projections.gdp_growth_projection_2025?.replace('%', '') || 0) },
