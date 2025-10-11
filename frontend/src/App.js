@@ -1026,26 +1026,51 @@ function ZLECAfCalculator() {
                     </CardContent>
                   </Card>
 
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Perspectives et Projections</CardTitle>
+                  <Card className="shadow-xl border-l-4 border-l-purple-500">
+                    <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50">
+                      <CardTitle className="text-xl font-bold text-purple-700 flex items-center gap-2">
+                        <span>🚀</span>
+                        <span>Perspectives et Projections</span>
+                      </CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="pt-6">
+                      {/* Graphique de croissance */}
+                      {countryProfile.projections && (
+                        <div className="mb-6">
+                          <ResponsiveContainer width="100%" height={200}>
+                            <AreaChart data={[
+                              { année: '2024', croissance: parseFloat(countryProfile.projections.gdp_growth_forecast_2024?.replace('%', '') || 0) },
+                              { année: '2025', croissance: parseFloat(countryProfile.projections.gdp_growth_projection_2025?.replace('%', '') || 0) },
+                              { année: '2026', croissance: parseFloat(countryProfile.projections.gdp_growth_projection_2026?.replace('%', '') || 0) }
+                            ]}>
+                              <CartesianGrid strokeDasharray="3 3" />
+                              <XAxis dataKey="année" />
+                              <YAxis label={{ value: 'Croissance (%)', angle: -90, position: 'insideLeft' }} />
+                              <Tooltip formatter={(value) => `${value}%`} />
+                              <Area type="monotone" dataKey="croissance" stroke="#8b5cf6" fill="#c084fc" />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      )}
+                      
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <h4 className="font-semibold mb-3">Projections de Croissance</h4>
-                          <div className="space-y-2">
-                            <div className="flex justify-between">
-                              <span>Croissance prévue 2024:</span>
-                              <Badge variant="secondary">{countryProfile.projections?.gdp_growth_forecast_2024 || 'N/A'}</Badge>
+                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-5 rounded-xl shadow-lg">
+                          <h4 className="font-bold text-lg mb-4 text-blue-700 flex items-center gap-2">
+                            <span>📈</span>
+                            <span>Projections de Croissance</span>
+                          </h4>
+                          <div className="space-y-3">
+                            <div className="bg-white p-3 rounded-lg shadow flex justify-between items-center">
+                              <span className="font-semibold">2024:</span>
+                              <Badge className="bg-blue-600 text-white text-base">{countryProfile.projections?.gdp_growth_forecast_2024 || 'N/A'}</Badge>
                             </div>
-                            <div className="flex justify-between">
-                              <span>Projection 2025:</span>
-                              <Badge variant="outline">{countryProfile.projections?.gdp_growth_projection_2025 || 'N/A'}</Badge>
+                            <div className="bg-white p-3 rounded-lg shadow flex justify-between items-center">
+                              <span className="font-semibold">2025:</span>
+                              <Badge className="bg-green-600 text-white text-base">{countryProfile.projections?.gdp_growth_projection_2025 || 'N/A'}</Badge>
                             </div>
-                            <div className="flex justify-between">
-                              <span>Projection 2026:</span>
-                              <Badge variant="default">{countryProfile.projections?.gdp_growth_projection_2026 || 'N/A'}</Badge>
+                            <div className="bg-white p-3 rounded-lg shadow flex justify-between items-center">
+                              <span className="font-semibold">2026:</span>
+                              <Badge className="bg-purple-600 text-white text-base">{countryProfile.projections?.gdp_growth_projection_2026 || 'N/A'}</Badge>
                             </div>
                           </div>
                         </div>
