@@ -292,20 +292,20 @@ function ZLECAfCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-amber-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b-2 border-green-600">
+      <div className="bg-white shadow-sm border-b-2 border-emerald-600">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-emerald-600 to-amber-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">🌍</span>
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
+                <h1 className="text-3xl font-bold text-emerald-900">
                   {t.title}
                 </h1>
-                <p className="text-gray-600 mt-1">
+                <p className="text-emerald-700 mt-1">
                   {t.subtitle}
                 </p>
               </div>
@@ -420,7 +420,7 @@ function ZLECAfCalculator() {
                   <Button 
                     onClick={calculateTariff}
                     disabled={loading}
-                    className="w-full bg-gradient-to-r from-green-600 to-blue-600"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-amber-500"
                   >
                     {loading ? 'Calcul en cours...' : t.calculateBtn}
                   </Button>
@@ -430,9 +430,9 @@ function ZLECAfCalculator() {
               {/* Résultats complets */}
               {result && (
                 <div className="space-y-4">
-                  <Card className="border-green-200">
+                  <Card className="border-emerald-200">
                     <CardHeader>
-                      <CardTitle className="flex items-center space-x-2 text-green-700">
+                      <CardTitle className="flex items-center space-x-2 text-emerald-700">
                         <span>💰</span>
                         <span>Résultats Détaillés</span>
                       </CardTitle>
@@ -444,7 +444,7 @@ function ZLECAfCalculator() {
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <p className="text-sm font-medium text-gray-600">{t.normalTariff}</p>
-                          <p className="text-2xl font-bold text-red-600">
+                          <p className="text-2xl font-bold text-orange-600">
                             {formatCurrency(result.normal_tariff_amount)}
                           </p>
                           <p className="text-sm text-gray-500">
@@ -454,7 +454,7 @@ function ZLECAfCalculator() {
 
                         <div className="space-y-2">
                           <p className="text-sm font-medium text-gray-600">{t.zlecafTariff}</p>
-                          <p className="text-2xl font-bold text-green-600">
+                          <p className="text-2xl font-bold text-emerald-600">
                             {formatCurrency(result.zlecaf_tariff_amount)}
                           </p>
                           <p className="text-sm text-gray-500">
@@ -467,7 +467,7 @@ function ZLECAfCalculator() {
 
                       <div className="text-center space-y-2">
                         <p className="text-sm font-medium text-gray-600">{t.savings}</p>
-                        <p className="text-3xl font-bold text-blue-600">
+                        <p className="text-3xl font-bold text-amber-600">
                           {formatCurrency(result.savings)}
                         </p>
                         <Badge variant="secondary" className="text-lg px-3 py-1">
@@ -575,7 +575,7 @@ function ZLECAfCalculator() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-center">
-                          <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-green-400 to-blue-500 mb-2">
+                          <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-emerald-400 to-amber-500 mb-2">
                             <span className="text-white font-bold text-lg">
                               {partnerImportStats.share_of_total_imports}%
                             </span>
@@ -593,7 +593,7 @@ function ZLECAfCalculator() {
                       <CardTitle className="text-lg">Économies Totales</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-2xl font-bold text-green-600">
+                      <p className="text-2xl font-bold text-emerald-600">
                         {formatCurrency(statistics.overview.total_savings)}
                       </p>
                       <p className="text-sm text-gray-600">économisées via ZLECAf</p>
@@ -609,7 +609,7 @@ function ZLECAfCalculator() {
                   <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="font-semibold mb-3 text-blue-600">Horizon 2025</h4>
+                        <h4 className="font-semibold mb-3 text-sky-600">Horizon 2025</h4>
                         <div className="space-y-2">
                           <div className="flex justify-between">
                             <span>Augmentation volume commercial:</span>
@@ -627,7 +627,7 @@ function ZLECAfCalculator() {
                       </div>
                       
                       <div>
-                        <h4 className="font-semibold mb-3 text-green-600">Horizon 2030</h4>
+                        <h4 className="font-semibold mb-3 text-emerald-600">Horizon 2030</h4>
                         <div className="space-y-2">
                           <div className="flex justify-between">
                             <span>Augmentation volume commercial:</span>
@@ -737,9 +737,9 @@ function ZLECAfCalculator() {
                       </div>
                     </div>
 
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-blue-800 mb-2">Informations Administratives</h4>
-                      <div className="space-y-1 text-sm text-blue-700">
+                    <div className="bg-sky-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-sky-800 mb-2">Informations Administratives</h4>
+                      <div className="space-y-1 text-sm text-sky-700">
                         <p><strong>Période de validité:</strong> {rulesOfOrigin.explanation.validity_period}</p>
                         <p><strong>Autorité émettrice:</strong> {rulesOfOrigin.explanation.issuing_authority}</p>
                       </div>
@@ -797,7 +797,7 @@ function ZLECAfCalculator() {
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         {countryProfile.gdp_usd && (
                           <div className="text-center">
-                            <p className="text-2xl font-bold text-green-600">
+                            <p className="text-2xl font-bold text-emerald-600">
                               ${countryProfile.gdp_usd.toFixed(1)}B
                             </p>
                             <p className="text-sm text-gray-600">PIB (milliards USD)</p>
@@ -806,7 +806,7 @@ function ZLECAfCalculator() {
                         
                         {countryProfile.gdp_per_capita && (
                           <div className="text-center">
-                            <p className="text-2xl font-bold text-blue-600">
+                            <p className="text-2xl font-bold text-sky-600">
                               ${formatNumber(Math.round(countryProfile.gdp_per_capita))}
                             </p>
                             <p className="text-sm text-gray-600">PIB par habitant</p>
@@ -831,20 +831,20 @@ function ZLECAfCalculator() {
                         <div className="col-span-full mt-4">
                           <h4 className="font-semibold mb-3 text-gray-800">Notations de Risque Souverain</h4>
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            <div className="bg-blue-50 p-3 rounded-lg text-center">
-                              <p className="text-lg font-bold text-blue-600">
+                            <div className="bg-sky-50 p-3 rounded-lg text-center">
+                              <p className="text-lg font-bold text-sky-600">
                                 {countryProfile.risk_ratings?.sp || 'NR'}
                               </p>
                               <p className="text-xs text-gray-600">S&P (USA)</p>
                             </div>
-                            <div className="bg-green-50 p-3 rounded-lg text-center">
-                              <p className="text-lg font-bold text-green-600">
+                            <div className="bg-emerald-50 p-3 rounded-lg text-center">
+                              <p className="text-lg font-bold text-emerald-600">
                                 {countryProfile.risk_ratings?.moodys || 'NR'}
                               </p>
                               <p className="text-xs text-gray-600">Moody's (USA)</p>
                             </div>
-                            <div className="bg-purple-50 p-3 rounded-lg text-center">
-                              <p className="text-lg font-bold text-purple-600">
+                            <div className="bg-violet-50 p-3 rounded-lg text-center">
+                              <p className="text-lg font-bold text-violet-600">
                                 {countryProfile.risk_ratings?.fitch || 'NR'}
                               </p>
                               <p className="text-xs text-gray-600">Fitch (FR/USA)</p>
@@ -931,18 +931,18 @@ function ZLECAfCalculator() {
                         </div>
                       </div>
 
-                      <div className="bg-green-50 p-4 rounded-lg mt-4">
-                        <h4 className="font-semibold text-green-800 mb-2">
+                      <div className="bg-emerald-50 p-4 rounded-lg mt-4">
+                        <h4 className="font-semibold text-emerald-800 mb-2">
                           Potentiel ZLECAf - {countryProfile.projections?.zlecaf_potential_level || 'N/A'}
                         </h4>
-                        <p className="text-sm text-green-700 mb-3">
+                        <p className="text-sm text-emerald-700 mb-3">
                           {countryProfile.projections?.zlecaf_potential_description || 'Description non disponible'}
                         </p>
                         
                         {countryProfile.projections?.zlecaf_opportunities && (
                           <div>
-                            <p className="text-sm font-semibold text-green-800 mb-2">Opportunités clés :</p>
-                            <ul className="text-sm text-green-700 space-y-1">
+                            <p className="text-sm font-semibold text-emerald-800 mb-2">Opportunités clés :</p>
+                            <ul className="text-sm text-emerald-700 space-y-1">
                               {countryProfile.projections.zlecaf_opportunities.map((opp, index) => (
                                 <li key={index} className="flex items-start">
                                   <span className="mr-2">•</span>
@@ -956,8 +956,8 @@ function ZLECAfCalculator() {
 
                       {/* Nouvelles sections avec données réelles */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                        <div className="bg-blue-50 p-4 rounded-lg">
-                          <h4 className="font-semibold text-blue-800 mb-2">Principales Exportations</h4>
+                        <div className="bg-sky-50 p-4 rounded-lg">
+                          <h4 className="font-semibold text-sky-800 mb-2">Principales Exportations</h4>
                           <div className="flex flex-wrap gap-1">
                             {countryProfile.projections?.main_exports?.map((exp, index) => (
                               <Badge key={index} variant="outline" className="text-xs">
