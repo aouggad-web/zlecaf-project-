@@ -534,27 +534,43 @@ function ZLECAfCalculator() {
                     </CardContent>
                   </Card>
 
-                  {/* Top producteurs africains */}
+                  {/* Top producteurs africains avec graphique */}
                   {result.top_african_producers && result.top_african_producers.length > 0 && (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center space-x-2">
+                    <Card className="shadow-xl border-l-4 border-l-orange-500">
+                      <CardHeader className="bg-gradient-to-r from-orange-50 to-yellow-50">
+                        <CardTitle className="flex items-center space-x-2 text-xl text-orange-700">
                           <span>🏆</span>
                           <span>Top Producteurs Africains</span>
                         </CardTitle>
-                        <CardDescription>
+                        <CardDescription className="font-semibold">
                           Principaux pays exportateurs pour le code SH {result.hs_code}
                         </CardDescription>
                       </CardHeader>
-                      <CardContent>
-                        <div className="space-y-2">
+                      <CardContent className="pt-4">
+                        <ResponsiveContainer width="100%" height={250}>
+                          <BarChart 
+                            data={result.top_african_producers.map((producer, index) => ({
+                              pays: `${index + 1}. ${producer.country_name}`,
+                              valeur: producer.export_value / 1000000,
+                              flag: countryFlags[producer.country_code]
+                            }))}
+                            layout="horizontal"
+                          >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis type="number" />
+                            <YAxis dataKey="pays" type="category" width={120} />
+                            <Tooltip formatter={(value) => `$${value.toFixed(1)}M USD`} />
+                            <Bar dataKey="valeur" fill="#f97316" />
+                          </BarChart>
+                        </ResponsiveContainer>
+                        <div className="grid grid-cols-2 gap-2 mt-4">
                           {result.top_african_producers.map((producer, index) => (
-                            <div key={producer.country_code} className="flex justify-between items-center">
-                              <span className="text-sm font-medium">
+                            <div key={producer.country_code} className="bg-orange-50 p-2 rounded-lg flex justify-between items-center">
+                              <span className="text-sm font-semibold">
                                 {index + 1}. {countryFlags[producer.country_code]} {producer.country_name}
                               </span>
-                              <Badge variant="outline">
-                                ${(producer.export_value / 1000000).toFixed(1)}M USD
+                              <Badge className="bg-orange-600 text-white">
+                                ${(producer.export_value / 1000000).toFixed(1)}M
                               </Badge>
                             </div>
                           ))}
