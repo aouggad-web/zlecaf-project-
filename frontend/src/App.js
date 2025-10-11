@@ -895,10 +895,13 @@ function ZLECAfCalculator() {
 
           <TabsContent value="profiles">
             <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Profils Économiques des Pays</CardTitle>
-                  <CardDescription>
+              <Card className="shadow-xl border-t-4 border-t-blue-600">
+                <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-50">
+                  <CardTitle className="text-2xl font-bold text-blue-700 flex items-center gap-2">
+                    <span>🌍</span>
+                    <span>Profils Économiques des Pays</span>
+                  </CardTitle>
+                  <CardDescription className="font-semibold text-gray-700">
                     Sélectionnez un pays pour consulter son profil économique complet
                   </CardDescription>
                 </CardHeader>
@@ -910,8 +913,8 @@ function ZLECAfCalculator() {
                       fetchCountryProfile(value);
                     }}
                   >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Choisir un pays" />
+                    <SelectTrigger className="text-lg font-semibold border-2 border-blue-300 focus:border-blue-500">
+                      <SelectValue placeholder="🔍 Choisir un pays" />
                     </SelectTrigger>
                     <SelectContent>
                       {countries.map((country) => (
@@ -926,14 +929,14 @@ function ZLECAfCalculator() {
 
               {countryProfile && (
                 <div className="space-y-4">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center space-x-2">
-                        <span>{countryFlags[countryProfile.country_code]}</span>
-                        <span>{countryProfile.country_name}</span>
+                  <Card className="shadow-2xl border-l-4 border-l-green-600">
+                    <CardHeader className="bg-gradient-to-r from-green-100 via-yellow-100 to-red-100">
+                      <CardTitle className="flex items-center space-x-2 text-2xl">
+                        <span className="text-4xl">{countryFlags[countryProfile.country_code]}</span>
+                        <span className="font-bold text-green-700">{countryProfile.country_name}</span>
                       </CardTitle>
-                      <CardDescription>
-                        {countryProfile.region} • Population: {formatNumber(countryProfile.population)} habitants
+                      <CardDescription className="text-lg font-semibold text-gray-700">
+                        {countryProfile.region} • 👥 Population: {formatNumber(countryProfile.population)} habitants
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
