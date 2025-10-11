@@ -1372,7 +1372,7 @@ REAL_COUNTRY_DATA = {
             "bureaux_importants": [
                 "Port de Mombasa (Port)",
                 "Aéroport international Jomo Kenyatta de Nairobi (Aéroport)",
-                "Poste frontalier de Malaba (Frontière terrestre avec l'Ouganda)"
+                "Poste frontalier de Malaba (Frontière terrestre)"
             ]
         }
     },

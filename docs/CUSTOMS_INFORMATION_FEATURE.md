@@ -23,7 +23,7 @@ Each country with customs information includes the following fields:
 
 ### Field Descriptions
 
-- **pays**: The name of the country in French
+- **pays**: The name of the country (typically in French, following the source data format)
 - **administration_douaniere**: The official name of the country's customs authority
 - **site_web**: The URL of the official customs website
 - **bureaux_importants**: A list of key customs offices, including ports, airports, and land border crossings
@@ -104,7 +104,7 @@ Types include:
 ```
 "Port de Mombasa (Port)"
 "Aéroport international Jomo Kenyatta de Nairobi (Aéroport)"
-"Poste frontalier de Malaba (Frontière terrestre avec l'Ouganda)"
+"Poste frontalier de Malaba (Frontière terrestre)"
 ```
 
 ## Usage in Client Applications
@@ -215,8 +215,8 @@ Potential improvements for this feature:
 ## Related Documentation
 
 - [API Documentation](../README.md)
-- [Country Data Structure](ZLECAF_COUNTRIES_DATA_EXTRACTION.md)
-- [Testing Guide](../tests/test_customs_information.py)
+- [Country Data Structure](../ZLECAF_COUNTRIES_DATA_EXTRACTION.md)
+- [Test Implementation](../tests/test_customs_information.py)
 
 ## Support
 
