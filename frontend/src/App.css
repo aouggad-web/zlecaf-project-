@@ -124,14 +124,14 @@ button:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Card hover effects */
+/* Card hover effects - Disabled to prevent jumping */
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
 
 .hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  /* transform: translateY(-4px); */
+  /* box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); */
 }
 
 .App-logo {
