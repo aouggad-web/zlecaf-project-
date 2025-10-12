@@ -1,0 +1,147 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2025-10-12T21:20:00.416428",
+  "description": "AfCFTA Dismantling Matrix and Rates Data for 2025-2035",
+  "source": "ZLECAf Lyra+ Pipeline",
+  "period": {
+    "start_year": 2025,
+    "end_year": 2035,
+    "total_years": 11
+  },
+  "coverage": {
+    "total_countries": 54,
+    "countries": [
+      "AGO",
+      "BDI",
+      "BEN",
+      "BFA",
+      "BWA",
+      "CAF",
+      "CIV",
+      "CMR",
+      "COD",
+      "COG",
+      "COM",
+      "CPV",
+      "DJI",
+      "DZA",
+      "EGY",
+      "ERI",
+      "ETH",
+      "GAB",
+      "GHA",
+      "GIN",
+      "GMB",
+      "GNB",
+      "GNQ",
+      "KEN",
+      "LBR",
+      "LBY",
+      "LSO",
+      "MAR",
+      "MDG",
+      "MLI",
+      "MOZ",
+      "MRT",
+      "MUS",
+      "MWI",
+      "NAM",
+      "NER",
+      "NGA",
+      "RWA",
+      "SDN",
+      "SEN",
+      "SLE",
+      "SOM",
+      "SSD",
+      "STP",
+      "SWZ",
+      "SYC",
+      "TCD",
+      "TGO",
+      "TUN",
+      "TZA",
+      "UGA",
+      "ZAF",
+      "ZMB",
+      "ZWE"
+    ],
+    "sample_hs6_codes": 58,
+    "note": "Sample dataset - Production version should include all 5000+ HS6 codes"
+  },
+  "dismantling_categories": {
+    "A": {
+      "name": "Category A",
+      "description": "Linear reduction to 0% over 5 years",
+      "years": 5
+    },
+    "B": {
+      "name": "Category B",
+      "description": "Linear reduction to 0% over 10 years",
+      "years": 10
+    },
+    "C": {
+      "name": "Category C",
+      "description": "Linear reduction to 0% over 13 years",
+      "years": 13
+    },
+    "Sensitive": {
+      "name": "Sensitive",
+      "description": "Linear reduction to 0% over 15 years",
+      "years": 15
+    },
+    "Excluded": {
+      "name": "Excluded",
+      "description": "Excluded from liberalization",
+      "years": null
+    }
+  },
+  "statistics": {
+    "matrix_rows": 58,
+    "rates_rows": 550,
+    "immediate_rows": 25
+  },
+  "data_fields": {
+    "dismantling_matrix": {
+      "description": "Wide format matrix with HS6 codes as rows and countries as columns",
+      "fields": [
+        "hs6_code",
+        "hs_description",
+        "...country_codes"
+      ],
+      "purpose": "Data entry template for dismantling schedules"
+    },
+    "rates_by_year": {
+      "description": "Long format table with one row per (country, hs6, year)",
+      "fields": [
+        "country",
+        "hs6_code",
+        "year",
+        "mfn_rate_pct",
+        "afcfta_rate_pct",
+        "schedule",
+        "immediate_flag",
+        "source_url"
+      ],
+      "purpose": "Time series data for tariff evolution"
+    },
+    "immediate_dismantled": {
+      "description": "Subset of positions with immediate dismantling (0% from start)",
+      "fields": [
+        "country",
+        "hs6_code",
+        "start_year",
+        "initial_mfn_rate_pct",
+        "schedule",
+        "notes",
+        "source_url"
+      ],
+      "purpose": "Quick reference for immediate liberalization"
+    }
+  },
+  "instructions": {
+    "data_entry": "Fill blank fields in dismantling_matrix with schedule types: A, B, C, Sensitive, Excluded, Immediate",
+    "rates_entry": "Complete rates_by_year with actual MFN and AfCFTA rates from national schedules",
+    "validation": "Ensure immediate_flag=1 when afcfta_rate_pct=0 from start_year"
+  }
+}
