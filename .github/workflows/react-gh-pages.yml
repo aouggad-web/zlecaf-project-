@@ -46,8 +46,6 @@ jobs:
       - name: Build React app
         working-directory: ./frontend
         run: yarn build
-        env:
-          CI: false
       
       - name: Setup Pages
         uses: actions/configure-pages@v5
