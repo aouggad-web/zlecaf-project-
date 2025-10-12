@@ -141,6 +141,8 @@ def main():
     parser = argparse.ArgumentParser(description='Lyra+ Data Release Pipeline')
     parser.add_argument('--demo', action='store_true', 
                         help='Mode démonstration avec données simulées')
+    parser.add_argument('--afcfta-2025', action='store_true',
+                        help='Generate AfCFTA dismantling matrix and rates for 2025-2035')
     parser.add_argument('--output', type=str, 
                         default='frontend/public/data',
                         help='Répertoire de sortie (défaut: frontend/public/data)')
@@ -155,12 +157,23 @@ def main():
     print("=" * 60)
     print("🚀 LYRA+ DATA RELEASE PIPELINE")
     print("=" * 60)
-    print(f"Mode: {'DEMO' if args.demo else 'PRODUCTION'}")
+    mode_desc = 'DEMO' if args.demo else ('AfCFTA 2025+' if args.afcfta_2025 else 'PRODUCTION')
+    print(f"Mode: {mode_desc}")
     print(f"Sortie: {output_dir}")
     print()
     
     if args.demo:
         generate_demo_data(output_dir)
+    elif args.afcfta_2025:
+        # Run the AfCFTA 2025 data generation script
+        import subprocess
+        script_path = Path(__file__).parent / 'generate_afcfta_2025_data.py'
+        result = subprocess.run([sys.executable, str(script_path)], 
+                              capture_output=True, text=True)
+        print(result.stdout)
+        if result.returncode != 0:
+            print(result.stderr)
+            sys.exit(1)
     else:
         print("❌ Mode production non implémenté")
         print("TODO: Intégrer les sources réelles:")
