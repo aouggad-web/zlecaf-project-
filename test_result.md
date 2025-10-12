@@ -148,7 +148,7 @@
     - agent: "main"
       message: "Application ZLECAf complète identifiée. Backend API fonctionne parfaitement (54 pays, calculs tarifaires, règles origine). Frontend moderne React avec Shadcn/UI. Problème: routing externe https://emergent.city/api cause erreurs CORS depuis localhost:3000. Solutions possibles: configurer proxy ou corriger ingress Kubernetes."
 
-user_problem_statement: "Tester l'application ZLECAf React qui vient d'être mise à jour avec de nouvelles données validées. L'utilisateur signale que les 'profils de pays' et 'statistiques' ne fonctionnent pas."
+user_problem_statement: "run - Exécuter le script apply_corrections.py pour appliquer les corrections tarifaires et statistiques ZLECAf 2024 au backend."
 
 backend:
   - task: "API ZLECAf avec nouvelles données Excel - GET /api/countries"
@@ -271,6 +271,18 @@ backend:
           agent: "testing"
           comment: "✅ VALIDÉ: Point d'entrée API accessible avec message ZLECAf correct. Endpoint GET /api/ opérationnel."
 
+  - task: "Application des corrections ZLECAf 2024"
+    implemented: true
+    working: true
+    file: "apply_corrections.py, backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "✅ APPLIQUÉ: Script apply_corrections.py mis à jour et exécuté. Taux tarifaires (60 secteurs HS2) et statistiques (OEC 2023-2024) intégrés dans backend/server.py. Validation syntaxe Python réussie."
+
 frontend:
   - task: "Interface React ZLECAf avec calculs tarifaires"
     implemented: true
@@ -340,3 +352,5 @@ agent_communication:
       message: "🎯 TESTS FRONTEND COMPLETS RÉUSSIS - Application ZLECAf React entièrement fonctionnelle. DIAGNOSTIC: Les 'profils de pays' et 'statistiques' signalés comme non fonctionnels par l'utilisateur FONCTIONNENT PARFAITEMENT. ✅ Calculateur: 54 pays ZLECAf chargés, sélections opérationnelles ✅ Statistiques: $64,500 économies affichées, projections 2025/2030 présentes ✅ Profils Pays: Sélecteur fonctionnel, données Algérie/Nigeria affichées (PIB, population) ✅ Intégration API: Tous endpoints opérationnels. CONCLUSION: Application prête pour production, aucun problème détecté."
     - agent: "testing"
       message: "🔍 TESTS VALIDATION FINALE - Vérification complète des 54 pays ZLECAf après mise à jour des données. ✅ BACKEND API: Tous les 54 pays chargés correctement avec données réelles validées. Tests API directs confirmés: Nigeria (374.984B, S&P: B-), Maroc (142.0B, S&P: BBB-), Ghana (76.6B, S&P: CCC+), Kenya (115.0B, S&P: B+), Angola (124.2B, S&P: B-). ✅ FRONTEND: Calculateur fonctionnel avec 54 pays disponibles, navigation entre onglets opérationnelle. ✅ STATISTIQUES: API retourne $64,500 économies totales, projections 2025/2030 correctes. 🎉 CONCLUSION: Le bug 'seulement l'Algérie fonctionne' est COMPLÈTEMENT RÉSOLU. Tous les 54 pays ZLECAf affichent maintenant leurs données correctement."
+    - agent: "main"
+      message: "✅ CORRECTIONS ZLECAF 2024 APPLIQUÉES - Script apply_corrections.py exécuté avec succès. Mis à jour: (1) Taux tarifaires - 60 secteurs HS2 avec taux normaux et ZLECAf officiels (2) Statistiques enrichies - Données OEC 2023-2024 intégrées avec top exportateurs/importeurs, analyse produits, intégration régionale, performance corridors, métriques impact ZLECAf, projections 2025/2030. Fichier backend/server.py modifié et validé. Syntaxe Python correcte. Prêt pour redémarrage du service backend."

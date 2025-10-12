@@ -4,6 +4,11 @@ Appliquer les corrections aux fichiers backend
 """
 import json
 import re
+import os
+from pathlib import Path
+
+# Déterminer le répertoire de base
+BASE_DIR = Path(__file__).parent.absolute()
 
 def apply_tariff_corrections():
     """Appliquer les corrections tarifaires au server.py"""
@@ -11,11 +16,13 @@ def apply_tariff_corrections():
     print("=" * 60)
     
     # Lire les corrections
-    with open('/app/zlecaf_corrections_2024.json', 'r', encoding='utf-8') as f:
+    corrections_path = BASE_DIR / 'zlecaf_corrections_2024.json'
+    with open(corrections_path, 'r', encoding='utf-8') as f:
         corrections = json.load(f)
     
     # Lire le fichier server.py
-    with open('/app/backend/server.py', 'r', encoding='utf-8') as f:
+    server_path = BASE_DIR / 'backend' / 'server.py'
+    with open(server_path, 'r', encoding='utf-8') as f:
         server_content = f.read()
     
     # Extraire les taux corrigés
@@ -43,7 +50,8 @@ def apply_tariff_corrections():
     server_content = re.sub(zlecaf_pattern, f'zlecaf_rates = {zlecaf_rates_str}', server_content, flags=re.DOTALL)
     
     # Écrire le fichier modifié
-    with open('/app/backend/server.py', 'w', encoding='utf-8') as f:
+    server_path = BASE_DIR / 'backend' / 'server.py'
+    with open(server_path, 'w', encoding='utf-8') as f:
         f.write(server_content)
     
     print(f"   ✅ Taux normaux mis à jour: {len(normal_rates)} secteurs")
@@ -56,13 +64,15 @@ def apply_statistics_corrections():
     print("=" * 60)
     
     # Lire les corrections
-    with open('/app/zlecaf_corrections_2024.json', 'r', encoding='utf-8') as f:
+    corrections_path = BASE_DIR / 'zlecaf_corrections_2024.json'
+    with open(corrections_path, 'r', encoding='utf-8') as f:
         corrections = json.load(f)
     
     enhanced_stats = corrections['enhanced_statistics']
     
     # Lire le fichier server.py
-    with open('/app/backend/server.py', 'r', encoding='utf-8') as f:
+    server_path = BASE_DIR / 'backend' / 'server.py'
+    with open(server_path, 'r', encoding='utf-8') as f:
         server_content = f.read()
     
     # Créer la nouvelle fonction de statistiques
@@ -153,11 +163,13 @@ async def get_comprehensive_statistics():
     }}'''
     
     # Remplacer l'ancienne fonction de statistiques
-    stats_pattern = r'@api_router\.get\("/statistics"\).*?return \{.*?\}\s*\}\s*\}\s*\}'
+    # Find the statistics function from decorator to the end (before next function or end marker)
+    stats_pattern = r'@api_router\.get\("/statistics"\).*?(?=\n@|\napp\.|\n# Include)'
     server_content = re.sub(stats_pattern, new_stats_function, server_content, flags=re.DOTALL)
     
     # Écrire le fichier modifié
-    with open('/app/backend/server.py', 'w', encoding='utf-8') as f:
+    server_path = BASE_DIR / 'backend' / 'server.py'
+    with open(server_path, 'w', encoding='utf-8') as f:
         f.write(server_content)
     
     print(f"   ✅ Fonction statistiques remplacée")
