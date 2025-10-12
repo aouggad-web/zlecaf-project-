@@ -1,3 +1,18 @@
+[build]
+  publish = "build"
+  command = "npm run build"
+  base = "frontend"
+  
+[context.production.environment]
+  MONGO_URL = "mongodb://localhost:27017"
+  DB_NAME = "zlecaf_production_db"
+  CORS_ORIGINS = "https://zlecaf-algeria.netlify.app"
+  
 [context.deploy-preview.environment]
-  MONGO_URL = "your-mongo-connection-string"
-  DB_NAME   = "your-database-name"
+  MONGO_URL = "mongodb://localhost:27017"  
+  DB_NAME = "zlecaf_preview_db"
+  CORS_ORIGINS = "https://deploy-preview--zlecaf-algeria.netlify.app"
+  
+[context.branch-deploy.environment]
+  MONGO_URL = "mongodb://localhost:27017"
+  DB_NAME = "zlecaf_branch_db"
