@@ -794,7 +794,7 @@ function ZLECAfCalculator() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                         {countryProfile.gdp_usd && (
                           <div className="text-center">
                             <p className="text-2xl font-bold text-green-600">
@@ -810,6 +810,15 @@ function ZLECAfCalculator() {
                               ${formatNumber(Math.round(countryProfile.gdp_per_capita))}
                             </p>
                             <p className="text-sm text-gray-600">PIB par habitant</p>
+                          </div>
+                        )}
+                        
+                        {countryProfile.unemployment_rate != null && (
+                          <div className="text-center">
+                            <p className="text-2xl font-bold text-red-600">
+                              {countryProfile.unemployment_rate.toFixed(1)}%
+                            </p>
+                            <p className="text-sm text-gray-600">Taux de chômage</p>
                           </div>
                         )}
                         
