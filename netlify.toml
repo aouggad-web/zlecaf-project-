@@ -1,3 +1,7 @@
-[context.deploy-preview.environment]
-  MONGO_URL = "your-mongo-connection-string"
-  DB_NAME   = "your-database-name"
+[build]
+base = "site"
+command = "npm run export"
+publish = "out"
+
+[build.environment]
+NODE_VERSION = "18"
