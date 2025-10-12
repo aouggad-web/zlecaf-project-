@@ -2,7 +2,7 @@
 
 ## 🎯 Problem Fixed
 
-The application preview was not accessible because two conflicting GitHub Actions workflows (Jekyll and React) were trying to deploy to GitHub Pages simultaneously. This prevented users from verifying work and data.
+The application preview was not accessible because two conflicting GitHub Actions workflows (Jekyll and React) were competing for the same GitHub Pages 'pages' concurrency group. This caused inconsistent deployments and prevented users from verifying work and data.
 
 ## ✅ Solution Implemented
 
@@ -16,7 +16,7 @@ The application preview was not accessible because two conflicting GitHub Action
 
 ## 🔗 Live Application URLs
 
-- **Frontend**: https://aouggad-web.github.io/zlecaf-project-/
+- **Frontend**: https://aouggad-web.github.io/zlecaf-project-
 - **Backend API**: https://etape-suivante.preview.emergentagent.com/api
 
 ## 📋 Verification Checklist
@@ -27,7 +27,7 @@ The application preview was not accessible because two conflicting GitHub Action
 - [ ] Check for any error messages in the workflow logs
 
 ### Step 2: Verify Application Access
-- [ ] Open https://aouggad-web.github.io/zlecaf-project-/ in your browser
+- [ ] Open https://aouggad-web.github.io/zlecaf-project- in your browser
 - [ ] Verify the page loads without errors
 - [ ] Check browser console (F12) for any critical errors
 
@@ -82,8 +82,11 @@ If you need to redeploy the app:
 ## 🐛 Common Issues and Solutions
 
 ### Issue: 404 Page Not Found
-**Cause**: GitHub Pages deployment hasn't completed or failed  
-**Solution**: Check Actions tab for workflow status and logs
+**Cause**: GitHub Pages deployment hasn't completed, failed, or direct navigation to non-root routes  
+**Solution**: 
+- Check Actions tab for workflow status and logs
+- Always access the app via the root URL: https://aouggad-web.github.io/zlecaf-project-
+- Note: GitHub Pages SPAs may show 404 on direct deep-link navigation (use root URL and navigate within app)
 
 ### Issue: Blank/White Page
 **Cause**: JavaScript errors or incorrect base path  
@@ -117,7 +120,7 @@ The application should display:
 ## 🎉 Success Criteria
 
 The deployment is successful if:
-- ✅ App is accessible at https://aouggad-web.github.io/zlecaf-project-/
+- ✅ App is accessible at https://aouggad-web.github.io/zlecaf-project-
 - ✅ All 4 tabs are visible and clickable
 - ✅ UI renders correctly without major layout issues
 - ✅ Language toggle works (FR/EN)

@@ -11,7 +11,7 @@ A comprehensive tariff calculator and trade information system for the African C
 
 ### 🔗 Access the Application
 
-- **Frontend App**: https://aouggad-web.github.io/zlecaf-project-/
+- **Frontend App**: https://aouggad-web.github.io/zlecaf-project-
 - **Backend API**: https://etape-suivante.preview.emergentagent.com/api
 
 The React application is automatically deployed to GitHub Pages on every push to the main branch that modifies the `frontend/` directory.
@@ -30,7 +30,7 @@ The application uses GitHub Actions for continuous deployment:
 
 After deployment completes, verify the app is working:
 
-1. **Open the App**: Visit https://aouggad-web.github.io/zlecaf-project-/
+1. **Open the App**: Visit https://aouggad-web.github.io/zlecaf-project-
 2. **Check All Tabs**: Navigate through all 4 tabs (Calculateur, Statistiques, Règles d'Origine, Profils Pays)
 3. **Test API Connection**: The app should display data from the backend API
 4. **Check Console**: Open browser DevTools (F12) to check for errors
