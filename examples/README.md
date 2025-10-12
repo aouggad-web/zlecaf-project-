@@ -20,7 +20,7 @@ A comprehensive example demonstrating how to use all core modules together to pe
 
 **Run the example**:
 ```bash
-cd /path/to/zlecaf-project-
+cd /path/to/zlecaf-project
 python examples/complete_analysis_example.py
 ```
 
@@ -212,7 +212,7 @@ else:
 Make sure you have installed all dependencies:
 
 ```bash
-cd /path/to/zlecaf-project-
+cd /path/to/zlecaf-project
 pip install -r backend/requirements.txt
 ```
 
@@ -231,7 +231,7 @@ chmod +x examples/complete_analysis_example.py
 
 ```python
 import sys
-sys.path.insert(0, '/path/to/zlecaf-project-/backend')
+sys.path.insert(0, '/path/to/zlecaf-project/backend')
 
 # Import and use modules
 from core.duty_calculator import AfCFTADutyCalculator

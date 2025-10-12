@@ -124,8 +124,9 @@ def main():
     print(f"AfCFTA Category: {category}")
     
     # Check if destination is LDC
-    # In a real implementation, this would use CountryProfileManager
-    is_ldc = False  # Nigeria is not an LDC
+    # Note: In production, use CountryProfileManager.is_ldc() to determine LDC status
+    # For this example, Nigeria is not a Least Developed Country
+    is_ldc = False
     
     afcfta_result = afcfta_calc.calculate_duty(
         value=trade_value,
