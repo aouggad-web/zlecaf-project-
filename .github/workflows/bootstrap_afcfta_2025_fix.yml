@@ -124,21 +124,25 @@ PY
             backend/tools/**
             prompts/zlecaf_tariffs/**
             .afcfta-bootstrap/**
-          branch: feat/bootstrap-afcfta-2025
+          branch: feat/bootstrap-afcfta-2025-${{ github.run_id }}
+          delete-branch: true
           commit-message: "data(afcfta-2025): bootstrap datasets + tax kit + prompts (fix)"
           title: "Bootstrap AfCFTA datasets 2025+ (tariffs + VAT/Levies/Excise) — Lyra+ ready"
           body: |
-            Création initiale des fichiers gold 2025+ et kit taxes. Ce run force un delta via .afcfta-bootstrap/marker.txt.
+            Génération initiale 2025+ (tarifs ZLECAf, TVA/accises/levies, prompts Lyra+, validateur).
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           labels: data, afcfta, lyra-plus
+          draft: false
 
       - name: Fallback PR via API (if none created)
         if: steps.cpr.outputs.pull-request-number == ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
         run: |
           set -eux
-          BR="feat/bootstrap-afcfta-2025"
+          BR="feat/bootstrap-afcfta-2025-${RUN_ID}"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git checkout -b "$BR"
