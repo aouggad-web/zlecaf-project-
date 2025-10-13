@@ -28,6 +28,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Verify GitHub Pages Setup
+        run: |
+          echo "ℹ️ Checking GitHub Pages configuration..."
+          echo ""
+          echo "⚠️ IMPORTANT: If this workflow fails with 'Get Pages site failed', please:"
+          echo "   1. Go to your repository Settings"
+          echo "   2. Navigate to Pages section (left sidebar)"
+          echo "   3. Under 'Build and deployment', set Source to 'GitHub Actions'"
+          echo "   4. Save the settings and re-run this workflow"
+          echo ""
+          echo "📖 For more information, see: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site"
+          echo ""
+      
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build with Jekyll

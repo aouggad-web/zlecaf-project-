@@ -120,6 +120,19 @@ The health endpoints provide real-time monitoring of:
 4. **API Response Times**: Track endpoint response times
 5. **Error Rates**: Monitor 4xx and 5xx response rates
 
+## 🚀 Deployment
+
+### GitHub Pages Setup
+
+This project can be deployed to GitHub Pages. If you encounter deployment issues, please see the [GitHub Pages Setup Guide](docs/GITHUB_PAGES_SETUP.md) for detailed instructions.
+
+**Quick setup:**
+1. Go to repository Settings → Pages
+2. Set Source to "GitHub Actions"
+3. The site will deploy automatically on push to `main`
+
+For troubleshooting the "Get Pages site failed" error, see [docs/GITHUB_PAGES_SETUP.md](docs/GITHUB_PAGES_SETUP.md).
+
 ## 🔍 Quick Start
 
 ### Check API Health
