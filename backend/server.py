@@ -530,11 +530,29 @@ async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
     normal_rate = normal_rates.get(sector_code, 0.15)
     zlecaf_rate = zlecaf_rates.get(sector_code, 0.03)
     
-    # Calculs en USD
+    # Calculs des droits de douane en USD
     normal_amount = request.value * normal_rate
     zlecaf_amount = request.value * zlecaf_rate
     savings = normal_amount - zlecaf_amount
     savings_percentage = (savings / normal_amount) * 100 if normal_amount > 0 else 0
+    
+    # Calcul des taxes pour le scénario NORMAL (NPF)
+    normal_taxes = calculate_all_taxes(
+        value=request.value,
+        customs_duty=normal_amount,
+        country_code=request.destination_country
+    )
+    
+    # Calcul des taxes pour le scénario ZLECAf
+    zlecaf_taxes = calculate_all_taxes(
+        value=request.value,
+        customs_duty=zlecaf_amount,
+        country_code=request.destination_country
+    )
+    
+    # Économies totales (incluant toutes les taxes)
+    total_savings_with_taxes = normal_taxes['total_cost'] - zlecaf_taxes['total_cost']
+    total_savings_percentage = (total_savings_with_taxes / normal_taxes['total_cost']) * 100 if normal_taxes['total_cost'] > 0 else 0
     
     # Règles d'origine
     rules = ZLECAF_RULES_OF_ORIGIN.get(sector_code, {
@@ -549,18 +567,39 @@ async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
     # Récupérer les données économiques des pays
     wb_data = await wb_client.get_country_data([origin_country['wb_code'], dest_country['wb_code']])
     
-    # Création de la réponse complète
+    # Création de la réponse complète avec toutes les taxes
     result = TariffCalculationResponse(
         origin_country=request.origin_country,
         destination_country=request.destination_country,
         hs_code=request.hs_code,
         value=request.value,
+        # Tarifs de douane
         normal_tariff_rate=normal_rate,
         normal_tariff_amount=normal_amount,
         zlecaf_tariff_rate=zlecaf_rate,
         zlecaf_tariff_amount=zlecaf_amount,
+        # Taxes normales (NPF)
+        normal_vat_rate=normal_taxes['vat_rate'],
+        normal_vat_amount=normal_taxes['vat_amount'],
+        normal_statistical_fee=normal_taxes['statistical_fee_amount'],
+        normal_community_levy=normal_taxes['community_levy_amount'],
+        normal_ecowas_levy=normal_taxes['ecowas_levy_amount'],
+        normal_other_taxes_total=normal_taxes['other_taxes_total'],
+        normal_total_cost=normal_taxes['total_cost'],
+        # Taxes ZLECAf
+        zlecaf_vat_rate=zlecaf_taxes['vat_rate'],
+        zlecaf_vat_amount=zlecaf_taxes['vat_amount'],
+        zlecaf_statistical_fee=zlecaf_taxes['statistical_fee_amount'],
+        zlecaf_community_levy=zlecaf_taxes['community_levy_amount'],
+        zlecaf_ecowas_levy=zlecaf_taxes['ecowas_levy_amount'],
+        zlecaf_other_taxes_total=zlecaf_taxes['other_taxes_total'],
+        zlecaf_total_cost=zlecaf_taxes['total_cost'],
+        # Économies
         savings=savings,
         savings_percentage=savings_percentage,
+        total_savings_with_taxes=total_savings_with_taxes,
+        total_savings_percentage=total_savings_percentage,
+        # Autres données
         rules_of_origin=rules,
         top_african_producers=top_producers,
         origin_country_data=wb_data.get(origin_country['wb_code'], {}),
