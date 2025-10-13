@@ -7,6 +7,42 @@
 
 A comprehensive tariff calculator and trade information system for the African Continental Free Trade Area (AfCFTA/ZLECAf).
 
+## 🌐 Live Preview & Deployment
+
+### 🔗 Access the Application
+
+- **Frontend App**: https://aouggad-web.github.io/zlecaf-project-
+- **Backend API**: https://etape-suivante.preview.emergentagent.com/api
+
+The React application is automatically deployed to GitHub Pages on every push to the main branch that modifies the `frontend/` directory.
+
+### 📋 Deployment Status
+
+The application uses GitHub Actions for continuous deployment:
+- **Workflow**: `.github/workflows/deploy-react-app.yml`
+- **Triggers**: 
+  - Push to `main` branch with changes to `frontend/**`
+  - Manual workflow dispatch via GitHub Actions tab
+- **Build Time**: ~2-3 minutes
+- **Status**: Check the [Actions tab](https://github.com/aouggad-web/zlecaf-project-/actions) for deployment status
+
+### ✅ Verify the Deployment
+
+After deployment completes, verify the app is working:
+
+1. **Open the App**: Visit https://aouggad-web.github.io/zlecaf-project-
+2. **Check All Tabs**: Navigate through all 4 tabs (Calculateur, Statistiques, Règles d'Origine, Profils Pays)
+3. **Test API Connection**: The app should display data from the backend API
+4. **Check Console**: Open browser DevTools (F12) to check for errors
+
+### 🔧 Manual Deployment
+
+To trigger a deployment manually:
+1. Go to the [Actions tab](https://github.com/aouggad-web/zlecaf-project-/actions)
+2. Select "Build and Deploy React App to GitHub Pages" workflow
+3. Click "Run workflow" button
+4. Select the `main` branch and click "Run workflow"
+
 ## 🚀 Features
 
 - **Tariff Calculations**: Calculate tariffs between 54 African countries
@@ -122,22 +158,49 @@ The health endpoints provide real-time monitoring of:
 
 ## 🔍 Quick Start
 
-### Check API Health
+### Local Development
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/aouggad-web/zlecaf-project-.git
+   cd zlecaf-project-
+   ```
+
+2. **Setup Frontend**
+   ```bash
+   cd frontend
+   cp .env.example .env
+   yarn install
+   yarn start
+   ```
+   The app will open at http://localhost:3000
+
+3. **Setup Backend** (Optional - for local API development)
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   # Create .env with MONGO_URL and DB_NAME
+   uvicorn server:app --reload --port 8000
+   ```
+
+### API Testing
+
+#### Check API Health
 
 ```bash
-curl https://your-domain.com/api/health
+curl https://etape-suivante.preview.emergentagent.com/api/health
 ```
 
-### Get All Countries
+#### Get All Countries
 
 ```bash
-curl https://your-domain.com/api/countries
+curl https://etape-suivante.preview.emergentagent.com/api/countries
 ```
 
-### Calculate Tariff
+#### Calculate Tariff
 
 ```bash
-curl -X POST https://your-domain.com/api/calculate-tariff \
+curl -X POST https://etape-suivante.preview.emergentagent.com/api/calculate-tariff \
   -H "Content-Type: application/json" \
   -d '{
     "origin_country": "KE",
@@ -146,6 +209,32 @@ curl -X POST https://your-domain.com/api/calculate-tariff \
     "value": 10000
   }'
 ```
+
+## 🐛 Troubleshooting
+
+### Frontend Issues
+
+**Problem**: App shows blank page or doesn't load
+- **Solution**: Clear browser cache and hard reload (Ctrl+Shift+R or Cmd+Shift+R)
+- **Check**: Open DevTools console (F12) for JavaScript errors
+
+**Problem**: Data not loading (empty dropdowns, no statistics)
+- **Solution**: Check that the backend API is online at https://etape-suivante.preview.emergentagent.com/api/health
+- **Workaround**: CORS errors are expected in some development environments
+
+**Problem**: Build fails in GitHub Actions
+- **Solution**: Check the Actions logs for specific errors
+- **Common causes**: Missing dependencies, invalid environment variables, or syntax errors
+
+### Local Development Issues
+
+**Problem**: `yarn start` fails
+- **Solution**: Delete `node_modules` and `yarn.lock`, then run `yarn install` again
+- **Check**: Ensure you have Node.js 18+ installed
+
+**Problem**: Environment variables not working
+- **Solution**: Make sure you have a `.env` file in the `frontend/` directory (copy from `.env.example`)
+- **Note**: You must restart the dev server after changing `.env` file
 
 ## 📝 License
 

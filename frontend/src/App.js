@@ -1171,7 +1171,7 @@ function ZLECAfCalculator() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/zlecaf-project-">
       <Routes>
         <Route path="/" element={<ZLECAfCalculator />} />
       </Routes>
