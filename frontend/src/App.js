@@ -662,6 +662,63 @@ function ZLECAfCalculator() {
                         </p>
                       </div>
 
+                      {/* Journal de calcul détaillé */}
+                      {result.normal_calculation_journal && (
+                        <Card className="shadow-lg border-t-4 border-t-purple-500">
+                          <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50">
+                            <CardTitle className="text-xl font-bold text-purple-700 flex items-center gap-2">
+                              <span>📋</span>
+                              <span>Journal de Calcul Détaillé (Ordre Officiel)</span>
+                            </CardTitle>
+                            <CardDescription className="font-semibold">
+                              {result.computation_order_ref}
+                            </CardDescription>
+                          </CardHeader>
+                          <CardContent className="pt-4">
+                            <div className="overflow-x-auto">
+                              <Table>
+                                <TableHeader>
+                                  <TableRow>
+                                    <TableHead>Étape</TableHead>
+                                    <TableHead>Composant</TableHead>
+                                    <TableHead>Base</TableHead>
+                                    <TableHead>Taux</TableHead>
+                                    <TableHead>Montant</TableHead>
+                                    <TableHead>Cumulatif</TableHead>
+                                    <TableHead>Référence Légale</TableHead>
+                                  </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                  {result.normal_calculation_journal.map((entry, index) => (
+                                    <TableRow key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
+                                      <TableCell className="font-bold">{entry.step}</TableCell>
+                                      <TableCell className="font-semibold">{entry.component}</TableCell>
+                                      <TableCell>{formatCurrency(entry.base)}</TableCell>
+                                      <TableCell>{entry.rate > 0 ? `${entry.rate.toFixed(2)}%` : '-'}</TableCell>
+                                      <TableCell className="font-bold text-blue-600">{formatCurrency(entry.amount)}</TableCell>
+                                      <TableCell className="font-bold">{formatCurrency(entry.cumulative)}</TableCell>
+                                      <TableCell className="text-xs">
+                                        {entry.legal_ref_url ? (
+                                          <a href={entry.legal_ref_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                            {entry.legal_ref}
+                                          </a>
+                                        ) : (
+                                          entry.legal_ref
+                                        )}
+                                      </TableCell>
+                                    </TableRow>
+                                  ))}
+                                </TableBody>
+                              </Table>
+                            </div>
+                            <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
+                              <Badge className="bg-green-600">✓ Vérifié: {result.last_verified}</Badge>
+                              <Badge className="bg-blue-600">Confiance: {result.confidence_level}</Badge>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      )}
+
                       {/* Règles d'origine avec style africain */}
                       <div className="bg-gradient-to-r from-amber-100 to-orange-100 p-6 rounded-xl border-l-4 border-orange-500 shadow-lg">
                         <h4 className="font-bold text-xl text-orange-800 mb-3 flex items-center gap-2">
