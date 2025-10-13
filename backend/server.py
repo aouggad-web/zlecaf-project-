@@ -680,22 +680,76 @@ async def get_comprehensive_statistics():
             "top_beneficiary_sectors": sectors_result
         },
         "zlecaf_impact": {
-            "average_tariff_reduction": "85%",
+            "average_tariff_reduction": "90%",
             "estimated_trade_creation": "52 milliards USD",
             "job_creation_potential": "18 millions d'emplois",
             "intra_african_trade_target": "25% d'ici 2030",
-            "current_intra_african_trade": "15.2%"
+            "current_intra_african_trade": "15.2%",
+            "poverty_reduction": "30 millions de personnes d'ici 2035",
+            "income_gains_2035": "450 milliards USD",
+            "export_increase_2035": "560 milliards USD (forte composante manufacturière)"
         },
         "projections": {
             "2025": {
                 "trade_volume_increase": "15%",
                 "tariff_eliminations": "90%",
-                "new_trade_corridors": 45
+                "new_trade_corridors": 45,
+                "gti_active_corridors": "8 corridors prioritaires"
             },
             "2030": {
                 "trade_volume_increase": "52%",
                 "gdp_increase": "7%",
-                "industrialization_boost": "35%"
+                "industrialization_boost": "35%",
+                "tariff_revenue_change": "+3% (malgré baisse des taux)"
+            },
+            "2035": {
+                "income_gains": "450 milliards USD",
+                "poverty_reduction": "30 millions de personnes",
+                "export_increase": "560 milliards USD",
+                "intra_african_trade": "25-30%"
+            },
+            "2040": {
+                "trade_volume_increase_conservative": "15%",
+                "trade_volume_increase_median": "20%",
+                "trade_volume_increase_ambitious": "25%",
+                "estimated_additional_trade": "50-70 milliards USD"
+            }
+        },
+        "scenarios": {
+            "conservative": {
+                "description": "Mise en œuvre lente, obstacles persistants",
+                "trade_increase_2040": "15%",
+                "additional_value": "50 milliards USD"
+            },
+            "median": {
+                "description": "Mise en œuvre progressive, réduction graduelle NTB",
+                "trade_increase_2040": "20%",
+                "additional_value": "60 milliards USD"
+            },
+            "ambitious": {
+                "description": "Mise en œuvre rapide, élimination NTB, infrastructure optimale",
+                "trade_increase_2040": "25%",
+                "additional_value": "70 milliards USD"
+            }
+        },
+        "key_mechanisms": {
+            "digital_trade_protocol": {
+                "adoption_date": "2024-02-18",
+                "status": "Adopté",
+                "focus": "Harmonisation règles, flux transfrontières, confiance numérique"
+            },
+            "ntb_platform": {
+                "url": "https://tradebarriers.africa",
+                "status": "Opérationnel",
+                "purpose": "Signalement et résolution obstacles non tarifaires"
+            },
+            "papss_payments": {
+                "status": "Déploiement en cours",
+                "purpose": "Système panafricain de paiements et règlements"
+            },
+            "gti": {
+                "status": "Actif",
+                "purpose": "Guided Trade Initiative - montée en charge progressive"
             }
         },
         "data_sources": [
