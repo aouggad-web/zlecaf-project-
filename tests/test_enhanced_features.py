@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Test pour les nouvelles fonctionnalités améliorées
+Tests for enhanced features
 """
 
 import sys
@@ -94,8 +94,12 @@ def test_verification_dialog_integration():
         print("⚠️ Fichier App.js non trouvé")
         return False
     
-    with open(app_js_path, 'r', encoding='utf-8') as f:
-        content = f.read()
+    try:
+        with open(app_js_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except (FileNotFoundError, PermissionError) as e:
+        print(f"❌ Erreur lors de la lecture du fichier: {e}")
+        return False
     
     # Vérifier les éléments clés
     checks = {
@@ -137,8 +141,12 @@ def test_backend_endpoints_structure():
         print("⚠️ Fichier server.py non trouvé")
         return False
     
-    with open(server_path, 'r', encoding='utf-8') as f:
-        content = f.read()
+    try:
+        with open(server_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except (FileNotFoundError, PermissionError) as e:
+        print(f"❌ Erreur lors de la lecture du fichier: {e}")
+        return False
     
     # Vérifier les éléments clés des endpoints
     checks = {
