@@ -803,6 +803,7 @@ class ZLECAfAPITester:
         self.test_countries_list()
         self.test_country_profiles()
         self.test_rules_of_origin()
+        self.test_tax_implementation_senegal_cote_ivoire()  # Test spécifique des taxes
         self.test_tariff_calculation()
         self.test_statistics()
         
