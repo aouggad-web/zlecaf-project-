@@ -14,6 +14,7 @@ import pandas as pd
 import asyncio
 import json
 from country_data import get_country_data, REAL_COUNTRY_DATA
+from tax_rates import calculate_all_taxes, get_vat_rate
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
