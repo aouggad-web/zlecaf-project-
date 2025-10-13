@@ -834,6 +834,16 @@ REAL_COUNTRY_DATA = {
                 "Intégration régionale",
                 "Réduction tarifaire"
             ]
+        },
+        "customs_information": {
+            "pays": "Égypte",
+            "administration_douaniere": "Egyptian Customs Authority",
+            "site_web": "https://www.customs.gov.eg/",
+            "bureaux_importants": [
+                "Port d'Alexandrie (Port)",
+                "Aéroport international du Caire (Aéroport)",
+                "Port de Port-Saïd (Port)"
+            ]
         }
     },
     "GNQ": {
@@ -1354,6 +1364,16 @@ REAL_COUNTRY_DATA = {
                 "Intégration régionale",
                 "Réduction tarifaire"
             ]
+        },
+        "customs_information": {
+            "pays": "Kenya",
+            "administration_douaniere": "Kenya Revenue Authority (KRA) - Customs and Border Control",
+            "site_web": "https://www.kra.go.ke/",
+            "bureaux_importants": [
+                "Port de Mombasa (Port)",
+                "Aéroport international Jomo Kenyatta de Nairobi (Aéroport)",
+                "Poste frontalier de Malaba (Frontière terrestre)"
+            ]
         }
     },
     "LSO": {
@@ -1822,6 +1842,16 @@ REAL_COUNTRY_DATA = {
                 "Intégration régionale",
                 "Réduction tarifaire"
             ]
+        },
+        "customs_information": {
+            "pays": "Maroc",
+            "administration_douaniere": "Administration des Douanes et Impôts Indirects (ADII)",
+            "site_web": "https://www.douane.gov.ma/",
+            "bureaux_importants": [
+                "Port de Tanger Med (Port)",
+                "Port de Casablanca (Port)",
+                "Aéroport Mohammed V de Casablanca (Aéroport)"
+            ]
         }
     },
     "MOZ": {
@@ -2029,6 +2059,16 @@ REAL_COUNTRY_DATA = {
                 "Commerce intra-africain",
                 "Intégration régionale",
                 "Réduction tarifaire"
+            ]
+        },
+        "customs_information": {
+            "pays": "Nigéria",
+            "administration_douaniere": "Nigeria Customs Service (NCS)",
+            "site_web": "https://customs.gov.ng/",
+            "bureaux_importants": [
+                "Port d'Apapa à Lagos (Port)",
+                "Aéroport international Murtala Muhammed de Lagos (Aéroport)",
+                "Port de Tin Can Island à Lagos (Port)"
             ]
         }
     },
@@ -2393,6 +2433,16 @@ REAL_COUNTRY_DATA = {
                 "Commerce intra-africain",
                 "Intégration régionale",
                 "Réduction tarifaire"
+            ]
+        },
+        "customs_information": {
+            "pays": "Afrique du Sud",
+            "administration_douaniere": "South African Revenue Service (SARS) - Customs Division",
+            "site_web": "https://www.sars.gov.za/",
+            "bureaux_importants": [
+                "Port de Durban (Port)",
+                "Aéroport international OR Tambo de Johannesburg (Aéroport)",
+                "Port du Cap (Port)"
             ]
         }
     },

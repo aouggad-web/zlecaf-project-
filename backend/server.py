@@ -328,6 +328,7 @@ class CountryEconomicProfile(BaseModel):
     trade_profile: Dict[str, Any] = {}
     projections: Dict[str, Any] = {}
     risk_ratings: Dict[str, Any] = {}
+    customs_information: Optional[Dict[str, Any]] = None
 
 # Routes
 @api_router.get("/")
@@ -450,6 +451,9 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
         "scope": "NR",
         "global_risk": "Non évalué"
     })
+    
+    # Ajouter les informations douanières si disponibles
+    profile.customs_information = real_data.get('customs_information')
     
     return profile
 
