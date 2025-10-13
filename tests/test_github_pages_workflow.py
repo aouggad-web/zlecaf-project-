@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Test for GitHub Pages workflow configuration
 Verifies that the workflow has proper error handling and documentation
