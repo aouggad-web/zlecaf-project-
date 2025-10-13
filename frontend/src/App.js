@@ -462,58 +462,147 @@ function ZLECAfCalculator() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6 pt-6">
-                      {/* Comparaison visuelle avec graphique */}
-                      <div className="bg-white p-4 rounded-lg shadow-md" style={{ minHeight: '280px' }}>
-                        <h4 className="font-bold text-lg mb-4 text-gray-800">📊 Comparaison Tarifaire</h4>
-                        <ResponsiveContainer width="100%" height={250} debounce={300}>
+                      {/* Graphique comparaison complète avec TOUTES les taxes */}
+                      <div className="bg-white p-4 rounded-lg shadow-md" style={{ minHeight: '320px' }}>
+                        <h4 className="font-bold text-lg mb-4 text-gray-800">📊 Comparaison Complète: Valeur + DD + TVA + Autres Taxes</h4>
+                        <ResponsiveContainer width="100%" height={280} debounce={300}>
                           <BarChart data={[
-                            { name: 'Tarif NPF', montant: result.normal_tariff_amount, taux: result.normal_tariff_rate * 100 },
-                            { name: 'Tarif ZLECAf', montant: result.zlecaf_tariff_amount, taux: result.zlecaf_tariff_rate * 100 },
-                            { name: 'Économie', montant: result.savings, taux: result.savings_percentage }
+                            { 
+                              name: 'Tarif NPF', 
+                              'Valeur marchandise': result.value,
+                              'Droits douane': result.normal_tariff_amount,
+                              'TVA': result.normal_vat_amount,
+                              'Autres taxes': result.normal_other_taxes_total
+                            },
+                            { 
+                              name: 'Tarif ZLECAf', 
+                              'Valeur marchandise': result.value,
+                              'Droits douane': result.zlecaf_tariff_amount,
+                              'TVA': result.zlecaf_vat_amount,
+                              'Autres taxes': result.zlecaf_other_taxes_total
+                            }
                           ]}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" />
                             <YAxis />
                             <Tooltip formatter={(value) => formatCurrency(value)} />
                             <Legend />
-                            <Bar dataKey="montant" fill="#10b981" name="Montant (USD)" />
+                            <Bar dataKey="Valeur marchandise" stackId="a" fill="#60a5fa" />
+                            <Bar dataKey="Droits douane" stackId="a" fill="#ef4444" />
+                            <Bar dataKey="TVA" stackId="a" fill="#f59e0b" />
+                            <Bar dataKey="Autres taxes" stackId="a" fill="#8b5cf6" />
                           </BarChart>
                         </ResponsiveContainer>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl shadow-md border-2 border-red-300">
-                          <p className="text-sm font-semibold text-red-700 mb-2">{t.normalTariff}</p>
-                          <p className="text-3xl font-bold text-red-600">
-                            {formatCurrency(result.normal_tariff_amount)}
-                          </p>
-                          <p className="text-sm text-red-600 mt-2 font-medium">
-                            {(result.normal_tariff_rate * 100).toFixed(1)}% • {formatCurrency(result.value)}
-                          </p>
+                      {/* Tableaux de détails des coûts */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* Scénario NPF */}
+                        <div className="bg-gradient-to-br from-red-50 to-pink-50 p-6 rounded-xl shadow-lg border-2 border-red-300">
+                          <h4 className="text-xl font-bold text-red-700 mb-4 flex items-center gap-2">
+                            <span>🔴</span>
+                            <span>Tarif NPF (Normal)</span>
+                          </h4>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex justify-between">
+                              <span>Valeur marchandise:</span>
+                              <span className="font-bold">{formatCurrency(result.value)}</span>
+                            </div>
+                            <div className="flex justify-between text-red-600">
+                              <span>+ Droits de douane ({(result.normal_tariff_rate * 100).toFixed(1)}%):</span>
+                              <span className="font-bold">{formatCurrency(result.normal_tariff_amount)}</span>
+                            </div>
+                            <div className="flex justify-between text-orange-600">
+                              <span>+ TVA ({result.normal_vat_rate}%):</span>
+                              <span className="font-bold">{formatCurrency(result.normal_vat_amount)}</span>
+                            </div>
+                            {result.normal_statistical_fee > 0 && (
+                              <div className="flex justify-between text-purple-600">
+                                <span>+ Redevance statistique:</span>
+                                <span className="font-bold">{formatCurrency(result.normal_statistical_fee)}</span>
+                              </div>
+                            )}
+                            {result.normal_community_levy > 0 && (
+                              <div className="flex justify-between text-purple-600">
+                                <span>+ Prélèvement communautaire:</span>
+                                <span className="font-bold">{formatCurrency(result.normal_community_levy)}</span>
+                              </div>
+                            )}
+                            {result.normal_ecowas_levy > 0 && (
+                              <div className="flex justify-between text-purple-600">
+                                <span>+ Prélèvement CEDEAO:</span>
+                                <span className="font-bold">{formatCurrency(result.normal_ecowas_levy)}</span>
+                              </div>
+                            )}
+                            <Separator className="my-2" />
+                            <div className="flex justify-between text-lg font-extrabold text-red-700">
+                              <span>TOTAL:</span>
+                              <span>{formatCurrency(result.normal_total_cost)}</span>
+                            </div>
+                          </div>
                         </div>
 
-                        <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-md border-2 border-green-300">
-                          <p className="text-sm font-semibold text-green-700 mb-2">{t.zlecafTariff}</p>
-                          <p className="text-3xl font-bold text-green-600">
-                            {formatCurrency(result.zlecaf_tariff_amount)}
-                          </p>
-                          <p className="text-sm text-green-600 mt-2 font-medium">
-                            {(result.zlecaf_tariff_rate * 100).toFixed(1)}% • {formatCurrency(result.value)}
-                          </p>
+                        {/* Scénario ZLECAf */}
+                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl shadow-lg border-2 border-green-300">
+                          <h4 className="text-xl font-bold text-green-700 mb-4 flex items-center gap-2">
+                            <span>🟢</span>
+                            <span>Tarif ZLECAf</span>
+                          </h4>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex justify-between">
+                              <span>Valeur marchandise:</span>
+                              <span className="font-bold">{formatCurrency(result.value)}</span>
+                            </div>
+                            <div className="flex justify-between text-green-600">
+                              <span>+ Droits de douane ({(result.zlecaf_tariff_rate * 100).toFixed(1)}%):</span>
+                              <span className="font-bold">{formatCurrency(result.zlecaf_tariff_amount)}</span>
+                            </div>
+                            <div className="flex justify-between text-orange-600">
+                              <span>+ TVA ({result.zlecaf_vat_rate}%):</span>
+                              <span className="font-bold">{formatCurrency(result.zlecaf_vat_amount)}</span>
+                            </div>
+                            {result.zlecaf_statistical_fee > 0 && (
+                              <div className="flex justify-between text-purple-600">
+                                <span>+ Redevance statistique:</span>
+                                <span className="font-bold">{formatCurrency(result.zlecaf_statistical_fee)}</span>
+                              </div>
+                            )}
+                            {result.zlecaf_community_levy > 0 && (
+                              <div className="flex justify-between text-purple-600">
+                                <span>+ Prélèvement communautaire:</span>
+                                <span className="font-bold">{formatCurrency(result.zlecaf_community_levy)}</span>
+                              </div>
+                            )}
+                            {result.zlecaf_ecowas_levy > 0 && (
+                              <div className="flex justify-between text-purple-600">
+                                <span>+ Prélèvement CEDEAO:</span>
+                                <span className="font-bold">{formatCurrency(result.zlecaf_ecowas_levy)}</span>
+                              </div>
+                            )}
+                            <Separator className="my-2" />
+                            <div className="flex justify-between text-lg font-extrabold text-green-700">
+                              <span>TOTAL:</span>
+                              <span>{formatCurrency(result.zlecaf_total_cost)}</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
                       <Separator className="my-4" />
 
+                      {/* Économies TOTALES */}
                       <div className="text-center bg-gradient-to-r from-yellow-100 via-orange-100 to-red-100 p-8 rounded-2xl shadow-lg border-4 border-yellow-400">
-                        <p className="text-lg font-bold text-gray-700 mb-2">{t.savings}</p>
+                        <p className="text-lg font-bold text-gray-700 mb-2">💰 ÉCONOMIE TOTALE (avec toutes les taxes)</p>
                         <p className="text-5xl font-extrabold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-3">
-                          {formatCurrency(result.savings)}
+                          {formatCurrency(result.total_savings_with_taxes)}
                         </p>
                         <Badge className="text-xl px-6 py-2 bg-gradient-to-r from-green-600 to-blue-600 text-white shadow-lg">
-                          🎉 {result.savings_percentage.toFixed(1)}% d'économie
+                          🎉 {result.total_savings_percentage.toFixed(1)}% d'économie totale
                         </Badge>
-                        <Progress value={result.savings_percentage} className="w-full mt-4 h-3" />
+                        <Progress value={result.total_savings_percentage} className="w-full mt-4 h-3" />
+                        <p className="text-sm text-gray-600 mt-3">
+                          Sur un coût total de {formatCurrency(result.normal_total_cost)} (NPF) vs {formatCurrency(result.zlecaf_total_cost)} (ZLECAf)
+                        </p>
                       </div>
 
                       {/* Règles d'origine avec style africain */}
