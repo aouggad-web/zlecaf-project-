@@ -346,6 +346,63 @@ function ZLECAfCalculator() {
       </div>
 
       <div className="container mx-auto px-4 py-8">
+        {/* Widgets de conformité et renseignement */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <Card className="bg-gradient-to-br from-orange-50 to-red-50 border-l-4 border-l-orange-500">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-3xl">🚧</span>
+                <h3 className="font-bold text-orange-700">Obstacles Non Tarifaires</h3>
+              </div>
+              <p className="text-sm text-gray-600 mb-3">Signalez ou consultez les NTB sur la plateforme officielle ZLECAf</p>
+              <a 
+                href="https://tradebarriers.africa" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-700 transition"
+              >
+                🔗 Accéder à la plateforme NTB
+              </a>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 border-l-4 border-l-blue-500">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-3xl">💻</span>
+                <h3 className="font-bold text-blue-700">Protocole Commerce Digital</h3>
+              </div>
+              <p className="text-sm text-gray-600 mb-3">Adopté 18 fév 2024 - Harmonisation flux transfrontières</p>
+              <a 
+                href="https://au.int/en/treaties/protocol-digital-trade" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+              >
+                📄 Voir le protocole
+              </a>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-l-4 border-l-green-500">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-3xl">🚀</span>
+                <h3 className="font-bold text-green-700">Guided Trade Initiative</h3>
+              </div>
+              <p className="text-sm text-gray-600 mb-3">Suivez les pays actifs et corridors commerciaux ZLECAf</p>
+              <a 
+                href="https://www.tralac.org/news/article/afcfta-guided-trade-initiative.html" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
+              >
+                🌍 Voir les pays GTI
+              </a>
+            </CardContent>
+          </Card>
+        </div>
+
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-4 bg-gradient-to-r from-red-100 via-yellow-100 to-green-100 p-2 shadow-lg">
             <TabsTrigger value="calculator" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-600 data-[state=active]:to-blue-600 data-[state=active]:text-white font-bold">
