@@ -102,6 +102,21 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
+## user_problem_statement: "analyse the app s and fix all the funding problem"
+
+## fixes_applied:
+  - task: "Fix React useEffect hook dependency warnings"
+    implemented: true
+    working: true
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Fixed missing dependencies in useEffect hooks by wrapping fetchCountries, fetchStatistics, and fetchPartnerImportStats with useCallback and adding them to dependency arrays. This eliminates React warnings and potential stale closure bugs."
+
 ## user_problem_statement: "bonjour je vous demande de reprendre notre projet a cette etape svp"
 
 ## backend:
