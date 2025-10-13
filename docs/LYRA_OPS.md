@@ -1,7 +1,7 @@
 # Lyra+ Ops — Cron hebdo & API Health
 
 Ce patch ajoute :
-- un **workflow GitHub Actions** planifié (`lyra_plus_ops.yml`) qui régénère les jeux de données et commit automatiquement les changements dans `frontend/public/data/` ;
+- un **workflow GitHub Actions** planifié (`lyra_plus_ops.yml`) qui régénère les jeux de données et crée automatiquement une Pull Request avec les changements dans `frontend/public/data/` ;
 - une **route API** `/api/health` qui expose l'état des fichiers attendus (HTTP 200 si ok, 503 sinon).
 
 ## 1) Planification
@@ -16,7 +16,7 @@ Format cron : `minute hour day-of-month month day-of-week`
 
 ## 2) Droits GitHub
 
-Le workflow requiert `permissions.contents: write` pour pousser les commits. Par défaut, `secrets.GITHUB_TOKEN` suffit dans ce repo.
+Le workflow requiert `permissions.contents: write` pour créer des commits et `permissions.pull-requests: write` pour créer des Pull Requests. Par défaut, `secrets.GITHUB_TOKEN` suffit dans ce repo.
 
 ## 3) Passage du mode démo au mode prod
 
@@ -97,6 +97,7 @@ Réponse attendue quand les fichiers sont présents :
 
 1. **Manuellement** : Aller sur l'onglet "Actions" du dépôt GitHub et déclencher le workflow `lyra-plus-ops` via "Run workflow"
 2. **Automatiquement** : Le workflow s'exécutera tous les lundis à 06:15 UTC selon le cron configuré
+3. **Pull Request** : Le workflow créera automatiquement une Pull Request avec les données mises à jour. La PR doit être revue et fusionnée manuellement.
 
 ## 6) Structure des fichiers de données
 
@@ -117,7 +118,8 @@ Comparaison des tarifs ZLECAf vs tarifs mondiaux (nécessite openpyxl).
 
 ## 7) Maintenance
 
-- **Mise à jour des données** : Le workflow automatique s'en charge chaque semaine
+- **Mise à jour des données** : Le workflow automatique crée une Pull Request chaque semaine avec les données mises à jour
+- **Révision des PRs** : Les PRs générées automatiquement doivent être revues et fusionnées manuellement pour valider les changements
 - **Logs** : Consultables dans l'onglet "Actions" de GitHub
 - **Erreurs** : Si le workflow échoue, vérifier les logs et les permissions GitHub
 - **Mode production** : Implémenter l'intégration avec les sources officielles dans `backend/make_release.py`
