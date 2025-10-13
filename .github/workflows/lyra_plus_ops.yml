@@ -6,8 +6,8 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: write        # pour pousser les commits
+  pull-requests: write   # pour interagir avec les PRs
 
 jobs:
   refresh-data:
