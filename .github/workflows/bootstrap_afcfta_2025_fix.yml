@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
-
+     
 jobs:
   bootstrap:
     runs-on: ubuntu-latest
@@ -149,3 +149,26 @@ PY
             "https://api.github.com/repos/$REPO/pulls" \
             -d "{\"title\":\"Bootstrap AfCFTA datasets 2025+ (fallback)\",\"body\":\"Fallback PR created via REST API\",\"head\":\"$BR\",\"base\":\"main\"}"
 
+- name: Force delta marker
+  run: |
+    mkdir -p .afcfta-bootstrap
+    date -u +"%Y-%m-%dT%H:%M:%SZ" > .afcfta-bootstrap/marker.txt
+- name: Create Pull Request (primary)
+  id: cpr
+  uses: peter-evans/create-pull-request@v6
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    add-paths: |
+      frontend/public/data/**
+      backend/tools/**
+      prompts/zlecaf_tariffs/**
+      .afcfta-bootstrap/**
+    branch: feat/bootstrap-afcfta-2025-${{ github.run_id }}
+    delete-branch: true
+    commit-message: "data(afcfta-2025): bootstrap datasets + tax kit + prompts (fix)"
+    title: "Bootstrap AfCFTA datasets 2025+ (tariffs + VAT/Levies/Excise) — Lyra+ ready"
+    body: |
+      Génération initiale 2025+ (tarifs ZLECAf, TVA/accises/levies, prompts Lyra+, validateur).
+      Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    labels: data, afcfta, lyra-plus
+    draft: false
