@@ -29,6 +29,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install openpyxl || true
 
+      - name: Force delta marker
+        run: |
+          mkdir -p .afcfta-bootstrap
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .afcfta-bootstrap/marker.txt
+
       - name: Generate datasets (Lyra+ pipeline)
         run: |
           # TODO: remplacez --demo par l'intégration réelle (e‑Tariff/UNCTAD/OEC)
@@ -40,7 +45,7 @@ jobs:
         run: |
           git config user.name "lyra-plus-bot"
           git config user.email "lyra-plus-bot@users.noreply.github.com"
-          git add frontend/public/data || true
+          git add frontend/public/data .afcfta-bootstrap || true
           if ! git diff --cached --quiet; then
             git commit -m "chore(ops): refresh AfCFTA datasets via Lyra+ weekly cron"
             git push
