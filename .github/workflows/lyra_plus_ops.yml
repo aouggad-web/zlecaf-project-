@@ -6,9 +6,8 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write    # nécessaire pour push
-  actions: read
-  checks: read
+  contents: write
+  pull-requests: write
 
 jobs:
   refresh-data:
