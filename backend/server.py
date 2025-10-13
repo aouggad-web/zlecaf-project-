@@ -753,12 +753,40 @@ async def get_comprehensive_statistics():
             }
         },
         "data_sources": [
-            "Union Africaine - Secrétariat ZLECAf",
-            "Banque Mondiale - World Development Indicators",
-            "UNCTAD - Données tarifaires",
-            "OEC - Atlas of Economic Complexity",
-            "BAD - Perspectives économiques africaines",
-            "FMI - Regional Economic Outlook"
+            {
+                "source": "Union Africaine - AfCFTA Secretariat",
+                "url": "https://au.int/en/cfta",
+                "verified": "2025-01-11"
+            },
+            {
+                "source": "Banque Mondiale - The African Continental Free Trade Area",
+                "url": "https://www.worldbank.org/en/topic/trade/publication/the-african-continental-free-trade-area",
+                "key_findings": "Gains de 450 Md$, 30M sorties pauvreté (2035)",
+                "verified": "2025-01-11"
+            },
+            {
+                "source": "UNECA - Economic Commission for Africa",
+                "url": "https://www.uneca.org/",
+                "key_findings": "Projections +15-25% échanges intra-africains (2040)",
+                "verified": "2025-01-11"
+            },
+            {
+                "source": "UNCTAD - Trade Data",
+                "url": "https://unctad.org/",
+                "verified": "2025-01-11"
+            },
+            {
+                "source": "tralac - Trade Law Centre",
+                "url": "https://www.tralac.org/",
+                "focus": "GTI, transposition nationale, suivi juridique",
+                "verified": "2025-01-11"
+            },
+            {
+                "source": "AfCFTA NTB Platform",
+                "url": "https://tradebarriers.africa",
+                "status": "Opérationnel",
+                "verified": "2025-01-11"
+            }
         ],
         "last_updated": datetime.now().isoformat()
     }
