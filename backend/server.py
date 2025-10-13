@@ -605,6 +605,12 @@ async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
         savings_percentage=savings_percentage,
         total_savings_with_taxes=total_savings_with_taxes,
         total_savings_percentage=total_savings_percentage,
+        # Journal de calcul et traçabilité
+        normal_calculation_journal=normal_taxes['calculation_journal'],
+        zlecaf_calculation_journal=zlecaf_taxes['calculation_journal'],
+        computation_order_ref=normal_taxes['computation_order_ref'],
+        last_verified=normal_taxes['last_verified'],
+        confidence_level=normal_taxes['confidence_level'],
         # Autres données
         rules_of_origin=rules,
         top_african_producers=top_producers,
