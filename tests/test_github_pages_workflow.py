@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Test for GitHub Pages workflow configuration
 Verifies that the workflow has proper error handling and documentation
@@ -8,12 +7,21 @@ import sys
 from pathlib import Path
 import yaml
 
+# Constants
+SEPARATOR_WIDTH = 70
+MINIMUM_DOC_SIZE = 1000  # Minimum expected size for documentation in bytes
+REQUIRED_ERROR_PHRASES = [
+    'Get Pages site failed',
+    'repository Settings',
+    'GitHub Actions'
+]
+
 
 def test_workflow_has_verification_step():
     """Test that the workflow includes the Pages verification step"""
-    print("\n" + "="*70)
+    print("\n" + "="*SEPARATOR_WIDTH)
     print("📋 TEST: GitHub Pages Workflow Verification Step")
-    print("="*70)
+    print("="*SEPARATOR_WIDTH)
     
     workflow_file = Path(__file__).parent.parent / '.github' / 'workflows' / 'jekyll-gh-pages.yml'
     
@@ -45,14 +53,9 @@ def test_workflow_has_verification_step():
                 # Check if it has the run command with helpful message
                 if 'run' in step:
                     run_content = step['run']
-                    required_phrases = [
-                        'Get Pages site failed',
-                        'repository Settings',
-                        'GitHub Actions'
-                    ]
                     
                     missing_phrases = []
-                    for phrase in required_phrases:
+                    for phrase in REQUIRED_ERROR_PHRASES:
                         if phrase not in run_content:
                             missing_phrases.append(phrase)
                     
@@ -78,9 +81,9 @@ def test_workflow_has_verification_step():
 
 def test_documentation_exists():
     """Test that GitHub Pages setup documentation exists"""
-    print("\n" + "="*70)
+    print("\n" + "="*SEPARATOR_WIDTH)
     print("📋 TEST: GitHub Pages Documentation")
-    print("="*70)
+    print("="*SEPARATOR_WIDTH)
     
     doc_file = Path(__file__).parent.parent / 'docs' / 'GITHUB_PAGES_SETUP.md'
     
@@ -115,7 +118,7 @@ def test_documentation_exists():
     
     # Check file size (should be substantial)
     file_size = doc_file.stat().st_size
-    if file_size < 1000:
+    if file_size < MINIMUM_DOC_SIZE:
         print(f"   ⚠️  Documentation seems too short: {file_size} bytes")
     else:
         print(f"   ✅ Documentation is comprehensive: {file_size} bytes")
@@ -125,9 +128,9 @@ def test_documentation_exists():
 
 def test_readme_links_to_documentation():
     """Test that README links to the GitHub Pages documentation"""
-    print("\n" + "="*70)
+    print("\n" + "="*SEPARATOR_WIDTH)
     print("📋 TEST: README Links to Documentation")
-    print("="*70)
+    print("="*SEPARATOR_WIDTH)
     
     readme_file = Path(__file__).parent.parent / 'README.md'
     
@@ -153,9 +156,9 @@ def test_readme_links_to_documentation():
 
 def test_workflow_permissions():
     """Test that the workflow has correct permissions"""
-    print("\n" + "="*70)
+    print("\n" + "="*SEPARATOR_WIDTH)
     print("📋 TEST: Workflow Permissions")
-    print("="*70)
+    print("="*SEPARATOR_WIDTH)
     
     workflow_file = Path(__file__).parent.parent / '.github' / 'workflows' / 'jekyll-gh-pages.yml'
     
@@ -193,9 +196,9 @@ def test_workflow_permissions():
 
 def main():
     """Main test function"""
-    print("\n" + "="*70)
+    print("\n" + "="*SEPARATOR_WIDTH)
     print("🧪 GITHUB PAGES WORKFLOW TESTS")
-    print("="*70)
+    print("="*SEPARATOR_WIDTH)
     
     tests = [
         ("Workflow Verification Step", test_workflow_has_verification_step),
@@ -214,9 +217,9 @@ def main():
             results.append((name, False))
     
     # Summary
-    print("\n" + "="*70)
+    print("\n" + "="*SEPARATOR_WIDTH)
     print("📊 TEST SUMMARY")
-    print("="*70)
+    print("="*SEPARATOR_WIDTH)
     
     passed = sum(1 for _, success in results if success)
     total = len(results)
@@ -225,9 +228,9 @@ def main():
         status = "✅ PASS" if success else "❌ FAIL"
         print(f"   {status}: {name}")
     
-    print("\n" + "="*70)
+    print("\n" + "="*SEPARATOR_WIDTH)
     print(f"Result: {passed}/{total} tests passed")
-    print("="*70)
+    print("="*SEPARATOR_WIDTH)
     
     return 0 if passed == total else 1
 
