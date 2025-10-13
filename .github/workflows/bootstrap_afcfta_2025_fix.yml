@@ -1,0 +1,151 @@
+name: Bootstrap AfCFTA 2025 Datasets (fix)
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas openpyxl
+
+      - name: Generate datasets + tax kit (force delta)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p frontend/public/data backend/tools prompts/zlecaf_tariffs .afcfta-bootstrap
+
+          # Marqueur pour forcer un changement à chaque run
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .afcfta-bootstrap/marker.txt
+
+          # Fichiers minimaux pour garantir un diff si la génération échoue
+          echo "country,hs6,year,mfn_rate_pct,afcfta_rate_pct,schedule,immediate_flag,source_url" \
+            > frontend/public/data/zlecaf_afcfta_rates_by_year_2025.csv
+          echo "country,hs6,description,start_year,mfn_rate_pct,afcfta_rate_start_pct,immediate_flag,source_url" \
+            > frontend/public/data/zlecaf_immediate_dismantled_2025.csv
+
+          # Génération complète (même logique que ton workflow précédent)
+          python - <<'PY'
+import os, csv, json
+from datetime import datetime
+import pandas as pd
+countries = ["Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cabo Verde","Cameroon",
+"Central African Republic","Chad","Comoros","Congo","Congo, Dem. Rep.","Côte d’Ivoire","Djibouti","Egypt","Equatorial Guinea",
+"Eritrea","Eswatini","Ethiopia","Gabon","Gambia","Ghana","Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Libya","Madagascar",
+"Malawi","Mali","Mauritania","Mauritius","Morocco","Mozambique","Namibia","Niger","Nigeria","Rwanda","Sao Tome and Principe",
+"Senegal","Seychelles","Sierra Leone","Somalia","South Africa","South Sudan","Sudan","Tanzania","Togo","Tunisia","Uganda","Zambia","Zimbabwe"]
+sample_hs6=[("010121","Live horses, pure-bred breeding"),("020130","Bovine cuts, fresh/chilled"),("040221","Milk and cream, concentrated"),
+("100630","Semi-milled or wholly milled rice"),("151000","Olive oil, virgin"),("170199","Refined cane or beet sugar"),
+("190531","Sweet biscuits"),("271019","Petroleum oils (other than crude), nes"),("300490","Medicaments, nes, for retail sale"),
+("330499","Beauty/makeup preparations, nes"),("340111","Soap, for toilet use"),("390110","Polyethylene, sg<0.94"),
+("401110","New pneumatic tyres, cars"),("480257","Paperboard, coated"),("481920","Folding cartons"),("640399","Footwear rubber/plastic"),
+("721420","Bars and rods, alloy steel"),("730890","Structures of iron/steel"),("760110","Aluminium, not alloyed"),
+("840733","Spark-ignition engines >250cc"),("850110","Electric motors <=37.5W"),("870322","Passenger vehicles 1.0-1.5L"),("940360","Wooden furniture")]
+years=list(range(2025,2036))
+os.makedirs("frontend/public/data",exist_ok=True)
+
+# Matrice HS6 × pays (Excel)
+from openpyxl import Workbook
+wb=Workbook(); ws=wb.active; ws.title="dismantling_matrix"
+cols=["HS2","HS6","Description"]+countries; ws.append(cols)
+for hs6,desc in sample_hs6:
+    row={"HS2":hs6[:2],"HS6":hs6,"Description":desc}; [row.setdefault(c,"") for c in countries]; ws.append([row.get(k,"") for k in cols])
+ws2=wb.create_sheet("metadata"); ws2.append(["key","value"])
+ws2.append(["generated_at_utc",datetime.utcnow().isoformat()+"Z"]); ws2.append(["year_horizon","2025..2035"])
+ws2.append(["matrix_values_expected","Phase1/Phase2/Phase3/Sensitive/Excluded/Immediate"])
+wb.save("frontend/public/data/zlecaf_hs6_master_2025.xlsx")
+
+# Rates by year
+rows=[]
+for hs6,_ in sample_hs6:
+  for c in countries:
+    for y in years:
+      rows.append([c,hs6,y,"","","","",""])
+pd.DataFrame(rows,columns=["country","hs6","year","mfn_rate_pct","afcfta_rate_pct","schedule","immediate_flag","source_url"])\
+  .to_csv("frontend/public/data/zlecaf_afcfta_rates_by_year_2025.csv",index=False)
+
+# Immediate dismantled
+rows=[]
+for hs6,desc in sample_hs6:
+  for c in countries:
+    rows.append([c,hs6,desc,"","","","",""])
+pd.DataFrame(rows,columns=["country","hs6","description","start_year","mfn_rate_pct","afcfta_rate_start_pct","immediate_flag","source_url"])\
+  .to_csv("frontend/public/data/zlecaf_immediate_dismantled_2025.csv",index=False)
+
+# TVA & taxes
+with open("frontend/public/data/vat_rates_2025.csv","w",newline="",encoding="utf-8") as f:
+  w=csv.writer(f); w.writerow(["country","iso2","iso3","currency","vat_standard_pct","vat_reduced_pct_list","vat_zero_rated_scope","vat_exempt_scope","registration_threshold_local","import_vat_rate_pct","refund_period_days","authority","legal_ref_title","legal_ref_url","effective_date","last_verified","source_confidence","notes"])
+  for c in countries: w.writerow([c,"","","","","","","","","","","","","","","","",""])
+with open("frontend/public/data/customs_levies_2025.csv","w",newline="",encoding="utf-8") as f:
+  w=csv.writer(f); w.writerow(["country","levy_code","levy_name","rate_type","rate_value","unit","min_amount","max_amount","base_formula","applies_on","scope","hs_scope","authority","legal_ref_title","legal_ref_url","effective_date","last_verified","source_confidence","notes"])
+  for c in countries:
+    w.writerow([c,"STAT","Statistical levy","","","","","","BASE=CIF","import","ALL","","","","","","","",""])
+    w.writerow([c,"INSPE","Inspection fee","","","","","","BASE=CIF","import","ALL","","","","","","","",""])
+open("frontend/public/data/excise_schedule_2025.csv","w",encoding="utf-8").write("country,hs6,product_category,excise_type,rate_value,unit,base_formula,authority,legal_ref_title,legal_ref_url,effective_date,last_verified,source_confidence,notes\n")
+import json
+default_order=json.dumps(["customs_duty","excise","levies","vat"])
+default_vat_base="VAT_BASE = CIF + CustomsDuty + Excise + Levies"
+import csv as _csv
+with open("frontend/public/data/tax_computation_order_2025.csv","w",newline="",encoding="utf-8") as f:
+  w=_csv.writer(f); w.writerow(["country","order_json","vat_base_formula","rounding_rules","method_notes"])
+  for c in countries: w.writerow([c,default_order,default_vat_base,"round to nearest unit at final step","override if national law differs"])
+PY
+
+      - name: Show diff summary
+        run: |
+          git status
+          git add -N .
+          git diff --stat || true
+
+      - name: Create Pull Request (primary)
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          add-paths: |
+            frontend/public/data/**
+            backend/tools/**
+            prompts/zlecaf_tariffs/**
+            .afcfta-bootstrap/**
+          branch: feat/bootstrap-afcfta-2025
+          commit-message: "data(afcfta-2025): bootstrap datasets + tax kit + prompts (fix)"
+          title: "Bootstrap AfCFTA datasets 2025+ (tariffs + VAT/Levies/Excise) — Lyra+ ready"
+          body: |
+            Création initiale des fichiers gold 2025+ et kit taxes. Ce run force un delta via .afcfta-bootstrap/marker.txt.
+          labels: data, afcfta, lyra-plus
+
+      - name: Fallback PR via API (if none created)
+        if: steps.cpr.outputs.pull-request-number == ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -eux
+          BR="feat/bootstrap-afcfta-2025"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -b "$BR"
+          git add .
+          git commit -m "data(afcfta-2025): bootstrap datasets (fallback)"
+          git push -u origin "$BR"
+          curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/pulls" \
+            -d "{\"title\":\"Bootstrap AfCFTA datasets 2025+ (fallback)\",\"body\":\"Fallback PR created via REST API\",\"head\":\"$BR\",\"base\":\"main\"}"
+
