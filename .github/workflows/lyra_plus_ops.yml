@@ -32,6 +32,9 @@ jobs:
       - name: Generate datasets (Lyra+ pipeline)
         run: |
           # TODO: remplacez --demo par l'intégration réelle (e‑Tariff/UNCTAD/OEC)
+          # Option 1: Using shell script (recommended for better error handling)
+          # ./afcfta_2025_datasets.sh --demo
+          # Option 2: Using Python script directly
           python backend/make_release.py --demo
 
       - name: Commit & push data changes
