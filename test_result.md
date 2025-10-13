@@ -148,9 +148,21 @@
     - agent: "main"
       message: "Application ZLECAf complète identifiée. Backend API fonctionne parfaitement (54 pays, calculs tarifaires, règles origine). Frontend moderne React avec Shadcn/UI. Problème: routing externe https://emergent.city/api cause erreurs CORS depuis localhost:3000. Solutions possibles: configurer proxy ou corriger ingress Kubernetes."
 
-user_problem_statement: "Tester l'application ZLECAf React qui vient d'être mise à jour avec de nouvelles données validées. L'utilisateur signale que les 'profils de pays' et 'statistiques' ne fonctionnent pas."
+user_problem_statement: "Tester la nouvelle implémentation des taxes dans le calculateur ZLECAf avec le scénario SN->CI, HS 010121, valeur 100000 USD"
 
 backend:
+  - task: "Implémentation complète des taxes ZLECAf (TVA, redevances, prélèvements)"
+    implemented: true
+    working: true
+    file: "backend/server.py, backend/tax_rates.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Nouvelle implémentation des taxes testée avec succès SN->CI. TVA Côte d'Ivoire 18% correcte, redevance statistique 1%, prélèvement communautaire 0.5%, prélèvement CEDEAO 1%. Formule Base TVA = Valeur + DD + autres taxes validée. Économies totales: 29,500 USD (19.6%)"
+
   - task: "API ZLECAf avec nouvelles données Excel - GET /api/countries"
     implemented: true
     working: true
