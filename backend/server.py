@@ -327,6 +327,12 @@ class TariffCalculationResponse(BaseModel):
     savings_percentage: float
     total_savings_with_taxes: float
     total_savings_percentage: float
+    # Journal de calcul et traçabilité
+    normal_calculation_journal: List[Dict[str, Any]]
+    zlecaf_calculation_journal: List[Dict[str, Any]]
+    computation_order_ref: str
+    last_verified: str
+    confidence_level: str
     # Règles d'origine
     rules_of_origin: Dict[str, Any]
     # Top producteurs africains
