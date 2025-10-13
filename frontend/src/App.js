@@ -987,17 +987,156 @@ function ZLECAfCalculator() {
                   </CardContent>
                 </Card>
 
-                {/* Sources de données */}
+                {/* Scénarios 2040 - Banque Mondiale & UNECA */}
+                {statistics.scenarios && (
+                  <Card className="shadow-2xl border-t-4 border-t-indigo-500">
+                    <CardHeader className="bg-gradient-to-r from-indigo-100 to-purple-100">
+                      <CardTitle className="text-2xl font-bold text-indigo-700 flex items-center gap-2">
+                        <span>🎯</span>
+                        <span>Scénarios Prospectifs 2040 (Sources: BM/UNECA)</span>
+                      </CardTitle>
+                      <CardDescription className="font-semibold">Projections selon le rythme de mise en œuvre ZLECAf</CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-6">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {/* Scénario Conservateur */}
+                        <div className="bg-gradient-to-br from-yellow-50 to-orange-50 p-6 rounded-xl border-2 border-yellow-400 shadow-lg">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="text-3xl">🐢</span>
+                            <h4 className="font-bold text-lg text-yellow-700">Conservateur</h4>
+                          </div>
+                          <p className="text-sm text-gray-700 mb-4">{statistics.scenarios.conservative.description}</p>
+                          <div className="bg-white p-3 rounded-lg shadow mb-2">
+                            <p className="text-sm">Augmentation commerciale:</p>
+                            <p className="text-2xl font-bold text-yellow-600">{statistics.scenarios.conservative.trade_increase_2040}</p>
+                          </div>
+                          <div className="bg-white p-3 rounded-lg shadow">
+                            <p className="text-sm">Valeur additionnelle:</p>
+                            <p className="text-xl font-bold text-yellow-600">{statistics.scenarios.conservative.additional_value}</p>
+                          </div>
+                        </div>
+
+                        {/* Scénario Médian */}
+                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border-2 border-blue-400 shadow-lg">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="text-3xl">🚶</span>
+                            <h4 className="font-bold text-lg text-blue-700">Médian</h4>
+                          </div>
+                          <p className="text-sm text-gray-700 mb-4">{statistics.scenarios.median.description}</p>
+                          <div className="bg-white p-3 rounded-lg shadow mb-2">
+                            <p className="text-sm">Augmentation commerciale:</p>
+                            <p className="text-2xl font-bold text-blue-600">{statistics.scenarios.median.trade_increase_2040}</p>
+                          </div>
+                          <div className="bg-white p-3 rounded-lg shadow">
+                            <p className="text-sm">Valeur additionnelle:</p>
+                            <p className="text-xl font-bold text-blue-600">{statistics.scenarios.median.additional_value}</p>
+                          </div>
+                        </div>
+
+                        {/* Scénario Ambitieux */}
+                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-2 border-green-400 shadow-lg">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="text-3xl">🚀</span>
+                            <h4 className="font-bold text-lg text-green-700">Ambitieux</h4>
+                          </div>
+                          <p className="text-sm text-gray-700 mb-4">{statistics.scenarios.ambitious.description}</p>
+                          <div className="bg-white p-3 rounded-lg shadow mb-2">
+                            <p className="text-sm">Augmentation commerciale:</p>
+                            <p className="text-2xl font-bold text-green-600">{statistics.scenarios.ambitious.trade_increase_2040}</p>
+                          </div>
+                          <div className="bg-white p-3 rounded-lg shadow">
+                            <p className="text-sm">Valeur additionnelle:</p>
+                            <p className="text-xl font-bold text-green-600">{statistics.scenarios.ambitious.additional_value}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Mécanismes Clés ZLECAf */}
+                {statistics.key_mechanisms && (
+                  <Card className="shadow-xl border-l-4 border-l-cyan-500">
+                    <CardHeader className="bg-gradient-to-r from-cyan-50 to-blue-50">
+                      <CardTitle className="text-xl font-bold text-cyan-700 flex items-center gap-2">
+                        <span>⚙️</span>
+                        <span>Mécanismes et Infrastructure ZLECAf</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                          <h5 className="font-bold text-purple-700 mb-2">📱 Protocole Commerce Digital</h5>
+                          <p className="text-sm mb-1"><strong>Adoption:</strong> {statistics.key_mechanisms.digital_trade_protocol.adoption_date}</p>
+                          <p className="text-sm mb-1"><strong>Statut:</strong> <Badge className="bg-green-600">{statistics.key_mechanisms.digital_trade_protocol.status}</Badge></p>
+                          <p className="text-sm text-gray-600">{statistics.key_mechanisms.digital_trade_protocol.focus}</p>
+                        </div>
+
+                        <div className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500">
+                          <h5 className="font-bold text-orange-700 mb-2">🚧 Plateforme NTB</h5>
+                          <p className="text-sm mb-1"><strong>Statut:</strong> <Badge className="bg-green-600">{statistics.key_mechanisms.ntb_platform.status}</Badge></p>
+                          <p className="text-sm text-gray-600 mb-2">{statistics.key_mechanisms.ntb_platform.purpose}</p>
+                          <a href={statistics.key_mechanisms.ntb_platform.url} target="_blank" rel="noopener noreferrer" className="text-sm text-orange-600 hover:underline font-semibold">
+                            🔗 {statistics.key_mechanisms.ntb_platform.url}
+                          </a>
+                        </div>
+
+                        <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                          <h5 className="font-bold text-blue-700 mb-2">💳 PAPSS - Paiements</h5>
+                          <p className="text-sm mb-1"><strong>Statut:</strong> <Badge className="bg-yellow-600">{statistics.key_mechanisms.papss_payments.status}</Badge></p>
+                          <p className="text-sm text-gray-600">{statistics.key_mechanisms.papss_payments.purpose}</p>
+                        </div>
+
+                        <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                          <h5 className="font-bold text-green-700 mb-2">🚀 GTI - Initiative Guidée</h5>
+                          <p className="text-sm mb-1"><strong>Statut:</strong> <Badge className="bg-green-600">{statistics.key_mechanisms.gti.status}</Badge></p>
+                          <p className="text-sm text-gray-600">{statistics.key_mechanisms.gti.purpose}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Sources de données enrichies */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>{t.dataSources}</CardTitle>
+                    <CardTitle className="flex items-center gap-2">
+                      <span>📚</span>
+                      <span>{t.dataSources}</span>
+                    </CardTitle>
+                    <CardDescription>Sources primaires officielles et vérifiées</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                    <div className="space-y-3">
                       {statistics.data_sources.map((source, index) => (
-                        <Badge key={index} variant="outline" className="text-center">
-                          {source}
-                        </Badge>
+                        <div key={index} className="bg-gray-50 p-4 rounded-lg border-l-4 border-l-blue-500">
+                          <div className="flex justify-between items-start">
+                            <div className="flex-1">
+                              <h5 className="font-bold text-gray-800">{source.source || source}</h5>
+                              {source.key_findings && (
+                                <p className="text-sm text-gray-600 mt-1">{source.key_findings}</p>
+                              )}
+                              {source.focus && (
+                                <p className="text-sm text-gray-600 mt-1">{source.focus}</p>
+                              )}
+                            </div>
+                            {source.url && (
+                              <a 
+                                href={source.url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:text-blue-800 font-semibold text-sm"
+                              >
+                                🔗 Accéder
+                              </a>
+                            )}
+                          </div>
+                          {source.verified && (
+                            <div className="mt-2">
+                              <Badge className="bg-green-600 text-xs">✓ Vérifié: {source.verified}</Badge>
+                            </div>
+                          )}
+                        </div>
                       ))}
                     </div>
                     <p className="text-sm text-gray-500 mt-4">
