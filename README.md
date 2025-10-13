@@ -5,6 +5,8 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-Connected-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
+> **Note importante** : Si vous utilisez ce projet dans un fork ou un contexte différent, pensez à adapter les URLs GitHub, les chemins de dépôt et les références au projet dans tous les fichiers de documentation (README.md, docs/, .github/workflows/, etc.) selon votre environnement.
+
 A comprehensive tariff calculator and trade information system for the African Continental Free Trade Area (AfCFTA/ZLECAf).
 
 ## 🚀 Features
