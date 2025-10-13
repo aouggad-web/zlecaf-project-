@@ -334,13 +334,13 @@ frontend:
 
 metadata:
   created_by: "testing_agent"
-  version: "3.0"
-  test_sequence: 3
-  run_ui: true
+  version: "4.0"
+  test_sequence: 4
+  run_ui: false
 
 test_plan:
   current_focus:
-    - "Tests frontend complets réussis"
+    - "Tests implémentation taxes ZLECAf validés"
   stuck_tasks: []
   test_all: true
   test_priority: "completed"
