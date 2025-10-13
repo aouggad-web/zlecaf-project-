@@ -364,6 +364,172 @@ class ZLECAfAPITester:
                     {'error': str(e)}
                 )
     
+    def test_tax_implementation_senegal_cote_ivoire(self):
+        """Test spécifique de l'implémentation des taxes SN->CI selon la demande"""
+        # Payload de test spécifique de la demande de révision
+        test_payload = {
+            "origin_country": "SN",  # Sénégal - pays CEDEAO
+            "destination_country": "CI",  # Côte d'Ivoire - pays CEDEAO/UEMOA
+            "hs_code": "010121",
+            "value": 100000
+        }
+        
+        try:
+            response = self.session.post(
+                f"{self.base_url}/calculate-tariff", 
+                json=test_payload, 
+                timeout=TIMEOUT
+            )
+            
+            if response.status_code == 200:
+                calculation = response.json()
+                
+                # Vérifier les champs de taxes requis
+                required_tax_fields = [
+                    'normal_vat_amount', 'normal_vat_rate',
+                    'normal_statistical_fee', 'normal_community_levy', 'normal_ecowas_levy',
+                    'normal_total_cost', 'zlecaf_total_cost',
+                    'total_savings_with_taxes', 'total_savings_percentage'
+                ]
+                missing_fields = [field for field in required_tax_fields if field not in calculation]
+                
+                if missing_fields:
+                    self.log_result(
+                        "Tax Implementation SN->CI", 
+                        False, 
+                        f"Champs de taxes manquants: {missing_fields}",
+                        {'calculation': calculation}
+                    )
+                    return
+                
+                # Vérifier les taux spécifiques pour la Côte d'Ivoire
+                expected_vat_rate = 18.0  # TVA Côte d'Ivoire = 18%
+                expected_statistical_fee_rate = 1.0  # Redevance statistique = 1%
+                expected_community_levy_rate = 0.5  # Prélèvement communautaire = 0.5%
+                expected_ecowas_levy_rate = 1.0  # Prélèvement CEDEAO = 1%
+                
+                if calculation['normal_vat_rate'] != expected_vat_rate:
+                    self.log_result(
+                        "Tax Implementation SN->CI", 
+                        False, 
+                        f"Taux TVA incorrect: {calculation['normal_vat_rate']}% au lieu de {expected_vat_rate}%",
+                        {'actual_vat_rate': calculation['normal_vat_rate']}
+                    )
+                    return
+                
+                # Vérifier la formule de calcul de la TVA
+                # Base TVA = Valeur + DD + autres taxes
+                value = calculation['value']
+                customs_duty = calculation['normal_tariff_amount']
+                statistical_fee = calculation['normal_statistical_fee']
+                community_levy = calculation['normal_community_levy']
+                ecowas_levy = calculation['normal_ecowas_levy']
+                
+                expected_vat_base = value + customs_duty + statistical_fee + community_levy + ecowas_levy
+                expected_vat_amount = expected_vat_base * (expected_vat_rate / 100)
+                
+                # Vérifier les calculs avec une tolérance de 0.01
+                if abs(calculation['normal_vat_amount'] - expected_vat_amount) > 0.01:
+                    self.log_result(
+                        "Tax Implementation SN->CI", 
+                        False, 
+                        f"Calcul TVA incorrect: {calculation['normal_vat_amount']:.2f} au lieu de {expected_vat_amount:.2f}",
+                        {
+                            'vat_base_calculated': expected_vat_base,
+                            'vat_amount_calculated': expected_vat_amount,
+                            'vat_amount_actual': calculation['normal_vat_amount']
+                        }
+                    )
+                    return
+                
+                # Vérifier les autres taxes
+                expected_statistical_fee = value * (expected_statistical_fee_rate / 100)
+                expected_community_levy = value * (expected_community_levy_rate / 100)
+                expected_ecowas_levy = value * (expected_ecowas_levy_rate / 100)
+                
+                tax_checks = [
+                    abs(statistical_fee - expected_statistical_fee) < 0.01,
+                    abs(community_levy - expected_community_levy) < 0.01,
+                    abs(ecowas_levy - expected_ecowas_levy) < 0.01
+                ]
+                
+                if not all(tax_checks):
+                    self.log_result(
+                        "Tax Implementation SN->CI", 
+                        False, 
+                        "Erreurs dans le calcul des autres taxes",
+                        {
+                            'statistical_fee': {'actual': statistical_fee, 'expected': expected_statistical_fee},
+                            'community_levy': {'actual': community_levy, 'expected': expected_community_levy},
+                            'ecowas_levy': {'actual': ecowas_levy, 'expected': expected_ecowas_levy}
+                        }
+                    )
+                    return
+                
+                # Vérifier le total normal
+                expected_normal_total = value + customs_duty + calculation['normal_vat_amount'] + statistical_fee + community_levy + ecowas_levy
+                
+                if abs(calculation['normal_total_cost'] - expected_normal_total) > 0.01:
+                    self.log_result(
+                        "Tax Implementation SN->CI", 
+                        False, 
+                        f"Total normal incorrect: {calculation['normal_total_cost']:.2f} au lieu de {expected_normal_total:.2f}",
+                        {
+                            'normal_total_calculated': expected_normal_total,
+                            'normal_total_actual': calculation['normal_total_cost']
+                        }
+                    )
+                    return
+                
+                # Vérifier les économies totales avec taxes
+                expected_total_savings = calculation['normal_total_cost'] - calculation['zlecaf_total_cost']
+                expected_savings_percentage = (expected_total_savings / calculation['normal_total_cost']) * 100
+                
+                if abs(calculation['total_savings_with_taxes'] - expected_total_savings) > 0.01:
+                    self.log_result(
+                        "Tax Implementation SN->CI", 
+                        False, 
+                        f"Économies totales incorrectes: {calculation['total_savings_with_taxes']:.2f} au lieu de {expected_total_savings:.2f}",
+                        {
+                            'total_savings_calculated': expected_total_savings,
+                            'total_savings_actual': calculation['total_savings_with_taxes']
+                        }
+                    )
+                    return
+                
+                self.log_result(
+                    "Tax Implementation SN->CI", 
+                    True, 
+                    f"✅ Implémentation des taxes validée - TVA: {calculation['normal_vat_rate']}%, Économies totales: {calculation['total_savings_with_taxes']:.2f} USD ({calculation['total_savings_percentage']:.1f}%)",
+                    {
+                        'vat_rate': f"{calculation['normal_vat_rate']}%",
+                        'vat_amount': calculation['normal_vat_amount'],
+                        'statistical_fee': statistical_fee,
+                        'community_levy': community_levy,
+                        'ecowas_levy': ecowas_levy,
+                        'normal_total': calculation['normal_total_cost'],
+                        'zlecaf_total': calculation['zlecaf_total_cost'],
+                        'total_savings': calculation['total_savings_with_taxes'],
+                        'savings_percentage': calculation['total_savings_percentage']
+                    }
+                )
+                
+            else:
+                self.log_result(
+                    "Tax Implementation SN->CI", 
+                    False, 
+                    f"Code de statut incorrect: {response.status_code}",
+                    {'status_code': response.status_code, 'response': response.text}
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "Tax Implementation SN->CI", 
+                False, 
+                f"Erreur lors du test des taxes: {str(e)}",
+                {'error': str(e), 'payload': test_payload}
+            )
+
     def test_tariff_calculation(self):
         """Test POST /api/calculate-tariff - Calcul complet des tarifs avec nouvelles données"""
         # Payload de test spécifique mentionné dans la demande
