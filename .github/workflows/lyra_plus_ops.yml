@@ -58,8 +58,8 @@ jobs:
             
             ### Details
             - **Workflow Run**: #${{ github.run_number }}
+            - **Run ID**: ${{ github.run_id }}
             - **Triggered by**: ${{ github.event_name }}
-            - **Generated at**: ${{ github.event.head_commit.timestamp || github.run_id }}
             
             **Note**: Currently running in demo mode with sample data. See `backend/make_release.py` for production integration.
           labels: |
