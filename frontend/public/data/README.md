@@ -19,8 +19,8 @@ Ces fichiers sont automatiquement générés et mis à jour :
 ## Mode Production
 
 En mode production, ces fichiers seront générés à partir des sources officielles :
-- e-Tariff Portal (schedules tarifaires)
+- Portail e-Tariff (calendriers tarifaires)
 - UNCTAD TRAINS (données commerciales)
-- OEC Atlas (complexité économique)
+- Atlas OEC (complexité économique)
 
 Voir `docs/LYRA_OPS.md` pour plus de détails.

@@ -33,7 +33,7 @@ def generate_demo_data(output_dir: Path):
         "metadata": {
             "version": "1.0",
             "generated_at": "2024-01-15T10:00:00Z",
-            "source": "Demo Mode - ZLECAf Schedules"
+            "source": "Mode Démo - Calendriers ZLECAf"
         },
         "countries": {
             "MA": {
@@ -104,13 +104,13 @@ def generate_demo_data(output_dir: Path):
     # 4. zlecaf_tariff_origin_phase.json
     tariff_origin_phase = {
         "metadata": {
-            "description": "Integrated tariff, origin rules, and phase-out schedule"
+            "description": "Tarifs intégrés, règles d'origine et calendrier de démantèlement"
         },
         "data": {
             "MA": {
                 "84": {
                     "category": "A",
-                    "rule": "40% regional content",
+                    "rule": "40% de contenu régional",
                     "phases": {
                         "2024": 5.0,
                         "2029": 2.0,
@@ -164,9 +164,9 @@ def main():
     else:
         print("❌ Mode production non implémenté")
         print("TODO: Intégrer les sources réelles:")
-        print("  - e-Tariff Portal (tariff schedules)")
-        print("  - UNCTAD TRAINS (trade data)")
-        print("  - OEC Observatory (economic complexity)")
+        print("  - Portail e-Tariff (calendriers tarifaires)")
+        print("  - UNCTAD TRAINS (données commerciales)")
+        print("  - OEC Observatory (complexité économique)")
         sys.exit(1)
     
     print()

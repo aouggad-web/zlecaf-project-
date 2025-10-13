@@ -36,8 +36,8 @@ Le script `backend/make_release.py` doit être mis à jour pour implémenter le 
 
 ## 4) API Health
 
-- **Endpoint**: `/api/health`
-- **Réponse**: `{ ok: boolean, files: { [filename]: boolean }, message: string, timestamp: string }`
+- **Point de terminaison** : `/api/health`
+- **Réponse** : `{ ok: boolean, files: { [filename]: boolean }, message: string, timestamp: string }`
 - Utilisable par Netlify / UptimeRobot pour un ping de supervision
 
 Fichiers surveillés :
@@ -88,7 +88,7 @@ Réponse attendue quand les fichiers sont présents :
     "zlecaf_dismantling_schedule.csv": true,
     "zlecaf_tariff_origin_phase.json": true
   },
-  "message": "All data files present",
+  "message": "Tous les fichiers de données sont présents",
   "timestamp": "2024-01-15T10:00:00"
 }
 ```
@@ -125,9 +125,9 @@ Comparaison des tarifs ZLECAf vs tarifs mondiaux (nécessite openpyxl).
 ## 8) Sources de données (mode production)
 
 À implémenter :
-- **e-Tariff Portal** : Schedules tarifaires officiels ZLECAf
+- **Portail e-Tariff** : Calendriers tarifaires officiels ZLECAf
 - **UNCTAD TRAINS** : Données commerciales et tarifaires
-- **OEC Atlas** : Complexité économique et flux commerciaux
+- **Atlas OEC** : Complexité économique et flux commerciaux
 - **Banque Mondiale** : Indicateurs économiques
 
 — Lyra+

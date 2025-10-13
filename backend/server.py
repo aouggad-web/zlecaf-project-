@@ -336,7 +336,7 @@ async def root():
 
 @api_router.get("/health")
 async def health_check():
-    """Simple health check endpoint"""
+    """Point de terminaison simple de vérification de santé"""
     return {
         "status": "healthy",
         "service": "ZLECAf API",
@@ -346,7 +346,7 @@ async def health_check():
 
 @api_router.get("/health/status")
 async def detailed_health_status():
-    """Detailed health status with system checks"""
+    """État de santé détaillé avec vérifications système"""
     health_status = {
         "status": "healthy",
         "timestamp": datetime.now().isoformat(),
@@ -355,21 +355,21 @@ async def detailed_health_status():
         "checks": {}
     }
     
-    # Check database connection
+    # Vérifier la connexion à la base de données
     try:
         await db.command("ping")
         health_status["checks"]["database"] = {
             "status": "healthy",
-            "message": "MongoDB connection active"
+            "message": "Connexion MongoDB active"
         }
     except Exception as e:
         health_status["checks"]["database"] = {
             "status": "unhealthy",
-            "message": f"Database connection error: {str(e)}"
+            "message": f"Erreur de connexion à la base de données: {str(e)}"
         }
         health_status["status"] = "unhealthy"
     
-    # Check API endpoints availability
+    # Vérifier la disponibilité des points de terminaison de l'API
     health_status["checks"]["api_endpoints"] = {
         "status": "healthy",
         "available_endpoints": [
@@ -384,7 +384,7 @@ async def detailed_health_status():
         ]
     }
     
-    # Check data availability
+    # Vérifier la disponibilité des données
     health_status["checks"]["data"] = {
         "status": "healthy",
         "countries_count": len(AFRICAN_COUNTRIES),
@@ -691,7 +691,7 @@ async def health_check():
     return {
         "ok": all_ok,
         "files": status,
-        "message": "All data files present" if all_ok else "Some data files are missing",
+        "message": "Tous les fichiers de données sont présents" if all_ok else "Certains fichiers de données sont manquants",
         "timestamp": datetime.now().isoformat()
     }
 
