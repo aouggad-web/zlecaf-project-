@@ -417,7 +417,6 @@ function ZLECAfCalculator() {
                       value={hsCode}
                       onChange={(e) => setHsCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
                       placeholder="Ex : 010121, 180100..."
-                      maxLength={6}
                     />
                     {hsCode.length >= 2 && (
                       <p className="text-sm text-blue-600">
@@ -432,7 +431,12 @@ function ZLECAfCalculator() {
                       id="value"
                       type="number"
                       value={value}
-                      onChange={(e) => setValue(e.target.value)}
+                      onChange={(e) => {
+                        const newValue = e.target.value;
+                        if (newValue === '' || (parseFloat(newValue) >= 0 && !isNaN(parseFloat(newValue)))) {
+                          setValue(newValue);
+                        }
+                      }}
                       placeholder="100000"
                       min="0"
                     />
@@ -913,7 +917,6 @@ function ZLECAfCalculator() {
                       placeholder="Code SH6 (ex: 010121)"
                       value={hsCode}
                       onChange={(e) => setHsCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                      maxLength={6}
                       className="text-lg font-semibold border-2 border-orange-300 focus:border-orange-500"
                     />
                     <Button 
