@@ -106,6 +106,77 @@ button:hover {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+  
+  /* Mobile-specific grid adjustments */
+  .grid-cols-1.md\\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-cols-1.md\\:grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-cols-1.md\\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Mobile typography */
+  .text-4xl.md\\:text-5xl {
+    font-size: 2rem;
+  }
+  
+  /* Mobile spacing */
+  .space-y-6 {
+    gap: 1rem;
+  }
+  
+  /* Mobile card padding */
+  .card {
+    margin: 0.5rem;
+  }
+  
+  /* Mobile button adjustments */
+  .w-full {
+    width: 100%;
+  }
+  
+  /* Mobile tabs */
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Extra small screens */
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  .text-xl {
+    font-size: 1.25rem;
+  }
+  
+  .p-6 {
+    padding: 1rem;
+  }
+  
+  .p-8 {
+    padding: 1.5rem;
+  }
+  
+  /* Stack tabs vertically on very small screens */
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Improved chart responsiveness */
+@media (max-width: 768px) {
+  .recharts-wrapper {
+    width: 100% !important;
+    height: auto !important;
+  }
 }
 
 /* Custom scrollbar with African colors */
