@@ -343,6 +343,15 @@ const TradeComparison = () => {
                         <li><strong>📥 Importations:</strong> Valeur totale des biens achetés par le pays auprès d'autres pays africains (en milliards USD)</li>
                         <li><strong>⚖️ Solde Commercial:</strong> Différence entre exportations et importations (positif = excédent, négatif = déficit)</li>
                       </ul>
+                      <div className="mt-3 bg-blue-50 p-2 rounded border-l-4 border-blue-500">
+                        <p className="text-xs text-blue-800 font-semibold">
+                          ⚠️ <strong>Important:</strong> Ces chiffres représentent uniquement le <strong>commerce INTRA-AFRICAIN</strong> 
+                          (entre pays africains), et non le commerce extérieur total.
+                        </p>
+                        <p className="text-xs text-blue-700 mt-1">
+                          📚 Source: <a href="https://oec.world/" target="_blank" rel="noopener noreferrer" className="underline font-semibold">OEC (Observatory of Economic Complexity)</a>
+                        </p>
+                      </div>
                     </div>
                     <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-lg shadow border-2 border-purple-300">
                       <h5 className="font-semibold text-purple-800 mb-2">💰 Économies ZLECAf - C'est quoi ?</h5>
