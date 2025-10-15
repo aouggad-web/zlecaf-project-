@@ -280,7 +280,67 @@ const TradeComparison = () => {
                 </Select>
               </div>
 
-              <div style={{ minHeight: '300px' }}>
+              {/* Tableau interactif avec tri */}
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-blue-100">
+                      <TableHead className="font-bold">Pays</TableHead>
+                      <TableHead 
+                        className="cursor-pointer hover:bg-blue-200 font-bold text-center"
+                        onClick={() => handleSort('exports')}
+                      >
+                        Exportations {sortConfig.key === 'exports' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                      </TableHead>
+                      <TableHead 
+                        className="cursor-pointer hover:bg-blue-200 font-bold text-center"
+                        onClick={() => handleSort('imports')}
+                      >
+                        Importations {sortConfig.key === 'imports' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                      </TableHead>
+                      <TableHead 
+                        className="cursor-pointer hover:bg-blue-200 font-bold text-center"
+                        onClick={() => handleSort('balance')}
+                      >
+                        Solde {sortConfig.key === 'balance' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                      </TableHead>
+                      <TableHead 
+                        className="cursor-pointer hover:bg-blue-200 font-bold text-center"
+                        onClick={() => handleSort('savings')}
+                      >
+                        Économies ZLECAf {sortConfig.key === 'savings' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {countryPerformance.map((item, index) => (
+                      <TableRow 
+                        key={item.code} 
+                        className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-blue-50 transition-colors`}
+                      >
+                        <TableCell className="font-semibold">{item.country}</TableCell>
+                        <TableCell className="text-center">
+                          <Badge className="bg-green-600 text-white">${item.exports.toFixed(1)}B</Badge>
+                        </TableCell>
+                        <TableCell className="text-center">
+                          <Badge className="bg-orange-600 text-white">${item.imports.toFixed(1)}B</Badge>
+                        </TableCell>
+                        <TableCell className="text-center">
+                          <Badge className={item.balance >= 0 ? 'bg-blue-600 text-white' : 'bg-red-600 text-white'}>
+                            {item.balance >= 0 ? '+' : ''}{item.balance.toFixed(1)}B
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-center">
+                          <Badge className="bg-purple-600 text-white font-bold">${item.savings.toFixed(1)}B</Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+
+              {/* Graphique de visualisation sous le tableau */}
+              <div style={{ minHeight: '300px' }} className="mt-6">
                 <ResponsiveContainer width="100%" height={280} debounce={300}>
                   <BarChart 
                     data={countryPerformance}
