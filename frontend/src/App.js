@@ -798,6 +798,10 @@ function ZLECAfCalculator() {
             </div>
           </TabsContent>
 
+          <TabsContent value="comparison">
+            <TradeComparison />
+          </TabsContent>
+
           <TabsContent value="statistics">
             {statistics && (
               <div className="space-y-6">
