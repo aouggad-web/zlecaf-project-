@@ -118,14 +118,15 @@ const TradeComparison = () => {
     flag: item.country
   }));
 
-  // Performance commerciale par pays avec données de calculs
-  const countryPerformance = [
-    { country: '🇿🇦 Afrique du Sud', exports: 89.5, imports: 64.7, balance: 24.8, savings: 12.5 },
-    { country: '🇳🇬 Nigéria', exports: 64.7, imports: 54.2, balance: 10.5, savings: 10.8 },
-    { country: '🇪🇬 Égypte', exports: 42.1, imports: 48.3, balance: -6.2, savings: 8.2 },
-    { country: '🇲🇦 Maroc', exports: 38.9, imports: 42.1, balance: -3.2, savings: 7.5 },
-    { country: '🇰🇪 Kenya', exports: 28.4, imports: 32.7, balance: -4.3, savings: 6.1 }
-  ];
+  // Performance commerciale avec données enrichies
+  const countryPerformance = sortedCalculations.slice(0, 10).map(item => ({
+    country: `${countryFlags[item.country] || '🌍'} ${item.name}`,
+    exports: item.exports,
+    imports: item.imports,
+    balance: item.balance,
+    savings: item.savings,
+    code: item.country
+  }));
 
   return (
     <div className="space-y-8">
