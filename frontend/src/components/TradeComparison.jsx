@@ -396,24 +396,27 @@ const TradeComparison = () => {
                 <Table>
                   <TableHeader>
                     <TableRow className="bg-blue-100">
-                      <TableHead className="font-bold">Pays</TableHead>
+                      <TableHead className="font-bold">🌍 Pays</TableHead>
                       <TableHead 
                         className="cursor-pointer hover:bg-blue-200 font-bold text-center"
                         onClick={() => handleSort('exports')}
+                        title="Valeur totale des exportations vers les pays africains (milliards USD)"
                       >
-                        Exportations {sortConfig.key === 'exports' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                        📤 Exportations {sortConfig.key === 'exports' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
                       </TableHead>
                       <TableHead 
                         className="cursor-pointer hover:bg-blue-200 font-bold text-center"
                         onClick={() => handleSort('imports')}
+                        title="Valeur totale des importations depuis les pays africains (milliards USD)"
                       >
-                        Importations {sortConfig.key === 'imports' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                        📥 Importations {sortConfig.key === 'imports' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
                       </TableHead>
                       <TableHead 
                         className="cursor-pointer hover:bg-blue-200 font-bold text-center"
                         onClick={() => handleSort('balance')}
+                        title="Différence entre exportations et importations (positif = excédent, négatif = déficit)"
                       >
-                        Solde {sortConfig.key === 'balance' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                        ⚖️ Solde Commercial {sortConfig.key === 'balance' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
                       </TableHead>
                       <TableHead 
                         className="cursor-pointer hover:bg-blue-200 font-bold text-center"
