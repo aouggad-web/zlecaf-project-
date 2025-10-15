@@ -106,6 +106,47 @@ The health endpoints provide real-time monitoring of:
 - **Real-time Trade Data**
 - **Economic Projections** through 2030
 
+## 📦 Data Generation: AfCFTA 2025-2035
+
+### Overview
+
+The project includes automated generation of AfCFTA dismantling matrix and tariff rates data for the period 2025-2035. This provides normalized data tables for AfCFTA customs analytics.
+
+### Generated Files
+
+1. **Dismantling Matrix** - Wide format (HS6 × Countries) for data entry
+2. **Rates by Year** - Long format time series (Country-HS6-Year)
+3. **Immediate Positions** - Subset of immediate dismantling cases
+4. **Metadata** - Documentation and validation reference
+5. **Excel Workbook** - Consolidated file with 4 sheets
+
+### Quick Start
+
+```bash
+# Generate AfCFTA 2025 data
+python backend/make_release.py --afcfta-2025
+
+# Or run directly
+python backend/generate_afcfta_2025_data.py
+
+# Run tests
+python tests/test_afcfta_2025_generation.py
+```
+
+### Documentation
+
+- Full documentation: [`docs/AFCFTA_2025_DATA.md`](docs/AFCFTA_2025_DATA.md)
+- Sample data: `frontend/public/data/zlecaf_*2025*`
+- Pipeline guide: [`docs/LYRA_OPS.md`](docs/LYRA_OPS.md)
+
+### Features
+
+- **54 AU Countries**: All AfCFTA member states
+- **11-Year Period**: 2025-2035 coverage
+- **Multiple Formats**: CSV, JSON, XLSX
+- **Dismantling Categories**: A, B, C, Sensitive, Excluded, Immediate
+- **Template-Based**: Ready for data entry and automation
+
 ## 🚦 Status Badges Explained
 
 - ![API Status](https://img.shields.io/badge/API-Online-success) - API is operational
