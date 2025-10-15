@@ -418,8 +418,10 @@ const TradeComparison = () => {
                       <TableHead 
                         className="cursor-pointer hover:bg-blue-200 font-bold text-center"
                         onClick={() => handleSort('savings')}
+                        title="Montant économisé sur les droits de douane et taxes grâce à l'accord ZLECAf (par rapport aux tarifs NPF normaux)"
                       >
-                        Économies ZLECAf {sortConfig.key === 'savings' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                        💰 Économies ZLECAf {sortConfig.key === 'savings' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                        <i className="fas fa-info-circle text-purple-500 ml-1 text-xs"></i>
                       </TableHead>
                     </TableRow>
                   </TableHeader>
