@@ -741,11 +741,13 @@ function ZLECAfCalculator() {
             </div>
           </TabsContent>
 
-          <TabsContent value="comparison">
-            <TradeComparison />
-          </TabsContent>
-
           <TabsContent value="statistics">
+            {/* Intégration du composant Comparaisons dans Statistiques */}
+            <TradeComparison />
+            
+            <div className="mt-8"></div>
+            
+            {/* Section Statistiques originale */}
             {statistics && (
               <div className="space-y-6">
                 {/* En-tête des statistiques avec style africain */}
