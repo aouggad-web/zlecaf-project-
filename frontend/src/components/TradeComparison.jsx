@@ -30,6 +30,7 @@ const TradeComparison = () => {
         const mockCalculations = [
           { country: 'ZA', name: 'Afrique du Sud', exports: 89.5, imports: 64.7, balance: 24.8, savings: 15.2 },
           { country: 'NG', name: 'Nigéria', exports: 64.7, imports: 54.2, balance: 10.5, savings: 12.8 },
+          { country: 'DZ', name: 'Algérie', exports: 45.8, imports: 51.3, balance: -5.5, savings: 11.4 },
           { country: 'EG', name: 'Égypte', exports: 42.1, imports: 48.3, balance: -6.2, savings: 10.5 },
           { country: 'MA', name: 'Maroc', exports: 38.9, imports: 42.1, balance: -3.2, savings: 9.2 },
           { country: 'KE', name: 'Kenya', exports: 28.4, imports: 32.7, balance: -4.3, savings: 7.8 },
@@ -37,7 +38,9 @@ const TradeComparison = () => {
           { country: 'CI', name: 'Côte d\'Ivoire', exports: 18.7, imports: 22.4, balance: -3.7, savings: 5.9 },
           { country: 'SN', name: 'Sénégal', exports: 16.3, imports: 19.8, balance: -3.5, savings: 4.8 },
           { country: 'TZ', name: 'Tanzanie', exports: 14.8, imports: 18.2, balance: -3.4, savings: 4.2 },
-          { country: 'ET', name: 'Éthiopie', exports: 12.9, imports: 16.5, balance: -3.6, savings: 3.9 }
+          { country: 'ET', name: 'Éthiopie', exports: 12.9, imports: 16.5, balance: -3.6, savings: 3.9 },
+          { country: 'AO', name: 'Angola', exports: 35.2, imports: 28.7, balance: 6.5, savings: 8.6 },
+          { country: 'TN', name: 'Tunisie', exports: 19.4, imports: 22.8, balance: -3.4, savings: 5.2 }
         ];
         setCalculations(mockCalculations);
         setLoading(false);
