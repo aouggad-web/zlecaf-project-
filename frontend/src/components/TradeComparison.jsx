@@ -288,29 +288,62 @@ const TradeComparison = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6">
-              <div className="flex gap-4 mb-4">
-                <Select value={selectedMetric} onValueChange={setSelectedMetric}>
-                  <SelectTrigger className="w-[200px]">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="exports">Exportations</SelectItem>
-                    <SelectItem value="imports">Importations</SelectItem>
-                    <SelectItem value="balance">Solde Commercial</SelectItem>
-                    <SelectItem value="savings">Économies ZLECAf</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="flex flex-wrap gap-4 mb-4 items-center justify-between">
+                <div className="flex gap-4">
+                  <Select value={selectedMetric} onValueChange={setSelectedMetric}>
+                    <SelectTrigger className="w-[200px]">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="exports">📤 Exportations</SelectItem>
+                      <SelectItem value="imports">📥 Importations</SelectItem>
+                      <SelectItem value="balance">⚖️ Solde Commercial</SelectItem>
+                      <SelectItem value="savings">💰 Économies ZLECAf</SelectItem>
+                    </SelectContent>
+                  </Select>
 
-                <Select value={selectedYear} onValueChange={setSelectedYear}>
-                  <SelectTrigger className="w-[150px]">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="2024">2024</SelectItem>
-                    <SelectItem value="2025">2025</SelectItem>
-                    <SelectItem value="2030">2030</SelectItem>
-                  </SelectContent>
-                </Select>
+                  <Select value={selectedYear} onValueChange={setSelectedYear}>
+                    <SelectTrigger className="w-[150px]">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="2024">📅 2024</SelectItem>
+                      <SelectItem value="2025">📅 2025</SelectItem>
+                      <SelectItem value="2030">📅 2030</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <Button 
+                  onClick={() => {
+                    const csvContent = [
+                      ['Pays', 'Exportations (B USD)', 'Importations (B USD)', 'Solde (B USD)', 'Économies ZLECAf (B USD)'],
+                      ...countryPerformance.map(c => [c.country, c.exports, c.imports, c.balance, c.savings])
+                    ].map(row => row.join(',')).join('\n');
+                    
+                    const blob = new Blob([csvContent], { type: 'text/csv' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `zlecaf_performance_${selectedYear}.csv`;
+                    a.click();
+                  }}
+                  className="bg-green-600 hover:bg-green-700 text-white"
+                >
+                  📥 Exporter CSV
+                </Button>
+              </div>
+
+              <div className="bg-blue-50 p-3 rounded-lg mb-4">
+                <p className="text-sm text-blue-700">
+                  <strong>💡 Astuce:</strong> Cliquez sur les en-têtes du tableau pour trier les données. 
+                  Le tri actuel: <Badge className="ml-2 bg-blue-600">
+                    {sortConfig.key === 'exports' ? 'Exportations' : 
+                     sortConfig.key === 'imports' ? 'Importations' : 
+                     sortConfig.key === 'balance' ? 'Solde' : 'Économies'} 
+                    {sortConfig.direction === 'desc' ? '↓ Décroissant' : '↑ Croissant'}
+                  </Badge>
+                </p>
               </div>
 
               {/* Tableau interactif avec tri */}
