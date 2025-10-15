@@ -409,11 +409,11 @@ function ZLECAfCalculator() {
             <TabsTrigger value="calculator" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-600 data-[state=active]:to-blue-600 data-[state=active]:text-white font-bold">
               🧮 {t.calculatorTab}
             </TabsTrigger>
-            <TabsTrigger value="comparison" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-purple-600 data-[state=active]:text-white font-bold">
-              📊 Comparaisons
-            </TabsTrigger>
             <TabsTrigger value="statistics" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-pink-600 data-[state=active]:text-white font-bold">
               📈 {t.statisticsTab}
+            </TabsTrigger>
+            <TabsTrigger value="tools" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-purple-600 data-[state=active]:text-white font-bold">
+              🛠️ Outils
             </TabsTrigger>
             <TabsTrigger value="rules" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-600 data-[state=active]:to-red-600 data-[state=active]:text-white font-bold">
               📜 {t.rulesTab}
