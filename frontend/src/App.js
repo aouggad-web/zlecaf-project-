@@ -14,6 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { toast } from './hooks/use-toast';
 import { Toaster } from './components/ui/toaster';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import TradeComparison from './components/TradeComparison';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
