@@ -292,6 +292,47 @@ const TradeComparison = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6">
+              {/* Section d'explication du tableau */}
+              <Card className="mb-6 bg-gradient-to-r from-indigo-50 to-purple-50 border-l-4 border-l-indigo-500">
+                <CardContent className="pt-6">
+                  <h4 className="font-bold text-lg text-indigo-700 mb-3 flex items-center gap-2">
+                    <i className="fas fa-info-circle"></i>
+                    <span>📖 Comprendre le Tableau de Performance</span>
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-white p-4 rounded-lg shadow">
+                      <h5 className="font-semibold text-gray-800 mb-2">📊 Métriques Commerciales</h5>
+                      <ul className="text-sm text-gray-700 space-y-2">
+                        <li><strong>📤 Exportations:</strong> Valeur totale des biens vendus par le pays à d'autres pays africains (en milliards USD)</li>
+                        <li><strong>📥 Importations:</strong> Valeur totale des biens achetés par le pays auprès d'autres pays africains (en milliards USD)</li>
+                        <li><strong>⚖️ Solde Commercial:</strong> Différence entre exportations et importations (positif = excédent, négatif = déficit)</li>
+                      </ul>
+                    </div>
+                    <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-lg shadow border-2 border-purple-300">
+                      <h5 className="font-semibold text-purple-800 mb-2">💰 Économies ZLECAf - C'est quoi ?</h5>
+                      <p className="text-sm text-gray-700 mb-2">
+                        Les <strong>"Économies ZLECAf"</strong> représentent <strong>l'argent économisé sur les droits de douane et taxes</strong> grâce à l'accord ZLECAf par rapport aux tarifs normaux (NPF).
+                      </p>
+                      <div className="bg-white p-3 rounded-lg mt-2">
+                        <p className="text-xs text-purple-700 font-semibold mb-1">📐 Formule de calcul:</p>
+                        <p className="text-xs text-gray-600">
+                          Économies = (Coût avec tarif NPF) - (Coût avec tarif ZLECAf)
+                        </p>
+                        <p className="text-xs text-gray-600 mt-1">
+                          Cela inclut: Droits de douane + TVA + Levies + Autres taxes
+                        </p>
+                      </div>
+                      <div className="mt-3 bg-green-100 p-2 rounded">
+                        <p className="text-xs text-green-800">
+                          <strong>💡 Exemple:</strong> Si un pays paie $100M en taxes avec tarif normal et $85M avec ZLECAf → 
+                          <strong className="text-green-700"> Économie de $15M !</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
               <div className="flex flex-wrap gap-4 mb-4 items-center justify-between">
                 <div className="flex gap-4">
                   <Select value={selectedMetric} onValueChange={setSelectedMetric}>
