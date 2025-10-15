@@ -433,7 +433,7 @@ const TradeComparison = () => {
             </CardContent>
           </Card>
 
-          {/* Indicateurs Clés */}
+          {/* Indicateurs Clés - Données Réelles */}
           <Card className="shadow-lg border-l-4 border-l-green-500">
             <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 pb-3">
               <CardTitle className="text-lg font-bold text-green-700 flex items-center gap-2">
@@ -444,20 +444,20 @@ const TradeComparison = () => {
             <CardContent className="pt-4 space-y-3">
               <div className="flex justify-between items-center">
                 <span className="text-sm font-semibold text-gray-700">Commerce intra-africain</span>
-                <Badge className="bg-blue-600 text-white text-base">16.3%</Badge>
+                <Badge className="bg-blue-600 text-white text-base">{keyIndicators.intraTrade}</Badge>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm font-semibold text-gray-700">Diversification exports</span>
-                <Badge className="bg-purple-600 text-white text-base">7.2/10</Badge>
+                <Badge className="bg-purple-600 text-white text-base">{keyIndicators.diversification}</Badge>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm font-semibold text-gray-700">Facilitation commerce</span>
-                <Badge className="bg-orange-600 text-white text-base">58.3/100</Badge>
+                <Badge className="bg-orange-600 text-white text-base">{keyIndicators.facilitation}</Badge>
               </div>
             </CardContent>
           </Card>
 
-          {/* Impact ZLECAf */}
+          {/* Impact ZLECAf - Données Réelles */}
           <Card className="shadow-lg border-l-4 border-l-red-500">
             <CardHeader className="bg-gradient-to-r from-red-50 to-pink-50 pb-3">
               <CardTitle className="text-lg font-bold text-red-700 flex items-center gap-2">
@@ -468,15 +468,15 @@ const TradeComparison = () => {
             <CardContent className="pt-4 space-y-3">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Réduction tarifaire moyenne</p>
-                <p className="text-3xl font-bold text-red-600">90%</p>
+                <p className="text-3xl font-bold text-red-600">{zlecafImpact.tariffReduction}</p>
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Augmentation commerce</p>
-                <p className="text-3xl font-bold text-green-600">+52%</p>
+                <p className="text-3xl font-bold text-green-600">{zlecafImpact.tradeIncrease}</p>
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Gain de revenu (2035)</p>
-                <p className="text-3xl font-bold text-blue-600">$450B</p>
+                <p className="text-3xl font-bold text-blue-600">{zlecafImpact.revenueGain}</p>
               </div>
             </CardContent>
           </Card>
