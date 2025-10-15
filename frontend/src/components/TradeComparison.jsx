@@ -86,7 +86,7 @@ const TradeComparison = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [selectedYear]);
 
   // Calculer la vue d'ensemble à partir des statistiques réelles
   const tradeOverview = statistics ? {
