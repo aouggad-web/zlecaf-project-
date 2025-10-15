@@ -88,17 +88,35 @@ const TradeComparison = () => {
     { annee: '2035', NPF: 15.5, ZLECAf: 0, economie: 15.5 }
   ];
 
-  // Top pays par économies tarifaires
-  const topCountriesSavings = [
-    { rank: 1, country: '🇿🇦 Afrique du Sud', savings: 89.5, flag: 'ZA' },
-    { rank: 2, country: '🇳🇬 Nigéria', savings: 64.7, flag: 'NG' },
-    { rank: 3, country: '🇪🇬 Égypte', savings: 42.1, flag: 'EG' },
-    { rank: 4, country: '🇲🇦 Maroc', savings: 38.9, flag: 'MA' },
-    { rank: 5, country: '🇰🇪 Kenya', savings: 28.4, flag: 'KE' },
-    { rank: 6, country: '🇬🇭 Ghana', savings: 24.2, flag: 'GH' },
-    { rank: 7, country: '🇨🇮 Côte d\'Ivoire', savings: 18.7, flag: 'CI' },
-    { rank: 8, country: '🇸🇳 Sénégal', savings: 16.3, flag: 'SN' }
-  ];
+  // Drapeaux emoji par code pays
+  const countryFlags = {
+    'ZA': '🇿🇦', 'NG': '🇳🇬', 'EG': '🇪🇬', 'MA': '🇲🇦', 'KE': '🇰🇪',
+    'GH': '🇬🇭', 'CI': '🇨🇮', 'SN': '🇸🇳', 'TZ': '🇹🇿', 'ET': '🇪🇹'
+  };
+
+  // Trier les pays selon la configuration
+  const handleSort = (key) => {
+    let direction = 'desc';
+    if (sortConfig.key === key && sortConfig.direction === 'desc') {
+      direction = 'asc';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedCalculations = [...calculations].sort((a, b) => {
+    if (sortConfig.direction === 'asc') {
+      return a[sortConfig.key] - b[sortConfig.key];
+    }
+    return b[sortConfig.key] - a[sortConfig.key];
+  });
+
+  // Top 8 pays par économies (toujours trié par savings)
+  const topCountriesSavings = sortedCalculations.slice(0, 8).map((item, index) => ({
+    rank: index + 1,
+    country: `${countryFlags[item.country] || '🌍'} ${item.name}`,
+    savings: item.savings,
+    flag: item.country
+  }));
 
   // Performance commerciale par pays avec données de calculs
   const countryPerformance = [
