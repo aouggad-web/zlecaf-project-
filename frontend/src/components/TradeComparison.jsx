@@ -344,8 +344,11 @@ const TradeComparison = () => {
             <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-50">
               <CardTitle className="text-xl font-bold text-blue-700 flex items-center gap-2">
                 <i className="fas fa-globe-africa"></i>
-                <span>Performance Commerciale par Pays</span>
+                <span>Performance Commerce INTRA-AFRICAIN par Pays</span>
               </CardTitle>
+              <CardDescription className="text-gray-700 font-semibold">
+                📅 Année: {selectedYear} • 📚 Source: OEC (Observatory of Economic Complexity)
+              </CardDescription>
             </CardHeader>
             <CardContent className="pt-6">
               {/* Section d'explication du tableau */}
