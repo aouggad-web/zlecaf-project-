@@ -203,6 +203,26 @@ const TradeComparison = () => {
 
   return (
     <div className="space-y-8">
+      {/* Note importante sur les données */}
+      <Card className="bg-gradient-to-r from-blue-100 via-cyan-100 to-teal-100 border-l-4 border-l-blue-600 mb-6">
+        <CardContent className="pt-4 pb-4">
+          <div className="flex items-start gap-3">
+            <i className="fas fa-info-circle text-blue-600 text-2xl mt-1"></i>
+            <div>
+              <h4 className="font-bold text-blue-800 mb-1">📊 Données de Commerce INTRA-AFRICAIN</h4>
+              <p className="text-sm text-blue-700">
+                Les données ci-dessous représentent uniquement les <strong>échanges commerciaux entre pays africains</strong>, 
+                basées sur les données officielles de l'<a href="https://oec.world/" target="_blank" rel="noopener noreferrer" className="underline font-bold">OEC (Observatory of Economic Complexity)</a>.
+              </p>
+              <p className="text-xs text-blue-600 mt-2">
+                💡 Note: Le commerce intra-africain représente actuellement environ <strong>15-17%</strong> du commerce extérieur total de l'Afrique. 
+                L'objectif de la ZLECAf est de porter ce chiffre à <strong>25-30% d'ici 2030</strong>.
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Vue d'ensemble Commerce - 4 Cartes Métriques */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 border-l-4 border-l-blue-600 shadow-lg">
