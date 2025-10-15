@@ -450,21 +450,121 @@ const TradeComparison = () => {
                 </Table>
               </div>
 
-              {/* Graphique de visualisation sous le tableau */}
-              <div style={{ minHeight: '300px' }} className="mt-6">
-                <ResponsiveContainer width="100%" height={280} debounce={300}>
-                  <BarChart 
-                    data={countryPerformance}
-                    layout="horizontal"
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis type="number" />
-                    <YAxis dataKey="country" type="category" width={150} />
-                    <Tooltip formatter={(value) => `$${value.toFixed(1)}B`} />
-                    <Bar dataKey={selectedMetric} fill="#3b82f6" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
+              {/* Graphique en colonnes groupées lié au tableau */}
+              <Card className="mt-6 shadow-xl border-t-4 border-t-indigo-600">
+                <CardHeader className="bg-gradient-to-r from-indigo-50 to-purple-50">
+                  <CardTitle className="text-xl font-bold text-indigo-700 flex items-center gap-2">
+                    <i className="fas fa-chart-column"></i>
+                    <span>Visualisation Comparative - Toutes les Métriques</span>
+                  </CardTitle>
+                  <CardDescription className="text-gray-700 font-semibold">
+                    Graphique synchronisé avec le tableau (ordre de tri: {
+                      sortConfig.key === 'exports' ? 'Exportations' : 
+                      sortConfig.key === 'imports' ? 'Importations' : 
+                      sortConfig.key === 'balance' ? 'Solde' : 'Économies ZLECAf'
+                    } - {sortConfig.direction === 'desc' ? 'Décroissant' : 'Croissant'})
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pt-6">
+                  <div style={{ minHeight: '450px' }}>
+                    <ResponsiveContainer width="100%" height={420} debounce={300}>
+                      <BarChart 
+                        data={countryPerformance.slice(0, 8)}
+                        margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis 
+                          dataKey="country" 
+                          angle={-45} 
+                          textAnchor="end" 
+                          height={100}
+                          interval={0}
+                          style={{ fontSize: '12px' }}
+                        />
+                        <YAxis 
+                          label={{ value: 'Montant (Milliards USD)', angle: -90, position: 'insideLeft' }}
+                        />
+                        <Tooltip 
+                          formatter={(value) => `$${value.toFixed(1)}B`}
+                          contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', borderRadius: '8px' }}
+                        />
+                        <Legend 
+                          wrapperStyle={{ paddingTop: '20px' }}
+                          iconType="square"
+                        />
+                        <Bar 
+                          dataKey="exports" 
+                          fill="#10b981" 
+                          name="📤 Exportations"
+                          radius={[8, 8, 0, 0]}
+                        />
+                        <Bar 
+                          dataKey="imports" 
+                          fill="#f59e0b" 
+                          name="📥 Importations"
+                          radius={[8, 8, 0, 0]}
+                        />
+                        <Bar 
+                          dataKey="balance" 
+                          fill="#3b82f6" 
+                          name="⚖️ Solde Commercial"
+                          radius={[8, 8, 0, 0]}
+                        />
+                        <Bar 
+                          dataKey="savings" 
+                          fill="#8b5cf6" 
+                          name="💰 Économies ZLECAf"
+                          radius={[8, 8, 0, 0]}
+                        />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+
+                  {/* Légende explicative sous le graphique */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+                    <div className="bg-green-50 p-3 rounded-lg border-l-4 border-green-500">
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-4 h-4 bg-green-600 rounded"></div>
+                        <span className="text-sm font-bold text-green-700">Exportations</span>
+                      </div>
+                      <p className="text-xs text-gray-600">Ventes vers autres pays africains</p>
+                    </div>
+
+                    <div className="bg-orange-50 p-3 rounded-lg border-l-4 border-orange-500">
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-4 h-4 bg-orange-600 rounded"></div>
+                        <span className="text-sm font-bold text-orange-700">Importations</span>
+                      </div>
+                      <p className="text-xs text-gray-600">Achats depuis autres pays africains</p>
+                    </div>
+
+                    <div className="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-500">
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-4 h-4 bg-blue-600 rounded"></div>
+                        <span className="text-sm font-bold text-blue-700">Solde</span>
+                      </div>
+                      <p className="text-xs text-gray-600">Différence Exports - Imports</p>
+                    </div>
+
+                    <div className="bg-purple-50 p-3 rounded-lg border-l-4 border-purple-500">
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-4 h-4 bg-purple-600 rounded"></div>
+                        <span className="text-sm font-bold text-purple-700">Économies</span>
+                      </div>
+                      <p className="text-xs text-gray-600">Gain avec tarifs ZLECAf</p>
+                    </div>
+                  </div>
+
+                  {/* Note sur le tri */}
+                  <div className="mt-4 bg-indigo-50 p-3 rounded-lg">
+                    <p className="text-sm text-indigo-700">
+                      <i className="fas fa-lightbulb mr-2"></i>
+                      <strong>Note:</strong> Le graphique affiche les 8 premiers pays selon le tri actuel du tableau. 
+                      Changez le tri en cliquant sur les en-têtes du tableau pour voir différents pays !
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             </CardContent>
           </Card>
         </div>
