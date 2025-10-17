@@ -10,12 +10,13 @@ import axios from 'axios';
 const API_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
 const TradeComparison = () => {
-  const [selectedYear, setSelectedYear] = useState('2023');
+  const [selectedYear, setSelectedYear] = useState('2024');
   const [selectedMetric, setSelectedMetric] = useState('exports');
   const [loading, setLoading] = useState(true);
   const [statistics, setStatistics] = useState(null);
+  const [tradePerformance, setTradePerformance] = useState([]);
   const [calculations, setCalculations] = useState([]);
-  const [sortConfig, setSortConfig] = useState({ key: 'savings', direction: 'desc' });
+  const [sortConfig, setSortConfig] = useState({ key: 'exports', direction: 'desc' });
   
   // Données de commerce INTRA-AFRICAIN par année (Source: OEC - Observatory of Economic Complexity)
   // Note: Le commerce intra-africain représente environ 15-17% du commerce total africain
@@ -49,25 +50,10 @@ const TradeComparison = () => {
       { country: 'ET', name: 'Éthiopie', exports: 3.1, imports: 4.5, balance: -1.4, savings: 1.0 },
       { country: 'AO', name: 'Angola', exports: 1.8, imports: 4.0, balance: -2.2, savings: 0.9 },
       { country: 'TN', name: 'Tunisie', exports: 4.1, imports: 4.2, balance: -0.1, savings: 1.2 }
-    ],
-    '2024': [
-      { country: 'ZA', name: 'Afrique du Sud', exports: 28.1, imports: 21.4, balance: 6.7, savings: 4.8 },
-      { country: 'NG', name: 'Nigéria', exports: 10.5, imports: 14.1, balance: -3.6, savings: 3.4 },
-      { country: 'DZ', name: 'Algérie', exports: 2.7, imports: 6.7, balance: -4.0, savings: 2.3 },
-      { country: 'EG', name: 'Égypte', exports: 7.8, imports: 10.2, balance: -2.4, savings: 2.7 },
-      { country: 'MA', name: 'Maroc', exports: 6.4, imports: 5.0, balance: 1.4, savings: 2.1 },
-      { country: 'KE', name: 'Kenya', exports: 8.4, imports: 7.9, balance: 0.5, savings: 2.5 },
-      { country: 'GH', name: 'Ghana', exports: 6.7, imports: 7.2, balance: -0.5, savings: 1.9 },
-      { country: 'CI', name: 'Côte d\'Ivoire', exports: 7.0, imports: 6.2, balance: 0.8, savings: 1.8 },
-      { country: 'SN', name: 'Sénégal', exports: 3.8, imports: 5.5, balance: -1.7, savings: 1.4 },
-      { country: 'TZ', name: 'Tanzanie', exports: 5.0, imports: 5.9, balance: -0.9, savings: 1.6 },
-      { country: 'ET', name: 'Éthiopie', exports: 3.4, imports: 4.9, balance: -1.5, savings: 1.1 },
-      { country: 'AO', name: 'Angola', exports: 2.0, imports: 4.3, balance: -2.3, savings: 1.0 },
-      { country: 'TN', name: 'Tunisie', exports: 4.5, imports: 4.5, balance: 0.0, savings: 1.3 }
     ]
   };
 
-  // Fetch des statistiques réelles
+  // Fetch des statistiques réelles et données de commerce 2024
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -75,10 +61,30 @@ const TradeComparison = () => {
         const statsResponse = await axios.get(`${API_URL}/api/statistics`);
         setStatistics(statsResponse.data);
         
-        // Charger les données de commerce INTRA-AFRICAIN pour l'année sélectionnée
-        // Source: OEC (Observatory of Economic Complexity)
-        const yearData = tradeDataByYear[selectedYear] || tradeDataByYear['2023'];
-        setCalculations(yearData);
+        // Pour 2024, charger les vraies données depuis l'API
+        if (selectedYear === '2024') {
+          const tradeResponse = await axios.get(`${API_URL}/api/trade-performance`);
+          const tradeData = tradeResponse.data.countries;
+          
+          // Transformer les données pour le format attendu
+          const formattedData = tradeData.map(country => ({
+            country: country.code,
+            name: country.country,
+            exports: parseFloat(country.exports_2024).toFixed(1),
+            imports: parseFloat(country.imports_2024).toFixed(1),
+            balance: parseFloat(country.trade_balance_2024).toFixed(1),
+            // Calculer les économies estimées (10% des droits de douane économisés)
+            savings: (parseFloat(country.exports_2024) * 0.15 * 0.90).toFixed(1)
+          }));
+          
+          setCalculations(formattedData);
+          setTradePerformance(tradeData);
+        } else {
+          // Pour les années précédentes, utiliser les données hardcodées
+          const yearData = tradeDataByYear[selectedYear] || tradeDataByYear['2023'];
+          setCalculations(yearData);
+        }
+        
         setLoading(false);
       } catch (error) {
         console.error('Erreur lors du chargement des données:', error);
