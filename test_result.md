@@ -225,13 +225,10 @@
 
 ## test_plan:
   current_focus:
-    - "Tester nouveaux endpoints backend: /api/trade-performance, /api/statistics (enhanced), /api/country-profile (enriched)"
-    - "Valider intégration données 2024 dans TradeComparison"
-    - "Vérifier tarifs corrigés dans calculateur"
-  stuck_tasks:
-    - "Configuration URL API pour environnement conteneurisé"
-  test_all: true
-  test_priority: "high_first"
+    - "Tests intégration données 2024 COMPLÉTÉS avec succès"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "completed"
 
 ## agent_communication:
     - agent: "main"
