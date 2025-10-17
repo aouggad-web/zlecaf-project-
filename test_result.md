@@ -156,11 +156,14 @@
     file: "backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: true
           agent: "main"
           comment: "Profils pays enrichis avec données 2024: export_products (top 5), import_products (top 5), export_partners, import_partners, exports_2024_billion_usd, imports_2024_billion_usd, trade_balance_2024, ratings (S&P, Moody's, Fitch, Scope), zlecaf_ratified, zlecaf_ratification_date"
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Profils pays enrichis 2024 opérationnels. ZAF: exports 108.2B, 5 produits export, 2 partenaires, notations complètes (S&P: BB-). DZA: exports 38.2B, 5 produits export, 2 partenaires, notations complètes (S&P: B+). Tous champs enrichis présents et fonctionnels."
   
   - task: "Mise à jour tarifs corrigés 2024 dans /api/calculate-tariff"
     implemented: true
