@@ -857,6 +857,20 @@ async def get_comprehensive_statistics():
         "last_updated": datetime.now().isoformat()
     }
 
+@api_router.get("/trade-performance")
+async def get_trade_performance():
+    """Récupérer les données de performance commerciale 2024 pour tous les pays"""
+    
+    # Charger les données de commerce enrichies
+    trade_data = get_all_countries_trade_performance()
+    
+    return {
+        "countries": trade_data,
+        "data_source": "Observatory of Economic Complexity (OEC) 2024",
+        "last_updated": "2024-09-16",
+        "year": 2024
+    }
+
 # Include the router in the main app
 app.include_router(api_router)
 
