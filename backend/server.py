@@ -562,7 +562,7 @@ async def get_rules_of_origin(hs_code: str):
 
 @api_router.post("/calculate-tariff", response_model=TariffCalculationResponse)
 async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
-    """Calculer les tarifs complets avec données officielles et règles d'origine"""
+    """Calculer les tarifs complets avec données officielles 2024 et règles d'origine"""
     
     # Vérifier que les pays sont membres de la ZLECAf
     origin_country = next((c for c in AFRICAN_COUNTRIES if c['code'] == request.origin_country), None)
@@ -574,18 +574,15 @@ async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
     # Calcul des tarifs selon le code SH6
     sector_code = request.hs_code[:2]
     
-    # Tarifs normaux (simulation basée sur des données réelles moyennes)
-    normal_rates = {
-        "01": 0.25,         "02": 0.25,         "03": 0.20,         "04": 0.30,         "05": 0.15,         "06": 0.15,         "07": 0.20,         "08": 0.20,         "09": 0.15,         "10": 0.15,         "11": 0.20,         "12": 0.15,         "13": 0.15,         "14": 0.10,         "15": 0.20,         "16": 0.30,         "17": 0.25,         "18": 0.20,         "19": 0.25,         "20": 0.30,         "21": 0.25,         "22": 0.35,         "23": 0.20,         "24": 0.50,         "25": 0.05,         "26": 0.02,         "27": 0.05,         "28": 0.10,         "29": 0.12,         "30": 0.05,         "31": 0.10,         "32": 0.15,         "33": 0.20,         "34": 0.12,         "35": 0.12,         "36": 0.10,         "37": 0.08,         "38": 0.15,         "39": 0.18,         "40": 0.15,         "50": 0.15,         "51": 0.15,         "52": 0.15,         "53": 0.12,         "54": 0.15,         "55": 0.15,         "56": 0.15,         "57": 0.15,         "58": 0.18,         "59": 0.15,         "60": 0.20,         "61": 0.30,         "62": 0.30,         "63": 0.25,         "84": 0.05,         "85": 0.05,         "86": 0.05,         "87": 0.25,         "88": 0.05,         "89": 0.08
-    }
-    
-    # Tarifs ZLECAf (réduction progressive prévue)
-    zlecaf_rates = {
-        "01": 0.00,         "02": 0.00,         "03": 0.00,         "04": 0.00,         "05": 0.00,         "06": 0.00,         "07": 0.00,         "08": 0.00,         "09": 0.00,         "10": 0.00,         "11": 0.00,         "12": 0.00,         "13": 0.00,         "14": 0.00,         "15": 0.00,         "16": 0.00,         "17": 0.00,         "18": 0.00,         "19": 0.00,         "20": 0.00,         "21": 0.00,         "22": 0.00,         "23": 0.00,         "24": 0.00,         "25": 0.00,         "26": 0.00,         "27": 0.00,         "28": 0.00,         "29": 0.00,         "30": 0.00,         "31": 0.00,         "32": 0.00,         "33": 0.00,         "34": 0.00,         "35": 0.00,         "36": 0.00,         "37": 0.00,         "38": 0.00,         "39": 0.00,         "40": 0.00,         "50": 0.00,         "51": 0.00,         "52": 0.00,         "53": 0.00,         "54": 0.00,         "55": 0.00,         "56": 0.00,         "57": 0.00,         "58": 0.00,         "59": 0.00,         "60": 0.00,         "61": 0.00,         "62": 0.00,         "63": 0.00,         "84": 0.00,         "85": 0.00,         "86": 0.00,         "87": 0.15,         "88": 0.00,         "89": 0.00
-    }
+    # Charger les taux corrigés depuis le fichier JSON 2024
+    tariff_corrections = get_tariff_corrections()
+    normal_rates = tariff_corrections.get('normal_rates', {})
+    zlecaf_rates = tariff_corrections.get('zlecaf_rates', {})
+    transition_periods = tariff_corrections.get('transition_periods', {})
     
     normal_rate = normal_rates.get(sector_code, 0.15)
     zlecaf_rate = zlecaf_rates.get(sector_code, 0.03)
+    transition_period = transition_periods.get(sector_code, 'immediate')
     
     # Calculs des droits de douane en USD
     normal_amount = request.value * normal_rate
