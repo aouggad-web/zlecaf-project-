@@ -141,11 +141,14 @@
     file: "backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: true
           agent: "main"
           comment: "Intégration des enhanced_statistics depuis zlecaf_corrections_2024.json: trade_evolution (2023-2024), top_exporters_2024, top_importers_2024, product_analysis, regional_integration, sector_performance, zlecaf_impact_metrics, projections 2025/2030"
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Endpoint /api/statistics enrichi avec toutes les sections 2024 demandées. trade_evolution validé (2023: 192.4B, 2024: 218.7B, croissance 13.7%), top_exporters_2024 avec ZAF (108.2B), NGA (68.5B), AGO (42.8B) conformes. Projections 2025/2030 présentes."
   
   - task: "Mise à jour endpoint /api/country-profile avec données commerce 2024"
     implemented: true
