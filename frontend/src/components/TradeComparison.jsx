@@ -302,6 +302,92 @@ const TradeComparison = () => {
         </Card>
       </div>
 
+      {/* COMMERCE INTRA-AFRICAIN - Vraies données */}
+      {statistics && statistics.trade_evolution && (
+        <Card className="shadow-2xl border-t-4 border-t-green-600 mt-8">
+          <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50">
+            <CardTitle className="text-2xl font-bold text-green-700 flex items-center gap-2">
+              <i className="fas fa-handshake"></i>
+              <span>Commerce INTRA-AFRICAIN (entre pays africains uniquement)</span>
+            </CardTitle>
+            <CardDescription className="text-lg font-semibold">
+              Commerce réalisé uniquement entre les 54 pays africains membres de la ZLECAf
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <Card className="bg-gradient-to-br from-teal-50 to-cyan-100 border-2 border-teal-400 shadow-lg">
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <p className="text-sm font-bold text-teal-700 mb-2">📊 Commerce Intra-Africain 2023</p>
+                    <p className="text-4xl font-extrabold text-teal-600">
+                      ${statistics.trade_evolution.intra_african_trade_2023}B
+                    </p>
+                    <p className="text-xs text-teal-600 mt-1">Milliards USD</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-green-50 to-emerald-100 border-2 border-green-400 shadow-lg">
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <p className="text-sm font-bold text-green-700 mb-2">📈 Commerce Intra-Africain 2024</p>
+                    <p className="text-4xl font-extrabold text-green-600">
+                      ${statistics.trade_evolution.intra_african_trade_2024}B
+                    </p>
+                    <p className="text-xs text-green-600 mt-1">Milliards USD</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-amber-50 to-yellow-100 border-2 border-amber-400 shadow-lg">
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <p className="text-sm font-bold text-amber-700 mb-2">🚀 Croissance 2023-2024</p>
+                    <p className="text-4xl font-extrabold text-amber-600">
+                      +{statistics.trade_evolution.growth_rate_2023_2024}%
+                    </p>
+                    <p className="text-xs text-amber-600 mt-1">{statistics.trade_evolution.trend}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Graphique évolution commerce intra-africain */}
+            <div style={{ minHeight: '300px' }}>
+              <ResponsiveContainer width="100%" height={280} debounce={300}>
+                <AreaChart data={[
+                  { année: '2023', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2023) },
+                  { année: '2024', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2024) },
+                  { année: '2025*', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2024) * 1.12 },
+                  { année: '2030*', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2024) * 1.52 }
+                ]}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="année" />
+                  <YAxis label={{ value: 'Milliards USD', angle: -90, position: 'insideLeft' }} />
+                  <Tooltip formatter={(value) => `$${value.toFixed(1)}B USD`} />
+                  <Legend />
+                  <Area 
+                    type="monotone" 
+                    dataKey="commerce" 
+                    stroke="#10b981" 
+                    fill="#6ee7b7" 
+                    name="Commerce Intra-Africain"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="mt-4 p-4 bg-green-50 rounded-lg border-l-4 border-l-green-600">
+              <p className="text-sm text-green-800">
+                <strong>📌 Note:</strong> Le commerce intra-africain représente actuellement environ <strong>15-17%</strong> du commerce total africain.
+                L'objectif de la ZLECAf est de porter ce chiffre à <strong>25-30% d'ici 2030</strong>.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Graphique Comparaison Tarifs NPF vs ZLECAf */}
       <Card className="shadow-2xl border-t-4 border-t-indigo-600">
         <CardHeader className="bg-gradient-to-r from-indigo-50 to-purple-50">
