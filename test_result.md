@@ -126,11 +126,14 @@
     file: "backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: true
           agent: "main"
           comment: "Nouvel endpoint GET /api/trade-performance retournant les 54 pays avec exports/imports/balance/gdp/hdi 2024 réels depuis ZLECAf_ENRICHI_2024_COMMERCE.csv"
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Endpoint /api/trade-performance opérationnel avec 46 pays ayant données complètes 2024 (exports, imports, balance, GDP, HDI). Données réelles validées pour ZAF (108.2B exports), NGA (68.5B), AGO (42.8B). Structure conforme aux spécifications."
   
   - task: "Mise à jour endpoint /api/statistics avec données enrichies 2024"
     implemented: true
