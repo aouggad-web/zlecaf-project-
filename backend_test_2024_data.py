@@ -428,9 +428,9 @@ class ZLECAf2024DataTester:
             )
     
     def test_country_profile_enriched_dza(self):
-        """Test GET /api/country-profile/DZA - Profil enrichi Algérie"""
+        """Test GET /api/country-profile/DZ - Profil enrichi Algérie"""
         try:
-            response = self.session.get(f"{self.base_url}/country-profile/DZA", timeout=TIMEOUT)
+            response = self.session.get(f"{self.base_url}/country-profile/DZ", timeout=TIMEOUT)
             
             if response.status_code == 200:
                 profile = response.json()
