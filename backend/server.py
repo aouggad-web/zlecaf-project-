@@ -673,9 +673,12 @@ async def calculate_comprehensive_tariff(request: TariffCalculationRequest):
 
 @api_router.get("/statistics")
 async def get_comprehensive_statistics():
-    """Récupérer les statistiques complètes ZLECAf"""
+    """Récupérer les statistiques complètes ZLECAf avec données enrichies 2024"""
     
-    # Statistiques de base
+    # Charger les statistiques enrichies depuis le JSON 2024
+    enhanced_stats = get_enhanced_statistics()
+    
+    # Statistiques de base de la DB
     total_calculations = await db.comprehensive_calculations.count_documents({})
     
     # Économies totales
@@ -712,16 +715,31 @@ async def get_comprehensive_statistics():
     
     # Calcul de l'impact économique potentiel
     african_population = sum([country['population'] for country in AFRICAN_COUNTRIES])
-    estimated_gdp = 3400000000000  # PIB estimé de l'Afrique en USD
+    
+    # Utiliser les données enrichies 2024 pour l'overview
+    overview_enhanced = enhanced_stats.get('overview', {})
     
     return {
         "overview": {
-            "total_calculations": total_calculations,
-            "total_savings": total_savings,
-            "african_countries_members": len(AFRICAN_COUNTRIES),
-            "combined_population": african_population,
-            "estimated_combined_gdp": estimated_gdp
+            "total_calculations": overview_enhanced.get('total_calculations', total_calculations),
+            "total_savings": overview_enhanced.get('total_savings', total_savings),
+            "african_countries_members": overview_enhanced.get('african_countries_members', len(AFRICAN_COUNTRIES)),
+            "combined_population": overview_enhanced.get('combined_population', african_population),
+            "estimated_combined_gdp": overview_enhanced.get('estimated_combined_gdp', 2706000000000),
+            "zlecaf_implementation_status": overview_enhanced.get('zlecaf_implementation_status', '')
         },
+        "trade_evolution": enhanced_stats.get('trade_evolution', {
+            "intra_african_trade_2023": 192.4,
+            "intra_african_trade_2024": 218.7,
+            "growth_rate_2023_2024": 13.7,
+            "trend": "Croissance soutenue malgré les défis globaux"
+        }),
+        "top_exporters_2024": enhanced_stats.get('top_exporters_2024', []),
+        "top_importers_2024": enhanced_stats.get('top_importers_2024', []),
+        "product_analysis": enhanced_stats.get('product_analysis', {}),
+        "regional_integration": enhanced_stats.get('regional_integration', {}),
+        "sector_performance": enhanced_stats.get('sector_performance', {}),
+        "zlecaf_impact_metrics": enhanced_stats.get('zlecaf_impact_metrics', {}),
         "trade_statistics": {
             "most_active_countries": countries_result,
             "popular_hs_codes": hs_result,
@@ -738,18 +756,18 @@ async def get_comprehensive_statistics():
             "export_increase_2035": "560 milliards USD (forte composante manufacturière)"
         },
         "projections": {
-            "2025": {
+            "2025": enhanced_stats.get('projections_updated', {}).get('2025', {
                 "trade_volume_increase": "15%",
                 "tariff_eliminations": "90%",
                 "new_trade_corridors": 45,
                 "gti_active_corridors": "8 corridors prioritaires"
-            },
-            "2030": {
+            }),
+            "2030": enhanced_stats.get('projections_updated', {}).get('2030', {
                 "trade_volume_increase": "52%",
                 "gdp_increase": "7%",
                 "industrialization_boost": "35%",
                 "tariff_revenue_change": "+3% (malgré baisse des taux)"
-            },
+            }),
             "2035": {
                 "income_gains": "450 milliards USD",
                 "poverty_reduction": "30 millions de personnes",
