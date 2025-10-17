@@ -229,47 +229,62 @@ const TradeComparison = () => {
         </CardContent>
       </Card>
 
-      {/* Vue d'ensemble Commerce - 4 Cartes Métriques */}
+      {/* Vue d'ensemble Commerce TOTAL AFRICAIN (avec tous les partenaires mondiaux) */}
+      <Card className="bg-gradient-to-r from-amber-50 to-yellow-50 border-l-4 border-l-amber-500 shadow-lg mb-6">
+        <CardContent className="pt-4">
+          <div className="flex items-center gap-3">
+            <i className="fas fa-globe text-amber-600 text-3xl"></i>
+            <div>
+              <h3 className="text-xl font-bold text-amber-800">Commerce Total Africain (Monde Entier)</h3>
+              <p className="text-sm text-amber-700 mt-1">
+                Ces chiffres représentent le <strong>commerce total de l'Afrique avec tous ses partenaires</strong> (Europe, Asie, Amériques, etc.).
+                <br/>Voir ci-dessous pour le commerce <strong>intra-africain</strong> uniquement.
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 border-l-4 border-l-blue-600 shadow-lg">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-semibold text-gray-600">Commerce Total ZLECAf</span>
+              <span className="text-sm font-semibold text-gray-600">PIB Total Africain</span>
               <i className="fas fa-chart-line text-blue-600 text-xl"></i>
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-4xl font-bold text-blue-700">${tradeOverview.totalTrade.value}B</span>
               <Badge className="bg-green-600 text-white">+{tradeOverview.totalTrade.change}%</Badge>
             </div>
-            <p className="text-xs text-gray-500 mt-1">YoY</p>
+            <p className="text-xs text-gray-500 mt-1">Avec tous partenaires</p>
           </CardContent>
         </Card>
 
         <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-l-4 border-l-green-600 shadow-lg">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-semibold text-gray-600">Exportations</span>
+              <span className="text-sm font-semibold text-gray-600">Exports (Monde)</span>
               <i className="fas fa-arrow-up text-green-600 text-xl"></i>
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-4xl font-bold text-green-700">${tradeOverview.exports.value}B</span>
               <Badge className="bg-green-600 text-white">+{tradeOverview.exports.change}%</Badge>
             </div>
-            <p className="text-xs text-gray-500 mt-1">YoY</p>
+            <p className="text-xs text-gray-500 mt-1">Vers tous pays</p>
           </CardContent>
         </Card>
 
         <Card className="bg-gradient-to-br from-orange-50 to-red-50 border-l-4 border-l-orange-600 shadow-lg">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-semibold text-gray-600">Importations</span>
+              <span className="text-sm font-semibold text-gray-600">Imports (Monde)</span>
               <i className="fas fa-arrow-down text-orange-600 text-xl"></i>
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-4xl font-bold text-orange-700">${tradeOverview.imports.value}B</span>
               <Badge className="bg-orange-600 text-white">+{tradeOverview.imports.change}%</Badge>
             </div>
-            <p className="text-xs text-gray-500 mt-1">YoY</p>
+            <p className="text-xs text-gray-500 mt-1">Depuis tous pays</p>
           </CardContent>
         </Card>
 
