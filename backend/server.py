@@ -433,56 +433,99 @@ async def get_countries():
 
 @api_router.get("/country-profile/{country_code}")
 async def get_country_profile(country_code: str) -> CountryEconomicProfile:
-    """Récupérer le profil économique complet d'un pays avec données réelles"""
+    """Récupérer le profil économique complet d'un pays avec données réelles et commerce 2024"""
     
     # Trouver le pays
     country = next((c for c in AFRICAN_COUNTRIES if c['code'] == country_code.upper()), None)
     if not country:
         raise HTTPException(status_code=404, detail="Pays non trouvé dans la ZLECAf")
     
-    # Récupérer les données réelles du pays
+    # Récupérer les données de commerce enrichies 2024
+    commerce_data = get_country_commerce_profile(country['iso3'])
+    
+    # Récupérer les données réelles du pays (fallback)
     real_data = get_country_data(country['iso3'])
     
-    # Construire le profil avec données réelles
-    profile = CountryEconomicProfile(
-        country_code=country['code'],
-        country_name=country['name'],
-        population=real_data.get('population_2024', country['population']),
-        region=country['region']
-    )
-    
-    # Ajouter les données économiques réelles
-    profile.gdp_usd = real_data.get('gdp_usd_2024')
-    profile.gdp_per_capita = real_data.get('gdp_per_capita_2024')
-    profile.inflation_rate = None  # À obtenir via API si nécessaire
-    
-    # Ajouter les projections réelles et secteurs spécifiques
-    profile.projections = {
-        "gdp_growth_forecast_2024": real_data.get('growth_forecast_2024', '3.0%'),
-        "gdp_growth_projection_2025": real_data.get('growth_projection_2025', '3.2%'),
-        "gdp_growth_projection_2026": real_data.get('growth_projection_2026', '3.5%'),
-        "development_index": real_data.get('development_index', 0.500),
-        "africa_rank": real_data.get('africa_rank', 25),
-        "key_sectors": [f"{sector['name']} ({sector['pib_share']}% PIB): {sector['description']}" 
-                       for sector in real_data.get('key_sectors', [])],
-        "zlecaf_potential_level": real_data.get('zlecaf_potential', {}).get('level', 'Modéré'),
-        "zlecaf_potential_description": real_data.get('zlecaf_potential', {}).get('description', ''),
-        "zlecaf_opportunities": real_data.get('zlecaf_potential', {}).get('key_opportunities', []),
-        "main_exports": real_data.get('main_exports', []),
-        "main_imports": real_data.get('main_imports', []),
-        "investment_climate_score": "B+",  # À personnaliser par pays
-        "infrastructure_index": 6.7,      # À personnaliser par pays
-        "business_environment_rank": real_data.get('africa_rank', 25)
-    }
-    
-    # Ajouter les notations de risque
-    profile.risk_ratings = real_data.get('risk_ratings', {
-        "sp": "NR",
-        "moodys": "NR", 
-        "fitch": "NR",
-        "scope": "NR",
-        "global_risk": "Non évalué"
-    })
+    # Construire le profil avec données commerce 2024 en priorité
+    if commerce_data:
+        profile = CountryEconomicProfile(
+            country_code=country['code'],
+            country_name=commerce_data['country'],
+            population=int(commerce_data['population_2024_million'] * 1000000) if commerce_data['population_2024_million'] else country['population'],
+            region=country['region']
+        )
+        
+        # Données économiques 2024
+        profile.gdp_usd = commerce_data['gdp_2024_billion_usd'] * 1000000000 if commerce_data['gdp_2024_billion_usd'] else None
+        profile.gdp_per_capita = commerce_data['gdp_per_capita_2024']
+        profile.inflation_rate = None
+        
+        # Projections enrichies avec données commerce
+        profile.projections = {
+            "gdp_growth_forecast_2024": f"{commerce_data['growth_rate_2024']}%" if commerce_data['growth_rate_2024'] else '3.0%',
+            "gdp_growth_projection_2025": real_data.get('growth_projection_2025', '3.2%'),
+            "gdp_growth_projection_2026": real_data.get('growth_projection_2026', '3.5%'),
+            "development_index": commerce_data['hdi_2024'] if commerce_data['hdi_2024'] else 0.500,
+            "africa_rank": real_data.get('africa_rank', 25),
+            "key_sectors": [f"{sector['name']} ({sector['pib_share']}% PIB): {sector['description']}" 
+                           for sector in real_data.get('key_sectors', [])],
+            "zlecaf_potential_level": real_data.get('zlecaf_potential', {}).get('level', 'Modéré'),
+            "zlecaf_potential_description": real_data.get('zlecaf_potential', {}).get('description', ''),
+            "zlecaf_opportunities": real_data.get('zlecaf_potential', {}).get('key_opportunities', []),
+            "main_exports": commerce_data['export_products'],
+            "main_imports": commerce_data['import_products'],
+            "export_partners": commerce_data['export_partners'],
+            "import_partners": commerce_data['import_partners'],
+            "exports_2024_billion_usd": commerce_data['exports_2024_billion_usd'],
+            "imports_2024_billion_usd": commerce_data['imports_2024_billion_usd'],
+            "trade_balance_2024_billion_usd": commerce_data['trade_balance_2024_billion_usd'],
+            "zlecaf_ratified": commerce_data['zlecaf_ratified'],
+            "zlecaf_ratification_date": commerce_data['zlecaf_ratification_date'],
+            "investment_climate_score": "B+",
+            "infrastructure_index": 6.7,
+            "business_environment_rank": real_data.get('africa_rank', 25)
+        }
+        
+        # Notations de risque 2024
+        profile.risk_ratings = commerce_data['ratings']
+    else:
+        # Fallback to old data
+        profile = CountryEconomicProfile(
+            country_code=country['code'],
+            country_name=country['name'],
+            population=real_data.get('population_2024', country['population']),
+            region=country['region']
+        )
+        
+        profile.gdp_usd = real_data.get('gdp_usd_2024')
+        profile.gdp_per_capita = real_data.get('gdp_per_capita_2024')
+        profile.inflation_rate = None
+        
+        profile.projections = {
+            "gdp_growth_forecast_2024": real_data.get('growth_forecast_2024', '3.0%'),
+            "gdp_growth_projection_2025": real_data.get('growth_projection_2025', '3.2%'),
+            "gdp_growth_projection_2026": real_data.get('growth_projection_2026', '3.5%'),
+            "development_index": real_data.get('development_index', 0.500),
+            "africa_rank": real_data.get('africa_rank', 25),
+            "key_sectors": [f"{sector['name']} ({sector['pib_share']}% PIB): {sector['description']}" 
+                           for sector in real_data.get('key_sectors', [])],
+            "zlecaf_potential_level": real_data.get('zlecaf_potential', {}).get('level', 'Modéré'),
+            "zlecaf_potential_description": real_data.get('zlecaf_potential', {}).get('description', ''),
+            "zlecaf_opportunities": real_data.get('zlecaf_potential', {}).get('key_opportunities', []),
+            "main_exports": real_data.get('main_exports', []),
+            "main_imports": real_data.get('main_imports', []),
+            "investment_climate_score": "B+",
+            "infrastructure_index": 6.7,
+            "business_environment_rank": real_data.get('africa_rank', 25)
+        }
+        
+        profile.risk_ratings = real_data.get('risk_ratings', {
+            "sp": "NR",
+            "moodys": "NR", 
+            "fitch": "NR",
+            "scope": "NR",
+            "global_risk": "Non évalué"
+        })
     
     return profile
 
