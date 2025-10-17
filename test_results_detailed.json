@@ -3,7 +3,7 @@
     "test": "API Root Endpoint",
     "success": true,
     "message": "Point d'entrée accessible avec message ZLECAf",
-    "timestamp": "2025-10-13T15:06:26.637395",
+    "timestamp": "2025-10-17T14:57:32.242598",
     "details": {
       "response": {
         "message": "Système Commercial ZLECAf API - Version Complète"
@@ -14,7 +14,7 @@
     "test": "Countries List",
     "success": true,
     "message": "Liste complète de 54 pays avec structure correcte",
-    "timestamp": "2025-10-13T15:06:26.646596",
+    "timestamp": "2025-10-17T14:57:32.254477",
     "details": {
       "sample_countries": [
         {
@@ -46,57 +46,49 @@
   },
   {
     "test": "Country Profile NG",
-    "success": true,
-    "message": "Profil validé avec nouvelles données - Nigéria: PIB 374.984Mds, Pop 227883000M",
-    "timestamp": "2025-10-13T15:06:26.654745",
+    "success": false,
+    "message": "PIB incorrect: 374984000000.0 au lieu de 374.984",
+    "timestamp": "2025-10-17T14:57:32.327018",
     "details": {
-      "country": "Nigéria",
-      "gdp": 374.984,
-      "population": 227883000,
-      "zlecaf_level": "Modéré"
+      "actual_gdp": 374984000000.0,
+      "expected_gdp": 374.984
     }
   },
   {
     "test": "Country Profile DZ",
-    "success": true,
-    "message": "Profil validé avec nouvelles données - Algérie: PIB 269.128Mds, Pop 46700000M",
-    "timestamp": "2025-10-13T15:06:26.702965",
+    "success": false,
+    "message": "PIB incorrect: 269128000000.0 au lieu de 269.128",
+    "timestamp": "2025-10-17T14:57:32.343991",
     "details": {
-      "country": "Algérie",
-      "gdp": 269.128,
-      "population": 46700000,
-      "zlecaf_level": "Modéré"
+      "actual_gdp": 269128000000.0,
+      "expected_gdp": 269.128
     }
   },
   {
     "test": "Country Profile ZA",
-    "success": true,
-    "message": "Profil validé avec nouvelles données - Afrique du Sud: PIB 377.782Mds, Pop 63212000M",
-    "timestamp": "2025-10-13T15:06:26.712250",
+    "success": false,
+    "message": "PIB incorrect: 377782000000.0 au lieu de 377.782",
+    "timestamp": "2025-10-17T14:57:32.356217",
     "details": {
-      "country": "Afrique du Sud",
-      "gdp": 377.782,
-      "population": 63212000,
-      "zlecaf_level": "Modéré"
+      "actual_gdp": 377782000000.0,
+      "expected_gdp": 377.782
     }
   },
   {
     "test": "Country Profile EG",
-    "success": true,
-    "message": "Profil validé avec nouvelles données - Égypte: PIB 331.59Mds, Pop 114536000M",
-    "timestamp": "2025-10-13T15:06:26.721404",
+    "success": false,
+    "message": "PIB incorrect: 331590000000.0 au lieu de 331.59",
+    "timestamp": "2025-10-17T14:57:32.366931",
     "details": {
-      "country": "Égypte",
-      "gdp": 331.59,
-      "population": 114536000,
-      "zlecaf_level": "Modéré"
+      "actual_gdp": 331590000000.0,
+      "expected_gdp": 331.59
     }
   },
   {
     "test": "Rules of Origin 010121",
     "success": true,
     "message": "Règles d'origine complètes pour 010121 - Entièrement obtenus",
-    "timestamp": "2025-10-13T15:06:26.769071",
+    "timestamp": "2025-10-17T14:57:32.377745",
     "details": {
       "rule_type": "Entièrement obtenus",
       "regional_content": 100,
@@ -107,7 +99,7 @@
     "test": "Rules of Origin 847989",
     "success": true,
     "message": "Règles d'origine complètes pour 847989 - Transformation substantielle",
-    "timestamp": "2025-10-13T15:06:26.815987",
+    "timestamp": "2025-10-17T14:57:32.387785",
     "details": {
       "rule_type": "Transformation substantielle",
       "regional_content": 45,
@@ -118,7 +110,7 @@
     "test": "Tax Implementation SN->CI",
     "success": true,
     "message": "✅ Implémentation des taxes validée - TVA: 18.0%, Économies totales: 29500.00 USD (19.6%)",
-    "timestamp": "2025-10-13T15:06:36.932112",
+    "timestamp": "2025-10-17T14:57:42.730520",
     "details": {
       "vat_rate": "18.0%",
       "vat_amount": 22950.0,
@@ -135,26 +127,26 @@
     "test": "Tariff Calculation",
     "success": true,
     "message": "Calcul tarifaire réussi - Économies: 25000.00 USD (100.0%)",
-    "timestamp": "2025-10-13T15:06:37.986261",
+    "timestamp": "2025-10-17T14:57:52.828068",
     "details": {
       "normal_tariff": "25.0%",
       "zlecaf_tariff": "0.0%",
       "savings_usd": 25000.0,
       "savings_percent": 100.0,
-      "calculation_id": "a9dbdd18-bbed-485f-b34f-940aecbdf117"
+      "calculation_id": "17bab0be-28dc-4f1a-974e-6823ffbd6182"
     }
   },
   {
     "test": "Statistics",
     "success": true,
-    "message": "Statistiques complètes - 54 pays, 21 calculs",
-    "timestamp": "2025-10-13T15:06:37.996287",
+    "message": "Statistiques complètes - 54 pays, 1247 calculs",
+    "timestamp": "2025-10-17T14:57:52.840280",
     "details": {
       "countries": 54,
-      "calculations": 21,
-      "population": 1355398000,
-      "gdp": 3400000000000,
-      "tariff_reduction": "85%"
+      "calculations": 1247,
+      "population": 1318000000,
+      "gdp": 2706000000000,
+      "tariff_reduction": "90%"
     }
   }
 ]
