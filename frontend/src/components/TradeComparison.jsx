@@ -70,11 +70,11 @@ const TradeComparison = () => {
           const formattedData = tradeData.map(country => ({
             country: country.code,
             name: country.country,
-            exports: parseFloat(country.exports_2024).toFixed(1),
-            imports: parseFloat(country.imports_2024).toFixed(1),
-            balance: parseFloat(country.trade_balance_2024).toFixed(1),
+            exports: parseFloat(country.exports_2024 || 0),
+            imports: parseFloat(country.imports_2024 || 0),
+            balance: parseFloat(country.trade_balance_2024 || 0),
             // Calculer les économies estimées (10% des droits de douane économisés)
-            savings: (parseFloat(country.exports_2024) * 0.15 * 0.90).toFixed(1)
+            savings: parseFloat(country.exports_2024 || 0) * 0.15 * 0.90
           }));
           
           setCalculations(formattedData);
