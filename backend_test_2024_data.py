@@ -237,17 +237,17 @@ class ZLECAf2024DataTester:
                     return
                 
                 # Vérifier que l'Afrique du Sud est dans le top avec ~108.2B
-                exporters_by_country = {exp.get('country', ''): exp for exp in top_exporters if isinstance(exp, dict)}
+                exporters_by_code = {exp.get('country', ''): exp for exp in top_exporters if isinstance(exp, dict)}
                 
-                expected_top_exporters = ['South Africa', 'Nigeria', 'Angola', 'Afrique du Sud', 'Nigéria']
-                found_exporters = [country for country in expected_top_exporters if country in exporters_by_country]
+                expected_top_exporters = ['ZAF', 'NGA', 'AGO']  # Codes ISO3
+                found_exporters = [code for code in expected_top_exporters if code in exporters_by_code]
                 
-                if not found_exporters:
+                if len(found_exporters) < 2:  # Au moins 2 des 3 attendus
                     self.log_result(
                         "Enhanced Statistics 2024", 
                         False, 
-                        "Aucun des top exporteurs attendus trouvé (Afrique du Sud, Nigeria, Angola)",
-                        {'available_exporters': list(exporters_by_country.keys())}
+                        f"Pas assez de top exporteurs attendus trouvés: {found_exporters}",
+                        {'available_exporters': list(exporters_by_code.keys())}
                     )
                     return
                 
