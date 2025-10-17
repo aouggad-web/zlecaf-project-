@@ -1562,7 +1562,7 @@ function ZLECAfCalculator() {
                           <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-6 rounded-xl shadow-lg border-2 border-green-300 text-center">
                             <p className="text-sm font-bold text-green-700 mb-2">💰 PIB Total</p>
                             <p className="text-3xl font-extrabold text-green-600">
-                              ${countryProfile.gdp_usd.toFixed(1)}B
+                              ${(countryProfile.gdp_usd / 1000000000).toFixed(1)}B
                             </p>
                             <p className="text-xs text-green-600 mt-1 font-semibold">milliards USD</p>
                           </div>
