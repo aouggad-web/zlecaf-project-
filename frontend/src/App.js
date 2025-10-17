@@ -1547,12 +1547,11 @@ function ZLECAfCalculator() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-6">
-                      {/* Graphique de croissance */}
+                      {/* Graphique de croissance - Only 2025 and 2026 projections */}
                       {countryProfile.projections && (
                         <div className="mb-6" style={{ minHeight: '220px' }}>
                           <ResponsiveContainer width="100%" height={200} debounce={300}>
                             <AreaChart data={[
-                              { année: '2024', croissance: parseFloat(countryProfile.projections.gdp_growth_forecast_2024?.replace('%', '') || 0) },
                               { année: '2025', croissance: parseFloat(countryProfile.projections.gdp_growth_projection_2025?.replace('%', '') || 0) },
                               { année: '2026', croissance: parseFloat(countryProfile.projections.gdp_growth_projection_2026?.replace('%', '') || 0) }
                             ]}>
@@ -1566,17 +1565,13 @@ function ZLECAfCalculator() {
                         </div>
                       )}
                       
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                         <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-5 rounded-xl shadow-lg">
                           <h4 className="font-bold text-lg mb-4 text-blue-700 flex items-center gap-2">
                             <span>📈</span>
                             <span>Projections de Croissance</span>
                           </h4>
-                          <div className="space-y-3">
-                            <div className="bg-white p-3 rounded-lg shadow flex justify-between items-center">
-                              <span className="font-semibold">2024:</span>
-                              <Badge className="bg-blue-600 text-white text-base">{countryProfile.projections?.gdp_growth_forecast_2024 || 'N/A'}</Badge>
-                            </div>
+                          <div className="grid grid-cols-2 gap-3">
                             <div className="bg-white p-3 rounded-lg shadow flex justify-between items-center">
                               <span className="font-semibold">2025:</span>
                               <Badge className="bg-green-600 text-white text-base">{countryProfile.projections?.gdp_growth_projection_2025 || 'N/A'}</Badge>
@@ -1584,24 +1579,6 @@ function ZLECAfCalculator() {
                             <div className="bg-white p-3 rounded-lg shadow flex justify-between items-center">
                               <span className="font-semibold">2026:</span>
                               <Badge className="bg-purple-600 text-white text-base">{countryProfile.projections?.gdp_growth_projection_2026 || 'N/A'}</Badge>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-semibold mb-3">Environnement des Affaires</h4>
-                          <div className="space-y-2">
-                            <div className="flex justify-between">
-                              <span>Climat d'investissement:</span>
-                              <Badge variant="secondary">{countryProfile.projections?.investment_climate_score}</Badge>
-                            </div>
-                            <div className="flex justify-between">
-                              <span>Indice infrastructure:</span>
-                              <Badge variant="outline">{countryProfile.projections?.infrastructure_index}/10</Badge>
-                            </div>
-                            <div className="flex justify-between">
-                              <span>Rang environnement business:</span>
-                              <Badge variant="default">#{countryProfile.projections?.business_environment_rank}</Badge>
                             </div>
                           </div>
                         </div>
