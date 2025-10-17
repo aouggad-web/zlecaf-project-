@@ -1,0 +1,54 @@
+[
+  {
+    "test": "Trade Performance 2024",
+    "success": false,
+    "message": "Nombre de pays incorrect: 46 au lieu de 54",
+    "timestamp": "2025-10-17T14:59:33.747752",
+    "details": {
+      "count": 46
+    }
+  },
+  {
+    "test": "Enhanced Statistics 2024",
+    "success": false,
+    "message": "Aucun des top exporteurs attendus trouvé (Afrique du Sud, Nigeria, Angola)",
+    "timestamp": "2025-10-17T14:59:33.765656",
+    "details": {
+      "available_exporters": [
+        "ZAF",
+        "NGA",
+        "AGO",
+        "EGY",
+        "MAR"
+      ]
+    }
+  },
+  {
+    "test": "Country Profile ZAF Enriched",
+    "success": false,
+    "message": "Code de statut incorrect: 404",
+    "timestamp": "2025-10-17T14:59:33.818245",
+    "details": {
+      "status_code": 404
+    }
+  },
+  {
+    "test": "Country Profile DZA Enriched",
+    "success": false,
+    "message": "Code de statut incorrect: 404",
+    "timestamp": "2025-10-17T14:59:33.831004",
+    "details": {
+      "status_code": 404
+    }
+  },
+  {
+    "test": "Updated Tariff Calculation 2024",
+    "success": false,
+    "message": "Taux tarifaires invalides - Normal: 0.25, ZLECAf: 0.0",
+    "timestamp": "2025-10-17T14:59:56.918214",
+    "details": {
+      "normal_rate": 0.25,
+      "zlecaf_rate": 0.0
+    }
+  }
+]
