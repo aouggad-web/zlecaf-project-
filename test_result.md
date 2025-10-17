@@ -111,11 +111,14 @@
     file: "backend/data_loader.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: true
           agent: "main"
           comment: "Créé data_loader.py pour charger les fichiers CSV 2024 (commerce, économie) et JSON (corrections tarifs). Fonctions: load_commerce_data(), load_country_economic_data(), get_country_commerce_profile(), get_all_countries_trade_performance(), get_enhanced_statistics(), get_tariff_corrections()"
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Data loader 2024 fonctionnel - Fichiers CSV/JSON chargés correctement, fonctions d'accès aux données opérationnelles. Intégration des données enrichies ZLECAf 2024 réussie."
 
   - task: "API /api/trade-performance avec données réelles 2024"
     implemented: true
