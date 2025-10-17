@@ -301,9 +301,9 @@ class ZLECAf2024DataTester:
             )
     
     def test_country_profile_enriched_zaf(self):
-        """Test GET /api/country-profile/ZAF - Profil enrichi Afrique du Sud"""
+        """Test GET /api/country-profile/ZA - Profil enrichi Afrique du Sud"""
         try:
-            response = self.session.get(f"{self.base_url}/country-profile/ZAF", timeout=TIMEOUT)
+            response = self.session.get(f"{self.base_url}/country-profile/ZA", timeout=TIMEOUT)
             
             if response.status_code == 200:
                 profile = response.json()
