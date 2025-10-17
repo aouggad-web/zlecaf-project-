@@ -210,15 +210,17 @@
 
 ## test_plan:
   current_focus:
-    - "Résoudre problème CORS pour connexion frontend->backend"
+    - "Tester nouveaux endpoints backend: /api/trade-performance, /api/statistics (enhanced), /api/country-profile (enriched)"
+    - "Valider intégration données 2024 dans TradeComparison"
+    - "Vérifier tarifs corrigés dans calculateur"
   stuck_tasks:
     - "Configuration URL API pour environnement conteneurisé"
-  test_all: false
+  test_all: true
   test_priority: "high_first"
 
 ## agent_communication:
     - agent: "main"
-      message: "Application ZLECAf complète identifiée. Backend API fonctionne parfaitement (54 pays, calculs tarifaires, règles origine). Frontend moderne React avec Shadcn/UI. Problème: routing externe https://emergent.city/api cause erreurs CORS depuis localhost:3000. Solutions possibles: configurer proxy ou corriger ingress Kubernetes."
+      message: "🔄 INTÉGRATION DONNÉES 2024 COMPLÈTE - Nouveaux fichiers analysés et intégrés: ZLECAf_ENRICHI_2024_COMMERCE.csv (54 pays avec commerce détaillé), zlecaf_corrections_2024.json (tarifs corrigés + statistiques enrichies), ZLECAF_54_PAYS_DONNEES_COMPLETES.csv (données économiques). BACKEND: Créé data_loader.py, ajouté endpoint /api/trade-performance, enrichi /api/statistics avec trade_evolution/top_exporters/importers_2024/product_analysis/regional_integration, enrichi /api/country-profile avec produits import/export + partenaires + notations, intégré tarifs corrigés dans calculateur. FRONTEND: Mis à jour TradeComparison pour charger vraies données 2024 depuis API. Tests nécessaires pour valider toute l'intégration."
 
 user_problem_statement: "Tester la nouvelle implémentation des taxes dans le calculateur ZLECAf avec le scénario SN->CI, HS 010121, valeur 100000 USD"
 
