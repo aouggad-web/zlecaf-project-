@@ -15,6 +15,14 @@ import asyncio
 import json
 from country_data import get_country_data, REAL_COUNTRY_DATA
 from tax_rates import calculate_all_taxes, get_vat_rate
+from data_loader import (
+    load_corrections_data, 
+    load_commerce_data, 
+    get_country_commerce_profile,
+    get_all_countries_trade_performance,
+    get_enhanced_statistics,
+    get_tariff_corrections
+)
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
