@@ -551,12 +551,12 @@ class ZLECAf2024DataTester:
                 normal_rate = calculation.get('normal_tariff_rate', 0)
                 zlecaf_rate = calculation.get('zlecaf_tariff_rate', 0)
                 
-                # Les taux doivent être différents de 0 et cohérents
-                if normal_rate == 0 or zlecaf_rate == 0:
+                # Le taux normal doit être > 0, ZLECAf peut être 0 (tarif préférentiel)
+                if normal_rate == 0:
                     self.log_result(
                         "Updated Tariff Calculation 2024", 
                         False, 
-                        f"Taux tarifaires invalides - Normal: {normal_rate}, ZLECAf: {zlecaf_rate}",
+                        f"Taux normal invalide: {normal_rate} (doit être > 0)",
                         {'normal_rate': normal_rate, 'zlecaf_rate': zlecaf_rate}
                     )
                     return
