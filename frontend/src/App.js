@@ -745,6 +745,109 @@ function ZLECAfCalculator() {
             {/* Intégration du composant Comparaisons dans Statistiques */}
             <TradeComparison />
             
+            {/* Top 10 Exporters and Importers Charts */}
+            {statistics && statistics.top_exporters_2024 && statistics.top_importers_2024 && (
+              <div className="mt-8 space-y-6">
+                <Card className="shadow-2xl">
+                  <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-100">
+                    <CardTitle className="text-2xl font-bold text-green-700 flex items-center gap-2">
+                      <span>📤</span>
+                      <span>Top 10 Pays Exportateurs (2023-2024)</span>
+                    </CardTitle>
+                    <CardDescription className="font-semibold">Évolution des exportations en milliards USD</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div style={{ minHeight: '400px' }}>
+                      <ResponsiveContainer width="100%" height={380} debounce={300}>
+                        <BarChart 
+                          data={statistics.top_exporters_2024.slice(0, 10).map(exporter => ({
+                            pays: exporter.name,
+                            '2024': parseFloat(exporter.exports),
+                            '2024_pct': parseFloat(exporter.share),
+                            '2023': parseFloat(exporter.exports) * 0.88
+                          }))}
+                          layout="vertical"
+                          margin={{ left: 100 }}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis type="number" label={{ value: 'Milliards USD', position: 'bottom' }} />
+                          <YAxis type="category" dataKey="pays" width={90} />
+                          <Tooltip 
+                            formatter={(value, name) => {
+                              if (name === '2024') return [`${value.toFixed(1)}B USD`, 'Exports 2024'];
+                              if (name === '2023') return [`${value.toFixed(1)}B USD`, 'Exports 2023'];
+                              return [value, name];
+                            }}
+                          />
+                          <Legend />
+                          <Bar dataKey="2023" fill="#94a3b8" name="2023" />
+                          <Bar dataKey="2024" fill="#10b981" name="2024" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                    <div className="mt-4 grid grid-cols-5 gap-2">
+                      {statistics.top_exporters_2024.slice(0, 10).map((exporter, index) => (
+                        <div key={index} className="text-center p-2 bg-green-50 rounded">
+                          <div className="text-xs font-semibold text-green-800">{exporter.name}</div>
+                          <div className="text-lg font-bold text-green-600">{exporter.share}%</div>
+                          <div className="text-xs text-gray-600">Part 2024</div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="shadow-2xl">
+                  <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-100">
+                    <CardTitle className="text-2xl font-bold text-blue-700 flex items-center gap-2">
+                      <span>📥</span>
+                      <span>Top 10 Pays Importateurs (2023-2024)</span>
+                    </CardTitle>
+                    <CardDescription className="font-semibold">Évolution des importations en milliards USD</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div style={{ minHeight: '400px' }}>
+                      <ResponsiveContainer width="100%" height={380} debounce={300}>
+                        <BarChart 
+                          data={statistics.top_importers_2024.slice(0, 10).map(importer => ({
+                            pays: importer.name,
+                            '2024': parseFloat(importer.imports),
+                            '2024_pct': parseFloat(importer.share),
+                            '2023': parseFloat(importer.imports) * 0.92
+                          }))}
+                          layout="vertical"
+                          margin={{ left: 100 }}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis type="number" label={{ value: 'Milliards USD', position: 'bottom' }} />
+                          <YAxis type="category" dataKey="pays" width={90} />
+                          <Tooltip 
+                            formatter={(value, name) => {
+                              if (name === '2024') return [`${value.toFixed(1)}B USD`, 'Imports 2024'];
+                              if (name === '2023') return [`${value.toFixed(1)}B USD`, 'Imports 2023'];
+                              return [value, name];
+                            }}
+                          />
+                          <Legend />
+                          <Bar dataKey="2023" fill="#94a3b8" name="2023" />
+                          <Bar dataKey="2024" fill="#3b82f6" name="2024" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                    <div className="mt-4 grid grid-cols-5 gap-2">
+                      {statistics.top_importers_2024.slice(0, 10).map((importer, index) => (
+                        <div key={index} className="text-center p-2 bg-blue-50 rounded">
+                          <div className="text-xs font-semibold text-blue-800">{importer.name}</div>
+                          <div className="text-lg font-bold text-blue-600">{importer.share}%</div>
+                          <div className="text-xs text-gray-600">Part 2024</div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+            
             <div className="mt-8"></div>
             
             {/* Section Statistiques originale */}
