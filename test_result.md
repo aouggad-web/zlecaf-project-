@@ -171,11 +171,14 @@
     file: "backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: true
           agent: "main"
           comment: "Intégration des taux tarifaires corrigés 2024 depuis zlecaf_corrections_2024.json: normal_rates, zlecaf_rates, transition_periods par code HS2"
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Calcul tarifaire 2024 avec corrections validé. Test ZA→NG, HS 010121, 100K USD: Normal 25.0%, ZLECAf 0.0%, Économies 25000 USD (100%). Traçabilité 2024 complète avec computation_order_ref et confidence_level. Tarifs corrigés depuis zlecaf_corrections_2024.json opérationnels."
   
   - task: "API ZLECAf complète avec 54 pays africains"
     implemented: true
