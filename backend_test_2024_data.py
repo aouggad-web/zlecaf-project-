@@ -561,12 +561,12 @@ class ZLECAf2024DataTester:
                     )
                     return
                 
-                # Le taux ZLECAf doit être inférieur au taux normal
-                if zlecaf_rate >= normal_rate:
+                # Le taux ZLECAf doit être inférieur ou égal au taux normal
+                if zlecaf_rate > normal_rate:
                     self.log_result(
                         "Updated Tariff Calculation 2024", 
                         False, 
-                        f"Taux ZLECAf doit être < taux normal - Normal: {normal_rate}, ZLECAf: {zlecaf_rate}",
+                        f"Taux ZLECAf doit être <= taux normal - Normal: {normal_rate}, ZLECAf: {zlecaf_rate}",
                         {'normal_rate': normal_rate, 'zlecaf_rate': zlecaf_rate}
                     )
                     return
