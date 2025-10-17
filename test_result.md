@@ -178,6 +178,18 @@
           comment: "API backend testée et fonctionnelle - tous endpoints opérationnels avec données réelles"
 
 ## frontend:
+  - task: "TradeComparison avec données réelles 2024"
+    implemented: true
+    working: true
+    file: "frontend/src/components/TradeComparison.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Mise à jour TradeComparison pour charger les vraies données 2024 depuis /api/trade-performance. Sélecteur d'année par défaut à 2024. Transformation des données pour afficher exports/imports/balance/savings des 54 pays avec données réelles CSV"
+
   - task: "Interface React ZLECAf avec calculs tarifaires"
     implemented: true
     working: false
