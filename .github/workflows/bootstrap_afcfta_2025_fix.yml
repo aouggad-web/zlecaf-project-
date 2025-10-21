@@ -43,7 +43,6 @@ jobs:
 
           # Génération complète (même logique que ton workflow précédent)
           python - <<'PY'
-import os, csv, json
 from datetime import datetime
 import pandas as pd
 countries = ["Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cabo Verde","Cameroon",
