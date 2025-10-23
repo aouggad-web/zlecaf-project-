@@ -1801,79 +1801,65 @@ function ZLECAfCalculator() {
                           {countryProfile.projections?.zlecaf_potential_description || 'Description non disponible'}
                         </p>
                         
-                        {countryProfile.projections?.zlecaf_opportunities && (
-                          <div>
-                            <p className="text-sm font-semibold text-green-800 mb-2">Opportunités clés :</p>
-                            <ul className="text-sm text-green-700 space-y-1">
-                              {countryProfile.projections.zlecaf_opportunities.map((opp, index) => (
-                                <li key={index} className="flex items-start">
-                                  <span className="mr-2">•</span>
-                                  {opp}
-                                </li>
+                        {/* Opportunités ZLECAf COMPACTES */}
+                        {countryProfile.projections?.zlecaf_opportunities && countryProfile.projections.zlecaf_opportunities.length > 0 && (
+                          <div className="mt-2">
+                            <p className="text-xs font-semibold text-green-800 mb-1">🎯 Opportunités:</p>
+                            <ul className="text-xs text-green-700 space-y-1">
+                              {countryProfile.projections.zlecaf_opportunities.slice(0, 3).map((opp, index) => (
+                                <li key={index}>• {opp}</li>
                               ))}
                             </ul>
                           </div>
                         )}
                       </div>
 
-                      {/* Nouvelles sections avec données réelles */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                        <div className="bg-blue-50 p-4 rounded-lg">
-                          <h4 className="font-semibold text-blue-800 mb-2">Principales Exportations</h4>
+                      {/* Exports/Imports COMPACTS */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+                        <div className="bg-blue-50 p-2 rounded">
+                          <h4 className="text-xs font-semibold text-blue-800 mb-1">📤 Export</h4>
                           <div className="flex flex-wrap gap-1">
-                            {countryProfile.projections?.main_exports?.map((exp, index) => (
-                              <Badge key={index} variant="outline" className="text-xs">
+                            {countryProfile.projections?.main_exports?.slice(0, 3).map((exp, index) => (
+                              <Badge key={index} variant="outline" className="text-xs py-0 px-1">
                                 {exp}
                               </Badge>
-                            )) || <p className="text-xs text-gray-500">Non disponible</p>}
+                            )) || <p className="text-xs text-gray-500">N/A</p>}
                           </div>
                         </div>
                         
-                        <div className="bg-orange-50 p-4 rounded-lg">
-                          <h4 className="font-semibold text-orange-800 mb-2">Principales Importations</h4>
+                        <div className="bg-orange-50 p-2 rounded">
+                          <h4 className="text-xs font-semibold text-orange-800 mb-1">📥 Import</h4>
                           <div className="flex flex-wrap gap-1">
-                            {countryProfile.projections?.main_imports?.map((imp, index) => (
-                              <Badge key={index} variant="outline" className="text-xs">
+                            {countryProfile.projections?.main_imports?.slice(0, 3).map((imp, index) => (
+                              <Badge key={index} variant="outline" className="text-xs py-0 px-1">
                                 {imp}
                               </Badge>
-                            )) || <p className="text-xs text-gray-500">Non disponible</p>}
+                            )) || <p className="text-xs text-gray-500">N/A</p>}
                           </div>
                         </div>
                       </div>
 
-                      {/* Données Commerce 2024 */}
+                      {/* Données Commerce 2024 COMPACTES */}
                       {(countryProfile.projections?.exports_2024_billion_usd || countryProfile.projections?.imports_2024_billion_usd) && (
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                          <Card className="bg-gradient-to-br from-green-50 to-emerald-100">
-                            <CardContent className="pt-4">
-                              <div className="text-center">
-                                <p className="text-sm text-gray-600 mb-1">Exportations 2024</p>
-                                <p className="text-2xl font-bold text-green-700">${countryProfile.projections.exports_2024_billion_usd?.toFixed(1)}B</p>
-                              </div>
-                            </CardContent>
-                          </Card>
-                          <Card className="bg-gradient-to-br from-blue-50 to-cyan-100">
-                            <CardContent className="pt-4">
-                              <div className="text-center">
-                                <p className="text-sm text-gray-600 mb-1">Importations 2024</p>
-                                <p className="text-2xl font-bold text-blue-700">${countryProfile.projections.imports_2024_billion_usd?.toFixed(1)}B</p>
-                              </div>
-                            </CardContent>
-                          </Card>
-                          <Card className={`bg-gradient-to-br ${countryProfile.projections.trade_balance_2024_billion_usd >= 0 ? 'from-green-50 to-teal-100' : 'from-red-50 to-orange-100'}`}>
-                            <CardContent className="pt-4">
-                              <div className="text-center">
-                                <p className="text-sm text-gray-600 mb-1">Balance Commerciale</p>
-                                <p className={`text-2xl font-bold ${countryProfile.projections.trade_balance_2024_billion_usd >= 0 ? 'text-green-700' : 'text-red-700'}`}>
-                                  ${countryProfile.projections.trade_balance_2024_billion_usd?.toFixed(1)}B
-                                </p>
-                              </div>
-                            </CardContent>
-                          </Card>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
+                          <div className="bg-green-50 p-2 rounded text-center">
+                            <p className="text-xs text-gray-600 mb-1">📤 Export 2024</p>
+                            <p className="text-lg font-bold text-green-700">${countryProfile.projections.exports_2024_billion_usd?.toFixed(1)}B</p>
+                          </div>
+                          <div className="bg-blue-50 p-2 rounded text-center">
+                            <p className="text-xs text-gray-600 mb-1">📥 Import 2024</p>
+                            <p className="text-lg font-bold text-blue-700">${countryProfile.projections.imports_2024_billion_usd?.toFixed(1)}B</p>
+                          </div>
+                          <div className={`p-2 rounded text-center ${countryProfile.projections.trade_balance_2024_billion_usd >= 0 ? 'bg-green-50' : 'bg-red-50'}`}>
+                            <p className="text-xs text-gray-600 mb-1">⚖️ Solde</p>
+                            <p className={`text-lg font-bold ${countryProfile.projections.trade_balance_2024_billion_usd >= 0 ? 'text-green-700' : 'text-red-700'}`}>
+                              ${countryProfile.projections.trade_balance_2024_billion_usd?.toFixed(1)}B
+                            </p>
+                          </div>
                         </div>
                       )}
 
-                      {/* Partenaires Commerciaux */}
+                      {/* Partenaires Commerciaux COMPACTS */}
                       {(countryProfile.projections?.export_partners || countryProfile.projections?.import_partners) && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                           {countryProfile.projections?.export_partners && (
