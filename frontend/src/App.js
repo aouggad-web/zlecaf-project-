@@ -1694,20 +1694,14 @@ function ZLECAfCalculator() {
                           </div>
                         </div>
                       )}
-                          </p>
-                          <p className="text-xs text-purple-600 mt-1 font-semibold">indice</p>
-                        </div>
-                        
-                        <div className="bg-gradient-to-br from-orange-50 to-red-100 p-6 rounded-xl shadow-lg border-2 border-orange-300 text-center">
-                          <p className="text-sm font-bold text-orange-700 mb-2">🏆 Rang Afrique</p>
-                          <p className="text-3xl font-extrabold text-orange-600">
-                            #{countryProfile.projections?.africa_rank || 'N/A'}
-                          </p>
-                          <p className="text-xs text-orange-600 mt-1 font-semibold">sur 54 pays</p>
-                        </div>
-                      </div>
                       
-                      {/* Notations de risque */}
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div>
+                  <Card className="shadow-xl border-t-4 border-t-purple-600">
+                    <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50">
                       <div className="mt-6">
                         <h4 className="font-semibold mb-3 text-gray-800 text-xl">🏛️ Notations de Risque Souverain</h4>
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
