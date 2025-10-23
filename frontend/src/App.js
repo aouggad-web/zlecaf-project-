@@ -1756,67 +1756,48 @@ function ZLECAfCalculator() {
 
                   <Card className="shadow-xl border-l-4 border-l-purple-500">
                     <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50">
-                      <CardTitle className="text-xl font-bold text-purple-700 flex items-center gap-2">
+                      <CardTitle className="text-lg font-bold text-purple-700 flex items-center gap-2">
                         <span>🚀</span>
                         <span>Perspectives et Projections</span>
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="pt-6">
-                      {/* Graphique de croissance - Only 2025 and 2026 projections */}
+                    <CardContent className="pt-3">
+                      {/* Projections de croissance COMPACTES - Sans graphique */}
                       {countryProfile.projections && (
-                        <div className="mb-6" style={{ minHeight: '220px' }}>
-                          <ResponsiveContainer width="100%" height={200} debounce={300}>
-                            <AreaChart data={[
-                              { année: '2025', croissance: parseFloat(countryProfile.projections.gdp_growth_projection_2025?.replace('%', '') || 0) },
-                              { année: '2026', croissance: parseFloat(countryProfile.projections.gdp_growth_projection_2026?.replace('%', '') || 0) }
-                            ]}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="année" />
-                              <YAxis label={{ value: 'Croissance (%)', angle: -90, position: 'insideLeft' }} />
-                              <Tooltip formatter={(value) => `${value}%`} />
-                              <Area type="monotone" dataKey="croissance" stroke="#8b5cf6" fill="#c084fc" />
-                            </AreaChart>
-                          </ResponsiveContainer>
-                        </div>
-                      )}
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
-                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-5 rounded-xl shadow-lg">
-                          <h4 className="font-bold text-lg mb-4 text-blue-700 flex items-center gap-2">
-                            <span>📈</span>
-                            <span>Projections de Croissance</span>
-                          </h4>
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="bg-white p-3 rounded-lg shadow flex justify-between items-center">
-                              <span className="font-semibold">2025:</span>
-                              <Badge className="bg-green-600 text-white text-base">{countryProfile.projections?.gdp_growth_projection_2025 || 'N/A'}</Badge>
-                            </div>
-                            <div className="bg-white p-3 rounded-lg shadow flex justify-between items-center">
-                              <span className="font-semibold">2026:</span>
-                              <Badge className="bg-purple-600 text-white text-base">{countryProfile.projections?.gdp_growth_projection_2026 || 'N/A'}</Badge>
-                            </div>
+                        <div className="grid grid-cols-2 gap-2 mb-3">
+                          <div className="bg-green-50 p-2 rounded-lg border-l-2 border-green-500 text-center">
+                            <p className="text-xs text-green-700 mb-1">📈 Croissance 2025</p>
+                            <p className="text-lg font-bold text-green-600">
+                              {countryProfile.projections?.gdp_growth_projection_2025 || 'N/A'}
+                            </p>
+                          </div>
+                          <div className="bg-purple-50 p-2 rounded-lg border-l-2 border-purple-500 text-center">
+                            <p className="text-xs text-purple-700 mb-1">📈 Croissance 2026</p>
+                            <p className="text-lg font-bold text-purple-600">
+                              {countryProfile.projections?.gdp_growth_projection_2026 || 'N/A'}
+                            </p>
                           </div>
                         </div>
-                      </div>
+                      )}
 
-                      <Separator className="my-4" />
-
-                      <div>
-                        <h4 className="font-semibold mb-3">Secteurs Clés</h4>
-                        <div className="space-y-2">
-                          {countryProfile.projections?.key_sectors?.map((sector, index) => (
-                            <div key={index} className="text-sm p-2 bg-gray-50 rounded">
+                      {/* Secteurs clés COMPACTS */}
+                      <div className="mb-3">
+                        <h4 className="text-xs font-semibold mb-2 text-gray-700">🏭 Secteurs Clés</h4>
+                        <div className="grid grid-cols-1 gap-1">
+                          {countryProfile.projections?.key_sectors?.slice(0, 3).map((sector, index) => (
+                            <div key={index} className="text-xs p-1 bg-gray-50 rounded border-l-2 border-blue-400">
                               {sector}
                             </div>
-                          )) || <p className="text-sm text-gray-500">Données non disponibles</p>}
+                          )) || <p className="text-xs text-gray-500">Données non disponibles</p>}
                         </div>
                       </div>
 
-                      <div className="bg-green-50 p-4 rounded-lg mt-4">
-                        <h4 className="font-semibold text-green-800 mb-2">
-                          Potentiel ZLECAf - {countryProfile.projections?.zlecaf_potential_level || 'N/A'}
+                      {/* Potentiel ZLECAf COMPACT */}
+                      <div className="bg-green-50 p-2 rounded-lg border-l-2 border-green-500">
+                        <h4 className="text-xs font-semibold text-green-800 mb-1">
+                          💡 Potentiel ZLECAf: {countryProfile.projections?.zlecaf_potential_level || 'N/A'}
                         </h4>
-                        <p className="text-sm text-green-700 mb-3">
+                        <p className="text-xs text-green-700 mb-2">
                           {countryProfile.projections?.zlecaf_potential_description || 'Description non disponible'}
                         </p>
                         
