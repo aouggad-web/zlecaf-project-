@@ -1163,17 +1163,17 @@ function ZLECAfCalculator() {
                     <CardDescription>Sources primaires officielles et vérifiées</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {statistics.data_sources.map((source, index) => (
-                        <div key={index} className="bg-gray-50 p-4 rounded-lg border-l-4 border-l-blue-500">
+                        <div key={index} className="bg-gray-50 p-3 rounded-lg border-l-4 border-l-blue-500">
                           <div className="flex justify-between items-start">
                             <div className="flex-1">
-                              <h5 className="font-bold text-gray-800">{source.source || source}</h5>
+                              <h5 className="font-semibold text-sm text-gray-800">{source.source || source}</h5>
                               {source.key_findings && (
-                                <p className="text-sm text-gray-600 mt-1">{source.key_findings}</p>
+                                <p className="text-xs text-gray-600 mt-1">{source.key_findings}</p>
                               )}
                               {source.focus && (
-                                <p className="text-sm text-gray-600 mt-1">{source.focus}</p>
+                                <p className="text-xs text-gray-600 mt-1">{source.focus}</p>
                               )}
                             </div>
                             {source.url && (
@@ -1181,21 +1181,21 @@ function ZLECAfCalculator() {
                                 href={source.url} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="text-blue-600 hover:text-blue-800 font-semibold text-sm"
+                                className="text-blue-600 hover:text-blue-800 font-semibold text-xs ml-2"
                               >
-                                🔗 Accéder
+                                🔗
                               </a>
                             )}
                           </div>
                           {source.verified && (
                             <div className="mt-2">
-                              <Badge className="bg-green-600 text-xs">✓ Vérifié: {source.verified}</Badge>
+                              <Badge className="bg-green-600 text-xs py-0 px-2">✓ {source.verified}</Badge>
                             </div>
                           )}
                         </div>
                       ))}
                     </div>
-                    <p className="text-sm text-gray-500 mt-4">
+                    <p className="text-xs text-gray-500 mt-3 text-center">
                       Dernière mise à jour: {new Date(statistics.last_updated).toLocaleDateString('fr-FR')}
                     </p>
                   </CardContent>
