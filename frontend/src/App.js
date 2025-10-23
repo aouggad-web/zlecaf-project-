@@ -1899,7 +1899,6 @@ function ZLECAfCalculator() {
                       )}
                     </CardContent>
                   </Card>
-                </div>
               )}
             </div>
           </TabsContent>
