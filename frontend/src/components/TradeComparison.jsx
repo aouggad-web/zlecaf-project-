@@ -14,8 +14,10 @@ const TradeComparison = () => {
   const [selectedMetric, setSelectedMetric] = useState('exports');
   const [loading, setLoading] = useState(true);
   const [statistics, setStatistics] = useState(null);
-  const [tradePerformance, setTradePerformance] = useState([]);
-  const [calculations, setCalculations] = useState([]);
+  const [tradePerformanceGlobal, setTradePerformanceGlobal] = useState([]);
+  const [tradePerformanceIntraAfrican, setTradePerformanceIntraAfrican] = useState([]);
+  const [calculationsGlobal, setCalculationsGlobal] = useState([]);
+  const [calculationsIntraAfrican, setCalculationsIntraAfrican] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: 'exports', direction: 'desc' });
   
   // Données de commerce INTRA-AFRICAIN par année (Source: OEC - Observatory of Economic Complexity)
