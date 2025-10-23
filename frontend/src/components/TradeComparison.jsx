@@ -168,7 +168,7 @@ const TradeComparison = () => {
     setSortConfig({ key, direction });
   };
 
-  const sortedCalculations = [...calculations].sort((a, b) => {
+  const sortedCalculations = [...calculationsGlobal].sort((a, b) => {
     if (sortConfig.direction === 'asc') {
       return a[sortConfig.key] - b[sortConfig.key];
     }
