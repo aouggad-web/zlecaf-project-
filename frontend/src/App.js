@@ -1743,7 +1743,7 @@ function ZLECAfCalculator() {
                             </span>
                           </div>
                       </div>
-                    </CardContent>
+                    </CardHeader>
                   </Card>
 
                   <Card className="shadow-xl border-l-4 border-l-purple-500">
