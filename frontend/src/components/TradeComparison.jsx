@@ -550,37 +550,37 @@ const TradeComparison = () => {
               <Table>
                 <TableHeader>
                   <TableRow className="bg-green-100">
-                    <TableHead className="font-bold">🌍 Pays</TableHead>
-                    <TableHead className="font-bold text-center">📤 Exports Intra-Afrique (B USD)</TableHead>
-                    <TableHead className="font-bold text-center">📥 Imports Intra-Afrique (B USD)</TableHead>
-                    <TableHead className="font-bold text-center">⚖️ Solde (B USD)</TableHead>
-                    <TableHead className="font-bold text-center">📊 % Intra-Africain</TableHead>
+                    <TableHead className="font-bold text-xs">🌍 Pays</TableHead>
+                    <TableHead className="font-bold text-center text-xs">📤 Exports Intra-Afr. (B USD)</TableHead>
+                    <TableHead className="font-bold text-center text-xs">📥 Imports Intra-Afr. (B USD)</TableHead>
+                    <TableHead className="font-bold text-center text-xs">⚖️ Solde (B USD)</TableHead>
+                    <TableHead className="font-bold text-center text-xs">📊 % Intra-Afr.</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {calculationsIntraAfrican.slice(0, 15).map((item, index) => (
+                  {calculationsIntraAfrican.map((item, index) => (
                     <TableRow key={item.country} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-green-50`}>
-                      <TableCell className="font-semibold">{item.name}</TableCell>
-                      <TableCell className="text-center">
-                        <Badge className="bg-green-600 text-white">${item.exports.toFixed(1)}B</Badge>
+                      <TableCell className="font-semibold text-xs py-2">{item.name}</TableCell>
+                      <TableCell className="text-center py-2">
+                        <Badge className="bg-green-600 text-white text-xs py-0 px-2">${item.exports.toFixed(1)}B</Badge>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <Badge className="bg-teal-600 text-white">${item.imports.toFixed(1)}B</Badge>
+                      <TableCell className="text-center py-2">
+                        <Badge className="bg-teal-600 text-white text-xs py-0 px-2">${item.imports.toFixed(1)}B</Badge>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <Badge className={item.balance >= 0 ? 'bg-blue-600 text-white' : 'bg-red-600 text-white'}>
+                      <TableCell className="text-center py-2">
+                        <Badge className={`${item.balance >= 0 ? 'bg-blue-600' : 'bg-red-600'} text-white text-xs py-0 px-2`}>
                           {item.balance >= 0 ? '+' : ''}{item.balance.toFixed(1)}B
                         </Badge>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <Badge className="bg-purple-600 text-white font-bold">{item.intra_percentage}%</Badge>
+                      <TableCell className="text-center py-2">
+                        <Badge className="bg-purple-600 text-white font-bold text-xs py-0 px-2">{item.intra_percentage}%</Badge>
                       </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
             </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">Affichage des 15 premiers pays (triés par exports intra-africains)</p>
+            <p className="text-xs text-gray-500 mt-2 text-center">Affichage de tous les pays membres ZLECAf (triés par exports intra-africains)</p>
           </CardContent>
         </Card>
       </div>
