@@ -1861,23 +1861,23 @@ function ZLECAfCalculator() {
 
                       {/* Partenaires Commerciaux COMPACTS */}
                       {(countryProfile.projections?.export_partners || countryProfile.projections?.import_partners) && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
                           {countryProfile.projections?.export_partners && (
-                            <div className="bg-purple-50 p-4 rounded-lg">
-                              <h4 className="font-semibold text-purple-800 mb-2">Principaux Partenaires Export</h4>
+                            <div className="bg-purple-50 p-2 rounded">
+                              <h4 className="text-xs font-semibold text-purple-800 mb-1">🌍 Partenaires Export</h4>
                               <div className="space-y-1">
                                 {countryProfile.projections.export_partners.map((partner, index) => (
-                                  <div key={index} className="text-sm text-purple-700">• {partner}</div>
+                                  <div key={index} className="text-xs text-purple-700">• {partner}</div>
                                 ))}
                               </div>
                             </div>
                           )}
                           {countryProfile.projections?.import_partners && (
-                            <div className="bg-indigo-50 p-4 rounded-lg">
-                              <h4 className="font-semibold text-indigo-800 mb-2">Principaux Partenaires Import</h4>
+                            <div className="bg-indigo-50 p-2 rounded">
+                              <h4 className="text-xs font-semibold text-indigo-800 mb-1">🌍 Partenaires Import</h4>
                               <div className="space-y-1">
                                 {countryProfile.projections.import_partners.map((partner, index) => (
-                                  <div key={index} className="text-sm text-indigo-700">• {partner}</div>
+                                  <div key={index} className="text-xs text-indigo-700">• {partner}</div>
                                 ))}
                               </div>
                             </div>
@@ -1885,38 +1885,7 @@ function ZLECAfCalculator() {
                         </div>
                       )}
 
-                      {/* Notations de Crédit 2024 */}
-                      {countryProfile.risk_ratings && (countryProfile.risk_ratings.sp !== 'NR' || countryProfile.risk_ratings.moodys !== 'NR') && (
-                        <div className="mt-4 bg-gray-50 p-4 rounded-lg">
-                          <h4 className="font-semibold text-gray-800 mb-3">Notations de Crédit 2024</h4>
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            {countryProfile.risk_ratings.sp !== 'NR' && (
-                              <div className="text-center">
-                                <p className="text-xs text-gray-500">S&P</p>
-                                <Badge variant="secondary" className="mt-1">{countryProfile.risk_ratings.sp}</Badge>
-                              </div>
-                            )}
-                            {countryProfile.risk_ratings.moodys !== 'NR' && (
-                              <div className="text-center">
-                                <p className="text-xs text-gray-500">Moody's</p>
-                                <Badge variant="secondary" className="mt-1">{countryProfile.risk_ratings.moodys}</Badge>
-                              </div>
-                            )}
-                            {countryProfile.risk_ratings.fitch !== 'NR' && (
-                              <div className="text-center">
-                                <p className="text-xs text-gray-500">Fitch</p>
-                                <Badge variant="secondary" className="mt-1">{countryProfile.risk_ratings.fitch}</Badge>
-                              </div>
-                            )}
-                            {countryProfile.risk_ratings.global_risk && (
-                              <div className="text-center">
-                                <p className="text-xs text-gray-500">Risque Global</p>
-                                <Badge variant="secondary" className="mt-1">{countryProfile.risk_ratings.global_risk}</Badge>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      )}
+                      {/* Notations supprimées car déjà présentes en haut */}
 
                       {/* Statut ZLECAf */}
                       {countryProfile.projections?.zlecaf_ratified && (
