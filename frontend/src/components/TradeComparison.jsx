@@ -63,28 +63,45 @@ const TradeComparison = () => {
         const statsResponse = await axios.get(`${API_URL}/api/statistics`);
         setStatistics(statsResponse.data);
         
-        // Pour 2024, charger les vraies données depuis l'API
+        // Pour 2024, charger les vraies données depuis l'API (GLOBAL et INTRA-AFRICAIN)
         if (selectedYear === '2024') {
-          const tradeResponse = await axios.get(`${API_URL}/api/trade-performance`);
-          const tradeData = tradeResponse.data.countries;
+          // 1. COMMERCE MONDIAL (avec tous les partenaires)
+          const tradeGlobalResponse = await axios.get(`${API_URL}/api/trade-performance`);
+          const tradeGlobalData = tradeGlobalResponse.data.countries_global;
           
-          // Transformer les données pour le format attendu
-          const formattedData = tradeData.map(country => ({
+          const formattedGlobalData = tradeGlobalData.map(country => ({
             country: country.code,
             name: country.country,
             exports: parseFloat(country.exports_2024 || 0),
             imports: parseFloat(country.imports_2024 || 0),
             balance: parseFloat(country.trade_balance_2024 || 0),
-            // Calculer les économies estimées (10% des droits de douane économisés)
             savings: parseFloat(country.exports_2024 || 0) * 0.15 * 0.90
           }));
           
-          setCalculations(formattedData);
-          setTradePerformance(tradeData);
+          setCalculationsGlobal(formattedGlobalData);
+          setTradePerformanceGlobal(tradeGlobalData);
+          
+          // 2. COMMERCE INTRA-AFRICAIN (uniquement entre pays africains)
+          const tradeIntraResponse = await axios.get(`${API_URL}/api/trade-performance-intra-african`);
+          const tradeIntraData = tradeIntraResponse.data.countries_intra_african;
+          
+          const formattedIntraData = tradeIntraData.map(country => ({
+            country: country.code,
+            name: country.country,
+            exports: parseFloat(country.exports_2024 || 0),
+            imports: parseFloat(country.imports_2024 || 0),
+            balance: parseFloat(country.trade_balance_2024 || 0),
+            intra_percentage: parseFloat(country.intra_african_percentage || 17),
+            savings: parseFloat(country.exports_2024 || 0) * 0.15 * 0.90
+          }));
+          
+          setCalculationsIntraAfrican(formattedIntraData);
+          setTradePerformanceIntraAfrican(tradeIntraData);
         } else {
           // Pour les années précédentes, utiliser les données hardcodées
           const yearData = tradeDataByYear[selectedYear] || tradeDataByYear['2023'];
-          setCalculations(yearData);
+          setCalculationsGlobal(yearData);
+          setCalculationsIntraAfrican(yearData); // Utiliser les mêmes pour l'instant
         }
         
         setLoading(false);
