@@ -489,24 +489,24 @@ const TradeComparison = () => {
               <Table>
                 <TableHeader>
                   <TableRow className="bg-amber-100">
-                    <TableHead className="font-bold">🌍 Pays</TableHead>
-                    <TableHead className="font-bold text-center">📤 Exports Mondiaux (B USD)</TableHead>
-                    <TableHead className="font-bold text-center">📥 Imports Mondiaux (B USD)</TableHead>
-                    <TableHead className="font-bold text-center">⚖️ Solde (B USD)</TableHead>
+                    <TableHead className="font-bold text-xs">🌍 Pays</TableHead>
+                    <TableHead className="font-bold text-center text-xs">📤 Exports (B USD)</TableHead>
+                    <TableHead className="font-bold text-center text-xs">📥 Imports (B USD)</TableHead>
+                    <TableHead className="font-bold text-center text-xs">⚖️ Solde (B USD)</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {calculationsGlobal.slice(0, 15).map((item, index) => (
+                  {calculationsGlobal.map((item, index) => (
                     <TableRow key={item.country} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-amber-50`}>
-                      <TableCell className="font-semibold">{item.name}</TableCell>
-                      <TableCell className="text-center">
-                        <Badge className="bg-green-700 text-white">${item.exports.toFixed(1)}B</Badge>
+                      <TableCell className="font-semibold text-xs py-2">{item.name}</TableCell>
+                      <TableCell className="text-center py-2">
+                        <Badge className="bg-green-700 text-white text-xs py-0 px-2">${item.exports.toFixed(1)}B</Badge>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <Badge className="bg-orange-700 text-white">${item.imports.toFixed(1)}B</Badge>
+                      <TableCell className="text-center py-2">
+                        <Badge className="bg-orange-700 text-white text-xs py-0 px-2">${item.imports.toFixed(1)}B</Badge>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <Badge className={item.balance >= 0 ? 'bg-blue-700 text-white' : 'bg-red-700 text-white'}>
+                      <TableCell className="text-center py-2">
+                        <Badge className={`${item.balance >= 0 ? 'bg-blue-700' : 'bg-red-700'} text-white text-xs py-0 px-2`}>
                           {item.balance >= 0 ? '+' : ''}{item.balance.toFixed(1)}B
                         </Badge>
                       </TableCell>
@@ -515,7 +515,7 @@ const TradeComparison = () => {
                 </TableBody>
               </Table>
             </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">Affichage des 15 premiers pays (triés par exports)</p>
+            <p className="text-xs text-gray-500 mt-2 text-center">Affichage de tous les pays membres ZLECAf (triés par exports)</p>
           </CardContent>
         </Card>
 
