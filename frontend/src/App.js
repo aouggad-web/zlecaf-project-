@@ -1592,32 +1592,108 @@ function ZLECAfCalculator() {
                         {countryProfile.region} • 👥 Population: {formatNumber(countryProfile.population)} habitants
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="pt-6">
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <CardContent className="pt-4">
+                      {/* Indicateurs économiques principaux - COMPACTS */}
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
                         {countryProfile.gdp_usd && (
-                          <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-6 rounded-xl shadow-lg border-2 border-green-300 text-center">
-                            <p className="text-sm font-bold text-green-700 mb-2">💰 PIB Total</p>
-                            <p className="text-3xl font-extrabold text-green-600">
+                          <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-3 rounded-lg shadow border border-green-300 text-center">
+                            <p className="text-xs font-semibold text-green-700 mb-1">💰 PIB Total</p>
+                            <p className="text-2xl font-bold text-green-600">
                               ${(countryProfile.gdp_usd / 1000000000).toFixed(1)}B
                             </p>
-                            <p className="text-xs text-green-600 mt-1 font-semibold">milliards USD</p>
+                            <p className="text-xs text-green-600 mt-1">Rang: #{countryProfile.projections?.africa_rank || 'N/A'}</p>
                           </div>
                         )}
                         
                         {countryProfile.gdp_per_capita && (
-                          <div className="bg-gradient-to-br from-blue-50 to-cyan-100 p-6 rounded-xl shadow-lg border-2 border-blue-300 text-center">
-                            <p className="text-sm font-bold text-blue-700 mb-2">👤 PIB/Habitant</p>
-                            <p className="text-3xl font-extrabold text-blue-600">
+                          <div className="bg-gradient-to-br from-blue-50 to-cyan-100 p-3 rounded-lg shadow border border-blue-300 text-center">
+                            <p className="text-xs font-semibold text-blue-700 mb-1">👤 PIB/Habitant</p>
+                            <p className="text-2xl font-bold text-blue-600">
                               ${formatNumber(Math.round(countryProfile.gdp_per_capita))}
                             </p>
-                            <p className="text-xs text-blue-600 mt-1 font-semibold">USD par personne</p>
+                            <p className="text-xs text-blue-600 mt-1">USD/personne</p>
                           </div>
                         )}
                         
-                        <div className="bg-gradient-to-br from-purple-50 to-pink-100 p-6 rounded-xl shadow-lg border-2 border-purple-300 text-center">
-                          <p className="text-sm font-bold text-purple-700 mb-2">📊 Développement</p>
-                          <p className="text-3xl font-extrabold text-purple-600">
+                        <div className="bg-gradient-to-br from-purple-50 to-pink-100 p-3 rounded-lg shadow border border-purple-300 text-center">
+                          <p className="text-xs font-semibold text-purple-700 mb-1">📊 IDH 2024</p>
+                          <p className="text-2xl font-bold text-purple-600">
                             {countryProfile.projections?.development_index || 'N/A'}
+                          </p>
+                          <p className="text-xs text-purple-600 mt-1">Indice Dév. Humain</p>
+                        </div>
+
+                        <div className="bg-gradient-to-br from-orange-50 to-amber-100 p-3 rounded-lg shadow border border-orange-300 text-center">
+                          <p className="text-xs font-semibold text-orange-700 mb-1">👥 Population</p>
+                          <p className="text-2xl font-bold text-orange-600">
+                            {(countryProfile.population / 1000000).toFixed(1)}M
+                          </p>
+                          <p className="text-xs text-orange-600 mt-1">Millions d'habitants</p>
+                        </div>
+                      </div>
+
+                      {/* Nouveaux indicateurs - Infrastructure et Économie */}
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+                        <div className="bg-red-50 p-2 rounded border-l-2 border-red-500">
+                          <p className="text-xs font-semibold text-red-700">💳 Dette Ext.</p>
+                          <p className="text-sm font-bold text-red-600">
+                            {countryProfile.projections?.external_debt_gdp_pct || '45'}% PIB
+                          </p>
+                        </div>
+                        <div className="bg-yellow-50 p-2 rounded border-l-2 border-yellow-500">
+                          <p className="text-xs font-semibold text-yellow-700">⚡ Énergie</p>
+                          <p className="text-sm font-bold text-yellow-600">
+                            ${countryProfile.projections?.energy_cost_kwh || '0.12'}/kWh
+                          </p>
+                        </div>
+                        <div className="bg-gray-50 p-2 rounded border-l-2 border-gray-500">
+                          <p className="text-xs font-semibold text-gray-700">🛣️ Routes</p>
+                          <p className="text-sm font-bold text-gray-600">
+                            {countryProfile.projections?.paved_roads_km ? 
+                              (countryProfile.projections.paved_roads_km / 1000).toFixed(0) + 'k km' : 
+                              'N/A'}
+                          </p>
+                        </div>
+                        <div className="bg-blue-50 p-2 rounded border-l-2 border-blue-500">
+                          <p className="text-xs font-semibold text-blue-700">🚢 Ports</p>
+                          <p className="text-sm font-bold text-blue-600">
+                            {countryProfile.projections?.international_ports || '2'} int. / {countryProfile.projections?.domestic_ports || '5'} dom.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Notations de crédit - COMPACTES */}
+                      {countryProfile.risk_ratings && (
+                        <div className="bg-gray-50 p-2 rounded-lg mb-4">
+                          <h4 className="text-xs font-semibold text-gray-700 mb-2">📊 Notations 2024</h4>
+                          <div className="grid grid-cols-4 gap-2">
+                            {countryProfile.risk_ratings.sp !== 'NR' && (
+                              <div className="text-center bg-white p-1 rounded">
+                                <p className="text-xs text-gray-500">S&P</p>
+                                <Badge className="text-xs py-0 px-1">{countryProfile.risk_ratings.sp}</Badge>
+                              </div>
+                            )}
+                            {countryProfile.risk_ratings.moodys !== 'NR' && (
+                              <div className="text-center bg-white p-1 rounded">
+                                <p className="text-xs text-gray-500">Moody's</p>
+                                <Badge className="text-xs py-0 px-1">{countryProfile.risk_ratings.moodys}</Badge>
+                              </div>
+                            )}
+                            {countryProfile.risk_ratings.fitch !== 'NR' && (
+                              <div className="text-center bg-white p-1 rounded">
+                                <p className="text-xs text-gray-500">Fitch</p>
+                                <Badge className="text-xs py-0 px-1">{countryProfile.risk_ratings.fitch}</Badge>
+                              </div>
+                            )}
+                            {countryProfile.risk_ratings.global_risk && (
+                              <div className="text-center bg-white p-1 rounded">
+                                <p className="text-xs text-gray-500">Risque</p>
+                                <Badge variant="secondary" className="text-xs py-0 px-1">{countryProfile.risk_ratings.global_risk}</Badge>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
                           </p>
                           <p className="text-xs text-purple-600 mt-1 font-semibold">indice</p>
                         </div>
