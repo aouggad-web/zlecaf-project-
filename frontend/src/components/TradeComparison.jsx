@@ -373,24 +373,54 @@ const TradeComparison = () => {
             </div>
 
             {/* Graphique évolution commerce intra-africain */}
-            <div style={{ minHeight: '300px' }}>
-              <ResponsiveContainer width="100%" height={280} debounce={300}>
-                <AreaChart data={[
-                  { année: '2023', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2023) },
-                  { année: '2024', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2024) },
-                  { année: '2025*', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2024) * 1.12 },
-                  { année: '2030*', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2024) * 1.52 }
-                ]}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="année" />
-                  <YAxis label={{ value: 'Milliards USD', angle: -90, position: 'insideLeft' }} />
-                  <Tooltip formatter={(value) => `$${value.toFixed(1)}B USD`} />
-                  <Legend />
+            <div style={{ minHeight: '320px' }}>
+              <ResponsiveContainer width="100%" height={300} debounce={300}>
+                <AreaChart 
+                  data={[
+                    { année: '2023', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2023) },
+                    { année: '2024', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2024) },
+                    { année: '2025*', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2024) * 1.12 },
+                    { année: '2030*', commerce: parseFloat(statistics.trade_evolution.intra_african_trade_2024) * 1.52 }
+                  ]}
+                  margin={{ top: 10, right: 30, left: 20, bottom: 10 }}
+                >
+                  <defs>
+                    <linearGradient id="colorCommerce" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#10b981" stopOpacity={0.8}/>
+                      <stop offset="95%" stopColor="#10b981" stopOpacity={0.1}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis 
+                    dataKey="année" 
+                    tick={{ fontSize: 12, fontWeight: 'bold' }}
+                    stroke="#6b7280"
+                  />
+                  <YAxis 
+                    label={{ value: 'Milliards USD', angle: -90, position: 'insideLeft', style: { fontSize: 12, fontWeight: 'bold' } }}
+                    tick={{ fontSize: 11 }}
+                    stroke="#6b7280"
+                  />
+                  <Tooltip 
+                    formatter={(value) => [`$${value.toFixed(1)}B USD`, 'Commerce']}
+                    contentStyle={{ 
+                      backgroundColor: '#f9fafb', 
+                      border: '2px solid #10b981',
+                      borderRadius: '8px',
+                      fontSize: '12px',
+                      fontWeight: 'bold'
+                    }}
+                  />
+                  <Legend 
+                    wrapperStyle={{ fontSize: '13px', fontWeight: 'bold' }}
+                    iconType="circle"
+                  />
                   <Area 
                     type="monotone" 
                     dataKey="commerce" 
                     stroke="#10b981" 
-                    fill="#6ee7b7" 
+                    strokeWidth={3}
+                    fill="url(#colorCommerce)" 
                     name="Commerce Intra-Africain"
                   />
                 </AreaChart>
