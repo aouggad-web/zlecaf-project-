@@ -463,8 +463,130 @@ const TradeComparison = () => {
         </CardContent>
       </Card>
 
-      {/* Performance par Pays avec Graphique */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* NOUVEAU: DEUX TABLEAUX SÉPARÉS - Commerce Mondial vs Commerce Intra-Africain */}
+      <div className="space-y-8">
+        {/* ========== TABLEAU 1: COMMERCE MONDIAL (avec tous les partenaires) ========== */}
+        <Card className="shadow-2xl border-t-4 border-t-amber-600">
+          <CardHeader className="bg-gradient-to-r from-amber-50 to-yellow-50">
+            <CardTitle className="text-2xl font-bold text-amber-800 flex items-center gap-2">
+              <i className="fas fa-globe"></i>
+              <span>Tableau 1: Commerce MONDIAL par Pays (Tous Partenaires)</span>
+            </CardTitle>
+            <CardDescription className="text-lg font-semibold text-amber-700">
+              📅 Année: {selectedYear} • 🌍 Commerce avec TOUS les pays (Europe, Asie, Amériques, Afrique, etc.)
+              <br/>📚 Source: OEC, Banque Mondiale, FMI
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-6">
+            <div className="bg-amber-50 p-4 rounded-lg border-l-4 border-l-amber-600 mb-4">
+              <p className="text-sm text-amber-800 font-semibold">
+                <strong>🌐 Commerce Total:</strong> Ce tableau montre les exportations/importations de chaque pays africain vers/depuis 
+                <strong> TOUS les partenaires mondiaux</strong> (Europe, Chine, USA, autres pays africains, etc.)
+              </p>
+            </div>
+
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-amber-100">
+                    <TableHead className="font-bold">🌍 Pays</TableHead>
+                    <TableHead className="font-bold text-center">📤 Exports Mondiaux (B USD)</TableHead>
+                    <TableHead className="font-bold text-center">📥 Imports Mondiaux (B USD)</TableHead>
+                    <TableHead className="font-bold text-center">⚖️ Solde (B USD)</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {calculationsGlobal.slice(0, 15).map((item, index) => (
+                    <TableRow key={item.country} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-amber-50`}>
+                      <TableCell className="font-semibold">{item.name}</TableCell>
+                      <TableCell className="text-center">
+                        <Badge className="bg-green-700 text-white">${item.exports.toFixed(1)}B</Badge>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge className="bg-orange-700 text-white">${item.imports.toFixed(1)}B</Badge>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge className={item.balance >= 0 ? 'bg-blue-700 text-white' : 'bg-red-700 text-white'}>
+                          {item.balance >= 0 ? '+' : ''}{item.balance.toFixed(1)}B
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+            <p className="text-xs text-gray-500 mt-2 text-center">Affichage des 15 premiers pays (triés par exports)</p>
+          </CardContent>
+        </Card>
+
+        {/* ========== TABLEAU 2: COMMERCE INTRA-AFRICAIN (uniquement entre pays africains) ========== */}
+        <Card className="shadow-2xl border-t-4 border-t-green-600">
+          <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50">
+            <CardTitle className="text-2xl font-bold text-green-800 flex items-center gap-2">
+              <i className="fas fa-handshake"></i>
+              <span>Tableau 2: Commerce INTRA-AFRICAIN par Pays (Entre Africains Uniquement)</span>
+            </CardTitle>
+            <CardDescription className="text-lg font-semibold text-green-700">
+              📅 Année: {selectedYear} • 🤝 Commerce UNIQUEMENT entre les 54 pays africains
+              <br/>📚 Source: Calculé à partir OEC + UNCTAD/AfDB pourcentages régionaux
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-6">
+            <div className="bg-green-50 p-4 rounded-lg border-l-4 border-l-green-600 mb-4">
+              <p className="text-sm text-green-800 font-semibold mb-2">
+                <strong>🤝 Commerce Intra-Africain:</strong> Ce tableau montre le commerce réalisé 
+                <strong> UNIQUEMENT entre pays africains</strong> (excluant Europe, Asie, Amériques).
+              </p>
+              <p className="text-xs text-green-700">
+                💡 Le % intra-africain varie selon l'intégration régionale: 
+                EAC (Kenya, Tanzanie, Ouganda: 30-40%), 
+                SADC (Zambie, Zimbabwe, Botswana: 40-65%), 
+                CEDEAO (Ghana, Sénégal, Côte d'Ivoire: 30-42%),
+                Pays pétroliers (Algérie, Angola: 4-6%)
+              </p>
+            </div>
+
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-green-100">
+                    <TableHead className="font-bold">🌍 Pays</TableHead>
+                    <TableHead className="font-bold text-center">📤 Exports Intra-Afrique (B USD)</TableHead>
+                    <TableHead className="font-bold text-center">📥 Imports Intra-Afrique (B USD)</TableHead>
+                    <TableHead className="font-bold text-center">⚖️ Solde (B USD)</TableHead>
+                    <TableHead className="font-bold text-center">📊 % Intra-Africain</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {calculationsIntraAfrican.slice(0, 15).map((item, index) => (
+                    <TableRow key={item.country} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-green-50`}>
+                      <TableCell className="font-semibold">{item.name}</TableCell>
+                      <TableCell className="text-center">
+                        <Badge className="bg-green-600 text-white">${item.exports.toFixed(1)}B</Badge>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge className="bg-teal-600 text-white">${item.imports.toFixed(1)}B</Badge>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge className={item.balance >= 0 ? 'bg-blue-600 text-white' : 'bg-red-600 text-white'}>
+                          {item.balance >= 0 ? '+' : ''}{item.balance.toFixed(1)}B
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge className="bg-purple-600 text-white font-bold">{item.intra_percentage}%</Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+            <p className="text-xs text-gray-500 mt-2 text-center">Affichage des 15 premiers pays (triés par exports intra-africains)</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Performance par Pays avec Graphique - ANCIEN CODE SUPPRIMÉ */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" style={{display: 'none'}}>
         <div className="lg:col-span-2">
           <Card className="shadow-xl border-t-4 border-t-blue-600">
             <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-50">
