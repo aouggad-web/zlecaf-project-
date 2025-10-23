@@ -1697,9 +1697,7 @@ function ZLECAfCalculator() {
                       
                     </CardContent>
                   </Card>
-                </div>
 
-                <div>
                   <Card className="shadow-xl border-t-4 border-t-purple-600">
                     <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50">
                       <div className="mt-6">
