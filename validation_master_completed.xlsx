@@ -1,0 +1,126 @@
+name: Push Validation Completed (from source)
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas openpyxl
+
+      - name: Generate completed validation file
+        shell: python
+        run: |
+          import os, pandas as pd
+          from datetime import datetime
+
+          SRC = "data/validation_master.xlsx"  # <-- place ton fichier source ici (UI GitHub)
+          OUT = "frontend/public/data/validation_master_completed.xlsx"
+
+          assert os.path.exists(SRC), f"Source not found: {SRC}"
+          xls = pd.ExcelFile(SRC)
+          countries = [c.lower() for c in [
+              "Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cabo Verde","Cameroon",
+              "Central African Republic","Chad","Comoros","Congo","Congo, Dem. Rep.","Côte d’Ivoire",
+              "Djibouti","Egypt","Equatorial Guinea","Eritrea","Eswatini","Ethiopia","Gabon","Gambia",
+              "Ghana","Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Libya","Madagascar","Malawi",
+              "Mali","Mauritania","Mauritius","Morocco","Mozambique","Namibia","Niger","Nigeria","Rwanda",
+              "Sao Tome and Principe","Senegal","Seychelles","Sierra Leone","Somalia","South Africa",
+              "South Sudan","Sudan","Tanzania","Togo","Tunisia","Uganda","Zambia","Zimbabwe"
+          ]]
+
+          dfs = {}
+          changes = []
+          for name in xls.sheet_names:
+              df = pd.read_excel(xls, sheet_name=name)
+              df.columns = [c.lower().strip() if isinstance(c,str) else c for c in df.columns]
+
+              # hs6 -> normalisation + hs2
+              if "hs6" in df.columns:
+                  df["hs6"] = df["hs6"].astype(str).str.replace(r"\D","",regex=True).str.zfill(6)
+                  if "hs2" not in df.columns:
+                      df.insert(0, "hs2", df["hs6"].str[:2])
+                      changes.append(f"[{name}] add hs2 from hs6")
+
+              # contrôle années
+              if "year" in df.columns:
+                  def _flag(v):
+                      try:
+                          i = int(v)
+                          return "" if 2025 <= i <= 2035 else "OUT_OF_RANGE"
+                      except Exception:
+                          return "NON_NUMERIC"
+                  df["qa_year_flag"] = df["year"].apply(_flag)
+                  changes.append(f"[{name}] add qa_year_flag")
+
+              # couverture colonnes pays (si table large)
+              country_cols = [c for c in df.columns if isinstance(c,str) and c in countries]
+              if len(country_cols) >= 5:
+                  filled = df[country_cols].astype(str).applymap(lambda x: x.strip() not in ("","nan"))
+                  df["coverage_filled_countries"] = filled.sum(axis=1)
+                  changes.append(f"[{name}] coverage on {len(country_cols)} country cols")
+
+              dfs[name] = df
+
+          # coverage sheet
+          coverage = []
+          for n, d in dfs.items():
+              coverage.append({
+                  "sheet": n,
+                  "rows": len(d),
+                  "cols": len(d.columns),
+                  "hs6_present": "hs6" in d.columns,
+                  "hs2_present": "hs2" in d.columns,
+                  "year_present": "year" in d.columns,
+                  "qa_year_flag_present": "qa_year_flag" in d.columns,
+                  "non_empty_cells": int(d.notna().sum().sum()) if len(d) else 0
+              })
+          cov = pd.DataFrame(coverage)
+
+          os.makedirs(os.path.dirname(OUT), exist_ok=True)
+          with pd.ExcelWriter(OUT, engine="openpyxl") as w:
+              for n,d in dfs.items():
+                  d.to_excel(w, sheet_name=n[:31], index=False)
+              cov.to_excel(w, sheet_name="COVERAGE", index=False)
+              pd.DataFrame([
+                  {"key":"completed_at_utc","value":datetime.utcnow().isoformat()+"Z"},
+                  {"key":"changes","value":" ; ".join(changes) if changes else "no enrichments"}
+              ]).to_excel(w, sheet_name="COMPLETION_NOTES", index=False)
+
+          print("OK ->", OUT)
+
+      - name: Force delta
+        run: |
+          mkdir -p .afcfta-bootstrap
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .afcfta-bootstrap/marker.txt
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          add-paths: |
+            frontend/public/data/validation_master_completed.xlsx
+            .afcfta-bootstrap/**
+          branch: feat/validation-completed-${{ github.run_id }}
+          delete-branch: true
+          commit-message: "data(validation): add validation_master_completed.xlsx (auto)"
+          title: "Add validation_master_completed.xlsx (auto-generated from source)"
+          body: "Automated generation + PR. Run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          labels: data, validation, lyra-plus
