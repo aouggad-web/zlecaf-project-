@@ -783,8 +783,9 @@ async def get_comprehensive_statistics():
             "growth_rate_2023_2024": 13.7,
             "trend": "Croissance soutenue malgré les défis globaux"
         }),
-        "top_exporters_2024": enhanced_stats.get('top_exporters_2024', []),
-        "top_importers_2024": enhanced_stats.get('top_importers_2024', []),
+        "top_exporters_2024": top_exporters_formatted,
+        "top_importers_2024": top_importers_formatted,
+        "top_5_gdp_trade_comparison": top_5_gdp_formatted,
         "product_analysis": enhanced_stats.get('product_analysis', {}),
         "regional_integration": enhanced_stats.get('regional_integration', {}),
         "sector_performance": enhanced_stats.get('sector_performance', {}),
