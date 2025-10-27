@@ -16,7 +16,7 @@ Format cron : `minute hour day-of-month month day-of-week`
 
 ## 2) Droits GitHub
 
-Le workflow requiert `permissions.contents: write` pour pousser les commits. Par défaut, `secrets.GITHUB_TOKEN` suffit dans ce repo.
+Le workflow requiert `permissions.contents: write` pour pousser les commits et `permissions.pull-requests: write` pour interagir avec les pull requests. Par défaut, `secrets.GITHUB_TOKEN` suffit dans ce repo.
 
 ## 3) Passage du mode démo au mode prod
 
