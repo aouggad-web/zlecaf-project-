@@ -456,9 +456,21 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
         "zlecaf_opportunities": real_data.get('zlecaf_potential', {}).get('key_opportunities', []),
         "main_exports": real_data.get('main_exports', []),
         "main_imports": real_data.get('main_imports', []),
-        "investment_climate_score": "B+",  # À personnaliser par pays
-        "infrastructure_index": 6.7,      # À personnaliser par pays
-        "business_environment_rank": real_data.get('africa_rank', 25)
+        "investment_climate_score": real_data.get('investment_climate_score', 'B+'),
+        "infrastructure_index": real_data.get('infrastructure_index', 6.7),
+        "business_environment_rank": real_data.get('africa_rank', 25),
+        # Enhanced fields for additional information
+        "trade_facilitation_index": real_data.get('trade_facilitation_index', 65.0),
+        "logistics_performance_index": real_data.get('logistics_performance_index', 2.5),
+        "ease_of_doing_business_rank": real_data.get('ease_of_doing_business_rank', 'N/A'),
+        "corruption_perception_index": real_data.get('corruption_perception_index', 40),
+        "human_development_index": real_data.get('development_index', 0.500),
+        "digital_readiness_score": real_data.get('digital_readiness_score', 45),
+        "renewable_energy_share": real_data.get('renewable_energy_share', '15%'),
+        "youth_unemployment_rate": real_data.get('youth_unemployment_rate', '20%'),
+        "trade_openness_ratio": real_data.get('trade_openness_ratio', '45%'),
+        "fdi_inflows_usd": real_data.get('fdi_inflows_usd', 'N/A'),
+        "regional_integration_score": real_data.get('regional_integration_score', 55)
     }
     
     # Ajouter les notations de risque
@@ -674,16 +686,88 @@ async def get_comprehensive_statistics():
             "intra_african_trade_target": "25% d'ici 2030",
             "current_intra_african_trade": "15.2%"
         },
+        "regional_trade_corridors": {
+            "east_africa": {
+                "name": "East African Corridor",
+                "countries": ["Kenya", "Tanzania", "Uganda", "Rwanda"],
+                "trade_volume_2024": "28.5 milliards USD",
+                "growth_rate": "12.3%",
+                "main_products": ["Café", "Thé", "Textiles", "Produits agricoles"]
+            },
+            "west_africa": {
+                "name": "West African Corridor",
+                "countries": ["Nigeria", "Ghana", "Côte d'Ivoire", "Sénégal"],
+                "trade_volume_2024": "42.1 milliards USD",
+                "growth_rate": "9.8%",
+                "main_products": ["Pétrole", "Cacao", "Produits manufacturés", "Arachides"]
+            },
+            "southern_africa": {
+                "name": "Southern African Corridor",
+                "countries": ["Afrique du Sud", "Zimbabwe", "Namibie", "Botswana"],
+                "trade_volume_2024": "35.7 milliards USD",
+                "growth_rate": "8.5%",
+                "main_products": ["Minerais", "Véhicules", "Équipements", "Produits agricoles"]
+            },
+            "north_africa": {
+                "name": "North African Corridor",
+                "countries": ["Égypte", "Maroc", "Tunisie", "Algérie"],
+                "trade_volume_2024": "31.2 milliards USD",
+                "growth_rate": "7.2%",
+                "main_products": ["Produits chimiques", "Textiles", "Électronique", "Phosphates"]
+            }
+        },
+        "trade_growth_trends": {
+            "year_over_year": [
+                {"year": 2020, "intra_african_trade": 67.2, "growth_rate": -5.3},
+                {"year": 2021, "intra_african_trade": 72.8, "growth_rate": 8.3},
+                {"year": 2022, "intra_african_trade": 81.5, "growth_rate": 12.0},
+                {"year": 2023, "intra_african_trade": 89.3, "growth_rate": 9.6},
+                {"year": 2024, "intra_african_trade": 98.7, "growth_rate": 10.5}
+            ],
+            "product_categories": [
+                {"category": "Produits agricoles", "share": "23%", "growth": "+14%"},
+                {"category": "Minerais et métaux", "share": "19%", "growth": "+8%"},
+                {"category": "Produits manufacturés", "share": "35%", "growth": "+16%"},
+                {"category": "Produits chimiques", "share": "12%", "growth": "+11%"},
+                {"category": "Services", "share": "11%", "growth": "+19%"}
+            ]
+        },
+        "top_trading_partners_by_region": {
+            "west_africa": [
+                {"country": "Nigeria", "exports": 18.5, "imports": 15.2},
+                {"country": "Ghana", "exports": 8.3, "imports": 7.1},
+                {"country": "Côte d'Ivoire", "exports": 9.7, "imports": 6.5}
+            ],
+            "east_africa": [
+                {"country": "Kenya", "exports": 7.2, "imports": 8.9},
+                {"country": "Tanzania", "exports": 6.1, "imports": 5.4},
+                {"country": "Ethiopia", "exports": 4.8, "imports": 9.2}
+            ],
+            "southern_africa": [
+                {"country": "Afrique du Sud", "exports": 25.3, "imports": 19.7},
+                {"country": "Zimbabwe", "exports": 3.2, "imports": 4.1},
+                {"country": "Zambie", "exports": 4.5, "imports": 3.8}
+            ],
+            "north_africa": [
+                {"country": "Égypte", "exports": 12.1, "imports": 14.5},
+                {"country": "Maroc", "exports": 9.8, "imports": 8.3},
+                {"country": "Algérie", "exports": 5.4, "imports": 11.2}
+            ]
+        },
         "projections": {
             "2025": {
                 "trade_volume_increase": "15%",
                 "tariff_eliminations": "90%",
-                "new_trade_corridors": 45
+                "new_trade_corridors": 45,
+                "estimated_intra_african_trade": "113.5 milliards USD",
+                "job_creation": "2.5 millions"
             },
             "2030": {
                 "trade_volume_increase": "52%",
                 "gdp_increase": "7%",
-                "industrialization_boost": "35%"
+                "industrialization_boost": "35%",
+                "estimated_intra_african_trade": "150.0 milliards USD",
+                "job_creation": "18 millions"
             }
         },
         "data_sources": [

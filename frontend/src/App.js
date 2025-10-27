@@ -11,6 +11,7 @@ import { Badge } from './components/ui/badge';
 import { Separator } from './components/ui/separator';
 import { Progress } from './components/ui/progress';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from './components/ui/alert-dialog';
 import { toast } from './hooks/use-toast';
 import { Toaster } from './components/ui/toaster';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
@@ -44,6 +45,7 @@ function ZLECAfCalculator() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('calculator');
   const [language, setLanguage] = useState('fr'); // fr ou en
+  const [showVerificationDialog, setShowVerificationDialog] = useState(false);
 
   const texts = {
     fr: {
@@ -169,7 +171,7 @@ function ZLECAfCalculator() {
     }
   };
 
-  const calculateTariff = async () => {
+  const handleCalculateClick = () => {
     if (!originCountry || !destinationCountry || !hsCode || !value) {
       toast({
         title: "Champs manquants",
@@ -188,6 +190,12 @@ function ZLECAfCalculator() {
       return;
     }
 
+    // Show verification dialog
+    setShowVerificationDialog(true);
+  };
+
+  const calculateTariff = async () => {
+    setShowVerificationDialog(false);
     setLoading(true);
     try {
       const response = await axios.post(`${API}/calculate-tariff`, {
@@ -439,12 +447,84 @@ function ZLECAfCalculator() {
                   </div>
 
                   <Button 
-                    onClick={calculateTariff}
+                    onClick={handleCalculateClick}
                     disabled={loading}
                     className="w-full bg-gradient-to-r from-red-600 via-yellow-500 to-green-600 text-white font-bold text-lg py-6 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
                   >
                     {loading ? '⏳ Calcul en cours...' : `🧮 ${t.calculateBtn}`}
                   </Button>
+
+                  {/* Verification Dialog */}
+                  <AlertDialog open={showVerificationDialog} onOpenChange={setShowVerificationDialog}>
+                    <AlertDialogContent className="max-w-2xl">
+                      <AlertDialogHeader>
+                        <AlertDialogTitle className="text-2xl font-bold text-green-700 flex items-center gap-2">
+                          <span>✅</span>
+                          <span>{language === 'fr' ? 'Vérification des Informations' : 'Verify Information'}</span>
+                        </AlertDialogTitle>
+                        <AlertDialogDescription className="text-base">
+                          {language === 'fr' 
+                            ? 'Veuillez vérifier les informations avant de lancer le calcul tarifaire.'
+                            : 'Please verify the information before proceeding with the tariff calculation.'}
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      
+                      <div className="space-y-4 py-4">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
+                            <p className="text-sm font-semibold text-blue-700 mb-1">
+                              {language === 'fr' ? 'Pays d\'origine' : 'Origin Country'}
+                            </p>
+                            <p className="text-lg font-bold text-blue-900 flex items-center gap-2">
+                              {countryFlags[originCountry]} {getCountryName(originCountry)}
+                            </p>
+                          </div>
+                          
+                          <div className="bg-green-50 p-4 rounded-lg border-2 border-green-200">
+                            <p className="text-sm font-semibold text-green-700 mb-1">
+                              {language === 'fr' ? 'Pays de destination' : 'Destination Country'}
+                            </p>
+                            <p className="text-lg font-bold text-green-900 flex items-center gap-2">
+                              {countryFlags[destinationCountry]} {getCountryName(destinationCountry)}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-orange-50 p-4 rounded-lg border-2 border-orange-200">
+                          <p className="text-sm font-semibold text-orange-700 mb-1">
+                            {language === 'fr' ? 'Code SH6 et Secteur' : 'HS6 Code and Sector'}
+                          </p>
+                          <p className="text-lg font-bold text-orange-900">
+                            {hsCode}
+                          </p>
+                          <p className="text-sm text-orange-700 mt-1">
+                            {getSectorName(hsCode)}
+                          </p>
+                        </div>
+                        
+                        <div className="bg-purple-50 p-4 rounded-lg border-2 border-purple-200">
+                          <p className="text-sm font-semibold text-purple-700 mb-1">
+                            {language === 'fr' ? 'Valeur de la marchandise' : 'Merchandise Value'}
+                          </p>
+                          <p className="text-2xl font-bold text-purple-900">
+                            {formatCurrency(parseFloat(value))}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <AlertDialogFooter>
+                        <AlertDialogCancel className="text-base font-semibold">
+                          {language === 'fr' ? '❌ Annuler' : '❌ Cancel'}
+                        </AlertDialogCancel>
+                        <AlertDialogAction 
+                          onClick={calculateTariff}
+                          className="bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold text-base"
+                        >
+                          {language === 'fr' ? '✓ Confirmer et Calculer' : '✓ Confirm and Calculate'}
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </CardContent>
               </Card>
 
@@ -873,6 +953,91 @@ function ZLECAfCalculator() {
                   </CardContent>
                 </Card>
 
+                {/* Regional Trade Corridors */}
+                {statistics.regional_trade_corridors && (
+                  <Card className="shadow-2xl border-t-4 border-t-cyan-500">
+                    <CardHeader className="bg-gradient-to-r from-cyan-100 to-blue-100">
+                      <CardTitle className="text-2xl font-bold text-cyan-700 flex items-center gap-2">
+                        <span>🌍</span>
+                        <span>Corridors Commerciaux Régionaux</span>
+                      </CardTitle>
+                      <CardDescription className="font-semibold">Analyse des flux commerciaux par région</CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {Object.entries(statistics.regional_trade_corridors).map(([key, corridor]) => (
+                          <div key={key} className="bg-gradient-to-br from-white to-gray-50 p-5 rounded-xl border-2 border-gray-200 shadow-lg">
+                            <h4 className="font-bold text-lg mb-3 text-gray-800 flex items-center gap-2">
+                              <span>🚢</span>
+                              <span>{corridor.name}</span>
+                            </h4>
+                            <div className="space-y-2">
+                              <div className="bg-blue-50 p-3 rounded-lg">
+                                <p className="text-sm text-blue-700">Volume 2024</p>
+                                <p className="text-xl font-bold text-blue-900">{corridor.trade_volume_2024}</p>
+                              </div>
+                              <div className="bg-green-50 p-3 rounded-lg">
+                                <p className="text-sm text-green-700">Croissance</p>
+                                <p className="text-xl font-bold text-green-900">{corridor.growth_rate}</p>
+                              </div>
+                              <div className="bg-purple-50 p-3 rounded-lg">
+                                <p className="text-sm text-purple-700 mb-1">Principaux Produits</p>
+                                <div className="flex flex-wrap gap-1">
+                                  {corridor.main_products.map((product, idx) => (
+                                    <Badge key={idx} variant="outline" className="text-xs">{product}</Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Trade Growth Trends */}
+                {statistics.trade_growth_trends && (
+                  <Card className="shadow-2xl border-t-4 border-t-green-500">
+                    <CardHeader className="bg-gradient-to-r from-green-100 to-emerald-100">
+                      <CardTitle className="text-2xl font-bold text-green-700 flex items-center gap-2">
+                        <span>📊</span>
+                        <span>Tendances de Croissance Commerciale</span>
+                      </CardTitle>
+                      <CardDescription className="font-semibold">Évolution du commerce intra-africain 2020-2024</CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-6">
+                      <div style={{ minHeight: '320px' }}>
+                        <ResponsiveContainer width="100%" height={300} debounce={300}>
+                          <AreaChart data={statistics.trade_growth_trends.year_over_year}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="year" />
+                            <YAxis yAxisId="left" label={{ value: 'Milliards USD', angle: -90, position: 'insideLeft' }} />
+                            <YAxis yAxisId="right" orientation="right" label={{ value: 'Croissance (%)', angle: 90, position: 'insideRight' }} />
+                            <Tooltip />
+                            <Legend />
+                            <Area yAxisId="left" type="monotone" dataKey="intra_african_trade" stroke="#10b981" fill="#6ee7b7" name="Commerce intra-africain" />
+                            <Line yAxisId="right" type="monotone" dataKey="growth_rate" stroke="#f59e0b" strokeWidth={3} name="Taux de croissance" />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+
+                      <div className="mt-6">
+                        <h4 className="font-bold text-lg mb-3 text-gray-800">Répartition par Catégorie de Produits</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+                          {statistics.trade_growth_trends.product_categories.map((category, idx) => (
+                            <div key={idx} className="bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-lg border-2 border-blue-200 text-center">
+                              <p className="text-sm font-semibold text-blue-700 mb-1">{category.category}</p>
+                              <p className="text-2xl font-bold text-blue-900">{category.share}</p>
+                              <Badge className="mt-2 bg-green-600 text-white">{category.growth}</Badge>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
                 {/* Sources de données */}
                 <Card>
                   <CardHeader>
@@ -1112,6 +1277,50 @@ function ZLECAfCalculator() {
                               🏛️ Risque Global: {countryProfile.risk_ratings?.global_risk || 'Non évalué'}
                             </span>
                           </div>
+                      </div>
+
+                      {/* Additional Country Information Section */}
+                      <Separator className="my-6" />
+                      <div className="mt-6">
+                        <h4 className="font-semibold mb-4 text-gray-800 text-xl">📊 Indicateurs Supplémentaires</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          {countryProfile.projections?.trade_facilitation_index && (
+                            <div className="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
+                              <p className="text-sm font-semibold text-blue-700 mb-1">🚢 Facilitation du Commerce</p>
+                              <p className="text-2xl font-bold text-blue-900">{countryProfile.projections.trade_facilitation_index}/100</p>
+                            </div>
+                          )}
+                          {countryProfile.projections?.logistics_performance_index && (
+                            <div className="bg-green-50 p-4 rounded-lg border-2 border-green-200">
+                              <p className="text-sm font-semibold text-green-700 mb-1">📦 Performance Logistique</p>
+                              <p className="text-2xl font-bold text-green-900">{countryProfile.projections.logistics_performance_index}/5.0</p>
+                            </div>
+                          )}
+                          {countryProfile.projections?.corruption_perception_index && (
+                            <div className="bg-purple-50 p-4 rounded-lg border-2 border-purple-200">
+                              <p className="text-sm font-semibold text-purple-700 mb-1">🔍 Perception de la Corruption</p>
+                              <p className="text-2xl font-bold text-purple-900">{countryProfile.projections.corruption_perception_index}/100</p>
+                            </div>
+                          )}
+                          {countryProfile.projections?.digital_readiness_score && (
+                            <div className="bg-cyan-50 p-4 rounded-lg border-2 border-cyan-200">
+                              <p className="text-sm font-semibold text-cyan-700 mb-1">💻 Préparation Numérique</p>
+                              <p className="text-2xl font-bold text-cyan-900">{countryProfile.projections.digital_readiness_score}/100</p>
+                            </div>
+                          )}
+                          {countryProfile.projections?.trade_openness_ratio && (
+                            <div className="bg-orange-50 p-4 rounded-lg border-2 border-orange-200">
+                              <p className="text-sm font-semibold text-orange-700 mb-1">🌐 Ouverture Commerciale</p>
+                              <p className="text-2xl font-bold text-orange-900">{countryProfile.projections.trade_openness_ratio}</p>
+                            </div>
+                          )}
+                          {countryProfile.projections?.regional_integration_score && (
+                            <div className="bg-pink-50 p-4 rounded-lg border-2 border-pink-200">
+                              <p className="text-sm font-semibold text-pink-700 mb-1">🤝 Intégration Régionale</p>
+                              <p className="text-2xl font-bold text-pink-900">{countryProfile.projections.regional_integration_score}/100</p>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
