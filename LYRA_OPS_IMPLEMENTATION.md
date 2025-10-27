@@ -15,13 +15,15 @@ This implementation adds automated data refresh capabilities and health monitori
 
 - **Schedule**: Runs every Monday at 06:15 UTC
 - **Trigger**: Can also be manually triggered via GitHub Actions UI
-- **Permissions**: Has write access to commit and push data changes
+- **Permissions**: Has write access to create commits and Pull Requests
 - **Steps**:
   1. Checkout repository
   2. Setup Python 3.11
   3. Install dependencies (openpyxl optional)
   4. Generate datasets using `backend/make_release.py --demo`
-  5. Commit and push changes to `frontend/public/data/`
+  5. Create Pull Request with changes to `frontend/public/data/`
+
+**Note**: The workflow now creates a Pull Request instead of committing directly to the main branch, allowing for review before merging.
 
 ### 2. Data Generation Script (`backend/make_release.py`)
 
