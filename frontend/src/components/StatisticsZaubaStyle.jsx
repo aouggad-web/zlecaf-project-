@@ -158,6 +158,96 @@ const StatisticsZaubaStyle = () => {
         </CardContent>
       </Card>
 
+      {/* NOUVEAU: Top 5 PIB - Commerce Monde vs Intra-Africain */}
+      {statistics.top_5_gdp_trade_comparison && statistics.top_5_gdp_trade_comparison.length > 0 && (
+        <Card className="shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50">
+            <CardTitle className="text-xl font-bold">💰 Top 5 PIB Africains - Comparaison Commerce</CardTitle>
+            <CardDescription className="text-sm">Commerce Mondial vs Commerce Intra-Africain (2024)</CardDescription>
+          </CardHeader>
+          <CardContent className="pt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Graphique Barres Comparatif */}
+              <div style={{ minHeight: '350px' }}>
+                <ResponsiveContainer width="100%" height={330}>
+                  <BarChart 
+                    data={statistics.top_5_gdp_trade_comparison.map(country => ({
+                      pays: country.country,
+                      'Exports Monde': parseFloat(country.exports_world),
+                      'Exports Intra-Afr.': parseFloat(country.exports_intra_african),
+                      'Imports Monde': parseFloat(country.imports_world),
+                      'Imports Intra-Afr.': parseFloat(country.imports_intra_african)
+                    }))}
+                    layout="vertical"
+                    margin={{ left: 10, right: 30, top: 10, bottom: 10 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis 
+                      type="number" 
+                      label={{ value: 'Milliards USD', position: 'bottom', style: { fontSize: 12, fontWeight: 'bold' } }}
+                      tick={{ fontSize: 11 }}
+                    />
+                    <YAxis 
+                      type="category" 
+                      dataKey="pays" 
+                      width={110} 
+                      tick={{ fontSize: 11, fontWeight: 'bold' }}
+                    />
+                    <Tooltip 
+                      formatter={(value) => `$${value.toFixed(1)}B`}
+                      contentStyle={{ 
+                        backgroundColor: '#f9fafb', 
+                        border: '2px solid #3b82f6',
+                        borderRadius: '8px',
+                        fontSize: '12px'
+                      }}
+                    />
+                    <Legend wrapperStyle={{ fontSize: '11px', fontWeight: 'bold' }} />
+                    <Bar dataKey="Exports Monde" fill="#10b981" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="Exports Intra-Afr." fill="#6ee7b7" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="Imports Monde" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="Imports Intra-Afr." fill="#93c5fd" radius={[0, 4, 4, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Tableau Détaillé */}
+              <div>
+                <h4 className="text-sm font-bold mb-3 text-gray-700">Détail par Pays (Milliards USD)</h4>
+                <div className="space-y-2">
+                  {statistics.top_5_gdp_trade_comparison.map((country, index) => (
+                    <div key={index} className="bg-gray-50 p-3 rounded-lg border-l-4 border-blue-500">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-bold text-gray-800">{country.country}</span>
+                        <Badge className="bg-purple-600 text-white text-xs">PIB: ${country.gdp_2024}B</Badge>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div>
+                          <p className="text-gray-500">Exp. Monde:</p>
+                          <p className="font-bold text-green-700">${country.exports_world.toFixed(1)}B</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-500">Exp. Intra-Afr:</p>
+                          <p className="font-bold text-green-600">${country.exports_intra_african.toFixed(1)}B ({country.intra_african_percentage}%)</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-500">Imp. Monde:</p>
+                          <p className="font-bold text-blue-700">${country.imports_world.toFixed(1)}B</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-500">Imp. Intra-Afr:</p>
+                          <p className="font-bold text-blue-600">${country.imports_intra_african.toFixed(1)}B</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Répartition par Secteur - Pie Chart */}
       {statistics.sector_performance && Object.keys(statistics.sector_performance).length > 0 && (
         <Card className="shadow-lg">
