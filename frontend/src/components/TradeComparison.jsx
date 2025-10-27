@@ -644,62 +644,6 @@ const TradeComparison = () => {
           </CardContent>
         </Card>
       </div>
-              <br/>📚 Source: Calculé à partir OEC + UNCTAD/AfDB pourcentages régionaux
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="pt-6">
-            <div className="bg-green-50 p-4 rounded-lg border-l-4 border-l-green-600 mb-4">
-              <p className="text-sm text-green-800 font-semibold mb-2">
-                <strong>🤝 Commerce Intra-Africain:</strong> Ce tableau montre le commerce réalisé 
-                <strong> UNIQUEMENT entre pays africains</strong> (excluant Europe, Asie, Amériques).
-              </p>
-              <p className="text-xs text-green-700">
-                💡 Le % intra-africain varie selon l'intégration régionale: 
-                EAC (Kenya, Tanzanie, Ouganda: 30-40%), 
-                SADC (Zambie, Zimbabwe, Botswana: 40-65%), 
-                CEDEAO (Ghana, Sénégal, Côte d'Ivoire: 30-42%),
-                Pays pétroliers (Algérie, Angola: 4-6%)
-              </p>
-            </div>
-
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-green-100">
-                    <TableHead className="font-bold text-xs">🌍 Pays</TableHead>
-                    <TableHead className="font-bold text-center text-xs">📤 Exports Intra-Afr. (B USD)</TableHead>
-                    <TableHead className="font-bold text-center text-xs">📥 Imports Intra-Afr. (B USD)</TableHead>
-                    <TableHead className="font-bold text-center text-xs">⚖️ Solde (B USD)</TableHead>
-                    <TableHead className="font-bold text-center text-xs">📊 % Intra-Afr.</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {calculationsIntraAfrican.map((item, index) => (
-                    <TableRow key={item.country} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-green-50`}>
-                      <TableCell className="font-semibold text-xs py-2">{item.name}</TableCell>
-                      <TableCell className="text-center py-2">
-                        <Badge className="bg-green-600 text-white text-xs py-0 px-2">${item.exports.toFixed(1)}B</Badge>
-                      </TableCell>
-                      <TableCell className="text-center py-2">
-                        <Badge className="bg-teal-600 text-white text-xs py-0 px-2">${item.imports.toFixed(1)}B</Badge>
-                      </TableCell>
-                      <TableCell className="text-center py-2">
-                        <Badge className={`${item.balance >= 0 ? 'bg-blue-600' : 'bg-red-600'} text-white text-xs py-0 px-2`}>
-                          {item.balance >= 0 ? '+' : ''}{item.balance.toFixed(1)}B
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-center py-2">
-                        <Badge className="bg-purple-600 text-white font-bold text-xs py-0 px-2">{item.intra_percentage}%</Badge>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">Affichage de tous les pays membres ZLECAf (triés par exports intra-africains)</p>
-          </CardContent>
-        </Card>
-      </div>
 
       {/* Performance par Pays avec Graphique - ANCIEN CODE SUPPRIMÉ */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" style={{display: 'none'}}>
