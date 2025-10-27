@@ -18,6 +18,8 @@ Format cron : `minute hour day-of-month month day-of-week`
 
 Le workflow requiert `permissions.contents: write` pour pousser les commits. Par défaut, `secrets.GITHUB_TOKEN` suffit dans ce repo.
 
+**Note importante**: Si vous rencontrez une erreur liée à GitHub Pages lors de l'exécution des workflows, consultez le [Guide de configuration GitHub Pages](GITHUB_PAGES_SETUP.md) pour résoudre les problèmes de déploiement.
+
 ## 3) Passage du mode démo au mode prod
 
 Remplacez dans l'étape du workflow :
