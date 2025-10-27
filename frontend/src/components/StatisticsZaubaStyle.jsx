@@ -159,7 +159,7 @@ const StatisticsZaubaStyle = () => {
       </Card>
 
       {/* Répartition par Secteur - Pie Chart */}
-      {statistics.sector_performance && (
+      {statistics.sector_performance && Object.keys(statistics.sector_performance).length > 0 && (
         <Card className="shadow-lg">
           <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50">
             <CardTitle className="text-xl font-bold">🏭 Performance par Secteur</CardTitle>
@@ -171,14 +171,19 @@ const StatisticsZaubaStyle = () => {
                 <ResponsiveContainer width="100%" height={280}>
                   <PieChart>
                     <Pie
-                      data={Object.entries(statistics.sector_performance).slice(0, 8).map(([key, value]) => ({
-                        name: key.replace(/_/g, ' ').toUpperCase(),
-                        value: parseFloat(value?.share || value || 10)
-                      }))}
+                      data={Object.entries(statistics.sector_performance).slice(0, 8).map(([key, value]) => {
+                        const shareValue = typeof value === 'object' && value.share ? value.share : 
+                                          typeof value === 'object' && value.value_2024 ? value.value_2024 : 
+                                          parseFloat(value) || 10;
+                        return {
+                          name: key.replace(/_/g, ' '),
+                          value: parseFloat(shareValue)
+                        };
+                      })}
                       cx="50%"
                       cy="50%"
                       labelLine={false}
-                      label={(entry) => `${entry.name}: ${entry.value}%`}
+                      label={(entry) => `${entry.value}%`}
                       outerRadius={80}
                       fill="#8884d8"
                       dataKey="value"
@@ -194,18 +199,25 @@ const StatisticsZaubaStyle = () => {
 
               <div className="space-y-2">
                 <h4 className="text-sm font-bold mb-3 text-gray-700">Détail des Secteurs</h4>
-                {Object.entries(statistics.sector_performance).slice(0, 8).map(([key, value], index) => (
-                  <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                    <div className="flex items-center gap-2">
-                      <div 
-                        className="w-3 h-3 rounded" 
-                        style={{ backgroundColor: COLORS[index % COLORS.length] }}
-                      />
-                      <span className="text-xs font-semibold">{key.replace(/_/g, ' ')}</span>
+                {Object.entries(statistics.sector_performance).slice(0, 8).map(([key, value], index) => {
+                  const shareValue = typeof value === 'object' && value.share ? value.share : 
+                                    typeof value === 'object' && value.value_2024 ? value.value_2024 : 
+                                    parseFloat(value) || 10;
+                  const displayName = key.replace(/_/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                  
+                  return (
+                    <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <div className="flex items-center gap-2">
+                        <div 
+                          className="w-3 h-3 rounded" 
+                          style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                        />
+                        <span className="text-xs font-semibold">{displayName}</span>
+                      </div>
+                      <Badge className="text-xs">{parseFloat(shareValue).toFixed(1)}%</Badge>
                     </div>
-                    <Badge className="text-xs">{value?.share || value || 10}%</Badge>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </CardContent>
