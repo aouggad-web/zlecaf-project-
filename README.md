@@ -163,6 +163,28 @@ python tests/test_afcfta_2025_generation.py
 
 ## 🔍 Quick Start
 
+### Generate AfCFTA Datasets
+
+Generate the latest AfCFTA 2025 datasets using the automated script:
+
+```bash
+# Generate demo data
+./afcfta_2025_datasets.sh --demo
+
+# Generate with custom output directory
+./afcfta_2025_datasets.sh --demo --output /path/to/output
+
+# Show help and options
+./afcfta_2025_datasets.sh --help
+```
+
+This script generates:
+- Tariff lines by country (JSON)
+- Africa vs World tariffs comparison (XLSX/CSV)
+- Rules of origin by sector (JSON)
+- Dismantling schedule (CSV)
+- Integrated tariff/origin/phase data (JSON)
+
 ### Check API Health
 
 ```bash
