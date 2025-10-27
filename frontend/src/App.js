@@ -811,6 +811,11 @@ function ZLECAfCalculator() {
           </TabsContent>
 
           <TabsContent value="statistics">
+            {/* Nouveau composant Style Zauba */}
+            <StatisticsZaubaStyle />
+            
+            <div className="my-8"></div>
+            
             {/* Intégration du composant Comparaisons dans Statistiques */}
             <TradeComparison />
             
