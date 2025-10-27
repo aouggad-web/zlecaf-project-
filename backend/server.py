@@ -719,6 +719,55 @@ async def get_comprehensive_statistics():
     # Utiliser les données enrichies 2024 pour l'overview
     overview_enhanced = enhanced_stats.get('overview', {})
     
+    # Générer le VRAI Top 10 exportateurs et importateurs depuis les données complètes
+    trade_data_all = get_all_countries_trade_performance()
+    
+    # Top 10 exportateurs (triés par exports décroissants)
+    top_10_exporters = sorted(trade_data_all, key=lambda x: x['exports_2024'], reverse=True)[:10]
+    top_exporters_formatted = [
+        {
+            "country": country['code'],
+            "name": country['country'],
+            "exports": country['exports_2024'],
+            "share": round((country['exports_2024'] / sum([c['exports_2024'] for c in trade_data_all])) * 100, 1)
+        }
+        for country in top_10_exporters
+    ]
+    
+    # Top 10 importateurs (triés par imports décroissants)
+    top_10_importers = sorted(trade_data_all, key=lambda x: x['imports_2024'], reverse=True)[:10]
+    top_importers_formatted = [
+        {
+            "country": country['code'],
+            "name": country['country'],
+            "imports": country['imports_2024'],
+            "share": round((country['imports_2024'] / sum([c['imports_2024'] for c in trade_data_all])) * 100, 1)
+        }
+        for country in top_10_importers
+    ]
+    
+    # Top 5 PIB avec comparaison échanges intra-africains vs monde
+    top_5_gdp = sorted(trade_data_all, key=lambda x: x['gdp_2024'], reverse=True)[:5]
+    top_5_gdp_formatted = []
+    
+    # Charger les données intra-africaines
+    intra_response = await get_trade_performance_intra_african()
+    intra_data_dict = {item['code']: item for item in intra_response['countries_intra_african']}
+    
+    for country in top_5_gdp:
+        intra_info = intra_data_dict.get(country['code'], {})
+        top_5_gdp_formatted.append({
+            "country": country['country'],
+            "code": country['code'],
+            "gdp_2024": country['gdp_2024'],
+            "exports_world": country['exports_2024'],
+            "imports_world": country['imports_2024'],
+            "exports_intra_african": intra_info.get('exports_2024', 0),
+            "imports_intra_african": intra_info.get('imports_2024', 0),
+            "intra_african_percentage": intra_info.get('intra_african_percentage', 17)
+        })
+    
+    
     return {
         "overview": {
             "total_calculations": overview_enhanced.get('total_calculations', total_calculations),
