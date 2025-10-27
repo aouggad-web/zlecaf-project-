@@ -493,71 +493,157 @@ const TradeComparison = () => {
         </CardContent>
       </Card>
 
-      {/* NOUVEAU: DEUX TABLEAUX SÉPARÉS - Commerce Mondial vs Commerce Intra-Africain */}
-      <div className="space-y-8">
+      {/* NOUVEAU: DEUX TABLEAUX CÔTE À CÔTE - Commerce Mondial vs Commerce Intra-Africain */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* ========== TABLEAU 1: COMMERCE MONDIAL (avec tous les partenaires) ========== */}
         <Card className="shadow-2xl border-t-4 border-t-amber-600">
           <CardHeader className="bg-gradient-to-r from-amber-50 to-yellow-50">
-            <CardTitle className="text-2xl font-bold text-amber-800 flex items-center gap-2">
+            <CardTitle className="text-xl font-bold text-amber-800 flex items-center gap-2">
               <i className="fas fa-globe"></i>
-              <span>Tableau 1: Commerce MONDIAL par Pays (Tous Partenaires)</span>
+              <span>Commerce MONDIAL</span>
             </CardTitle>
-            <CardDescription className="text-lg font-semibold text-amber-700">
-              📅 Année: {selectedYear} • 🌍 Commerce avec TOUS les pays (Europe, Asie, Amériques, Afrique, etc.)
-              <br/>📚 Source: OEC, Banque Mondiale, FMI
+            <CardDescription className="text-xs font-semibold text-amber-700">
+              🌍 Tous partenaires • 📚 OEC, BM, FMI
             </CardDescription>
           </CardHeader>
-          <CardContent className="pt-6">
-            <div className="bg-amber-50 p-4 rounded-lg border-l-4 border-l-amber-600 mb-4">
-              <p className="text-sm text-amber-800 font-semibold">
-                <strong>🌐 Commerce Total:</strong> Ce tableau montre les exportations/importations de chaque pays africain vers/depuis 
-                <strong> TOUS les partenaires mondiaux</strong> (Europe, Chine, USA, autres pays africains, etc.)
+          <CardContent className="pt-4">
+            <div className="bg-amber-50 p-2 rounded-lg border-l-2 border-l-amber-600 mb-3">
+              <p className="text-xs text-amber-800 font-semibold">
+                Commerce avec TOUS les pays mondiaux
               </p>
             </div>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" style={{ maxHeight: '600px', overflowY: 'auto' }}>
               <Table>
-                <TableHeader>
+                <TableHeader className="sticky top-0 bg-white z-10">
                   <TableRow className="bg-amber-100">
-                    <TableHead className="font-bold text-xs">🌍 Pays</TableHead>
-                    <TableHead className="font-bold text-center text-xs">📤 Exports (B USD)</TableHead>
-                    <TableHead className="font-bold text-center text-xs">📥 Imports (B USD)</TableHead>
-                    <TableHead className="font-bold text-center text-xs">⚖️ Solde (B USD)</TableHead>
+                    <TableHead className="font-bold text-xs">Pays</TableHead>
+                    <TableHead className="font-bold text-center text-xs">📤 Exp</TableHead>
+                    <TableHead className="font-bold text-center text-xs">📥 Imp</TableHead>
+                    <TableHead className="font-bold text-center text-xs">⚖️</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {calculationsGlobal.map((item, index) => (
                     <TableRow key={item.country} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-amber-50`}>
-                      <TableCell className="font-semibold text-xs py-2">{item.name}</TableCell>
-                      <TableCell className="text-center py-2">
-                        <Badge className="bg-green-700 text-white text-xs py-0 px-2">${item.exports.toFixed(1)}B</Badge>
+                      <TableCell className="font-semibold text-xs py-1">{item.name}</TableCell>
+                      <TableCell className="text-center py-1">
+                        <Badge className="bg-green-700 text-white text-xs py-0 px-1">${item.exports.toFixed(1)}B</Badge>
                       </TableCell>
-                      <TableCell className="text-center py-2">
-                        <Badge className="bg-orange-700 text-white text-xs py-0 px-2">${item.imports.toFixed(1)}B</Badge>
+                      <TableCell className="text-center py-1">
+                        <Badge className="bg-orange-700 text-white text-xs py-0 px-1">${item.imports.toFixed(1)}B</Badge>
                       </TableCell>
-                      <TableCell className="text-center py-2">
-                        <Badge className={`${item.balance >= 0 ? 'bg-blue-700' : 'bg-red-700'} text-white text-xs py-0 px-2`}>
-                          {item.balance >= 0 ? '+' : ''}{item.balance.toFixed(1)}B
+                      <TableCell className="text-center py-1">
+                        <Badge className={`${item.balance >= 0 ? 'bg-blue-700' : 'bg-red-700'} text-white text-xs py-0 px-1`}>
+                          {item.balance >= 0 ? '+' : ''}{item.balance.toFixed(1)}
                         </Badge>
                       </TableCell>
                     </TableRow>
                   ))}
+                  
+                  {/* Pays non-signataires */}
+                  <TableRow className="bg-red-100">
+                    <TableCell colSpan={4} className="text-center font-bold text-xs py-2 text-red-800">
+                      🚫 PAYS NON-SIGNATAIRES ZLECAf
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className="bg-red-50">
+                    <TableCell className="font-semibold text-xs py-1">Érythrée</TableCell>
+                    <TableCell className="text-center py-1">
+                      <Badge className="bg-gray-500 text-white text-xs py-0 px-1">N/A</Badge>
+                    </TableCell>
+                    <TableCell className="text-center py-1">
+                      <Badge className="bg-gray-500 text-white text-xs py-0 px-1">N/A</Badge>
+                    </TableCell>
+                    <TableCell className="text-center py-1">
+                      <Badge className="bg-gray-500 text-white text-xs py-0 px-1">N/A</Badge>
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">Affichage de tous les pays membres ZLECAf (triés par exports)</p>
+            <p className="text-xs text-gray-500 mt-2 text-center">Tous les pays africains</p>
           </CardContent>
         </Card>
 
         {/* ========== TABLEAU 2: COMMERCE INTRA-AFRICAIN (uniquement entre pays africains) ========== */}
         <Card className="shadow-2xl border-t-4 border-t-green-600">
           <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50">
-            <CardTitle className="text-2xl font-bold text-green-800 flex items-center gap-2">
+            <CardTitle className="text-xl font-bold text-green-800 flex items-center gap-2">
               <i className="fas fa-handshake"></i>
-              <span>Tableau 2: Commerce INTRA-AFRICAIN par Pays (Entre Africains Uniquement)</span>
+              <span>Commerce INTRA-AFRICAIN</span>
             </CardTitle>
-            <CardDescription className="text-lg font-semibold text-green-700">
-              📅 Année: {selectedYear} • 🤝 Commerce UNIQUEMENT entre les 54 pays africains
+            <CardDescription className="text-xs font-semibold text-green-700">
+              🤝 Entre pays africains • 📚 OEC + UNCTAD/AfDB
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-4">
+            <div className="bg-green-50 p-2 rounded-lg border-l-2 border-l-green-600 mb-3">
+              <p className="text-xs text-green-800 font-semibold">
+                Commerce UNIQUEMENT entre africains
+              </p>
+            </div>
+
+            <div className="overflow-x-auto" style={{ maxHeight: '600px', overflowY: 'auto' }}>
+              <Table>
+                <TableHeader className="sticky top-0 bg-white z-10">
+                  <TableRow className="bg-green-100">
+                    <TableHead className="font-bold text-xs">Pays</TableHead>
+                    <TableHead className="font-bold text-center text-xs">📤 Exp</TableHead>
+                    <TableHead className="font-bold text-center text-xs">📥 Imp</TableHead>
+                    <TableHead className="font-bold text-center text-xs">⚖️</TableHead>
+                    <TableHead className="font-bold text-center text-xs">%</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {calculationsIntraAfrican.map((item, index) => (
+                    <TableRow key={item.country} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-green-50`}>
+                      <TableCell className="font-semibold text-xs py-1">{item.name}</TableCell>
+                      <TableCell className="text-center py-1">
+                        <Badge className="bg-green-600 text-white text-xs py-0 px-1">${item.exports.toFixed(1)}B</Badge>
+                      </TableCell>
+                      <TableCell className="text-center py-1">
+                        <Badge className="bg-teal-600 text-white text-xs py-0 px-1">${item.imports.toFixed(1)}B</Badge>
+                      </TableCell>
+                      <TableCell className="text-center py-1">
+                        <Badge className={`${item.balance >= 0 ? 'bg-blue-600' : 'bg-red-600'} text-white text-xs py-0 px-1`}>
+                          {item.balance >= 0 ? '+' : ''}{item.balance.toFixed(1)}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-center py-1">
+                        <Badge className="bg-purple-600 text-white font-bold text-xs py-0 px-1">{item.intra_percentage}%</Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  
+                  {/* Pays non-signataires */}
+                  <TableRow className="bg-red-100">
+                    <TableCell colSpan={5} className="text-center font-bold text-xs py-2 text-red-800">
+                      🚫 PAYS NON-SIGNATAIRES ZLECAf
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className="bg-red-50">
+                    <TableCell className="font-semibold text-xs py-1">Érythrée</TableCell>
+                    <TableCell className="text-center py-1">
+                      <Badge className="bg-gray-500 text-white text-xs py-0 px-1">N/A</Badge>
+                    </TableCell>
+                    <TableCell className="text-center py-1">
+                      <Badge className="bg-gray-500 text-white text-xs py-0 px-1">N/A</Badge>
+                    </TableCell>
+                    <TableCell className="text-center py-1">
+                      <Badge className="bg-gray-500 text-white text-xs py-0 px-1">N/A</Badge>
+                    </TableCell>
+                    <TableCell className="text-center py-1">
+                      <Badge className="bg-gray-500 text-white text-xs py-0 px-1">0%</Badge>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+            <p className="text-xs text-gray-500 mt-2 text-center">Tous les pays africains</p>
+          </CardContent>
+        </Card>
+      </div>
               <br/>📚 Source: Calculé à partir OEC + UNCTAD/AfDB pourcentages régionaux
             </CardDescription>
           </CardHeader>
