@@ -440,7 +440,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Tests implémentation taxes ZLECAf validés"
+    - "Tests profil pays Algérie validés"
   stuck_tasks: []
   test_all: true
   test_priority: "completed"
