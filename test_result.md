@@ -452,10 +452,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Tests profil pays Algérie validés"
-  stuck_tasks: []
-  test_all: true
-  test_priority: "completed"
+    - "Profils pays multiples - Données infrastructure Nigeria, Égypte, Afrique du Sud"
+  stuck_tasks:
+    - "Profils pays multiples - Données infrastructure Nigeria, Égypte, Afrique du Sud"
+  test_all: false
+  test_priority: "high_first"
 
 agent_communication:
     - agent: "testing"
