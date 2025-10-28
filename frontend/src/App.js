@@ -1834,6 +1834,112 @@ function ZLECAfCalculator() {
                     </CardHeader>
                   </Card>
 
+                  {/* Section Douanes */}
+                  {countryProfile.customs && countryProfile.customs.administration && (
+                    <Card className="shadow-xl border-t-4 border-t-blue-600">
+                      <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-50">
+                        <CardTitle className="text-lg font-bold text-blue-700 flex items-center gap-2">
+                          <span>🛃</span>
+                          <span>Douanes & Administration</span>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <div className="space-y-3">
+                          <div className="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-500">
+                            <p className="text-xs font-semibold text-blue-700 mb-1">🏛️ Administration Douanière</p>
+                            <p className="text-sm font-medium text-blue-900">{countryProfile.customs.administration}</p>
+                          </div>
+                          
+                          {countryProfile.customs.website && countryProfile.customs.website !== 'N/A' && (
+                            <div className="bg-cyan-50 p-3 rounded-lg border-l-4 border-cyan-500">
+                              <p className="text-xs font-semibold text-cyan-700 mb-1">🌐 Site Web Officiel</p>
+                              <a 
+                                href={countryProfile.customs.website} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-sm font-medium text-cyan-600 hover:text-cyan-800 hover:underline"
+                              >
+                                {countryProfile.customs.website}
+                              </a>
+                            </div>
+                          )}
+                          
+                          {countryProfile.customs.offices && (
+                            <div className="bg-gray-50 p-3 rounded-lg border-l-4 border-gray-500">
+                              <p className="text-xs font-semibold text-gray-700 mb-2">📍 Bureaux Importants</p>
+                              <div className="text-sm text-gray-800">
+                                {countryProfile.customs.offices.split(';').map((office, idx) => (
+                                  <div key={idx} className="mb-1 flex items-start">
+                                    <span className="text-blue-600 mr-2">•</span>
+                                    <span>{office.trim()}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Section Classement Infrastructure */}
+                  {countryProfile.infrastructure_ranking && countryProfile.infrastructure_ranking.africa_rank && (
+                    <Card className="shadow-xl border-t-4 border-t-green-600">
+                      <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50">
+                        <CardTitle className="text-lg font-bold text-green-700 flex items-center gap-2">
+                          <span>🏗️</span>
+                          <span>Classement Infrastructure</span>
+                        </CardTitle>
+                        <p className="text-xs text-gray-600 mt-1">
+                          Basé sur l'Indice de Performance Logistique (IPL) 2023 de la Banque Mondiale et l'Indice AIDI de la BAD
+                        </p>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                          <div className="bg-green-50 p-3 rounded-lg text-center border-2 border-green-300">
+                            <p className="text-xs font-semibold text-green-700 mb-1">🏆 Rang Afrique</p>
+                            <p className="text-3xl font-bold text-green-600">
+                              #{countryProfile.infrastructure_ranking.africa_rank}
+                            </p>
+                            <p className="text-xs text-green-600 mt-1">sur 54 pays</p>
+                          </div>
+                          
+                          <div className="bg-blue-50 p-3 rounded-lg text-center">
+                            <p className="text-xs font-semibold text-blue-700 mb-1">🌍 Rang Mondial</p>
+                            <p className="text-2xl font-bold text-blue-600">
+                              #{countryProfile.infrastructure_ranking.lpi_world_rank}
+                            </p>
+                            <p className="text-xs text-blue-600 mt-1">sur 139 pays</p>
+                          </div>
+                          
+                          <div className="bg-purple-50 p-3 rounded-lg text-center">
+                            <p className="text-xs font-semibold text-purple-700 mb-1">📊 Score IPL</p>
+                            <p className="text-2xl font-bold text-purple-600">
+                              {countryProfile.infrastructure_ranking.lpi_infrastructure_score}/5
+                            </p>
+                            <p className="text-xs text-purple-600 mt-1">Infrastructure</p>
+                          </div>
+                          
+                          <div className="bg-orange-50 p-3 rounded-lg text-center">
+                            <p className="text-xs font-semibold text-orange-700 mb-1">🚚 Score AIDI</p>
+                            <p className="text-2xl font-bold text-orange-600">
+                              {countryProfile.infrastructure_ranking.aidi_transport_score}/100
+                            </p>
+                            <p className="text-xs text-orange-600 mt-1">Transport</p>
+                          </div>
+                        </div>
+                        
+                        <div className="mt-4 bg-gray-50 p-3 rounded-lg">
+                          <p className="text-xs text-gray-700">
+                            <strong>IPL (Indice de Performance Logistique)</strong> : Évalue la qualité des infrastructures liées au commerce et au transport.
+                            <br />
+                            <strong>AIDI (Africa Infrastructure Development Index)</strong> : Mesure le développement des réseaux routiers, aériens et portuaires.
+                          </p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
                   <Card className="shadow-xl border-l-4 border-l-purple-500">
                     <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50">
                       <CardTitle className="text-lg font-bold text-purple-700 flex items-center gap-2">
