@@ -483,7 +483,15 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
             "zlecaf_ratification_date": commerce_data['zlecaf_ratification_date'],
             "investment_climate_score": "B+",
             "infrastructure_index": 6.7,
-            "business_environment_rank": real_data.get('africa_rank', 25)
+            "business_environment_rank": real_data.get('africa_rank', 25),
+            # Infrastructure data from CSV
+            "international_ports": commerce_data.get('infrastructure', {}).get('international_ports', 2),
+            "domestic_ports": commerce_data.get('infrastructure', {}).get('domestic_ports', 5),
+            "international_airports": commerce_data.get('infrastructure', {}).get('international_airports', 2),
+            "domestic_airports": commerce_data.get('infrastructure', {}).get('domestic_airports', 10),
+            "railways_km": commerce_data.get('infrastructure', {}).get('railways_km', 0),
+            "external_debt_gdp_pct": commerce_data.get('infrastructure', {}).get('external_debt_pct_gdp', 60.0),
+            "energy_cost_kwh": commerce_data.get('infrastructure', {}).get('energy_cost_usd_kwh', 0.20)
         }
         
         # Notations de risque 2024
