@@ -1711,20 +1711,24 @@ function ZLECAfCalculator() {
                         <div className="bg-red-50 p-2 rounded border-l-2 border-red-500">
                           <p className="text-xs font-semibold text-red-700">💳 Dette Ext.</p>
                           <p className="text-sm font-bold text-red-600">
-                            {countryProfile.projections?.external_debt_gdp_pct || '45'}% PIB
+                            {countryProfile.projections?.external_debt_gdp_pct ? 
+                              countryProfile.projections.external_debt_gdp_pct.toFixed(1) : '60.0'}% PIB
                           </p>
                         </div>
                         <div className="bg-yellow-50 p-2 rounded border-l-2 border-yellow-500">
                           <p className="text-xs font-semibold text-yellow-700">⚡ Énergie</p>
                           <p className="text-sm font-bold text-yellow-600">
-                            ${countryProfile.projections?.energy_cost_kwh || '0.12'}/kWh
+                            ${countryProfile.projections?.energy_cost_kwh ? 
+                              countryProfile.projections.energy_cost_kwh.toFixed(2) : '0.20'}/kWh
                           </p>
                         </div>
                         <div className="bg-gray-50 p-2 rounded border-l-2 border-gray-500">
-                          <p className="text-xs font-semibold text-gray-700">🛣️ Routes</p>
+                          <p className="text-xs font-semibold text-gray-700">🚂 Chemins de Fer</p>
                           <p className="text-sm font-bold text-gray-600">
-                            {countryProfile.projections?.paved_roads_km ? 
-                              (countryProfile.projections.paved_roads_km / 1000).toFixed(0) + 'k km' : 
+                            {countryProfile.projections?.railways_km ? 
+                              (countryProfile.projections.railways_km >= 1000 ? 
+                                (countryProfile.projections.railways_km / 1000).toFixed(1) + 'k km' :
+                                countryProfile.projections.railways_km + ' km') : 
                               'N/A'}
                           </p>
                         </div>
@@ -1732,6 +1736,16 @@ function ZLECAfCalculator() {
                           <p className="text-xs font-semibold text-blue-700">🚢 Ports</p>
                           <p className="text-sm font-bold text-blue-600">
                             {countryProfile.projections?.international_ports || '2'} int. / {countryProfile.projections?.domestic_ports || '5'} dom.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Aéroports */}
+                      <div className="grid grid-cols-1 md:grid-cols-1 gap-2 mb-4">
+                        <div className="bg-sky-50 p-2 rounded border-l-2 border-sky-500">
+                          <p className="text-xs font-semibold text-sky-700">✈️ Aéroports</p>
+                          <p className="text-sm font-bold text-sky-600">
+                            {countryProfile.projections?.international_airports || '2'} internationaux • {countryProfile.projections?.domestic_airports || '10'} domestiques
                           </p>
                         </div>
                       </div>
