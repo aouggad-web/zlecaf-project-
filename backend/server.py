@@ -21,7 +21,9 @@ from data_loader import (
     get_country_commerce_profile,
     get_all_countries_trade_performance,
     get_enhanced_statistics,
-    get_tariff_corrections
+    get_tariff_corrections,
+    get_country_customs_info,
+    get_country_infrastructure_ranking
 )
 
 ROOT_DIR = Path(__file__).parent
