@@ -144,3 +144,48 @@ def get_tariff_corrections() -> Dict:
     """Get updated tariff rates for normal and zlecaf"""
     corrections = load_corrections_data()
     return corrections.get('tariff_corrections', {})
+
+# Load customs data
+def load_customs_data():
+    """Load African customs administrations data"""
+    customs_path = ROOT_DIR / "douanes_africaines.json"
+    with open(customs_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+# Load infrastructure ranking data
+def load_infrastructure_ranking():
+    """Load African infrastructure ranking (IPL & AIDI)"""
+    ranking_path = ROOT_DIR / "classement_infrastructure_afrique.json"
+    with open(ranking_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+# Get customs info for a country
+def get_country_customs_info(country_name: str) -> Optional[Dict]:
+    """Get customs administration info for a specific country"""
+    customs_data = load_customs_data()
+    
+    # Match by country name (case-insensitive)
+    for entry in customs_data:
+        if entry['pays'].lower() == country_name.lower():
+            return {
+                'administration': entry['administration_douaniere'],
+                'website': entry['site_web'],
+                'offices': entry['bureaux_importants']
+            }
+    return None
+
+# Get infrastructure ranking for a country
+def get_country_infrastructure_ranking(country_name: str) -> Optional[Dict]:
+    """Get infrastructure ranking for a specific country"""
+    ranking_data = load_infrastructure_ranking()
+    
+    # Match by country name (case-insensitive)
+    for entry in ranking_data:
+        if entry['pays'].lower() == country_name.lower():
+            return {
+                'africa_rank': entry['rang_afrique'],
+                'lpi_infrastructure_score': entry['score_infrastructure_ipl'],
+                'lpi_world_rank': entry['rang_mondial_ipl'],
+                'aidi_transport_score': entry['score_transport_aidi']
+            }
+    return None
