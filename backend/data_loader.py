@@ -78,6 +78,17 @@ def get_country_commerce_profile(country_code: str) -> Optional[Dict]:
         'global_risk': row.get('Risque_Global_2024', 'Non évalué')
     }
     
+    # Infrastructure data
+    infrastructure = {
+        'international_ports': int(row['Ports_Internationaux']) if pd.notna(row.get('Ports_Internationaux')) else 1,
+        'domestic_ports': int(row['Ports_Domestiques']) if pd.notna(row.get('Ports_Domestiques')) else 2,
+        'international_airports': int(row['Aeroports_Internationaux']) if pd.notna(row.get('Aeroports_Internationaux')) else 1,
+        'domestic_airports': int(row['Aeroports_Domestiques']) if pd.notna(row.get('Aeroports_Domestiques')) else 5,
+        'railways_km': int(row['Chemins_Fer_KM']) if pd.notna(row.get('Chemins_Fer_KM')) else 0,
+        'external_debt_pct_gdp': float(row['Dette_Exterieure_Pct_PIB']) if pd.notna(row.get('Dette_Exterieure_Pct_PIB')) else 60.0,
+        'energy_cost_usd_kwh': float(row['Cout_Energie_USD_kWh']) if pd.notna(row.get('Cout_Energie_USD_kWh')) else 0.20
+    }
+    
     return {
         'country': row['Pays'],
         'code': row['Code_ISO'],
@@ -94,6 +105,7 @@ def get_country_commerce_profile(country_code: str) -> Optional[Dict]:
         'export_partners': export_partners,
         'import_partners': import_partners,
         'ratings': ratings,
+        'infrastructure': infrastructure,
         'zlecaf_ratified': row.get('ZLECAf_Ratifie', 'Non'),
         'zlecaf_ratification_date': row.get('Date_Ratification_ZLECAf', None),
         'sources': row.get('Sources_Principales', ''),
