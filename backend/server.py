@@ -498,6 +498,14 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
         
         # Notations de risque 2024
         profile.risk_ratings = commerce_data['ratings']
+        
+        # Customs information
+        customs_info = get_country_customs_info(commerce_data['country'])
+        profile.customs = customs_info if customs_info else {}
+        
+        # Infrastructure ranking
+        infra_ranking = get_country_infrastructure_ranking(commerce_data['country'])
+        profile.infrastructure_ranking = infra_ranking if infra_ranking else {}
     else:
         # Fallback to old data
         profile = CountryEconomicProfile(
