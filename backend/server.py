@@ -544,6 +544,14 @@ async def get_country_profile(country_code: str) -> CountryEconomicProfile:
             "scope": "NR",
             "global_risk": "Non évalué"
         })
+        
+        # Customs information
+        customs_info = get_country_customs_info(country['name'])
+        profile.customs = customs_info if customs_info else {}
+        
+        # Infrastructure ranking
+        infra_ranking = get_country_infrastructure_ranking(country['name'])
+        profile.infrastructure_ranking = infra_ranking if infra_ranking else {}
     
     return profile
 
