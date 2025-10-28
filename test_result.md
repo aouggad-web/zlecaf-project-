@@ -420,6 +420,18 @@ frontend:
           agent: "testing"
           comment: "✅ VALIDÉ: Intégration complète réussie - URL API externe https://trade-africa.preview.emergentagent.com/api fonctionnelle, appels API countries/statistics/country-profile opérationnels."
 
+  - task: "Profil pays Algérie - Données complètes et alignement"
+    implemented: true
+    working: true
+    file: "App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Test complet du profil Algérie selon review request. Navigation onglet 'Profils Pays' ✓, Sélection 'Algérie' ✓, Données économiques (PIB $278.0B, Pop 45.5M, IDH 0.745) ✓, Notations crédit (S&P B+, Moody's NR) ✓, Infrastructure (Dette 18.5%, Énergie $0.04/kWh, Railways 4.2k km, Ports 11/8, Aéroports 15/28) ✓, Commerce (Export Pétrole brut 35%, Gaz naturel 30%, Partenaires Italie/Espagne) ✓. Toutes données correctement alignées dans les bons champs. PROFIL ALGÉRIE 100% CONFORME."
+
 metadata:
   created_by: "testing_agent"
   version: "4.0"
