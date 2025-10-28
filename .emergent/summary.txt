@@ -1,100 +1,84 @@
 <analysis>
-The AI engineer successfully transformed a ZLECAf trade calculator application. Initially, it performed UI/design overhauls, adopting an African-inspired theme, integrating  for data visualization, and addressing multiple frontend issues like  errors and layout jumps across various sections (preview, country profiles, calculator) by implementing  and stabilizing CSS. Subsequently, the engineer integrated new tax calculations (TVA, other taxes) into the backend using  and updated the  and frontend () to display these. A strategic roadmap was then incorporated, adding new statistical projections and creating a dedicated Outils tab for relevant links. Finally, new data integration was initiated by analyzing user-provided CSV/Excel files to update the Trade Performance tables, specifically correcting intra-African trade data, adding historical years, and making the tables interactive with linked charts, explanations, and dynamic content like Algeria's trade data. The latest task involves integrating newly provided economic data files.
+The AI engineer's work primarily focused on enhancing the ZLECAf Trade Calculator application. Initially, the project involved integrating new economic data (, ) into the backend (, ) and updating the frontend (, ) for display. Key tasks included fixing numerous UI/data display bugs (blank pages, incorrect rates, static data), improving data visualization (charts, tables), refining UI aesthetics (font sizes, compactness), and correcting data accuracy (Algérie's GDP, distinguishing global vs. intra-African trade). The process involved iterative debugging, particularly for frontend rendering issues and backend CSV parsing errors. The latest interaction centered on verifying and updating country profile data, explicitly requested by the user.
 </analysis>
 
 <product_requirements>
-The ZLECAf Trade Calculator application, initially a basic MVP, requires significant enhancements. The core problem is to provide users with accurate trade calculations, comprehensive data visualization, and strategic insights into the African Continental Free Trade Area.
+The ZLECAf Trade Calculator application aims to provide accurate trade calculations, comprehensive data visualization, and strategic insights for the African Continental Free Trade Area.
 
 **Implemented features include:**
-1.  **UI/Design Improvement**: Modern, professional, African-inspired design with improved colors and layout.
-2.  **Enhanced Data Visualization**: Integration of charts and graphs using  for results, statistics, country profiles, and top producers.
-3.  **Frontend Stability Fixes**: Resolution of preview jump issues,  loop errors, and calculator layout instability.
-4.  **Tax Integration**: Incorporation of TVA, customs duties (DD), and other taxes into tariff calculations, based on provided Excel/CSV data.
-5.  **Strategic Data & Modules**: Display of AfCFTA strategic projections (macro gains, intra-African exports), a new Outils tab for links to NTB platforms, digital protocol, and GTI.
-6.  **Interactive Trade Performance**: Development of a Comparisons tab (later merged into Statistics) with interactive tables and charts showing intra-African trade performance, tariff savings, country-specific data, and historical years (2022-2024), explicitly correcting data source to OEC for intra-African trade figures.
-7.  **Data Analysis & Integration**: Analysis of user-provided , , ,  for tax data, and recent  for trade statistics.
+1.  **UI/Design Improvement**: Modern, African-inspired design with improved layouts.
+2.  **Enhanced Data Visualization**: Integration of charts/graphs using  for results, statistics, country profiles, and top producers.
+3.  **Frontend Stability Fixes**: Resolution of  errors and layout instability.
+4.  **Tax Integration**: Incorporation of TVA, customs duties, and other taxes.
+5.  **Strategic Data & Modules**: Display of AfCFTA strategic projections and an Outils tab for links.
+6.  **Interactive Trade Performance**: Statistics tab with interactive tables and charts for trade performance (global and intra-African), tariff savings, and historical years.
+7.  **Data Analysis & Integration**: Integration of new economic data (ZLECAf_Economic_Data_2024.csv, zlecaf_corrections_2024.json) into backend and frontend.
+8.  **Refined Country Profiles**: Display of enriched country data including trading partners, trade statistics, and credit ratings.
+9.  **Language Support**: Initial steps towards full English translation.
 </product_requirements>
 
 <key_technical_concepts>
 -   **Full-stack Architecture**: React (frontend), FastAPI (backend), MongoDB (database).
--   **UI/UX**: Tailwind CSS for styling, Recharts for data visualization.
--   **Frontend State Management**: React hooks (, ).
--   **API Communication**: Frontend uses , backend uses  prefix.
--   **Environment Variables**: , .
--   **Error Handling**: Debugging  loops, HTML syntax.
--   **Data Processing**: Python for backend logic, data parsing (Excel/CSV).
+-   **UI/UX**: Tailwind CSS, Recharts for data visualization, React hooks.
+-   **API Communication**: ,  prefix, .
+-   **Data Processing**: Python  for CSV/Excel, JSON parsing.
+-   **Error Handling**: Frontend (JavaScript errors, JSX syntax), Backend (CSV parsing).
+-   **Internationalization**: Frontend language switching.
 </key_technical_concepts>
 
 <code_architecture>
-The application follows a standard full-stack architecture:
 
 
-
--   **/app/backend/server.py**: The core FastAPI backend file. It defines API endpoints (, , ) and handles the logic for data fetching, tariff/tax calculations, and economic statistics.
-    -   **Changes Made**: Modified to include new tax calculations (TVA, other taxes) by importing , updated response models for tax breakdown, and enhanced the  endpoint with new strategic projections.
--   **/app/backend/tax_rates.py**: A newly created Python file to centralize tax rate data for various African countries, including standard TVA, statistical fees, and community levies.
-    -   **Changes Made**: Created with a dictionary-like structure mapping countries to their respective tax rates and calculation orders.
--   **/app/frontend/src/App.js**: The main React component orchestrating the application's UI, state, and API interactions. It contains the calculator, results, statistics, country profiles, rules of origin, and navigation tabs.
-    -   **Changes Made**: Extensively modified for UI redesign (African theme), integrated  for visualization, fixed  issues (applying , ), stabilized calculator layout, incorporated  and , reorganized tabs (merged Comparisons into Statistics, created Outils).
--   **/app/frontend/src/App.css**: Contains custom CSS styles, primarily for the African-inspired theme.
-    -   **Changes Made**: Added new styles for calculator buttons, forms, cards, top producers, tabs, and aggressive animation disabling for  elements to fix jump issues.
--   **/app/frontend/src/index.js**: The entry point for the React application.
-    -   **Changes Made**: Added a global fix for  issues, preventing rapid redraw loops.
--   **/app/frontend/src/components/OfficialLinksWidget.jsx**: A new React component to display links to official platforms (NTB, Digital Protocol, GTI).
-    -   **Changes Made**: Created to centralize and render these strategic links, integrated into the new Outils tab.
--   **/app/frontend/src/components/TradeComparison.jsx**: A new React component dedicated to displaying comparative trade data. It includes metric cards, interactive tables, and linked charts for trade performance, tariff economies, and key ZLECAf indicators.
-    -   **Changes Made**: Created to encapsulate trade comparison logic, implemented data fetching, interactive sorting, CSV export, filters, added Algeria's data, incorporated year selection (2022-2024), clarified data sources for intra-African trade, and linked a column chart to the table.
--   **/app/frontend/.env**: Contains environment variables for the frontend, notably .
-    -   **Changes Made**: None, adheres to the rule of not modifying .
--   **/app/test_result.md**: Stores problem statements, testing data, and communication logs.
-    -   **Changes Made**: Updated with backend test results and frontend preview screenshots.
+-   **/app/backend/server.py**: Core FastAPI backend.
+    -   **Summary**: Defines API endpoints, handles data, tariff/tax calculations.
+    -   **Changes Made**: Updated , ,  endpoints to use new data from  and . New  endpoint added. Logic for generating Top 10 exporters/importers and Top 5 GDP countries dynamically was implemented.
+-   **/app/backend/tax_rates.py**: Centralizes tax rate data.
+    -   **Summary**: Stores country-specific tax rates. No direct changes in trajectory, but used by .
+-   **/app/backend/data_loader.py**: Newly created module for data parsing.
+    -   **Summary**: Created to load  and  into memory for backend use. Handles data structuring.
+    -   **Changes Made**: Created to load CSV and JSON data.
+-   **/app/frontend/src/App.js**: Main React component.
+    -   **Summary**: Orchestrates UI, state, API interactions. Contains main tabs (calculator, statistics, country profiles, outils).
+    -   **Changes Made**: Extensive modifications for UI display of new statistics, country profile data (including new indicators, rankings, trade partners, formatted GDP). Fixed numerous JSX syntax errors. Standardized font sizes, updated tab translations, integrated  component.
+-   **/app/frontend/src/components/TradeComparison.jsx**: Displays comparative trade data.
+    -   **Summary**: Component for interactive tables and charts for trade performance.
+    -   **Changes Made**: Updated to fetch new 2024 trade data, corrected  usage. Refactored to display two distinct tables: Global Trade and Intra-African Trade, with non-signatory countries. Fixed  import. Applied font size reductions.
+-   **/app/frontend/src/components/StatisticsZaubaStyle.jsx**: New component for Zauba-inspired statistics.
+    -   **Summary**: Created to present statistics in a dashboard-like format.
+    -   **Changes Made**: Created to hold the Zauba-style statistics. Fixed JSX error related to objects as React children in PieChart.
+-   **/app/test_result.md**: Stores problem statements and test data.
+    -   **Summary**: Used for communication and testing protocol.
+    -   **Changes Made**: Updated with new test results and implementation notes.
+-   **/app/ZLECAf_ENRICHI_2024_COMMERCE.csv**: Main economic data source.
+    -   **Summary**: Contains comprehensive economic data for African countries.
+    -   **Changes Made**: Modified to correct PIB values for Nigeria, Egypt, and Algeria multiple times, leading to several CSV parsing error fixes. The header was also corrected to match data column count.
+-   **/app/zlecaf_corrections_2024.json**: Data for tariff and statistics corrections.
+    -   **Summary**: Contains specific corrections for tariffs and enhanced statistics.
+    -   **Changes Made**: Used as a source for  and  which were initially limited to 5 entries.
 </code_architecture>
 
 <pending_tasks>
--   **Integrate Gold CSV Files**: The user explicitly chose to integrate provided Gold CSV files (, , etc.) into the application. These specific files are not yet provided to the AI, and the AI cannot generate them.
+-   **Integrate Gold CSV Files**: The user explicitly chose to integrate provided Gold CSV files (, , etc.). These specific files are not yet provided.
 -   **Implement Lyra+ Prompts**: The full Lyra+ prompt template was shared, but the AI cannot execute it to extract data. This is a user responsibility.
--   **Complete New ZIP Analysis and Integration**: The analysis of  is ongoing, and the integration of the identified files into the application is pending.
+-   **Complete Country Profile Data Verification**: The user requested verification and update of country profile data regarding population, ratings, infrastructure (ports, airports, railways), external debt, and energy index.
 </pending_tasks>
 
 <current_work>
-Immediately prior to this summary request, the AI engineer was tasked with analyzing and integrating newly provided data files from a ZIP archive (). The primary goal is to use these files to update the application's data, particularly for the trade performance tables and potentially other economic indicators.
+Immediately prior to this summary request, the AI engineer was addressing data accuracy issues within the application. A significant recent focus was on correcting the GDP data for Algeria in the  file, ensuring it reflected the country's correct ranking (3rd) among African economies according to FMI/World Bank data. This involved several attempts to modify the CSV file using  and direct Python manipulation, leading to repeated CSV parsing errors (e.g., Expected 39 fields in line 3, saw 48 or Expected 39 fields in line 1, saw 43) due to incorrect column counts or header mismatches.
 
-The AI successfully downloaded the ZIP file and performed an LYRA_OPS_IMPLEMENTATION.md
-README.md
-ZLECAF_54_PAYS_DONNEES_COMPLETES.csv
-ZLECAF_COUNTRIES_DATA_EXTRACTION.md
-ZLECAF_DATA_UPDATED.csv
-ZLECAF_DONNEES_VALIDATION.xlsx
-ZLECAF_VALIDATION.csv
-ZLECAf_COMPLET_AVEC_NOTATIONS.csv
-ZLECAf_COMPLET_AVEC_NOTATIONS.xlsx
-ZLECAf_ENRICHI_2024_COMMERCE.csv
-analyze_validation_file.py
-apply_corrections.py
-backend/
-backend_test.py
-complete_excel_with_ratings.py
-country_data_updated.py
-create_complete_excel_final.py
-create_enhanced_excel_2024.py
-create_validation_file.py
-detailed_verification.py
-docs/
-export_validation_csv.py
-fix_tariffs_and_stats.py
-frontend/
-integrate_validated_data.py
-test_result.md
-test_results_detailed.json
-tests/
-update_all_countries.py
-validation_master.xlsx
-verify_data_quality.py
-zlecaf_corrections_2024.json command to list its contents, revealing several files including . The AI then initiated an analysis of this specific CSV file, noting that it contient des données économiques complètes 2024 pour 54 pays.
+The troubleshoot agent was invoked to identify the root cause, which was confirmed to be a discrepancy between the CSV header's column count (39) and the data rows' column count (43). The AI successfully fixed this by adding 4 generic columns to the header, allowing the CSV to load correctly and backend services to restart.
 
-The work is currently in the **data analysis phase** of integrating these new files. The AI has identified one key data source () from the provided archive, but has not yet detailed how this data will be used or started any code modifications for its integration into the backend or frontend. The previous discussion also involved the user providing specific Gold CSV files which are not yet supplied, so this new ZIP might contain some of those, or additional data to be processed. The AI is poised to identify which specific files from the archive are needed and then plan their integration into the application's backend (for processing) and frontend (for display).
+The last user request (Chat Message 627) is to further verify and update other specific data points within the country profiles, including:
+- Population numbers.
+- Rating data.
+- Infrastructure indicators (ports, airports, railways).
+- External debt.
+- Energy index.
+
+The AI engineer acknowledged this request and was about to begin the verification process for these country profile data points, starting by checking what is currently displayed. The current state is that the backend is healthy and the CSV parsing issues related to GDP have been resolved, with Algeria's GDP correctly displayed. However, the accuracy of other country profile metrics remains to be confirmed and potentially updated based on the user's latest feedback.
 </current_work>
 
 <optional_next_step>
-Continue analyzing the remaining files within the  to identify all necessary data sources for integration, then propose a plan for their backend and frontend incorporation.
+Verify and update population, rating, infrastructure, external debt, and energy index data in country profiles as per user's request.
 </optional_next_step>
+
