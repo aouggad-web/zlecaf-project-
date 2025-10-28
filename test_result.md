@@ -444,6 +444,18 @@ frontend:
           agent: "testing"
           comment: "❌ PROBLÈME IDENTIFIÉ: Test des 4 pays demandés révèle que seule l'Algérie a des données infrastructure complètes. Nigeria, Égypte et Afrique du Sud ont tous les champs infrastructure (external_debt_gdp_pct, energy_cost_kwh, railways_km, international_ports, domestic_ports, international_airports, domestic_airports) à null dans l'API backend. Seules les notations crédit de l'Afrique du Sud sont présentes (S&P BB-, Moody's Ba2). Les données attendues manquent: Nigeria (Dette 38.7%, Énergie $0.18/kWh, Railways 3.5k km, Ports 9/12, Aéroports 5/52), Égypte (Dette 95.2%, Énergie $0.09/kWh, Railways 5.2k km, Ports 15/28, Aéroports 20/72), Afrique du Sud (Dette 62.3%, Énergie $0.15/kWh, Railways 20.5k km, Ports 8/15, Aéroports 10/98)."
 
+  - task: "Profil Algérie - Nouvelles sections Douanes et Classement Infrastructure"
+    implemented: true
+    working: true
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ VALIDÉ: Test complet des nouvelles sections Douanes & Infrastructure pour l'Algérie selon review request. NAVIGATION: Onglet 'Profils Pays' accessible ✓, Sélection 'Algérie' opérationnelle ✓. SECTION DOUANES: Titre '🛃 Douanes & Administration' présent ✓, Administration Douanière 'Direction Générale des Douanes Algériennes' ✓, Site Web 'http://www.douane.gov.dz/' ✓, Bureaux Importants: Port d'Alger ✓, Port d'Oran ✓, Aéroport d'Alger ✓, Taleb Larbi (Frontière Tunisie) ✓. SECTION INFRASTRUCTURE: Titre '🏗️ Classement Infrastructure' présent ✓, Rang Afrique #21 ✓, Rang Mondial #102 ✓, Score IPL 2.3/5 ✓, Score AIDI 68.2/100 ✓. SECTIONS EXISTANTES: Toutes préservées (PIB, Population, IDH, Notations S&P/Moody's) ✓. Les deux nouvelles sections sont parfaitement implémentées et fonctionnelles."
+
 metadata:
   created_by: "testing_agent"
   version: "5.0"
