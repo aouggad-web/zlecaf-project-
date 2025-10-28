@@ -432,6 +432,18 @@ frontend:
           agent: "testing"
           comment: "✅ VALIDÉ: Test complet du profil Algérie selon review request. Navigation onglet 'Profils Pays' ✓, Sélection 'Algérie' ✓, Données économiques (PIB $278.0B, Pop 45.5M, IDH 0.745) ✓, Notations crédit (S&P B+, Moody's NR) ✓, Infrastructure (Dette 18.5%, Énergie $0.04/kWh, Railways 4.2k km, Ports 11/8, Aéroports 15/28) ✓, Commerce (Export Pétrole brut 35%, Gaz naturel 30%, Partenaires Italie/Espagne) ✓. Toutes données correctement alignées dans les bons champs. PROFIL ALGÉRIE 100% CONFORME."
 
+  - task: "Profils pays multiples - Données infrastructure Nigeria, Égypte, Afrique du Sud"
+    implemented: false
+    working: false
+    file: "backend/server.py, backend/country_data.py"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ PROBLÈME IDENTIFIÉ: Test des 4 pays demandés révèle que seule l'Algérie a des données infrastructure complètes. Nigeria, Égypte et Afrique du Sud ont tous les champs infrastructure (external_debt_gdp_pct, energy_cost_kwh, railways_km, international_ports, domestic_ports, international_airports, domestic_airports) à null dans l'API backend. Seules les notations crédit de l'Afrique du Sud sont présentes (S&P BB-, Moody's Ba2). Les données attendues manquent: Nigeria (Dette 38.7%, Énergie $0.18/kWh, Railways 3.5k km, Ports 9/12, Aéroports 5/52), Égypte (Dette 95.2%, Énergie $0.09/kWh, Railways 5.2k km, Ports 15/28, Aéroports 20/72), Afrique du Sud (Dette 62.3%, Énergie $0.15/kWh, Railways 20.5k km, Ports 8/15, Aéroports 10/98)."
+
 metadata:
   created_by: "testing_agent"
   version: "5.0"
