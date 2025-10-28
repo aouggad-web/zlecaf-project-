@@ -363,6 +363,8 @@ class CountryEconomicProfile(BaseModel):
     trade_profile: Dict[str, Any] = {}
     projections: Dict[str, Any] = {}
     risk_ratings: Dict[str, Any] = {}
+    customs: Dict[str, Any] = {}
+    infrastructure_ranking: Dict[str, Any] = {}
 
 # Routes
 @api_router.get("/")
