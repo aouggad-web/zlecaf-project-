@@ -51,6 +51,21 @@ Fichiers surveillés :
 
 ### Générer les données localement
 
+#### Option 1: Utiliser le script shell (Recommandé)
+
+```bash
+./afcfta_2025_datasets.sh --demo
+```
+
+Le script shell offre:
+- Vérification automatique des prérequis
+- Meilleure gestion des erreurs
+- Validation des fichiers générés
+- Messages colorés et informatifs
+- Options flexibles (--output, --help, etc.)
+
+#### Option 2: Utiliser directement Python
+
 ```bash
 python backend/make_release.py --demo
 ```
