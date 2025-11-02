@@ -1,0 +1,26 @@
+Les chiffres Abidjan 2024 viennent des annonces PAA de 2025 (40 Mt, 1,64 M EVP).  ￼
+	•	Tanger Med 2024 : 142 Mt, >10,2 M EVP.  ￼
+	•	Durban 2024 : volumes consolidés via TNPA.  ￼
+
+⸻
+
+5. Stratégie de remplissage “full Africa”
+	1.	Étape 1 – Harvest auto : on télécharge/scrape tout ce qui est public (PDF rapports annuels, pages “statistics”, communiqués 2024–2025).
+	2.	Étape 2 – Normalisation : on aligne les champs vers le modèle ci-dessus (année, tonnes, TEU, calls).
+	3.	Étape 3 – Enrichissement agents/lignes : on crée une petite table “port → communautés portuaires → agents déclarés” + on ajoute les grands armateurs présents en Afrique (MSC, Maersk, CMA CGM, Hapag-Lloyd, PIL, Arkas, Grimaldi). L’actualité PIL à Tema/Ghana montre l’utilité de surveiller ces annonces.  ￼
+	4.	Étape 4 – Exposition dans ton app : un onglet “Logistique” qui se filtre par pays et par port, et qui calcule en temps réel : part du port dans le trafic maritime national + rang CPPI (si dispo).
+
+⸻
+
+6. Ce qu’il faudra prévoir dans ton repo ZLECAf
+	•	/data/logistics/ports_master.json (référentiel)
+	•	/data/logistics/ports_stats_YYYY.json (stats annuelles)
+	•	/data/logistics/ports_agents.json
+	•	/data/logistics/ports_services.json
+	•	un petit validateur (ton fameux validation_...) pour vérifier : country_iso, un_locode, year, source_url ≠ null.
+
+⸻
+
+7. Remarque réaliste
+
+Les consignataires et les lignes régulières sont les moins standardisés : il faudra accepter un niveau “80 % auto / 20 % manuel” car tous les ports africains ne publient pas la liste à jour. On le marque dans le dataset : completeness = high|medium|low.
