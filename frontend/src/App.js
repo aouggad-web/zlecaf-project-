@@ -16,6 +16,9 @@ import { Toaster } from './components/ui/toaster';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import TradeComparison from './components/TradeComparison';
 import StatisticsZaubaStyle from './components/StatisticsZaubaStyle';
+import LogisticsMap from './components/logistics/LogisticsMap';
+import PortCard from './components/logistics/PortCard';
+import PortDetailsModal from './components/logistics/PortDetailsModal';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
