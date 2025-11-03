@@ -482,7 +482,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Tests Logistique Maritime COMPLÉTÉS avec succès"
+    - "Tests Enriched Port Details Modal Tanger Med COMPLÉTÉS avec succès"
   stuck_tasks:
     - "Profils pays multiples - Données infrastructure Nigeria, Égypte, Afrique du Sud"
   test_all: false
