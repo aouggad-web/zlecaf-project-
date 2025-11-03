@@ -1032,6 +1032,130 @@ async def get_trade_performance_intra_african():
         "note": "Les pourcentages intra-africains varient selon l'intégration régionale (SADC, EAC, CEDEAO, etc.)"
     }
 
+# ==========================================
+# LOGISTICS MARITIME ENDPOINTS
+# ==========================================
+
+@api_router.get("/logistics/ports")
+async def get_ports(country_iso: Optional[str] = None):
+    """
+    Get all maritime ports or filter by country ISO code
+    Query params:
+    - country_iso: Filter ports by country (e.g., MAR, NGA, ZAF)
+    """
+    try:
+        ports = get_all_ports(country_iso=country_iso)
+        return {
+            "count": len(ports),
+            "ports": ports
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error loading ports data: {str(e)}")
+
+@api_router.get("/logistics/ports/{port_id}")
+async def get_port_details(port_id: str):
+    """
+    Get detailed information for a specific port
+    """
+    port = get_port_by_id(port_id)
+    
+    if not port:
+        raise HTTPException(status_code=404, detail=f"Port {port_id} not found")
+    
+    return port
+
+@api_router.get("/logistics/ports/type/{port_type}")
+async def get_ports_filtered_by_type(port_type: str):
+    """
+    Get ports filtered by type
+    Port types: Hub Transhipment, Hub Regional, Maritime Commercial
+    """
+    valid_types = ["Hub Transhipment", "Hub Regional", "Maritime Commercial"]
+    
+    if port_type not in valid_types:
+        raise HTTPException(
+            status_code=400, 
+            detail=f"Invalid port type. Valid types: {', '.join(valid_types)}"
+        )
+    
+    ports = get_ports_by_type(port_type)
+    return {
+        "port_type": port_type,
+        "count": len(ports),
+        "ports": ports
+    }
+
+@api_router.get("/logistics/ports/top/teu")
+async def get_top_ports_teu(limit: int = 20):
+    """
+    Get top ports by container throughput (TEU)
+    Query params:
+    - limit: Number of ports to return (default: 20, max: 50)
+    """
+    if limit > 50:
+        limit = 50
+    
+    ports = get_top_ports_by_teu(limit=limit)
+    return {
+        "count": len(ports),
+        "ports": ports
+    }
+
+@api_router.get("/logistics/ports/search")
+async def search_ports_endpoint(q: str):
+    """
+    Search ports by name, UN LOCODE, or country name
+    Query params:
+    - q: Search query string
+    """
+    if len(q) < 2:
+        raise HTTPException(status_code=400, detail="Search query must be at least 2 characters")
+    
+    results = search_ports(q)
+    return {
+        "query": q,
+        "count": len(results),
+        "results": results
+    }
+
+@api_router.get("/logistics/statistics")
+async def get_logistics_statistics():
+    """
+    Get global logistics statistics for African ports
+    """
+    all_ports = get_all_ports()
+    
+    total_teu = sum(
+        p.get('latest_stats', {}).get('container_throughput_teu', 0) 
+        for p in all_ports
+    )
+    
+    total_cargo = sum(
+        p.get('latest_stats', {}).get('cargo_throughput_tons', 0) 
+        for p in all_ports
+    )
+    
+    # Count ports by type
+    port_types = {}
+    for port in all_ports:
+        ptype = port.get('port_type', 'Unknown')
+        port_types[ptype] = port_types.get(ptype, 0) + 1
+    
+    # Count ports by country
+    ports_by_country = {}
+    for port in all_ports:
+        country = port.get('country_name', 'Unknown')
+        ports_by_country[country] = ports_by_country.get(country, 0) + 1
+    
+    return {
+        "total_ports": len(all_ports),
+        "total_container_throughput_teu": total_teu,
+        "total_cargo_throughput_tons": total_cargo,
+        "ports_by_type": port_types,
+        "ports_by_country": dict(sorted(ports_by_country.items(), key=lambda x: x[1], reverse=True)),
+        "year": 2024
+    }
+
 # Include the router in the main app
 app.include_router(api_router)
 
