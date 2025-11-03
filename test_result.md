@@ -456,6 +456,18 @@ frontend:
           agent: "testing"
           comment: "✅ VALIDÉ: Test complet des nouvelles sections Douanes & Infrastructure pour l'Algérie selon review request. NAVIGATION: Onglet 'Profils Pays' accessible ✓, Sélection 'Algérie' opérationnelle ✓. SECTION DOUANES: Titre '🛃 Douanes & Administration' présent ✓, Administration Douanière 'Direction Générale des Douanes Algériennes' ✓, Site Web 'http://www.douane.gov.dz/' ✓, Bureaux Importants: Port d'Alger ✓, Port d'Oran ✓, Aéroport d'Alger ✓, Taleb Larbi (Frontière Tunisie) ✓. SECTION INFRASTRUCTURE: Titre '🏗️ Classement Infrastructure' présent ✓, Rang Afrique #21 ✓, Rang Mondial #102 ✓, Score IPL 2.3/5 ✓, Score AIDI 68.2/100 ✓. SECTIONS EXISTANTES: Toutes préservées (PIB, Population, IDH, Notations S&P/Moody's) ✓. Les deux nouvelles sections sont parfaitement implémentées et fonctionnelles."
 
+  - task: "Onglet Logistique Maritime - Nouvelle fonctionnalité ports africains"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/App.js, frontend/src/components/logistics/"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "NOUVEAU: Onglet 'Logistique Maritime' détecté dans l'application avec composants LogisticsMap, PortCard, PortDetailsModal. Backend endpoints /api/logistics/ports implémentés avec données ports_africains.json (52 ports). Fonctionnalités: carte interactive Leaflet, filtrage par pays, vue carte/liste, détails ports avec agents maritimes et lignes régulières. Nécessite test complet selon review request."
+
 metadata:
   created_by: "testing_agent"
   version: "5.0"
