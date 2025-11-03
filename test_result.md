@@ -474,6 +474,18 @@ frontend:
           agent: "testing"
           comment: "🎉 TESTS ENRICHED PORT DETAILS MODAL VALIDÉS - Test spécifique du Port de Tanger Med avec données enrichies selon review request réussi à 100%. ✅ NAVIGATION: Filtrage Maroc (3 ports) ✓, Clic 'Voir les détails' Tanger Med ✓. ✅ MODAL HEADER: Titre 'Port de Tanger Med' ✓, Badge Performance A (vert) ✓, Badges pays/type ✓. ✅ 5 KPI CARDS: TEU 8.2M ✓, Tonnes 96M ✓, Escales 4200 ✓, Temps Port 14.5h ✓, Attente 3.2h ✓. ✅ INDICATEURS AVANCÉS: Productivité 35 mouvements/heure ✓, LSCI 41.88/100 (#52 mondial) ✓. ✅ AGENTS TAB: 15 agents maritimes ✓, Compagnies chinoises (COSCO, Evergreen, ONE, Yang Ming) ✓. ✅ SERVICES TAB: 10 lignes régulières ✓, Transporteurs chinois (COSCO, ONE, Evergreen, Yang Ming, HMM) ✓. ✅ STATS TAB: 3 graphiques historiques 2020-2024 ✓, Tableau comparatif annuel (6 colonnes) ✓. ✅ INFO TAB: Coordonnées GPS disponibles ✓. TOUTES LES DONNÉES ENRICHIES DEMANDÉES SONT PARFAITEMENT AFFICHÉES."
 
+  - task: "Onglet Logistique Aérienne - Nouvelle fonctionnalité aéroports africains"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/App.js, frontend/src/components/logistics/, backend/server.py, backend/logistics_air_data.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "IMPLÉMENTATION EN COURS: Backend endpoints /api/logistics/air/* créés (airports, airport details, top cargo, search, statistics). Frontend composants créés: AirportCard.jsx, AirportDetailsModal.jsx, AirLogisticsMap.jsx. Données airports_africains.json avec 8 aéroports pilotes (JNB, CAI, NBO, ADD, CMN, LOS, ABJ, ACC). Structure parallèle à maritime: stats historiques 2020-2024, acteurs (airlines, handlers, forwarders), routes régulières. Nécessite intégration dans App.js et tests complets."
+
 metadata:
   created_by: "testing_agent"
   version: "5.0"
