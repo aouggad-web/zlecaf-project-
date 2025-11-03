@@ -25,6 +25,13 @@ from data_loader import (
     get_country_customs_info,
     get_country_infrastructure_ranking
 )
+from logistics_data import (
+    get_all_ports,
+    get_port_by_id,
+    get_ports_by_type,
+    get_top_ports_by_teu,
+    search_ports
+)
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
