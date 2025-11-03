@@ -2469,5 +2469,1081 @@
     },
     "agents": [],
     "services": []
+  },
+  {
+    "port_id": "MRT-NDB-f546f00d",
+    "port_name": "Port de Nouadhibou",
+    "country_iso": "MRT",
+    "country_name": "Mauritanie",
+    "city": "Nouadhibou",
+    "port_type": "commercial",
+    "geo_lat": 20.9333,
+    "geo_lon": -17.0333,
+    "max_draft_meters": 12.5,
+    "quay_length_meters": 1800,
+    "storage_area_sqm": 85000,
+    "annual_capacity_teu": 0,
+    "annual_capacity_tons": 850000,
+    "has_container_terminal": false,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Port de pêche et minerai de fer, zone franche",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 720000,
+        "ship_calls": 850,
+        "avg_time_in_port_hours": 28.0,
+        "avg_waiting_time_hours": 6.5
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 685000,
+        "ship_calls": 820,
+        "avg_time_in_port_hours": 29.0,
+        "avg_waiting_time_hours": 7.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 650000,
+        "ship_calls": 780,
+        "avg_time_in_port_hours": 30.0,
+        "avg_waiting_time_hours": 7.5
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 12.5,
+      "lsci_rank_global": 185,
+      "productivity_moves_per_hour": 15,
+      "performance_grade": "C"
+    },
+    "agents": [
+      {
+        "agent_name": "SMCP Mauritanie",
+        "agent_type": "shipping_agent",
+        "specialization": "Bulk cargo"
+      },
+      {
+        "agent_name": "Bolloré Africa Logistics",
+        "agent_type": "freight_forwarder",
+        "specialization": "General cargo"
+      }
+    ],
+    "regular_services": [
+      {
+        "carrier": "CMA CGM",
+        "service_name": "WAFMAX",
+        "frequency": "Monthly",
+        "route": "Europe-West Africa"
+      }
+    ]
+  },
+  {
+    "port_id": "SEN-ZIG-f7f4da70",
+    "port_name": "Port de Ziguinchor",
+    "country_iso": "SEN",
+    "country_name": "Sénégal",
+    "city": "Ziguinchor",
+    "port_type": "regional",
+    "geo_lat": 12.5833,
+    "geo_lon": -16.2667,
+    "max_draft_meters": 8.0,
+    "quay_length_meters": 450,
+    "storage_area_sqm": 25000,
+    "annual_capacity_teu": 0,
+    "annual_capacity_tons": 120000,
+    "has_container_terminal": false,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Port régional Casamance, cargo général",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 85000,
+        "ship_calls": 280,
+        "avg_time_in_port_hours": 36.0,
+        "avg_waiting_time_hours": 10.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 78000,
+        "ship_calls": 265,
+        "avg_time_in_port_hours": 38.0,
+        "avg_waiting_time_hours": 11.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 72000,
+        "ship_calls": 250,
+        "avg_time_in_port_hours": 40.0,
+        "avg_waiting_time_hours": 12.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 8.2,
+      "lsci_rank_global": 225,
+      "productivity_moves_per_hour": 12,
+      "performance_grade": "D"
+    },
+    "agents": [
+      {
+        "agent_name": "GETMA Sénégal",
+        "agent_type": "shipping_agent",
+        "specialization": "General cargo"
+      }
+    ],
+    "regular_services": []
+  },
+  {
+    "port_id": "GMB-BJL-b5e0fb39",
+    "port_name": "Port de Banjul",
+    "country_iso": "GMB",
+    "country_name": "Gambie",
+    "city": "Banjul",
+    "port_type": "commercial",
+    "geo_lat": 13.4549,
+    "geo_lon": -16.579,
+    "max_draft_meters": 9.5,
+    "quay_length_meters": 680,
+    "storage_area_sqm": 42000,
+    "annual_capacity_teu": 8000,
+    "annual_capacity_tons": 250000,
+    "has_container_terminal": true,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Principal port Gambie, estuaire Gambie River",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 6500,
+        "cargo_throughput_tons": 195000,
+        "ship_calls": 420,
+        "avg_time_in_port_hours": 32.0,
+        "avg_waiting_time_hours": 9.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 6100,
+        "cargo_throughput_tons": 182000,
+        "ship_calls": 400,
+        "avg_time_in_port_hours": 34.0,
+        "avg_waiting_time_hours": 10.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 5800,
+        "cargo_throughput_tons": 170000,
+        "ship_calls": 385,
+        "avg_time_in_port_hours": 36.0,
+        "avg_waiting_time_hours": 11.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 10.5,
+      "lsci_rank_global": 205,
+      "productivity_moves_per_hour": 14,
+      "performance_grade": "C"
+    },
+    "agents": [
+      {
+        "agent_name": "GPA Gambia Ports Authority",
+        "agent_type": "port_authority",
+        "specialization": "All cargo"
+      },
+      {
+        "agent_name": "Maersk Gambia",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      }
+    ],
+    "regular_services": [
+      {
+        "carrier": "Maersk Line",
+        "service_name": "WAFMAX",
+        "frequency": "Weekly",
+        "route": "Europe-West Africa"
+      }
+    ]
+  },
+  {
+    "port_id": "SLE-FNA-9b70b534",
+    "port_name": "Port de Freetown",
+    "country_iso": "SLE",
+    "country_name": "Sierra Leone",
+    "city": "Freetown",
+    "port_type": "commercial",
+    "geo_lat": 8.49,
+    "geo_lon": -13.2342,
+    "max_draft_meters": 10.0,
+    "quay_length_meters": 920,
+    "storage_area_sqm": 58000,
+    "annual_capacity_teu": 12000,
+    "annual_capacity_tons": 380000,
+    "has_container_terminal": true,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Deep natural harbor, Queen Elizabeth II Quay",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 9500,
+        "cargo_throughput_tons": 295000,
+        "ship_calls": 520,
+        "avg_time_in_port_hours": 38.0,
+        "avg_waiting_time_hours": 12.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 8800,
+        "cargo_throughput_tons": 275000,
+        "ship_calls": 490,
+        "avg_time_in_port_hours": 40.0,
+        "avg_waiting_time_hours": 13.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 8200,
+        "cargo_throughput_tons": 260000,
+        "ship_calls": 465,
+        "avg_time_in_port_hours": 42.0,
+        "avg_waiting_time_hours": 14.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 11.8,
+      "lsci_rank_global": 195,
+      "productivity_moves_per_hour": 13,
+      "performance_grade": "C"
+    },
+    "agents": [
+      {
+        "agent_name": "Sierra Leone Ports Authority",
+        "agent_type": "port_authority",
+        "specialization": "All cargo"
+      },
+      {
+        "agent_name": "Maersk Sierra Leone",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      }
+    ],
+    "regular_services": [
+      {
+        "carrier": "Maersk Line",
+        "service_name": "WAFMAX",
+        "frequency": "Weekly",
+        "route": "Europe-West Africa"
+      }
+    ]
+  },
+  {
+    "port_id": "LBR-MLW-2d027bfe",
+    "port_name": "Port de Monrovia",
+    "country_iso": "LBR",
+    "country_name": "Libéria",
+    "city": "Monrovia",
+    "port_type": "commercial",
+    "geo_lat": 6.3156,
+    "geo_lon": -10.7956,
+    "max_draft_meters": 11.0,
+    "quay_length_meters": 1250,
+    "storage_area_sqm": 75000,
+    "annual_capacity_teu": 25000,
+    "annual_capacity_tons": 650000,
+    "has_container_terminal": true,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Port Freeport of Monrovia, modernisé APM Terminals",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 19500,
+        "cargo_throughput_tons": 520000,
+        "ship_calls": 680,
+        "avg_time_in_port_hours": 30.0,
+        "avg_waiting_time_hours": 8.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 18200,
+        "cargo_throughput_tons": 485000,
+        "ship_calls": 650,
+        "avg_time_in_port_hours": 32.0,
+        "avg_waiting_time_hours": 9.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 17000,
+        "cargo_throughput_tons": 455000,
+        "ship_calls": 620,
+        "avg_time_in_port_hours": 34.0,
+        "avg_waiting_time_hours": 10.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 15.2,
+      "lsci_rank_global": 165,
+      "productivity_moves_per_hour": 18,
+      "performance_grade": "C+"
+    },
+    "agents": [
+      {
+        "agent_name": "APM Terminals Liberia",
+        "agent_type": "terminal_operator",
+        "specialization": "Containers"
+      },
+      {
+        "agent_name": "Maersk Liberia",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      },
+      {
+        "agent_name": "MSC Liberia",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      }
+    ],
+    "regular_services": [
+      {
+        "carrier": "Maersk Line",
+        "service_name": "WAFMAX",
+        "frequency": "Weekly",
+        "route": "Europe-West Africa"
+      },
+      {
+        "carrier": "MSC",
+        "service_name": "West Africa Express",
+        "frequency": "Weekly",
+        "route": "Europe-West Africa"
+      }
+    ]
+  },
+  {
+    "port_id": "LBR-BUC-9895806e",
+    "port_name": "Port de Buchanan",
+    "country_iso": "LBR",
+    "country_name": "Libéria",
+    "city": "Buchanan",
+    "port_type": "bulk",
+    "geo_lat": 5.8808,
+    "geo_lon": -10.0467,
+    "max_draft_meters": 15.0,
+    "quay_length_meters": 580,
+    "storage_area_sqm": 45000,
+    "annual_capacity_teu": 0,
+    "annual_capacity_tons": 1200000,
+    "has_container_terminal": false,
+    "has_roro": false,
+    "has_bulk": true,
+    "port_infra_notes": "Port minier minerai de fer, ArcelorMittal",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 950000,
+        "ship_calls": 320,
+        "avg_time_in_port_hours": 24.0,
+        "avg_waiting_time_hours": 5.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 890000,
+        "ship_calls": 305,
+        "avg_time_in_port_hours": 25.0,
+        "avg_waiting_time_hours": 5.5
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 820000,
+        "ship_calls": 285,
+        "avg_time_in_port_hours": 26.0,
+        "avg_waiting_time_hours": 6.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 9.5,
+      "lsci_rank_global": 215,
+      "productivity_moves_per_hour": 22,
+      "performance_grade": "C"
+    },
+    "agents": [
+      {
+        "agent_name": "ArcelorMittal Liberia",
+        "agent_type": "terminal_operator",
+        "specialization": "Bulk iron ore"
+      }
+    ],
+    "regular_services": []
+  },
+  {
+    "port_id": "GNQ-MAL-82fd1f50",
+    "port_name": "Port de Malabo",
+    "country_iso": "GNQ",
+    "country_name": "Guinée Équatoriale",
+    "city": "Malabo",
+    "port_type": "commercial",
+    "geo_lat": 3.7558,
+    "geo_lon": 8.7844,
+    "max_draft_meters": 10.0,
+    "quay_length_meters": 720,
+    "storage_area_sqm": 48000,
+    "annual_capacity_teu": 8000,
+    "annual_capacity_tons": 280000,
+    "has_container_terminal": true,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Port sur île Bioko, cargo pétrolier et général",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 6200,
+        "cargo_throughput_tons": 215000,
+        "ship_calls": 380,
+        "avg_time_in_port_hours": 34.0,
+        "avg_waiting_time_hours": 10.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 5800,
+        "cargo_throughput_tons": 200000,
+        "ship_calls": 360,
+        "avg_time_in_port_hours": 36.0,
+        "avg_waiting_time_hours": 11.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 5400,
+        "cargo_throughput_tons": 185000,
+        "ship_calls": 340,
+        "avg_time_in_port_hours": 38.0,
+        "avg_waiting_time_hours": 12.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 10.8,
+      "lsci_rank_global": 200,
+      "productivity_moves_per_hour": 14,
+      "performance_grade": "C"
+    },
+    "agents": [
+      {
+        "agent_name": "Gepetrol",
+        "agent_type": "shipping_agent",
+        "specialization": "Oil & gas"
+      },
+      {
+        "agent_name": "CMA CGM Equatorial Guinea",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      }
+    ],
+    "regular_services": []
+  },
+  {
+    "port_id": "STP-TMS-c9d3f1be",
+    "port_name": "Port de São Tomé",
+    "country_iso": "STP",
+    "country_name": "São Tomé-et-Príncipe",
+    "city": "São Tomé",
+    "port_type": "regional",
+    "geo_lat": 0.3365,
+    "geo_lon": 6.7273,
+    "max_draft_meters": 8.5,
+    "quay_length_meters": 380,
+    "storage_area_sqm": 18000,
+    "annual_capacity_teu": 3000,
+    "annual_capacity_tons": 85000,
+    "has_container_terminal": true,
+    "has_roro": true,
+    "has_bulk": false,
+    "port_infra_notes": "Petit port insulaire, cargo cacao et café",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 2200,
+        "cargo_throughput_tons": 62000,
+        "ship_calls": 180,
+        "avg_time_in_port_hours": 42.0,
+        "avg_waiting_time_hours": 14.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 2000,
+        "cargo_throughput_tons": 58000,
+        "ship_calls": 170,
+        "avg_time_in_port_hours": 44.0,
+        "avg_waiting_time_hours": 15.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 1850,
+        "cargo_throughput_tons": 54000,
+        "ship_calls": 160,
+        "avg_time_in_port_hours": 46.0,
+        "avg_waiting_time_hours": 16.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 6.5,
+      "lsci_rank_global": 245,
+      "productivity_moves_per_hour": 10,
+      "performance_grade": "D"
+    },
+    "agents": [
+      {
+        "agent_name": "ENAPORT",
+        "agent_type": "port_authority",
+        "specialization": "All cargo"
+      }
+    ],
+    "regular_services": []
+  },
+  {
+    "port_id": "COG-PNR-40c582e7",
+    "port_name": "Port de Pointe-Noire",
+    "country_iso": "COG",
+    "country_name": "Congo",
+    "city": "Pointe-Noire",
+    "port_type": "commercial",
+    "geo_lat": -4.7953,
+    "geo_lon": 11.8638,
+    "max_draft_meters": 12.0,
+    "quay_length_meters": 1450,
+    "storage_area_sqm": 95000,
+    "annual_capacity_teu": 65000,
+    "annual_capacity_tons": 1800000,
+    "has_container_terminal": true,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Principal port Congo, hub pétrole et bois, terminal conteneurs moderne",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 52000,
+        "cargo_throughput_tons": 1520000,
+        "ship_calls": 920,
+        "avg_time_in_port_hours": 26.0,
+        "avg_waiting_time_hours": 7.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 48500,
+        "cargo_throughput_tons": 1425000,
+        "ship_calls": 880,
+        "avg_time_in_port_hours": 28.0,
+        "avg_waiting_time_hours": 8.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 45000,
+        "cargo_throughput_tons": 1350000,
+        "ship_calls": 840,
+        "avg_time_in_port_hours": 30.0,
+        "avg_waiting_time_hours": 9.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 18.5,
+      "lsci_rank_global": 145,
+      "productivity_moves_per_hour": 20,
+      "performance_grade": "B"
+    },
+    "agents": [
+      {
+        "agent_name": "Bolloré Africa Logistics Congo",
+        "agent_type": "terminal_operator",
+        "specialization": "Containers"
+      },
+      {
+        "agent_name": "CMA CGM Congo",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      },
+      {
+        "agent_name": "MSC Congo",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      }
+    ],
+    "regular_services": [
+      {
+        "carrier": "CMA CGM",
+        "service_name": "MEDGULF",
+        "frequency": "Weekly",
+        "route": "Mediterranean-West Africa"
+      },
+      {
+        "carrier": "MSC",
+        "service_name": "South Africa Express",
+        "frequency": "Weekly",
+        "route": "Europe-Southern Africa"
+      }
+    ]
+  },
+  {
+    "port_id": "NAM-WVB-77bf36b5",
+    "port_name": "Port de Walvis Bay",
+    "country_iso": "NAM",
+    "country_name": "Namibie",
+    "city": "Walvis Bay",
+    "port_type": "commercial",
+    "geo_lat": -22.9575,
+    "geo_lon": 14.5053,
+    "max_draft_meters": 14.0,
+    "quay_length_meters": 2100,
+    "storage_area_sqm": 125000,
+    "annual_capacity_teu": 750000,
+    "annual_capacity_tons": 2200000,
+    "has_container_terminal": true,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Hub Southern Africa, nouveau terminal conteneurs, gateway vers Botswana et Zambie",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 580000,
+        "cargo_throughput_tons": 1850000,
+        "ship_calls": 1250,
+        "avg_time_in_port_hours": 18.0,
+        "avg_waiting_time_hours": 4.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 540000,
+        "cargo_throughput_tons": 1720000,
+        "ship_calls": 1200,
+        "avg_time_in_port_hours": 19.0,
+        "avg_waiting_time_hours": 4.5
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 495000,
+        "cargo_throughput_tons": 1600000,
+        "ship_calls": 1150,
+        "avg_time_in_port_hours": 20.0,
+        "avg_waiting_time_hours": 5.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 28.5,
+      "lsci_rank_global": 85,
+      "productivity_moves_per_hour": 32,
+      "performance_grade": "A-"
+    },
+    "agents": [
+      {
+        "agent_name": "Namport",
+        "agent_type": "port_authority",
+        "specialization": "All cargo"
+      },
+      {
+        "agent_name": "Maersk Namibia",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      },
+      {
+        "agent_name": "MSC Namibia",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      },
+      {
+        "agent_name": "CMA CGM Namibia",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      }
+    ],
+    "regular_services": [
+      {
+        "carrier": "Maersk Line",
+        "service_name": "Southern Africa Express",
+        "frequency": "Weekly",
+        "route": "Asia-Southern Africa"
+      },
+      {
+        "carrier": "MSC",
+        "service_name": "South Africa Express",
+        "frequency": "Weekly",
+        "route": "Europe-Southern Africa"
+      }
+    ]
+  },
+  {
+    "port_id": "ERI-MSW-8ba28755",
+    "port_name": "Port de Massawa",
+    "country_iso": "ERI",
+    "country_name": "Érythrée",
+    "city": "Massawa",
+    "port_type": "commercial",
+    "geo_lat": 15.6086,
+    "geo_lon": 39.4522,
+    "max_draft_meters": 10.5,
+    "quay_length_meters": 850,
+    "storage_area_sqm": 52000,
+    "annual_capacity_teu": 15000,
+    "annual_capacity_tons": 420000,
+    "has_container_terminal": true,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Principal port Érythrée, Mer Rouge",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 11000,
+        "cargo_throughput_tons": 320000,
+        "ship_calls": 450,
+        "avg_time_in_port_hours": 40.0,
+        "avg_waiting_time_hours": 13.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 10200,
+        "cargo_throughput_tons": 295000,
+        "ship_calls": 420,
+        "avg_time_in_port_hours": 42.0,
+        "avg_waiting_time_hours": 14.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 9500,
+        "cargo_throughput_tons": 275000,
+        "ship_calls": 400,
+        "avg_time_in_port_hours": 44.0,
+        "avg_waiting_time_hours": 15.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 11.2,
+      "lsci_rank_global": 198,
+      "productivity_moves_per_hour": 13,
+      "performance_grade": "C"
+    },
+    "agents": [
+      {
+        "agent_name": "Eritrean Shipping Lines",
+        "agent_type": "shipping_agent",
+        "specialization": "All cargo"
+      }
+    ],
+    "regular_services": []
+  },
+  {
+    "port_id": "ERI-ASB-d22efa85",
+    "port_name": "Port d'Assab",
+    "country_iso": "ERI",
+    "country_name": "Érythrée",
+    "city": "Assab",
+    "port_type": "commercial",
+    "geo_lat": 13.0094,
+    "geo_lon": 42.7397,
+    "max_draft_meters": 11.0,
+    "quay_length_meters": 620,
+    "storage_area_sqm": 38000,
+    "annual_capacity_teu": 5000,
+    "annual_capacity_tons": 250000,
+    "has_container_terminal": false,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Port secondaire, raffinerie pétrole",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 185000,
+        "ship_calls": 320,
+        "avg_time_in_port_hours": 38.0,
+        "avg_waiting_time_hours": 12.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 172000,
+        "ship_calls": 300,
+        "avg_time_in_port_hours": 40.0,
+        "avg_waiting_time_hours": 13.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 160000,
+        "ship_calls": 285,
+        "avg_time_in_port_hours": 42.0,
+        "avg_waiting_time_hours": 14.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 8.8,
+      "lsci_rank_global": 218,
+      "productivity_moves_per_hour": 11,
+      "performance_grade": "D+"
+    },
+    "agents": [
+      {
+        "agent_name": "Eritrean Shipping Lines",
+        "agent_type": "shipping_agent",
+        "specialization": "Bulk cargo"
+      }
+    ],
+    "regular_services": []
+  },
+  {
+    "port_id": "SYC-VIC-17c715f3",
+    "port_name": "Port Victoria",
+    "country_iso": "SYC",
+    "country_name": "Seychelles",
+    "city": "Victoria",
+    "port_type": "commercial",
+    "geo_lat": -4.6236,
+    "geo_lon": 55.4544,
+    "max_draft_meters": 10.0,
+    "quay_length_meters": 580,
+    "storage_area_sqm": 32000,
+    "annual_capacity_teu": 8000,
+    "annual_capacity_tons": 220000,
+    "has_container_terminal": true,
+    "has_roro": true,
+    "has_bulk": false,
+    "port_infra_notes": "Hub océan Indien, transhipment thon",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 6800,
+        "cargo_throughput_tons": 175000,
+        "ship_calls": 520,
+        "avg_time_in_port_hours": 28.0,
+        "avg_waiting_time_hours": 7.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 6400,
+        "cargo_throughput_tons": 165000,
+        "ship_calls": 490,
+        "avg_time_in_port_hours": 30.0,
+        "avg_waiting_time_hours": 8.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 6000,
+        "cargo_throughput_tons": 155000,
+        "ship_calls": 465,
+        "avg_time_in_port_hours": 32.0,
+        "avg_waiting_time_hours": 9.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 14.2,
+      "lsci_rank_global": 175,
+      "productivity_moves_per_hour": 16,
+      "performance_grade": "C+"
+    },
+    "agents": [
+      {
+        "agent_name": "Seychelles Ports Authority",
+        "agent_type": "port_authority",
+        "specialization": "All cargo"
+      },
+      {
+        "agent_name": "Maersk Seychelles",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      }
+    ],
+    "regular_services": []
+  },
+  {
+    "port_id": "COM-MUT-c7a9cfd1",
+    "port_name": "Port de Mutsamudu",
+    "country_iso": "COM",
+    "country_name": "Comores",
+    "city": "Mutsamudu",
+    "port_type": "regional",
+    "geo_lat": -12.1667,
+    "geo_lon": 44.4,
+    "max_draft_meters": 7.0,
+    "quay_length_meters": 280,
+    "storage_area_sqm": 12000,
+    "annual_capacity_teu": 0,
+    "annual_capacity_tons": 45000,
+    "has_container_terminal": false,
+    "has_roro": true,
+    "has_bulk": false,
+    "port_infra_notes": "Petit port insulaire île Anjouan, cargo vanille et ylang-ylang",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 32000,
+        "ship_calls": 150,
+        "avg_time_in_port_hours": 48.0,
+        "avg_waiting_time_hours": 16.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 29000,
+        "ship_calls": 140,
+        "avg_time_in_port_hours": 50.0,
+        "avg_waiting_time_hours": 17.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 27000,
+        "ship_calls": 130,
+        "avg_time_in_port_hours": 52.0,
+        "avg_waiting_time_hours": 18.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 5.2,
+      "lsci_rank_global": 255,
+      "productivity_moves_per_hour": 8,
+      "performance_grade": "D"
+    },
+    "agents": [
+      {
+        "agent_name": "ASECNA Comores",
+        "agent_type": "port_authority",
+        "specialization": "All cargo"
+      }
+    ],
+    "regular_services": []
+  },
+  {
+    "port_id": "SDN-PTS-3ae1c38d",
+    "port_name": "Port Sudan",
+    "country_iso": "SDN",
+    "country_name": "Soudan",
+    "city": "Port Sudan",
+    "port_type": "commercial",
+    "geo_lat": 19.6158,
+    "geo_lon": 37.2164,
+    "max_draft_meters": 12.0,
+    "quay_length_meters": 1580,
+    "storage_area_sqm": 88000,
+    "annual_capacity_teu": 45000,
+    "annual_capacity_tons": 1200000,
+    "has_container_terminal": true,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Principal port Soudan sur Mer Rouge, gateway commerce intérieur",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 32000,
+        "cargo_throughput_tons": 850000,
+        "ship_calls": 720,
+        "avg_time_in_port_hours": 35.0,
+        "avg_waiting_time_hours": 11.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 29500,
+        "cargo_throughput_tons": 780000,
+        "ship_calls": 680,
+        "avg_time_in_port_hours": 37.0,
+        "avg_waiting_time_hours": 12.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 27000,
+        "cargo_throughput_tons": 720000,
+        "ship_calls": 640,
+        "avg_time_in_port_hours": 39.0,
+        "avg_waiting_time_hours": 13.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 16.8,
+      "lsci_rank_global": 155,
+      "productivity_moves_per_hour": 15,
+      "performance_grade": "C+"
+    },
+    "agents": [
+      {
+        "agent_name": "Sea Ports Corporation",
+        "agent_type": "port_authority",
+        "specialization": "All cargo"
+      },
+      {
+        "agent_name": "CMA CGM Sudan",
+        "agent_type": "shipping_agent",
+        "specialization": "Containers"
+      }
+    ],
+    "regular_services": [
+      {
+        "carrier": "CMA CGM",
+        "service_name": "Red Sea Service",
+        "frequency": "Weekly",
+        "route": "Asia-Red Sea"
+      }
+    ]
+  },
+  {
+    "port_id": "SDN-SAW-598088f7",
+    "port_name": "Port de Sawakin",
+    "country_iso": "SDN",
+    "country_name": "Soudan",
+    "city": "Sawakin",
+    "port_type": "regional",
+    "geo_lat": 19.1058,
+    "geo_lon": 37.3322,
+    "max_draft_meters": 8.0,
+    "quay_length_meters": 420,
+    "storage_area_sqm": 22000,
+    "annual_capacity_teu": 0,
+    "annual_capacity_tons": 150000,
+    "has_container_terminal": false,
+    "has_roro": true,
+    "has_bulk": true,
+    "port_infra_notes": "Port historique en redéveloppement, projet turc",
+    "historical_stats": [
+      {
+        "year": 2024,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 95000,
+        "ship_calls": 220,
+        "avg_time_in_port_hours": 42.0,
+        "avg_waiting_time_hours": 14.0
+      },
+      {
+        "year": 2023,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 85000,
+        "ship_calls": 200,
+        "avg_time_in_port_hours": 44.0,
+        "avg_waiting_time_hours": 15.0
+      },
+      {
+        "year": 2022,
+        "container_throughput_teu": 0,
+        "cargo_throughput_tons": 78000,
+        "ship_calls": 185,
+        "avg_time_in_port_hours": 46.0,
+        "avg_waiting_time_hours": 16.0
+      }
+    ],
+    "performance_indicators": {
+      "lsci_score": 7.5,
+      "lsci_rank_global": 235,
+      "productivity_moves_per_hour": 10,
+      "performance_grade": "D+"
+    },
+    "agents": [
+      {
+        "agent_name": "Sea Ports Corporation",
+        "agent_type": "port_authority",
+        "specialization": "Bulk cargo"
+      }
+    ],
+    "regular_services": []
   }
 ]
