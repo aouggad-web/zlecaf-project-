@@ -56,6 +56,7 @@ function ZLECAfCalculator() {
       rulesTab: "Règles d'Origine",
       profilesTab: "Profils Pays",
       toolsTab: "Outils",
+      logisticsTab: "Logistique Maritime",
       calculatorTitle: "Calculateur ZLECAf Complet",
       calculatorDesc: "Calculs basés sur les données officielles des organismes internationaux",
       originCountry: "Pays d'origine",
