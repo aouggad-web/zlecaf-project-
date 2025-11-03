@@ -747,7 +747,7 @@ function ZLECAfCalculator() {
               📈 {t.statisticsTab}
             </TabsTrigger>
             <TabsTrigger value="logistics" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-teal-600 data-[state=active]:text-white font-bold">
-              🚢 {t.logisticsTab}
+              🚢✈️ {t.logisticsTab}
             </TabsTrigger>
             <TabsTrigger value="tools" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-purple-600 data-[state=active]:text-white font-bold">
               🛠️ {t.toolsTab}
