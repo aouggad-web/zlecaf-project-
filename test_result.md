@@ -476,7 +476,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Profils pays multiples - Données infrastructure Nigeria, Égypte, Afrique du Sud"
+    - "Onglet Logistique Maritime - Nouvelle fonctionnalité ports africains"
   stuck_tasks:
     - "Profils pays multiples - Données infrastructure Nigeria, Égypte, Afrique du Sud"
   test_all: false
