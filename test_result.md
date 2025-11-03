@@ -494,11 +494,12 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Tests Enriched Port Details Modal Tanger Med COMPLÉTÉS avec succès"
+    - "Implémentation Logistique Aérienne en cours"
+    - "Intégration frontend App.js avec sous-tabs Logistique (Maritime, Aérienne)"
   stuck_tasks:
     - "Profils pays multiples - Données infrastructure Nigeria, Égypte, Afrique du Sud"
   test_all: false
-  test_priority: "completed"
+  test_priority: "air_logistics_implementation"
 
 agent_communication:
     - agent: "testing"
