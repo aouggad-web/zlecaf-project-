@@ -194,6 +194,160 @@ function LogisticsTabContent() {
 }
 
 
+// ==========================================
+// AIR LOGISTICS TAB COMPONENT
+// ==========================================
+function AirLogisticsTabContent() {
+  const [airports, setAirports] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedAirport, setSelectedAirport] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState('ALL');
+  const [viewMode, setViewMode] = useState('map'); // 'map' or 'list'
+
+  useEffect(() => {
+    fetchAirports(selectedCountry);
+  }, [selectedCountry]);
+
+  const fetchAirports = async (countryIso) => {
+    setLoading(true);
+    try {
+      const url = countryIso && countryIso !== 'ALL'
+        ? `${API}/logistics/air/airports?country_iso=${countryIso}`
+        : `${API}/logistics/air/airports`;
+      
+      const response = await axios.get(url);
+      setAirports(response.data.airports || []);
+    } catch (error) {
+      console.error('Error fetching airports:', error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de charger les données aéroportuaires",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAirportClick = async (airport) => {
+    try {
+      const response = await axios.get(`${API}/logistics/air/airports/${airport.airport_id}`);
+      setSelectedAirport(response.data);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error('Error fetching airport details:', error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de charger les détails de l'aéroport",
+        variant: "destructive",
+      });
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header Section */}
+      <Card className="bg-gradient-to-r from-sky-600 to-blue-600 text-white shadow-xl">
+        <CardHeader>
+          <CardTitle className="text-3xl font-bold flex items-center gap-3">
+            <span>✈️</span>
+            <span>Logistique Aérienne Panafricaine</span>
+          </CardTitle>
+          <CardDescription className="text-blue-100 text-lg">
+            Visualisez les principaux aéroports cargo d'Afrique avec leurs statistiques de trafic, acteurs et routes régulières
+          </CardDescription>
+        </CardHeader>
+      </Card>
+
+      {/* Controls Section */}
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+            {/* Country Filter */}
+            <div className="flex items-center gap-3 w-full md:w-auto">
+              <span className="text-sm font-semibold text-gray-700">Filtrer par pays:</span>
+              <select
+                value={selectedCountry}
+                onChange={(e) => setSelectedCountry(e.target.value)}
+                className="px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+              >
+                <option value="ALL">🌍 Tous les pays</option>
+                <option value="ZAF">🇿🇦 Afrique du Sud</option>
+                <option value="EGY">🇪🇬 Égypte</option>
+                <option value="ETH">🇪🇹 Éthiopie</option>
+                <option value="KEN">🇰🇪 Kenya</option>
+                <option value="MAR">🇲🇦 Maroc</option>
+                <option value="NGA">🇳🇬 Nigéria</option>
+                <option value="CIV">🇨🇮 Côte d'Ivoire</option>
+                <option value="GHA">🇬🇭 Ghana</option>
+              </select>
+            </div>
+
+            {/* View Mode Toggle */}
+            <div className="flex items-center gap-2">
+              <Button
+                onClick={() => setViewMode('map')}
+                variant={viewMode === 'map' ? 'default' : 'outline'}
+                className={viewMode === 'map' ? 'bg-sky-600 hover:bg-sky-700' : ''}
+              >
+                🗺️ Carte
+              </Button>
+              <Button
+                onClick={() => setViewMode('list')}
+                variant={viewMode === 'list' ? 'default' : 'outline'}
+                className={viewMode === 'list' ? 'bg-sky-600 hover:bg-sky-700' : ''}
+              >
+                📋 Liste
+              </Button>
+            </div>
+
+            {/* Airport Count Badge */}
+            <Badge variant="secondary" className="text-lg px-4 py-2">
+              {airports.length} aéroport{airports.length > 1 ? 's' : ''}
+            </Badge>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Map or List View */}
+      {loading ? (
+        <Card>
+          <CardContent className="py-12">
+            <div className="flex flex-col items-center justify-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sky-600"></div>
+              <p className="mt-4 text-gray-600">Chargement des données aéroportuaires...</p>
+            </div>
+          </CardContent>
+        </Card>
+      ) : viewMode === 'map' ? (
+        <AirLogisticsMap
+          onAirportClick={handleAirportClick}
+          selectedCountry={selectedCountry}
+        />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {airports.map((airport) => (
+            <AirportCard
+              key={airport.airport_id}
+              airport={airport}
+              onOpenDetails={handleAirportClick}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Airport Details Modal */}
+      <AirportDetailsModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        airport={selectedAirport}
+      />
+    </div>
+  );
+}
+
+
 function ZLECAfCalculator() {
   const [countries, setCountries] = useState([]);
   const [originCountry, setOriginCountry] = useState('');
