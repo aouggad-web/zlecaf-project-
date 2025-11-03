@@ -32,6 +32,12 @@ from logistics_data import (
     get_top_ports_by_teu,
     search_ports
 )
+from logistics_air_data import (
+    get_all_airports,
+    get_airport_by_id,
+    get_top_airports_by_cargo,
+    search_airports
+)
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
