@@ -2423,9 +2423,26 @@ function ZLECAfCalculator() {
             </div>
           </TabsContent>
 
-          {/* LOGISTICS MARITIME TAB */}
+          {/* LOGISTICS TAB WITH SUB-TABS (MARITIME & AIR) */}
           <TabsContent value="logistics">
-            <LogisticsTabContent />
+            <Tabs defaultValue="maritime" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 mb-6">
+                <TabsTrigger value="maritime" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+                  🚢 {t.logisticsMaritimeSubTab}
+                </TabsTrigger>
+                <TabsTrigger value="air" className="data-[state=active]:bg-sky-600 data-[state=active]:text-white">
+                  ✈️ {t.logisticsAirSubTab}
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="maritime">
+                <LogisticsTabContent />
+              </TabsContent>
+
+              <TabsContent value="air">
+                <AirLogisticsTabContent />
+              </TabsContent>
+            </Tabs>
           </TabsContent>
         </Tabs>
       </div>
