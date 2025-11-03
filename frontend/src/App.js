@@ -113,6 +113,7 @@ function ZLECAfCalculator() {
       rulesTab: "Rules of Origin", 
       profilesTab: "Country Profiles",
       toolsTab: "Tools",
+      logisticsTab: "Maritime Logistics",
       calculatorTitle: "Complete AfCFTA Calculator",
       calculatorDesc: "Calculations based on official data from international organizations",
       originCountry: "Origin Country",
