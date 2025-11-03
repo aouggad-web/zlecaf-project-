@@ -2102,6 +2102,12 @@ function ZLECAfCalculator() {
                     </CardContent>
                   </Card>
                 </div>
+
+          {/* LOGISTICS MARITIME TAB */}
+          <TabsContent value="logistics">
+            <LogisticsTabContent />
+          </TabsContent>
+
               )}
             </div>
           </TabsContent>
