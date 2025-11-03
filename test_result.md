@@ -479,11 +479,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Onglet Logistique Maritime - Nouvelle fonctionnalité ports africains"
+    - "Tests Logistique Maritime COMPLÉTÉS avec succès"
   stuck_tasks:
     - "Profils pays multiples - Données infrastructure Nigeria, Égypte, Afrique du Sud"
   test_all: false
-  test_priority: "high_first"
+  test_priority: "completed"
 
 agent_communication:
     - agent: "testing"
