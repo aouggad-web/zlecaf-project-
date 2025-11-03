@@ -19,6 +19,9 @@ import StatisticsZaubaStyle from './components/StatisticsZaubaStyle';
 import LogisticsMap from './components/logistics/LogisticsMap';
 import PortCard from './components/logistics/PortCard';
 import PortDetailsModal from './components/logistics/PortDetailsModal';
+import AirLogisticsMap from './components/logistics/AirLogisticsMap';
+import AirportCard from './components/logistics/AirportCard';
+import AirportDetailsModal from './components/logistics/AirportDetailsModal';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
