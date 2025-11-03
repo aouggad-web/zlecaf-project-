@@ -1162,6 +1162,104 @@ async def get_logistics_statistics():
         "year": 2024
     }
 
+
+
+# ==========================================
+# LOGISTICS AIR CARGO ENDPOINTS
+# ==========================================
+
+@api_router.get("/logistics/air/airports")
+async def get_airports(country_iso: Optional[str] = None):
+    """
+    Get all airports or filter by country ISO code
+    Query params:
+    - country_iso: Filter airports by country (e.g., ZAF, ETH, KEN)
+    """
+    try:
+        airports = get_all_airports(country_iso=country_iso)
+        return {
+            "count": len(airports),
+            "airports": airports
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error loading airports data: {str(e)}")
+
+@api_router.get("/logistics/air/airports/{airport_id}")
+async def get_airport_details(airport_id: str):
+    """
+    Get detailed information for a specific airport
+    """
+    airport = get_airport_by_id(airport_id)
+    
+    if not airport:
+        raise HTTPException(status_code=404, detail=f"Airport {airport_id} not found")
+    
+    return airport
+
+@api_router.get("/logistics/air/airports/top/cargo")
+async def get_top_airports_cargo(limit: int = 20):
+    """
+    Get top airports by cargo throughput (tons)
+    Query params:
+    - limit: Number of airports to return (default: 20, max: 50)
+    """
+    if limit > 50:
+        limit = 50
+    
+    airports = get_top_airports_by_cargo(limit=limit)
+    return {
+        "count": len(airports),
+        "airports": airports
+    }
+
+@api_router.get("/logistics/air/airports/search")
+async def search_airports_endpoint(q: str):
+    """
+    Search airports by name, IATA code, or country name
+    Query params:
+    - q: Search query string
+    """
+    if len(q) < 2:
+        raise HTTPException(status_code=400, detail="Search query must be at least 2 characters")
+    
+    results = search_airports(q)
+    return {
+        "query": q,
+        "count": len(results),
+        "results": results
+    }
+
+@api_router.get("/logistics/air/statistics")
+async def get_air_logistics_statistics():
+    """
+    Get global air cargo statistics for African airports
+    """
+    all_airports = get_all_airports()
+    
+    total_cargo = sum(
+        a.get('historical_stats', [{}])[0].get('cargo_throughput_tons', 0) if a.get('historical_stats') else 0
+        for a in all_airports
+    )
+    
+    total_mail = sum(
+        a.get('historical_stats', [{}])[0].get('mail_throughput_tons', 0) if a.get('historical_stats') else 0
+        for a in all_airports
+    )
+    
+    # Count airports by country
+    airports_by_country = {}
+    for airport in all_airports:
+        country = airport.get('country_name', 'Unknown')
+        airports_by_country[country] = airports_by_country.get(country, 0) + 1
+    
+    return {
+        "total_airports": len(all_airports),
+        "total_cargo_throughput_tons": total_cargo,
+        "total_mail_throughput_tons": total_mail,
+        "airports_by_country": dict(sorted(airports_by_country.items(), key=lambda x: x[1], reverse=True)),
+        "year": 2024
+    }
+
 # Include the router in the main app
 app.include_router(api_router)
 
