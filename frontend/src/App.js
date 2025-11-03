@@ -272,15 +272,70 @@ function AirLogisticsTabContent() {
                 onChange={(e) => setSelectedCountry(e.target.value)}
                 className="px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
               >
-                <option value="ALL">🌍 Tous les pays</option>
-                <option value="ZAF">🇿🇦 Afrique du Sud</option>
-                <option value="EGY">🇪🇬 Égypte</option>
-                <option value="ETH">🇪🇹 Éthiopie</option>
-                <option value="KEN">🇰🇪 Kenya</option>
-                <option value="MAR">🇲🇦 Maroc</option>
-                <option value="NGA">🇳🇬 Nigéria</option>
-                <option value="CIV">🇨🇮 Côte d'Ivoire</option>
-                <option value="GHA">🇬🇭 Ghana</option>
+                <option value="ALL">🌍 Tous les pays (64 aéroports)</option>
+                <optgroup label="Afrique du Nord">
+                  <option value="DZA">🇩🇿 Algérie (3)</option>
+                  <option value="EGY">🇪🇬 Égypte (2)</option>
+                  <option value="LBY">🇱🇾 Libye</option>
+                  <option value="MAR">🇲🇦 Maroc (3)</option>
+                  <option value="TUN">🇹🇳 Tunisie</option>
+                </optgroup>
+                <optgroup label="Afrique de l'Ouest">
+                  <option value="BEN">🇧🇯 Bénin</option>
+                  <option value="BFA">🇧🇫 Burkina Faso</option>
+                  <option value="CPV">🇨🇻 Cap-Vert</option>
+                  <option value="CIV">🇨🇮 Côte d'Ivoire</option>
+                  <option value="GMB">🇬🇲 Gambie</option>
+                  <option value="GHA">🇬🇭 Ghana</option>
+                  <option value="GIN">🇬🇳 Guinée</option>
+                  <option value="LBR">🇱🇷 Libéria</option>
+                  <option value="MLI">🇲🇱 Mali</option>
+                  <option value="MRT">🇲🇷 Mauritanie</option>
+                  <option value="NER">🇳🇪 Niger</option>
+                  <option value="NGA">🇳🇬 Nigéria (3)</option>
+                  <option value="SEN">🇸🇳 Sénégal</option>
+                  <option value="SLE">🇸🇱 Sierra Leone</option>
+                  <option value="TGO">🇹🇬 Togo</option>
+                </optgroup>
+                <optgroup label="Afrique Centrale">
+                  <option value="AGO">🇦🇴 Angola</option>
+                  <option value="CMR">🇨🇲 Cameroun</option>
+                  <option value="CAF">🇨🇫 Rép. Centrafricaine</option>
+                  <option value="TCD">🇹🇩 Tchad</option>
+                  <option value="COG">🇨🇬 Congo</option>
+                  <option value="COD">🇨🇩 RD Congo (2)</option>
+                  <option value="GNQ">🇬🇶 Guinée Équatoriale</option>
+                  <option value="GAB">🇬🇦 Gabon</option>
+                  <option value="STP">🇸🇹 São Tomé-et-Príncipe</option>
+                </optgroup>
+                <optgroup label="Afrique de l'Est">
+                  <option value="BDI">🇧🇮 Burundi</option>
+                  <option value="COM">🇰🇲 Comores</option>
+                  <option value="DJI">🇩🇯 Djibouti</option>
+                  <option value="ERI">🇪🇷 Érythrée</option>
+                  <option value="ETH">🇪🇹 Éthiopie</option>
+                  <option value="KEN">🇰🇪 Kenya (2)</option>
+                  <option value="MDG">🇲🇬 Madagascar</option>
+                  <option value="MWI">🇲🇼 Malawi</option>
+                  <option value="MUS">🇲🇺 Maurice</option>
+                  <option value="RWA">🇷🇼 Rwanda</option>
+                  <option value="SYC">🇸🇨 Seychelles</option>
+                  <option value="SOM">🇸🇴 Somalie</option>
+                  <option value="SSD">🇸🇸 Soudan du Sud</option>
+                  <option value="SDN">🇸🇩 Soudan</option>
+                  <option value="TZA">🇹🇿 Tanzanie (2)</option>
+                  <option value="UGA">🇺🇬 Ouganda</option>
+                </optgroup>
+                <optgroup label="Afrique Australe">
+                  <option value="BWA">🇧🇼 Botswana</option>
+                  <option value="LSO">🇱🇸 Lesotho</option>
+                  <option value="MOZ">🇲🇿 Mozambique</option>
+                  <option value="NAM">🇳🇦 Namibie</option>
+                  <option value="ZAF">🇿🇦 Afrique du Sud (2)</option>
+                  <option value="SWZ">🇸🇿 Eswatini</option>
+                  <option value="ZMB">🇿🇲 Zambie</option>
+                  <option value="ZWE">🇿🇼 Zimbabwe</option>
+                </optgroup>
               </select>
             </div>
 
