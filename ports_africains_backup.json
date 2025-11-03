@@ -15,38 +15,14 @@
       "vessel_calls": 2800
     },
     "agents": [
-      {
-        "agent_name": "Algérie Ferries",
-        "group": "National"
-      },
-      {
-        "agent_name": "CNAN Group",
-        "group": "National"
-      },
-      {
-        "agent_name": "Maersk Algeria",
-        "group": "International"
-      }
+      {"agent_name": "Algérie Ferries", "group": "National"},
+      {"agent_name": "CNAN Group", "group": "National"},
+      {"agent_name": "Maersk Algeria", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "CMA CGM",
-        "service_name": "MEDGULF",
-        "frequency": "Weekly",
-        "rotation": "Marseille-Barcelona-Algiers-Valencia"
-      },
-      {
-        "carrier": "MSC",
-        "service_name": "Africa Express",
-        "frequency": "Bi-weekly",
-        "rotation": "Genoa-Marseille-Algiers-Tunis"
-      }
-    ],
-    "lsci": {
-      "value": 15.32,
-      "world_rank": 102,
-      "year": 2023
-    }
+      {"carrier": "CMA CGM", "service_name": "MEDGULF", "frequency": "Weekly", "rotation": "Marseille-Barcelona-Algiers-Valencia"},
+      {"carrier": "MSC", "service_name": "Africa Express", "frequency": "Bi-weekly", "rotation": "Genoa-Marseille-Algiers-Tunis"}
+    ]
   },
   {
     "port_id": "DZA-ORA-001",
@@ -64,28 +40,12 @@
       "vessel_calls": 1800
     },
     "agents": [
-      {
-        "agent_name": "Port of Oran Authority",
-        "group": "Public"
-      },
-      {
-        "agent_name": "Transmarine",
-        "group": "Private"
-      }
+      {"agent_name": "Port of Oran Authority", "group": "Public"},
+      {"agent_name": "Transmarine", "group": "Private"}
     ],
     "services": [
-      {
-        "carrier": "Grimaldi Lines",
-        "service_name": "West Med Service",
-        "frequency": "Weekly",
-        "rotation": "Barcelona-Oran-Valencia"
-      }
-    ],
-    "lsci": {
-      "value": 15.32,
-      "world_rank": 102,
-      "year": 2023
-    }
+      {"carrier": "Grimaldi Lines", "service_name": "West Med Service", "frequency": "Weekly", "rotation": "Barcelona-Oran-Valencia"}
+    ]
   },
   {
     "port_id": "DZA-BEJ-001",
@@ -103,12 +63,7 @@
       "vessel_calls": 1200
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 15.32,
-      "world_rank": 102,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "MAR-CAS-001",
@@ -126,38 +81,14 @@
       "vessel_calls": 3500
     },
     "agents": [
-      {
-        "agent_name": "Marsa Maroc",
-        "group": "National"
-      },
-      {
-        "agent_name": "Somaport",
-        "group": "National"
-      },
-      {
-        "agent_name": "CMA CGM Maroc",
-        "group": "International"
-      }
+      {"agent_name": "Marsa Maroc", "group": "National"},
+      {"agent_name": "Somaport", "group": "National"},
+      {"agent_name": "CMA CGM Maroc", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "CMA CGM",
-        "service_name": "FAL",
-        "frequency": "Weekly",
-        "rotation": "Le Havre-Algeciras-Casablanca-Dakar"
-      },
-      {
-        "carrier": "MSC",
-        "service_name": "Africalink",
-        "frequency": "Weekly",
-        "rotation": "Valencia-Casablanca-Lagos-Tema"
-      }
-    ],
-    "lsci": {
-      "value": 41.88,
-      "world_rank": 52,
-      "year": 2023
-    }
+      {"carrier": "CMA CGM", "service_name": "FAL", "frequency": "Weekly", "rotation": "Le Havre-Algeciras-Casablanca-Dakar"},
+      {"carrier": "MSC", "service_name": "Africalink", "frequency": "Weekly", "rotation": "Valencia-Casablanca-Lagos-Tema"}
+    ]
   },
   {
     "port_id": "MAR-TAN-001",
@@ -172,51 +103,18 @@
       "year": 2024,
       "container_throughput_teu": 8200000,
       "cargo_throughput_tons": 96000000,
-      "vessel_calls": 4200,
-      "median_time_in_port_hours": 14.5,
-      "average_waiting_time_hours": 3.2,
-      "berth_productivity_moves_per_hour": 35,
-      "performance_grade": "A"
+      "vessel_calls": 4200
     },
     "agents": [
-      {
-        "agent_name": "APM Terminals",
-        "group": "International"
-      },
-      {
-        "agent_name": "Eurogate Tanger",
-        "group": "International"
-      },
-      {
-        "agent_name": "Marsa Maroc",
-        "group": "National"
-      }
+      {"agent_name": "APM Terminals", "group": "International"},
+      {"agent_name": "Eurogate Tanger", "group": "International"},
+      {"agent_name": "Marsa Maroc", "group": "National"}
     ],
     "services": [
-      {
-        "carrier": "Maersk",
-        "service_name": "AE2",
-        "frequency": "Weekly",
-        "rotation": "Rotterdam-Hamburg-Tangier-Singapore"
-      },
-      {
-        "carrier": "MSC",
-        "service_name": "Silk",
-        "frequency": "Weekly",
-        "rotation": "Piraeus-Valencia-Tangier-New York"
-      },
-      {
-        "carrier": "CMA CGM",
-        "service_name": "FAL3",
-        "frequency": "Weekly",
-        "rotation": "Antwerp-Le Havre-Tangier-Miami"
-      }
-    ],
-    "lsci": {
-      "value": 41.88,
-      "world_rank": 52,
-      "year": 2023
-    }
+      {"carrier": "Maersk", "service_name": "AE2", "frequency": "Weekly", "rotation": "Rotterdam-Hamburg-Tangier-Singapore"},
+      {"carrier": "MSC", "service_name": "Silk", "frequency": "Weekly", "rotation": "Piraeus-Valencia-Tangier-New York"},
+      {"carrier": "CMA CGM", "service_name": "FAL3", "frequency": "Weekly", "rotation": "Antwerp-Le Havre-Tangier-Miami"}
+    ]
   },
   {
     "port_id": "MAR-AGD-001",
@@ -234,12 +132,7 @@
       "vessel_calls": 850
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 41.88,
-      "world_rank": 52,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "TUN-RAD-001",
@@ -257,28 +150,12 @@
       "vessel_calls": 1600
     },
     "agents": [
-      {
-        "agent_name": "STAM",
-        "group": "National"
-      },
-      {
-        "agent_name": "CMA CGM Tunisia",
-        "group": "International"
-      }
+      {"agent_name": "STAM", "group": "National"},
+      {"agent_name": "CMA CGM Tunisia", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "CMA CGM",
-        "service_name": "Medex",
-        "frequency": "Weekly",
-        "rotation": "Marseille-Genoa-Tunis-Alexandria"
-      }
-    ],
-    "lsci": {
-      "value": 18.45,
-      "world_rank": 81,
-      "year": 2023
-    }
+      {"carrier": "CMA CGM", "service_name": "Medex", "frequency": "Weekly", "rotation": "Marseille-Genoa-Tunis-Alexandria"}
+    ]
   },
   {
     "port_id": "TUN-SFX-001",
@@ -296,12 +173,7 @@
       "vessel_calls": 900
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 18.45,
-      "world_rank": 81,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "EGY-ALE-001",
@@ -319,38 +191,14 @@
       "vessel_calls": 4200
     },
     "agents": [
-      {
-        "agent_name": "Alexandria Container Terminal",
-        "group": "Public"
-      },
-      {
-        "agent_name": "Maersk Egypt",
-        "group": "International"
-      },
-      {
-        "agent_name": "MSC Egypt",
-        "group": "International"
-      }
+      {"agent_name": "Alexandria Container Terminal", "group": "Public"},
+      {"agent_name": "Maersk Egypt", "group": "International"},
+      {"agent_name": "MSC Egypt", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "Maersk",
-        "service_name": "AE7",
-        "frequency": "Weekly",
-        "rotation": "Piraeus-Alexandria-Jeddah-Singapore"
-      },
-      {
-        "carrier": "MSC",
-        "service_name": "Levant Express",
-        "frequency": "Weekly",
-        "rotation": "Istanbul-Alexandria-Haifa-Ashdod"
-      }
-    ],
-    "lsci": {
-      "value": 58.71,
-      "world_rank": 32,
-      "year": 2023
-    }
+      {"carrier": "Maersk", "service_name": "AE7", "frequency": "Weekly", "rotation": "Piraeus-Alexandria-Jeddah-Singapore"},
+      {"carrier": "MSC", "service_name": "Levant Express", "frequency": "Weekly", "rotation": "Istanbul-Alexandria-Haifa-Ashdod"}
+    ]
   },
   {
     "port_id": "EGY-PSA-001",
@@ -365,35 +213,15 @@
       "year": 2024,
       "container_throughput_teu": 4200000,
       "cargo_throughput_tons": 48000000,
-      "vessel_calls": 3800,
-      "median_time_in_port_hours": 16.8,
-      "average_waiting_time_hours": 4.5,
-      "berth_productivity_moves_per_hour": 32,
-      "performance_grade": "A"
+      "vessel_calls": 3800
     },
     "agents": [
-      {
-        "agent_name": "Port Said Container Terminal",
-        "group": "Public"
-      },
-      {
-        "agent_name": "APM Terminals",
-        "group": "International"
-      }
+      {"agent_name": "Port Said Container Terminal", "group": "Public"},
+      {"agent_name": "APM Terminals", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "CMA CGM",
-        "service_name": "India Middle East",
-        "frequency": "Weekly",
-        "rotation": "Mumbai-Jebel Ali-Port Said-Piraeus"
-      }
-    ],
-    "lsci": {
-      "value": 58.71,
-      "world_rank": 32,
-      "year": 2023
-    }
+      {"carrier": "CMA CGM", "service_name": "India Middle East", "frequency": "Weekly", "rotation": "Mumbai-Jebel Ali-Port Said-Piraeus"}
+    ]
   },
   {
     "port_id": "EGY-DAM-001",
@@ -411,12 +239,7 @@
       "vessel_calls": 1400
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 58.71,
-      "world_rank": 32,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "LBY-TRI-001",
@@ -470,38 +293,14 @@
       "vessel_calls": 2100
     },
     "agents": [
-      {
-        "agent_name": "DP World Dakar",
-        "group": "International"
-      },
-      {
-        "agent_name": "CMA CGM Sénégal",
-        "group": "International"
-      },
-      {
-        "agent_name": "Maersk Sénégal",
-        "group": "International"
-      }
+      {"agent_name": "DP World Dakar", "group": "International"},
+      {"agent_name": "CMA CGM Sénégal", "group": "International"},
+      {"agent_name": "Maersk Sénégal", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "CMA CGM",
-        "service_name": "WAF",
-        "frequency": "Weekly",
-        "rotation": "Antwerp-Le Havre-Dakar-Abidjan-Lagos"
-      },
-      {
-        "carrier": "Maersk",
-        "service_name": "WAX",
-        "frequency": "Weekly",
-        "rotation": "Rotterdam-Dakar-Tema-Lagos-Durban"
-      }
-    ],
-    "lsci": {
-      "value": 19.88,
-      "world_rank": 65,
-      "year": 2023
-    }
+      {"carrier": "CMA CGM", "service_name": "WAF", "frequency": "Weekly", "rotation": "Antwerp-Le Havre-Dakar-Abidjan-Lagos"},
+      {"carrier": "Maersk", "service_name": "WAX", "frequency": "Weekly", "rotation": "Rotterdam-Dakar-Tema-Lagos-Durban"}
+    ]
   },
   {
     "port_id": "CIV-ABJ-001",
@@ -516,45 +315,17 @@
       "year": 2024,
       "container_throughput_teu": 1050000,
       "cargo_throughput_tons": 24500000,
-      "vessel_calls": 2600,
-      "median_time_in_port_hours": 22.3,
-      "average_waiting_time_hours": 8.7,
-      "berth_productivity_moves_per_hour": 25,
-      "performance_grade": "B"
+      "vessel_calls": 2600
     },
     "agents": [
-      {
-        "agent_name": "APMT Abidjan",
-        "group": "International"
-      },
-      {
-        "agent_name": "Bollore Africa Logistics",
-        "group": "International"
-      },
-      {
-        "agent_name": "MSC Côte d'Ivoire",
-        "group": "International"
-      }
+      {"agent_name": "APMT Abidjan", "group": "International"},
+      {"agent_name": "Bollore Africa Logistics", "group": "International"},
+      {"agent_name": "MSC Côte d'Ivoire", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "MSC",
-        "service_name": "West Africa Express",
-        "frequency": "Weekly",
-        "rotation": "Antwerp-Abidjan-Lagos-Tema-Lome"
-      },
-      {
-        "carrier": "CMA CGM",
-        "service_name": "WAFMAX",
-        "frequency": "Weekly",
-        "rotation": "Rotterdam-Abidjan-Tema-Douala"
-      }
-    ],
-    "lsci": {
-      "value": 26.78,
-      "world_rank": 64,
-      "year": 2023
-    }
+      {"carrier": "MSC", "service_name": "West Africa Express", "frequency": "Weekly", "rotation": "Antwerp-Abidjan-Lagos-Tema-Lome"},
+      {"carrier": "CMA CGM", "service_name": "WAFMAX", "frequency": "Weekly", "rotation": "Rotterdam-Abidjan-Tema-Douala"}
+    ]
   },
   {
     "port_id": "CIV-SAN-001",
@@ -572,12 +343,7 @@
       "vessel_calls": 580
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 26.78,
-      "world_rank": 64,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "GHA-TEM-001",
@@ -595,38 +361,14 @@
       "vessel_calls": 2400
     },
     "agents": [
-      {
-        "agent_name": "Meridian Port Services",
-        "group": "International"
-      },
-      {
-        "agent_name": "Maersk Ghana",
-        "group": "International"
-      },
-      {
-        "agent_name": "MSC Ghana",
-        "group": "International"
-      }
+      {"agent_name": "Meridian Port Services", "group": "International"},
+      {"agent_name": "Maersk Ghana", "group": "International"},
+      {"agent_name": "MSC Ghana", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "Maersk",
-        "service_name": "WAFMAX",
-        "frequency": "Weekly",
-        "rotation": "Tangier-Tema-Lagos-Lome-Douala"
-      },
-      {
-        "carrier": "MSC",
-        "service_name": "Africa",
-        "frequency": "Weekly",
-        "rotation": "Valencia-Tema-Abidjan-Lagos"
-      }
-    ],
-    "lsci": {
-      "value": 22.33,
-      "world_rank": 73,
-      "year": 2023
-    }
+      {"carrier": "Maersk", "service_name": "WAFMAX", "frequency": "Weekly", "rotation": "Tangier-Tema-Lagos-Lome-Douala"},
+      {"carrier": "MSC", "service_name": "Africa", "frequency": "Weekly", "rotation": "Valencia-Tema-Abidjan-Lagos"}
+    ]
   },
   {
     "port_id": "GHA-TAK-001",
@@ -644,12 +386,7 @@
       "vessel_calls": 950
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 22.33,
-      "world_rank": 73,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "NGA-LAG-001",
@@ -664,45 +401,17 @@
       "year": 2024,
       "container_throughput_teu": 1650000,
       "cargo_throughput_tons": 42000000,
-      "vessel_calls": 3200,
-      "median_time_in_port_hours": 45.2,
-      "average_waiting_time_hours": 28.5,
-      "berth_productivity_moves_per_hour": 18,
-      "performance_grade": "C"
+      "vessel_calls": 3200
     },
     "agents": [
-      {
-        "agent_name": "APM Terminals Apapa",
-        "group": "International"
-      },
-      {
-        "agent_name": "Maersk Nigeria",
-        "group": "International"
-      },
-      {
-        "agent_name": "CMA CGM Nigeria",
-        "group": "International"
-      }
+      {"agent_name": "APM Terminals Apapa", "group": "International"},
+      {"agent_name": "Maersk Nigeria", "group": "International"},
+      {"agent_name": "CMA CGM Nigeria", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "Maersk",
-        "service_name": "WAFMAX",
-        "frequency": "Weekly",
-        "rotation": "Antwerp-Dakar-Abidjan-Lagos-Pointe Noire"
-      },
-      {
-        "carrier": "CMA CGM",
-        "service_name": "MEDGULF",
-        "frequency": "Weekly",
-        "rotation": "Le Havre-Algeciras-Lagos-Douala"
-      }
-    ],
-    "lsci": {
-      "value": 24.15,
-      "world_rank": 97,
-      "year": 2023
-    }
+      {"carrier": "Maersk", "service_name": "WAFMAX", "frequency": "Weekly", "rotation": "Antwerp-Dakar-Abidjan-Lagos-Pointe Noire"},
+      {"carrier": "CMA CGM", "service_name": "MEDGULF", "frequency": "Weekly", "rotation": "Le Havre-Algeciras-Lagos-Douala"}
+    ]
   },
   {
     "port_id": "NGA-TIN-001",
@@ -720,21 +429,10 @@
       "vessel_calls": 2100
     },
     "agents": [
-      {
-        "agent_name": "PTML",
-        "group": "National"
-      },
-      {
-        "agent_name": "Bollore Africa Logistics",
-        "group": "International"
-      }
+      {"agent_name": "PTML", "group": "National"},
+      {"agent_name": "Bollore Africa Logistics", "group": "International"}
     ],
-    "services": [],
-    "lsci": {
-      "value": 24.15,
-      "world_rank": 97,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "NGA-PHC-001",
@@ -752,12 +450,7 @@
       "vessel_calls": 1200
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 24.15,
-      "world_rank": 97,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "BEN-COT-001",
@@ -765,7 +458,7 @@
     "country_iso": "BEN",
     "country_name": "Bénin",
     "un_locode": "BJCOO",
-    "geo_lat": 6.365,
+    "geo_lat": 6.3650,
     "geo_lon": 2.4381,
     "port_type": "Hub Regional",
     "latest_stats": {
@@ -775,22 +468,11 @@
       "vessel_calls": 1800
     },
     "agents": [
-      {
-        "agent_name": "Bolloré Africa Logistics",
-        "group": "International"
-      },
-      {
-        "agent_name": "CMA CGM Bénin",
-        "group": "International"
-      }
+      {"agent_name": "Bolloré Africa Logistics", "group": "International"},
+      {"agent_name": "CMA CGM Bénin", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "MSC",
-        "service_name": "Africa Service",
-        "frequency": "Weekly",
-        "rotation": "Antwerp-Cotonou-Lagos-Douala"
-      }
+      {"carrier": "MSC", "service_name": "Africa Service", "frequency": "Weekly", "rotation": "Antwerp-Cotonou-Lagos-Douala"}
     ]
   },
   {
@@ -806,45 +488,17 @@
       "year": 2024,
       "container_throughput_teu": 1950000,
       "cargo_throughput_tons": 22000000,
-      "vessel_calls": 2800,
-      "median_time_in_port_hours": 18.9,
-      "average_waiting_time_hours": 5.2,
-      "berth_productivity_moves_per_hour": 30,
-      "performance_grade": "B+"
+      "vessel_calls": 2800
     },
     "agents": [
-      {
-        "agent_name": "Lomé Container Terminal",
-        "group": "Public"
-      },
-      {
-        "agent_name": "MSC Togo",
-        "group": "International"
-      },
-      {
-        "agent_name": "Maersk Togo",
-        "group": "International"
-      }
+      {"agent_name": "Lomé Container Terminal", "group": "Public"},
+      {"agent_name": "MSC Togo", "group": "International"},
+      {"agent_name": "Maersk Togo", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "MSC",
-        "service_name": "West Africa Service",
-        "frequency": "Weekly",
-        "rotation": "Rotterdam-Lomé-Lagos-Tema-Abidjan"
-      },
-      {
-        "carrier": "CMA CGM",
-        "service_name": "WAX",
-        "frequency": "Weekly",
-        "rotation": "Hamburg-Lomé-Cotonou-Douala"
-      }
-    ],
-    "lsci": {
-      "value": 27.45,
-      "world_rank": 58,
-      "year": 2023
-    }
+      {"carrier": "MSC", "service_name": "West Africa Service", "frequency": "Weekly", "rotation": "Rotterdam-Lomé-Lagos-Tema-Abidjan"},
+      {"carrier": "CMA CGM", "service_name": "WAX", "frequency": "Weekly", "rotation": "Hamburg-Lomé-Cotonou-Douala"}
+    ]
   },
   {
     "port_id": "CMR-DLA-001",
@@ -862,38 +516,14 @@
       "vessel_calls": 2000
     },
     "agents": [
-      {
-        "agent_name": "Douala International Terminal",
-        "group": "Public"
-      },
-      {
-        "agent_name": "Bollore Africa Logistics",
-        "group": "International"
-      },
-      {
-        "agent_name": "MSC Cameroun",
-        "group": "International"
-      }
+      {"agent_name": "Douala International Terminal", "group": "Public"},
+      {"agent_name": "Bollore Africa Logistics", "group": "International"},
+      {"agent_name": "MSC Cameroun", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "MSC",
-        "service_name": "Central Africa",
-        "frequency": "Weekly",
-        "rotation": "Antwerp-Douala-Pointe Noire-Luanda"
-      },
-      {
-        "carrier": "CMA CGM",
-        "service_name": "CEMAC",
-        "frequency": "Bi-weekly",
-        "rotation": "Le Havre-Douala-Libreville"
-      }
-    ],
-    "lsci": {
-      "value": 21.22,
-      "world_rank": 64,
-      "year": 2023
-    }
+      {"carrier": "MSC", "service_name": "Central Africa", "frequency": "Weekly", "rotation": "Antwerp-Douala-Pointe Noire-Luanda"},
+      {"carrier": "CMA CGM", "service_name": "CEMAC", "frequency": "Bi-weekly", "rotation": "Le Havre-Douala-Libreville"}
+    ]
   },
   {
     "port_id": "CMR-KRI-001",
@@ -911,12 +541,7 @@
       "vessel_calls": 620
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 21.22,
-      "world_rank": 64,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "GAB-OWE-001",
@@ -934,14 +559,8 @@
       "vessel_calls": 950
     },
     "agents": [
-      {
-        "agent_name": "Gabon Port Handling",
-        "group": "National"
-      },
-      {
-        "agent_name": "Bollore Africa Logistics",
-        "group": "International"
-      }
+      {"agent_name": "Gabon Port Handling", "group": "National"},
+      {"agent_name": "Bollore Africa Logistics", "group": "International"}
     ],
     "services": []
   },
@@ -961,22 +580,11 @@
       "vessel_calls": 1600
     },
     "agents": [
-      {
-        "agent_name": "Congo Terminal",
-        "group": "International"
-      },
-      {
-        "agent_name": "Bollore Africa Logistics",
-        "group": "International"
-      }
+      {"agent_name": "Congo Terminal", "group": "International"},
+      {"agent_name": "Bollore Africa Logistics", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "MSC",
-        "service_name": "Central Africa Link",
-        "frequency": "Weekly",
-        "rotation": "Antwerp-Douala-Pointe Noire-Luanda"
-      }
+      {"carrier": "MSC", "service_name": "Central Africa Link", "frequency": "Weekly", "rotation": "Antwerp-Douala-Pointe Noire-Luanda"}
     ]
   },
   {
@@ -995,38 +603,14 @@
       "vessel_calls": 2200
     },
     "agents": [
-      {
-        "agent_name": "Multipurpose Terminal",
-        "group": "Public"
-      },
-      {
-        "agent_name": "Maersk Angola",
-        "group": "International"
-      },
-      {
-        "agent_name": "MSC Angola",
-        "group": "International"
-      }
+      {"agent_name": "Multipurpose Terminal", "group": "Public"},
+      {"agent_name": "Maersk Angola", "group": "International"},
+      {"agent_name": "MSC Angola", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "Maersk",
-        "service_name": "SAECS",
-        "frequency": "Weekly",
-        "rotation": "Tangier-Luanda-Walvis Bay-Cape Town-Durban"
-      },
-      {
-        "carrier": "MSC",
-        "service_name": "Southern Africa",
-        "frequency": "Weekly",
-        "rotation": "Antwerp-Pointe Noire-Luanda-Durban"
-      }
-    ],
-    "lsci": {
-      "value": 18.67,
-      "world_rank": 105,
-      "year": 2023
-    }
+      {"carrier": "Maersk", "service_name": "SAECS", "frequency": "Weekly", "rotation": "Tangier-Luanda-Walvis Bay-Cape Town-Durban"},
+      {"carrier": "MSC", "service_name": "Southern Africa", "frequency": "Weekly", "rotation": "Antwerp-Pointe Noire-Luanda-Durban"}
+    ]
   },
   {
     "port_id": "AGO-LOB-001",
@@ -1035,7 +619,7 @@
     "country_name": "Angola",
     "un_locode": "AOLOB",
     "geo_lat": -12.3644,
-    "geo_lon": 13.545,
+    "geo_lon": 13.5450,
     "port_type": "Maritime Commercial",
     "latest_stats": {
       "year": 2024,
@@ -1044,12 +628,7 @@
       "vessel_calls": 680
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 18.67,
-      "world_rank": 105,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "KEN-MBA-001",
@@ -1064,45 +643,17 @@
       "year": 2024,
       "container_throughput_teu": 1550000,
       "cargo_throughput_tons": 34500000,
-      "vessel_calls": 2800,
-      "median_time_in_port_hours": 32.4,
-      "average_waiting_time_hours": 15.8,
-      "berth_productivity_moves_per_hour": 22,
-      "performance_grade": "B-"
+      "vessel_calls": 2800
     },
     "agents": [
-      {
-        "agent_name": "Kenya Ports Authority",
-        "group": "Public"
-      },
-      {
-        "agent_name": "Maersk Kenya",
-        "group": "International"
-      },
-      {
-        "agent_name": "MSC Kenya",
-        "group": "International"
-      }
+      {"agent_name": "Kenya Ports Authority", "group": "Public"},
+      {"agent_name": "Maersk Kenya", "group": "International"},
+      {"agent_name": "MSC Kenya", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "Maersk",
-        "service_name": "Silk",
-        "frequency": "Weekly",
-        "rotation": "Singapore-Colombo-Mombasa-Djibouti-Jeddah"
-      },
-      {
-        "carrier": "MSC",
-        "service_name": "Africa East Coast",
-        "frequency": "Weekly",
-        "rotation": "Jeddah-Mombasa-Dar es Salaam-Durban"
-      }
-    ],
-    "lsci": {
-      "value": 31.88,
-      "world_rank": 57,
-      "year": 2023
-    }
+      {"carrier": "Maersk", "service_name": "Silk", "frequency": "Weekly", "rotation": "Singapore-Colombo-Mombasa-Djibouti-Jeddah"},
+      {"carrier": "MSC", "service_name": "Africa East Coast", "frequency": "Weekly", "rotation": "Jeddah-Mombasa-Dar es Salaam-Durban"}
+    ]
   },
   {
     "port_id": "TZA-DAR-001",
@@ -1120,28 +671,12 @@
       "vessel_calls": 2200
     },
     "agents": [
-      {
-        "agent_name": "Tanzania Ports Authority",
-        "group": "Public"
-      },
-      {
-        "agent_name": "Bollore Africa Logistics",
-        "group": "International"
-      }
+      {"agent_name": "Tanzania Ports Authority", "group": "Public"},
+      {"agent_name": "Bollore Africa Logistics", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "MSC",
-        "service_name": "East Africa Express",
-        "frequency": "Weekly",
-        "rotation": "Jebel Ali-Mombasa-Dar es Salaam-Maputo"
-      }
-    ],
-    "lsci": {
-      "value": 28.45,
-      "world_rank": 54,
-      "year": 2023
-    }
+      {"carrier": "MSC", "service_name": "East Africa Express", "frequency": "Weekly", "rotation": "Jebel Ali-Mombasa-Dar es Salaam-Maputo"}
+    ]
   },
   {
     "port_id": "DJI-DJI-001",
@@ -1149,48 +684,23 @@
     "country_iso": "DJI",
     "country_name": "Djibouti",
     "un_locode": "DJJIB",
-    "geo_lat": 11.595,
+    "geo_lat": 11.5950,
     "geo_lon": 43.1456,
     "port_type": "Hub Transhipment",
     "latest_stats": {
       "year": 2024,
       "container_throughput_teu": 1250000,
       "cargo_throughput_tons": 22000000,
-      "vessel_calls": 2600,
-      "median_time_in_port_hours": 19.5,
-      "average_waiting_time_hours": 6.1,
-      "berth_productivity_moves_per_hour": 29,
-      "performance_grade": "B+"
+      "vessel_calls": 2600
     },
     "agents": [
-      {
-        "agent_name": "DP World Djibouti",
-        "group": "International"
-      },
-      {
-        "agent_name": "CMA CGM Djibouti",
-        "group": "International"
-      }
+      {"agent_name": "DP World Djibouti", "group": "International"},
+      {"agent_name": "CMA CGM Djibouti", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "CMA CGM",
-        "service_name": "Red Sea",
-        "frequency": "Weekly",
-        "rotation": "Singapore-Jebel Ali-Djibouti-Suez"
-      },
-      {
-        "carrier": "Maersk",
-        "service_name": "AE1",
-        "frequency": "Weekly",
-        "rotation": "Hong Kong-Singapore-Djibouti-Jeddah-Rotterdam"
-      }
-    ],
-    "lsci": {
-      "value": 35.12,
-      "world_rank": 43,
-      "year": 2023
-    }
+      {"carrier": "CMA CGM", "service_name": "Red Sea", "frequency": "Weekly", "rotation": "Singapore-Jebel Ali-Djibouti-Suez"},
+      {"carrier": "Maersk", "service_name": "AE1", "frequency": "Weekly", "rotation": "Hong Kong-Singapore-Djibouti-Jeddah-Rotterdam"}
+    ]
   },
   {
     "port_id": "ZAF-DUR-001",
@@ -1205,45 +715,17 @@
       "year": 2024,
       "container_throughput_teu": 2850000,
       "cargo_throughput_tons": 68000000,
-      "vessel_calls": 4200,
-      "median_time_in_port_hours": 28.5,
-      "average_waiting_time_hours": 12.3,
-      "berth_productivity_moves_per_hour": 28,
-      "performance_grade": "B"
+      "vessel_calls": 4200
     },
     "agents": [
-      {
-        "agent_name": "Transnet Port Terminals",
-        "group": "Public"
-      },
-      {
-        "agent_name": "Maersk South Africa",
-        "group": "International"
-      },
-      {
-        "agent_name": "MSC South Africa",
-        "group": "International"
-      }
+      {"agent_name": "Transnet Port Terminals", "group": "Public"},
+      {"agent_name": "Maersk South Africa", "group": "International"},
+      {"agent_name": "MSC South Africa", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "Maersk",
-        "service_name": "SAECS",
-        "frequency": "Weekly",
-        "rotation": "Singapore-Colombo-Durban-Cape Town-Tangier"
-      },
-      {
-        "carrier": "MSC",
-        "service_name": "South Africa Express",
-        "frequency": "Weekly",
-        "rotation": "Hong Kong-Singapore-Durban-Port Elizabeth-Santos"
-      }
-    ],
-    "lsci": {
-      "value": 67.22,
-      "world_rank": 24,
-      "year": 2023
-    }
+      {"carrier": "Maersk", "service_name": "SAECS", "frequency": "Weekly", "rotation": "Singapore-Colombo-Durban-Cape Town-Tangier"},
+      {"carrier": "MSC", "service_name": "South Africa Express", "frequency": "Weekly", "rotation": "Hong Kong-Singapore-Durban-Port Elizabeth-Santos"}
+    ]
   },
   {
     "port_id": "ZAF-CPT-001",
@@ -1252,7 +734,7 @@
     "country_name": "Afrique du Sud",
     "un_locode": "ZACPT",
     "geo_lat": -33.9065,
-    "geo_lon": 18.425,
+    "geo_lon": 18.4250,
     "port_type": "Hub Regional",
     "latest_stats": {
       "year": 2024,
@@ -1261,28 +743,12 @@
       "vessel_calls": 2100
     },
     "agents": [
-      {
-        "agent_name": "Transnet Port Terminals",
-        "group": "Public"
-      },
-      {
-        "agent_name": "Mediterranean Shipping Company",
-        "group": "International"
-      }
+      {"agent_name": "Transnet Port Terminals", "group": "Public"},
+      {"agent_name": "Mediterranean Shipping Company", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "Maersk",
-        "service_name": "Far East-South Africa",
-        "frequency": "Weekly",
-        "rotation": "Shanghai-Singapore-Durban-Cape Town-Santos"
-      }
-    ],
-    "lsci": {
-      "value": 67.22,
-      "world_rank": 24,
-      "year": 2023
-    }
+      {"carrier": "Maersk", "service_name": "Far East-South Africa", "frequency": "Weekly", "rotation": "Shanghai-Singapore-Durban-Cape Town-Santos"}
+    ]
   },
   {
     "port_id": "ZAF-PLZ-001",
@@ -1291,7 +757,7 @@
     "country_name": "Afrique du Sud",
     "un_locode": "ZAPLZ",
     "geo_lat": -33.9581,
-    "geo_lon": 25.6,
+    "geo_lon": 25.6000,
     "port_type": "Maritime Commercial",
     "latest_stats": {
       "year": 2024,
@@ -1300,12 +766,7 @@
       "vessel_calls": 950
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 67.22,
-      "world_rank": 24,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "NAM-WAL-001",
@@ -1323,28 +784,12 @@
       "vessel_calls": 1200
     },
     "agents": [
-      {
-        "agent_name": "Namport",
-        "group": "Public"
-      },
-      {
-        "agent_name": "Maersk Namibia",
-        "group": "International"
-      }
+      {"agent_name": "Namport", "group": "Public"},
+      {"agent_name": "Maersk Namibia", "group": "International"}
     ],
     "services": [
-      {
-        "carrier": "Maersk",
-        "service_name": "SAECS",
-        "frequency": "Weekly",
-        "rotation": "Tangier-Luanda-Walvis Bay-Cape Town-Durban"
-      }
-    ],
-    "lsci": {
-      "value": 19.12,
-      "world_rank": 50,
-      "year": 2023
-    }
+      {"carrier": "Maersk", "service_name": "SAECS", "frequency": "Weekly", "rotation": "Tangier-Luanda-Walvis Bay-Cape Town-Durban"}
+    ]
   },
   {
     "port_id": "MOZ-MAP-001",
@@ -1362,21 +807,10 @@
       "vessel_calls": 1400
     },
     "agents": [
-      {
-        "agent_name": "Maputo Port Development Company",
-        "group": "Public"
-      },
-      {
-        "agent_name": "Grindrod",
-        "group": "International"
-      }
+      {"agent_name": "Maputo Port Development Company", "group": "Public"},
+      {"agent_name": "Grindrod", "group": "International"}
     ],
-    "services": [],
-    "lsci": {
-      "value": 15.43,
-      "world_rank": 112,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "MOZ-BEI-001",
@@ -1394,12 +828,7 @@
       "vessel_calls": 720
     },
     "agents": [],
-    "services": [],
-    "lsci": {
-      "value": 15.43,
-      "world_rank": 112,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "MDG-TOA-001",
@@ -1408,7 +837,7 @@
     "country_name": "Madagascar",
     "un_locode": "MGTMM",
     "geo_lat": -18.1443,
-    "geo_lon": 49.408,
+    "geo_lon": 49.4080,
     "port_type": "Hub Regional",
     "latest_stats": {
       "year": 2024,
@@ -1417,21 +846,10 @@
       "vessel_calls": 1100
     },
     "agents": [
-      {
-        "agent_name": "MICTSL",
-        "group": "International"
-      },
-      {
-        "agent_name": "Bollore Africa Logistics",
-        "group": "International"
-      }
+      {"agent_name": "MICTSL", "group": "International"},
+      {"agent_name": "Bollore Africa Logistics", "group": "International"}
     ],
-    "services": [],
-    "lsci": {
-      "value": 12.34,
-      "world_rank": 118,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "MRT-NKC-001",
@@ -1457,7 +875,7 @@
     "country_iso": "MRT",
     "country_name": "Mauritanie",
     "un_locode": "MRNDB",
-    "geo_lat": 20.9,
+    "geo_lat": 20.9000,
     "geo_lon": -17.0333,
     "port_type": "Maritime Commercial",
     "latest_stats": {
@@ -1485,10 +903,7 @@
       "vessel_calls": 950
     },
     "agents": [
-      {
-        "agent_name": "Bollore Africa Logistics",
-        "group": "International"
-      }
+      {"agent_name": "Bollore Africa Logistics", "group": "International"}
     ],
     "services": []
   },
@@ -1516,7 +931,7 @@
     "country_iso": "SLE",
     "country_name": "Sierra Leone",
     "un_locode": "SLFNA",
-    "geo_lat": 8.484,
+    "geo_lat": 8.4840,
     "geo_lon": -13.2299,
     "port_type": "Maritime Commercial",
     "latest_stats": {
@@ -1535,7 +950,7 @@
     "country_name": "Gambie",
     "un_locode": "GMBJL",
     "geo_lat": 13.4549,
-    "geo_lon": -16.579,
+    "geo_lon": -16.5790,
     "port_type": "Maritime Commercial",
     "latest_stats": {
       "year": 2024,
@@ -1634,21 +1049,10 @@
       "vessel_calls": 1200
     },
     "agents": [
-      {
-        "agent_name": "Mauritius Ports Authority",
-        "group": "Public"
-      },
-      {
-        "agent_name": "CMA CGM Maurice",
-        "group": "International"
-      }
+      {"agent_name": "Mauritius Ports Authority", "group": "Public"},
+      {"agent_name": "CMA CGM Maurice", "group": "International"}
     ],
-    "services": [],
-    "lsci": {
-      "value": 28.76,
-      "world_rank": 37,
-      "year": 2023
-    }
+    "services": []
   },
   {
     "port_id": "SYC-VIC-001",
