@@ -1,84 +1,113 @@
 <analysis>
-The AI engineer's work primarily focused on enhancing the ZLECAf Trade Calculator application. Initially, the project involved integrating new economic data (, ) into the backend (, ) and updating the frontend (, ) for display. Key tasks included fixing numerous UI/data display bugs (blank pages, incorrect rates, static data), improving data visualization (charts, tables), refining UI aesthetics (font sizes, compactness), and correcting data accuracy (Algérie's GDP, distinguishing global vs. intra-African trade). The process involved iterative debugging, particularly for frontend rendering issues and backend CSV parsing errors. The latest interaction centered on verifying and updating country profile data, explicitly requested by the user.
+The AI engineer's trajectory shows an iterative development process focused on enhancing the ZLECAf Trade Calculator. Initially, the core task involved fixing data accuracy and display issues within existing country profiles, particularly for Algeria's GDP, infrastructure, and risk ratings. This necessitated direct CSV file manipulations and updates to both backend data loading (, ) and frontend rendering (). Following this, a major feature addition was the Maritime Logistics tab, including a map and port profiles, built from scratch using a comprehensive ETL pipeline drawing on public World Bank and UNCTAD data, integrated into the existing React/Tailwind frontend. The latest interaction involves addressing historical data display for ports and beginning the implementation of a new Air Logistics section, based on a detailed user-provided plan. The work showcases strong debugging capabilities, adaptation to existing frontend technologies, and a structured approach to data integration and new feature development.
 </analysis>
 
 <product_requirements>
-The ZLECAf Trade Calculator application aims to provide accurate trade calculations, comprehensive data visualization, and strategic insights for the African Continental Free Trade Area.
+The ZLECAf Trade Calculator application aims to deliver precise trade calculations, extensive data visualization, and strategic insights for the African Continental Free Trade Area.
 
-**Implemented features include:**
+**Initially implemented features included:**
 1.  **UI/Design Improvement**: Modern, African-inspired design with improved layouts.
-2.  **Enhanced Data Visualization**: Integration of charts/graphs using  for results, statistics, country profiles, and top producers.
+2.  **Enhanced Data Visualization**: Integration of charts/graphs using .
 3.  **Frontend Stability Fixes**: Resolution of  errors and layout instability.
 4.  **Tax Integration**: Incorporation of TVA, customs duties, and other taxes.
 5.  **Strategic Data & Modules**: Display of AfCFTA strategic projections and an Outils tab for links.
-6.  **Interactive Trade Performance**: Statistics tab with interactive tables and charts for trade performance (global and intra-African), tariff savings, and historical years.
-7.  **Data Analysis & Integration**: Integration of new economic data (ZLECAf_Economic_Data_2024.csv, zlecaf_corrections_2024.json) into backend and frontend.
-8.  **Refined Country Profiles**: Display of enriched country data including trading partners, trade statistics, and credit ratings.
-9.  **Language Support**: Initial steps towards full English translation.
+6.  **Interactive Trade Performance**: Statistics tab with interactive tables and charts for trade performance.
+7.  **Data Analysis & Integration**: Integration of economic data (, ).
+8.  **Refined Country Profiles**: Display of enriched country data.
+9.  **Language Support**: Initial steps towards English translation.
+
+**Recently implemented enhancements and new features:**
+-   **Country Profile Data Correction**: Corrected Algeria's GDP ranking, external debt, and added detailed infrastructure data (ports, airports, railways km) for all countries.
+-   **New Country Profile Sections**: Integrated Section Douanes (customs administration, website, important offices) and Section Infrastructure (LPI, AIDI rankings) into country profiles.
+-   **Maritime Logistics Tab**: Added a new Logistique Maritime tab featuring an interactive map with African ports, individual port profiles, detailed modals displaying shipping agents, regular lines, and historical performance statistics (LSCI, time in port, productivity, performance grade). Data is sourced via an ETL pipeline using public World Bank and UNCTAD data.
 </product_requirements>
 
 <key_technical_concepts>
 -   **Full-stack Architecture**: React (frontend), FastAPI (backend), MongoDB (database).
--   **UI/UX**: Tailwind CSS, Recharts for data visualization, React hooks.
+-   **UI/UX**: Tailwind CSS, Recharts for data visualization, React hooks, Leaflet for interactive maps.
 -   **API Communication**: ,  prefix, .
--   **Data Processing**: Python  for CSV/Excel, JSON parsing.
--   **Error Handling**: Frontend (JavaScript errors, JSX syntax), Backend (CSV parsing).
+-   **Data Processing**: Python  for CSV/Excel, JSON parsing, ETL pipelines for external data (World Bank, UNCTAD).
+-   **Error Handling**: Frontend (JavaScript errors, JSX syntax), Backend (CSV parsing, API routing).
 -   **Internationalization**: Frontend language switching.
+-   **Pydantic**: Data validation and serialization for FastAPI models.
 </key_technical_concepts>
 
 <code_architecture>
 
 
+
 -   **/app/backend/server.py**: Core FastAPI backend.
     -   **Summary**: Defines API endpoints, handles data, tariff/tax calculations.
-    -   **Changes Made**: Updated , ,  endpoints to use new data from  and . New  endpoint added. Logic for generating Top 10 exporters/importers and Top 5 GDP countries dynamically was implemented.
--   **/app/backend/tax_rates.py**: Centralizes tax rate data.
-    -   **Summary**: Stores country-specific tax rates. No direct changes in trajectory, but used by .
--   **/app/backend/data_loader.py**: Newly created module for data parsing.
-    -   **Summary**: Created to load  and  into memory for backend use. Handles data structuring.
-    -   **Changes Made**: Created to load CSV and JSON data.
+    -   **Changes Made**: Heavily modified to include new data from  and . New , ,  endpoints. Added logic for dynamic Top 10 exporters/importers and Top 5 GDP countries. Crucially, updated to serve new country profile data (customs info, infrastructure rankings) and new logistics data (ports, port details, logistics statistics). Major refactoring for new logistics endpoints was done to ensure they are registered correctly before .
+-   **/app/backend/data_loader.py**: Module for data parsing.
+    -   **Summary**: Loads , .
+    -   **Changes Made**: Extended to load new  and  for country profiles.
+-   **/app/backend/logistics_data.py**: New module for maritime logistics data.
+    -   **Summary**: Created to load and manage  and expose functions for retrieving port data, statistics, and individual port details.
+    -   **Changes Made**: New file created to support the maritime logistics tab.
+-   **/app/backend/logistics_air_data.py**: New module for air logistics data.
+    -   **Summary**: Created to load and manage  and will expose functions for air logistics data.
+    -   **Changes Made**: New file created to support the air logistics tab.
+-   **/app/backend/etl_wb_logistics.py**: New script for World Bank ETL.
+    -   **Summary**: Created to collect logistics indicators (LPI, container port traffic) from World Bank API without API keys.
+    -   **Changes Made**: New file created.
+-   **/app/backend/etl_unctad_maritime.py**: New script for UNCTAD maritime ETL.
+    -   **Summary**: Created to collect maritime data (LSCI, time in port, waiting time, productivity) via World Bank Data360.
+    -   **Changes Made**: New file created, outputs .
+-   **/app/backend/enrich_ports_professional.py**: New script for professional port data enrichment.
+    -   **Summary**: Created to massively enrich agents/lines, add historical statistics (2020-2024), and add detailed performance indicators to port data.
+    -   **Changes Made**: New file created, outputs .
+-   **/app/update_infrastructure_data.py**: New script for updating CSV infrastructure data.
+    -   **Summary**: Created to programmatically update infrastructure data in .
+    -   **Changes Made**: New file created.
 -   **/app/frontend/src/App.js**: Main React component.
     -   **Summary**: Orchestrates UI, state, API interactions. Contains main tabs (calculator, statistics, country profiles, outils).
-    -   **Changes Made**: Extensive modifications for UI display of new statistics, country profile data (including new indicators, rankings, trade partners, formatted GDP). Fixed numerous JSX syntax errors. Standardized font sizes, updated tab translations, integrated  component.
--   **/app/frontend/src/components/TradeComparison.jsx**: Displays comparative trade data.
-    -   **Summary**: Component for interactive tables and charts for trade performance.
-    -   **Changes Made**: Updated to fetch new 2024 trade data, corrected  usage. Refactored to display two distinct tables: Global Trade and Intra-African Trade, with non-signatory countries. Fixed  import. Applied font size reductions.
--   **/app/frontend/src/components/StatisticsZaubaStyle.jsx**: New component for Zauba-inspired statistics.
-    -   **Summary**: Created to present statistics in a dashboard-like format.
-    -   **Changes Made**: Created to hold the Zauba-style statistics. Fixed JSX error related to objects as React children in PieChart.
--   **/app/test_result.md**: Stores problem statements and test data.
-    -   **Summary**: Used for communication and testing protocol.
-    -   **Changes Made**: Updated with new test results and implementation notes.
+    -   **Changes Made**: Extensive modifications for UI display of new statistics, country profile data (including new indicators, rankings, trade partners, formatted GDP, customs info, infrastructure rankings). Fixed numerous JSX syntax errors. Standardized font sizes, updated tab translations. Integrated  component. Added a new Logistique Maritime tab, including new text translations, updating the grid-cols for tabs, and integrating  component. Added imports for new logistics components.
+-   **/app/frontend/src/components/logistics/PortCard.jsx**: New component.
+    -   **Summary**: Displays a summary of a single port within the maritime logistics tab.
+    -   **Changes Made**: New file created (Tailwind adapted).
+-   **/app/frontend/src/components/logistics/PortDetailsModal.jsx**: New component.
+    -   **Summary**: Displays detailed information for a selected port, including agents, services, and historical statistics/performance indicators.
+    -   **Changes Made**: New file created (Tailwind adapted) and then completely replaced to include historical stats and enriched performance indicators (LSCI, time in port, etc.).
+-   **/app/frontend/src/components/logistics/LogisticsMap.jsx**: New component.
+    -   **Summary**: Displays an interactive Leaflet map of African ports.
+    -   **Changes Made**: New file created, including logic to calculate marker radius based on traffic.
 -   **/app/ZLECAf_ENRICHI_2024_COMMERCE.csv**: Main economic data source.
     -   **Summary**: Contains comprehensive economic data for African countries.
-    -   **Changes Made**: Modified to correct PIB values for Nigeria, Egypt, and Algeria multiple times, leading to several CSV parsing error fixes. The header was also corrected to match data column count.
--   **/app/zlecaf_corrections_2024.json**: Data for tariff and statistics corrections.
-    -   **Summary**: Contains specific corrections for tariffs and enhanced statistics.
-    -   **Changes Made**: Used as a source for  and  which were initially limited to 5 entries.
+    -   **Changes Made**: Modified multiple times to correct PIB values, fix CSV parsing errors (header column count mismatch), and add new infrastructure-related columns (ports, airports, railways, external debt, energy cost).
+-   **/app/douanes_africaines.json**: New data file.
+    -   **Summary**: Stores customs administration information for African countries.
+    -   **Changes Made**: New file created and populated.
+-   **/app/classement_infrastructure_afrique.json**: New data file.
+    -   **Summary**: Stores infrastructure ranking data (World Bank LPI, AfDB AIDI) for African countries.
+    -   **Changes Made**: New file created and populated.
+-   **/app/ports_africains.json**: New data file.
+    -   **Summary**: Stores base data for African maritime ports.
+    -   **Changes Made**: New file created, then overwritten by  and subsequently by .
+-   **/app/airports_africains.json**: New data file.
+    -   **Summary**: Will store base data for African airports for air logistics.
+    -   **Changes Made**: New file created.
+
 </code_architecture>
 
 <pending_tasks>
--   **Integrate Gold CSV Files**: The user explicitly chose to integrate provided Gold CSV files (, , etc.). These specific files are not yet provided.
--   **Implement Lyra+ Prompts**: The full Lyra+ prompt template was shared, but the AI cannot execute it to extract data. This is a user responsibility.
--   **Complete Country Profile Data Verification**: The user requested verification and update of country profile data regarding population, ratings, infrastructure (ports, airports, railways), external debt, and energy index.
+-   **Historical Data Display in Frontend**: Ensure historical data (2022-2023) for ports is correctly displayed in the frontend.
+-   **Integrate Air Logistics**: Fully implement the Logistique Aérienne section as a sub-tab, including backend endpoints and frontend components based on the user-provided data model and strategy.
+-   **Integrate Terrestrial Logistics**: Implement the Logistique Terrestre section as a sub-tab (to be detailed later by user).
 </pending_tasks>
 
 <current_work>
-Immediately prior to this summary request, the AI engineer was addressing data accuracy issues within the application. A significant recent focus was on correcting the GDP data for Algeria in the  file, ensuring it reflected the country's correct ranking (3rd) among African economies according to FMI/World Bank data. This involved several attempts to modify the CSV file using  and direct Python manipulation, leading to repeated CSV parsing errors (e.g., Expected 39 fields in line 3, saw 48 or Expected 39 fields in line 1, saw 43) due to incorrect column counts or header mismatches.
+Immediately prior to this summary request, the AI engineer was addressing two main points from the user. First, the user noted that historical port data from 2022-2023 was not being displayed in the frontend, despite the API correctly providing it. The AI identified this as a potential frontend rendering issue, possibly related to , and installed  to ensure it's available.
 
-The troubleshoot agent was invoked to identify the root cause, which was confirmed to be a discrepancy between the CSV header's column count (39) and the data rows' column count (43). The AI successfully fixed this by adding 4 generic columns to the header, allowing the CSV to load correctly and backend services to restart.
+Second, and more significantly, the user requested the integration of Logistique Aérienne as a new sub-tab under a broader Logistique main tab, alongside the existing Maritime and a future Terrestre tab. The user provided a detailed plan for air cargo logistics, including functional objectives, a proposed data model (, , , ), master data sources (ACI, ICAO, national authorities), and a filling strategy.
 
-The last user request (Chat Message 627) is to further verify and update other specific data points within the country profiles, including:
-- Population numbers.
-- Rating data.
-- Infrastructure indicators (ports, airports, railways).
-- External debt.
-- Energy index.
-
-The AI engineer acknowledged this request and was about to begin the verification process for these country profile data points, starting by checking what is currently displayed. The current state is that the backend is healthy and the CSV parsing issues related to GDP have been resolved, with Algeria's GDP correctly displayed. However, the accuracy of other country profile metrics remains to be confirmed and potentially updated based on the user's latest feedback.
+The AI engineer has begun implementing the Air Logistics feature:
+1.  Created a new JSON data file: . This file will store the base data for African airports.
+2.  Created a new Python backend module: . This module is intended to handle the loading and processing of air logistics data.
+3.  The AI is currently in the process of adding the new FastAPI endpoints for air logistics into . The last action in the trajectory shows the AI has successfully edited  to include these endpoints and is verifying their insertion point.
+The task paused while the AI was ensuring the new air logistics endpoints are correctly added to  after the existing maritime logistics endpoints.
 </current_work>
 
 <optional_next_step>
-Verify and update population, rating, infrastructure, external debt, and energy index data in country profiles as per user's request.
+Continue implementing the Logistique Aérienne backend endpoints in  and verify their functionality.
 </optional_next_step>
-
