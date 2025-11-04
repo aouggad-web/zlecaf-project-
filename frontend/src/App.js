@@ -22,6 +22,9 @@ import PortDetailsModal from './components/logistics/PortDetailsModal';
 import AirLogisticsMap from './components/logistics/AirLogisticsMap';
 import AirportCard from './components/logistics/AirportCard';
 import AirportDetailsModal from './components/logistics/AirportDetailsModal';
+import CorridorMap from './components/logistics/CorridorMap';
+import CorridorCard from './components/logistics/CorridorCard';
+import CorridorDetailsModal from './components/logistics/CorridorDetailsModal';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
