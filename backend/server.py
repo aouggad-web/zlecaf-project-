@@ -1265,7 +1265,7 @@ async def get_air_logistics_statistics():
 # LAND LOGISTICS ENDPOINTS (TERRESTRIAL)
 # ==========================================
 
-from backend.logistics_land_data import (
+from logistics_land_data import (
     get_all_corridors,
     get_corridor_by_id,
     get_corridors_by_country,
