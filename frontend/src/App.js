@@ -433,6 +433,7 @@ function ZLECAfCalculator() {
       logisticsTab: "Logistique",
       logisticsMaritimeSubTab: "Maritime",
       logisticsAirSubTab: "Aérienne",
+      logisticsTerrestreSubTab: "Terrestre",
       calculatorTitle: "Calculateur ZLECAf Complet",
       calculatorDesc: "Calculs basés sur les données officielles des organismes internationaux",
       originCountry: "Pays d'origine",
