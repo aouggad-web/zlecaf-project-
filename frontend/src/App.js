@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
@@ -97,15 +97,15 @@ function ZLECAfCalculator() {
   useEffect(() => {
     fetchCountries();
     fetchStatistics();
-  }, []);
+  }, [fetchCountries, fetchStatistics]);
 
   useEffect(() => {
     if (destinationCountry && hsCode.length >= 4) {
       fetchPartnerImportStats();
     }
-  }, [destinationCountry, hsCode]);
+  }, [destinationCountry, hsCode, fetchPartnerImportStats]);
 
-  const fetchCountries = async () => {
+  const fetchCountries = useCallback(async () => {
     try {
       const response = await axios.get(`${API}/countries`);
       setCountries(response.data);
@@ -117,18 +117,18 @@ function ZLECAfCalculator() {
         variant: "destructive"
       });
     }
-  };
+  }, []);
 
-  const fetchStatistics = async () => {
+  const fetchStatistics = useCallback(async () => {
     try {
       const response = await axios.get(`${API}/statistics`);
       setStatistics(response.data);
     } catch (error) {
       console.error('Erreur lors du chargement des statistiques:', error);
     }
-  };
+  }, []);
 
-  const fetchPartnerImportStats = async () => {
+  const fetchPartnerImportStats = useCallback(async () => {
     if (!destinationCountry || hsCode.length < 4) return;
     
     try {
@@ -147,7 +147,7 @@ function ZLECAfCalculator() {
     } catch (error) {
       console.error('Erreur lors du chargement des statistiques d\'importation:', error);
     }
-  };
+  }, [destinationCountry, hsCode]);
 
   const fetchCountryProfile = async (countryCode) => {
     try {
