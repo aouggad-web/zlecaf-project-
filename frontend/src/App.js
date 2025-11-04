@@ -493,6 +493,7 @@ function ZLECAfCalculator() {
       logisticsTab: "Logistics",
       logisticsMaritimeSubTab: "Maritime",
       logisticsAirSubTab: "Air Cargo",
+      logisticsTerrestreSubTab: "Land",
       calculatorTitle: "Complete AfCFTA Calculator",
       calculatorDesc: "Calculations based on official data from international organizations",
       originCountry: "Origin Country",
