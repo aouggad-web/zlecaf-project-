@@ -2644,12 +2644,15 @@ function ZLECAfCalculator() {
           {/* LOGISTICS TAB WITH SUB-TABS (MARITIME & AIR) */}
           <TabsContent value="logistics">
             <Tabs defaultValue="maritime" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6">
+              <TabsList className="grid w-full grid-cols-3 mb-6">
                 <TabsTrigger value="maritime" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                   🚢 {t.logisticsMaritimeSubTab}
                 </TabsTrigger>
                 <TabsTrigger value="air" className="data-[state=active]:bg-sky-600 data-[state=active]:text-white">
                   ✈️ {t.logisticsAirSubTab}
+                </TabsTrigger>
+                <TabsTrigger value="land" className="data-[state=active]:bg-slate-700 data-[state=active]:text-white">
+                  🚛 {t.logisticsTerrestreSubTab}
                 </TabsTrigger>
               </TabsList>
 
@@ -2659,6 +2662,10 @@ function ZLECAfCalculator() {
 
               <TabsContent value="air">
                 <AirLogisticsTabContent />
+              </TabsContent>
+
+              <TabsContent value="land">
+                <LandLogisticsTabContent />
               </TabsContent>
             </Tabs>
           </TabsContent>
